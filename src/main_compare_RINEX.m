@@ -13,7 +13,7 @@ close all; clearvars; clc;
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src'));
 %% ---------------- Paths & Options -------------------------
 options.SAVE_PLOT = 1;
-options.CLOSE_at_END = 0;
+options.CLOSE_at_END = 1;
 options.SAVE_VIDEO_SKYPLOT = 0;
 
 base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
@@ -35,8 +35,6 @@ receptors = struct( ...
 %% ---------------- Process Individual RINEX ----------------
 for i = 1:numel(receptors)
     exp_name = receptors(i).name;
-    % ---------------- Determinar qué cargar: .mat o .obs ----------------
-    % obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_obs);
     mat_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_mat);
     out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
     satellitePRNs = [];  % todos
@@ -49,8 +47,17 @@ for i = 1:numel(receptors)
     if ~isfolder(out_dir), mkdir(out_dir); end
 
     fprintf('[%s] Procesando RINEX...\n', exp_name);
-    RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, options.SAVE_PLOT);
+
+    % Procesar ambas constelaciones
+    for constellation = ["GPS", "Galileo"]
+        try
+            RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, options.SAVE_PLOT, char(constellation));
+        catch ME
+            warning('No se pudo procesar %s para %s: %s', exp_name, constellation, ME.message);
+        end
+    end
 end
+
 
 %% ---------------- Compare RINEX Between Receptors (usar .mat si existe) ---------
 
