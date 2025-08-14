@@ -31,7 +31,7 @@ results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica d
 
 % RINEX por receptor (archivos originales y .mat preprocesados)
 receptors = struct( ...
-    'name', {'SCRAB II Basic Rx', 'SCRAB II Advanced Rx', 'SCRAB II MOSAIC-X5'}, ...
+    'name', {'Flight 2 Basic Rx', 'Flight 2 Advanced Rx', 'Flight 2 MOSAIC-X5'}, ...
     'folder', { ...
         fullfile('vuelo_2_eme_rx_basic'), ...
         fullfile('vuelo_2_eme_rx_adv'), ...
@@ -39,7 +39,7 @@ receptors = struct( ...
     }, ...
     'file_obs', {'run_2025-02-05_00-25-57/GSDR036a25.25O', 'run_2025-07-05_00-18-38/GSDR186a18.25O', '1ant1015.obs'}, ...  % RINEX original
     'file_mat', {'vuelo_2_eme_rx_basic.mat', 'vuelo_2_eme_rx_adv.mat', 'vuelo_2_mosaicX5.mat'}, ... % struct ya cargado
-    'result_dir', {'figures_rx_basic', 'figures_rx_advanced', 'figures_mosaicX5'} ...
+    'result_dir', {''} ...
 );
 
 %% ---------------- Process Individual RINEX gor GPS and GAL ----------------
@@ -83,11 +83,10 @@ if options.process_comparision
         name2_clean = regexprep(receptors(idx2).name, '\W', '_'); 
     
         % Carpeta de resultados automática por par
-        result_dir_cmp = fullfile(results_base_dir, ...
-            sprintf('figures_comparision_%s_vs_%s_%s', name1_clean, name2_clean, constellation));
-        if ~isfolder(result_dir_cmp), mkdir(result_dir_cmp); end
+        out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
+        if ~isfolder(out_dir), mkdir(out_dir); end
     
-        experiment = sprintf('SCRAB II flight - %s vs %s', receptors(idx1).name, receptors(idx2).name);
+        experiment = sprintf('Flight 2 - %s vs %s', receptors(idx1).name, receptors(idx2).name);
     
         % ---------------- Determinar qué cargar: .mat o .obs ----------------
         mat_file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_mat);
@@ -98,7 +97,7 @@ if options.process_comparision
             data1 = load(mat_file1); data1 = data1.rinexData;
             data2 = load(mat_file2); data2 = data2.rinexData;
             fprintf('[%s] Comparando usando .mat preprocesado (%s)...\n', experiment, constellation);
-            compare_rinex_observables(experiment, data1, data2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
+            compare_rinex_observables(experiment, data1, data2, out_dir, [], options.SAVE_PLOT, constellation);
         else
             % Caer a los archivos .obs originales
             file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_obs);
@@ -108,7 +107,7 @@ if options.process_comparision
                 continue
             end
             fprintf('[%s] Comparando usando .obs original (%s)...\n', experiment, constellation);
-            compare_rinex_observables(experiment, file1, file2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
+            compare_rinex_observables(experiment, file1, file2, out_dir, [], options.SAVE_PLOT, constellation);
         end
     end
 end
