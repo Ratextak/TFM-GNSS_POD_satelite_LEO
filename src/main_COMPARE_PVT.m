@@ -15,6 +15,7 @@ close all; clc;
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src')); 
 
 SAVE_PLOT = 0;
+cache_file = '../data/pvt_cache_flight_2.mat';
 %% 0. Define Log Files and Read Data
 % --- IMPORTANT: Specify the paths to your two PVT log files ---
 % Replace 'your_pvt_log_file_1.bin' and 'your_pvt_log_file_2.bin'
@@ -31,28 +32,43 @@ dataset_name_3 = 'Mosaic X5'; % e.g., 'Dynamic Test', 'Receiver 2'
 output_mat_filename = '..\results\pvt_comparison_processed.mat'; % Name for the output .mat file
 output_plots_folder = '..\results\plots\PVT_Comparison_Plots'; % Folder to save comparison plots
 
-fprintf('Reading first PVT log file: %s\n', log_filename1);
-try
-    data1 = read_pvt_bin(log_filename1);
-    fprintf('Successfully read %d records from %s (%s).\n', length(data1.TOW), log_filename1, dataset_name_1);
-catch ME
-    error('Error reading first PVT log file: %s\nEnsure the file exists and read_pvt_log.m is correct and on path.\nError: %s', log_filename1, ME.message);
-end
+if exist(cache_file, 'file')
+    fprintf('Loading cached PVT data from %s...\n', cache_file);
+    load(cache_file, 'data1', 'data2', 'data_sep');
+else
+    fprintf('Reading first PVT log file: %s\n', log_filename1);
+    try
+        data1 = read_pvt_bin(log_filename1);
+        fprintf('Successfully read %d records from %s (%s).\n', ...
+            length(data1.TOW), log_filename1, dataset_name_1);
+    catch ME
+        error('Error reading first PVT log file: %s\nEnsure the file exists and read_pvt_log.m is correct and on path.\nError: %s', ...
+            log_filename1, ME.message);
+    end
 
-fprintf('\nReading second PVT log file: %s\n', log_filename2);
-try
-    data2 = read_pvt_bin(log_filename2);
-    fprintf('Successfully read %d records from %s (%s).\n', length(data2.TOW), log_filename2, dataset_name_2);
-catch ME
-    error('Error reading second PVT log file: %s\nEnsure the file exists and read_pvt_log.m is correct and on path.\nError: %s', log_filename2, ME.message);
-end
+    fprintf('\nReading second PVT log file: %s\n', log_filename2);
+    try
+        data2 = read_pvt_bin(log_filename2);
+        fprintf('Successfully read %d records from %s (%s).\n', ...
+            length(data2.TOW), log_filename2, dataset_name_2);
+    catch ME
+        error('Error reading second PVT log file: %s\nEnsure the file exists and read_pvt_log.m is correct and on path.\nError: %s', ...
+            log_filename2, ME.message);
+    end
 
-fprintf('\nReading septentrio PVT log file: %s\n', log_filename_septentrio);
-try
-    data_sep = read_pvt_septentrio(log_filename_septentrio);
-    fprintf('Successfully read %d records from %s (%s).\n', length(data_sep.TOW), log_filename_septentrio, dataset_name_3);
-catch ME
-    error('Error reading second PVT log file: %s\nEnsure the file exists and read_pvt_log.m is correct and on path.\nError: %s', log_filename_septentrio, ME.message);
+    fprintf('\nReading Septentrio PVT log file: %s\n', log_filename_septentrio);
+    try
+        data_sep = read_pvt_septentrio(log_filename_septentrio);
+        fprintf('Successfully read %d records from %s (%s).\n', ...
+            length(data_sep.TOW), log_filename_septentrio, dataset_name_3);
+    catch ME
+        error('Error reading Septentrio PVT log file: %s\nEnsure the file exists and read_pvt_septentrio.m is correct and on path.\nError: %s', ...
+            log_filename_septentrio, ME.message);
+    end
+
+    % Save for future runs
+    save(cache_file, 'data1', 'data2', 'data_sep', '-v7.3');
+    fprintf('PVT data cached to %s.\n', cache_file);
 end
 
 %% 0.1. Prepare Data for Plotting (Dataset 1)
