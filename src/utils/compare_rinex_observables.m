@@ -40,17 +40,27 @@ if isempty(satelliteIDs)
     satelliteIDs = intersect(unique(data1.SatelliteID), unique(data2.SatelliteID));
 end
 
+%% ---------------- Detect observable fields ----------------
+cn0_field = intersect({'S1C','S1B','S6C','S5Q','S7Q'}, data1.Properties.VariableNames);
+doppler_field = intersect({'D1C','D1B','D6C','D5Q','D7Q'}, data1.Properties.VariableNames);
+pr_field = intersect({'C1C','C1B','C6C','C5Q','C7Q'}, data1.Properties.VariableNames);
+
+if isempty(cn0_field) || isempty(doppler_field) || isempty(pr_field)
+    error('No se encuentran los campos de observables en data1');
+end
+
 %% ---------------- Initialize RMSE and error arrays ----------------
 rmse_table = table('Size', [length(satelliteIDs), 4], ...
                    'VariableTypes', {'double','double','double','double'}, ...
                    'VariableNames', {'SV','RMSE_S1C','RMSE_D1C_Hz','RMSE_C1C_m'});
 
-all_err_s1c = [];
-all_err_d1c = [];
-all_err_c1c = [];
+all_err_cn0 = [];
+all_err_doppler = [];
+all_err_pr = [];
+
+f1 = figure('Name','Observable Errors','WindowState','maximized');
 
 %% ---------------- Create figure for time series ----------------
-f1 = figure('Name','Observable Errors','WindowState','maximized');
 
 for idx = 1:length(satelliteIDs)
     sv = satelliteIDs(idx);
@@ -59,47 +69,36 @@ for idx = 1:length(satelliteIDs)
 
     [t_common, ia, ib] = intersect(d1.Time, d2.Time);
 
-    % ---------------- Detect available observables ----------------
-    available_obs = intersect(fieldnames(d1), fieldnames(d2));
-
-    cn0_field        = available_obs(contains(available_obs,'S')); % C/N0
-    doppler_field    = available_obs(contains(available_obs,'D')); % Doppler
-    pseudorange_field= available_obs(contains(available_obs,'C')); % Pseudorange
-
-    % ---------------- Calculate errors if fields exist ----------------
-    if ~isempty(cn0_field)
-        err_cn0 = d1.(cn0_field{1})(ia) - d2.(cn0_field{1})(ib);
-    else
-        err_cn0 = [];
-    end
-
-    if ~isempty(doppler_field)
-        err_doppler = d1.(doppler_field{1})(ia) - d2.(doppler_field{1})(ib);
-    else
-        err_doppler = [];
-    end
-
-    if ~isempty(pseudorange_field)
-        err_pseudorange = d1.(pseudorange_field{1})(ia) - d2.(pseudorange_field{1})(ib);
-    else
-        err_pseudorange = [];
-    end
+    % ---- Detect CN0, Doppler, Pseudorange fields para cada table ----
+    cn0_field1 = intersect({'S1C','S1B','S1X'}, d1.Properties.VariableNames);
+    cn0_field2 = intersect({'S1C','S1B','S1X'}, d2.Properties.VariableNames);
+    
+    doppler_field1 = intersect({'D1C','D1B','D1X'}, d1.Properties.VariableNames);
+    doppler_field2 = intersect({'D1C','D1B','D1X'}, d2.Properties.VariableNames);
+    
+    pr_field1 = intersect({'C1C','C1B','C1X'}, d1.Properties.VariableNames);
+    pr_field2 = intersect({'C1C','C1B','C1X'}, d2.Properties.VariableNames);
+    
+    % ---- Usar los que existen ----
+    err_cn0     = d1.(cn0_field1{1})(ia) - d2.(cn0_field2{1})(ib);
+    err_doppler = d1.(doppler_field1{1})(ia) - d2.(doppler_field2{1})(ib);
+    err_pr      = d1.(pr_field1{1})(ia) - d2.(pr_field2{1})(ib);
 
     % ---------------- Accumulate errors ----------------
-    all_err_s1c = [all_err_s1c; err_cn0];
-    all_err_d1c = [all_err_d1c; err_doppler];
-    all_err_c1c = [all_err_c1c; err_pseudorange];
+    all_err_cn0 = [all_err_cn0; err_cn0];
+    all_err_doppler = [all_err_doppler; err_doppler];
+    all_err_pr = [all_err_pr; err_pr];
 
     % ---------------- Calculate RMSE ----------------
     rmse_table.SV(idx) = sv;
     rmse_table.RMSE_S1C(idx) = sqrt(mean(err_cn0.^2,'omitnan'));
     rmse_table.RMSE_D1C_Hz(idx) = sqrt(mean(err_doppler.^2,'omitnan'));
-    rmse_table.RMSE_C1C_m(idx) = sqrt(mean(err_pseudorange.^2,'omitnan'));
+    rmse_table.RMSE_C1C_m(idx) = sqrt(mean(err_pr.^2,'omitnan'));
 
     % ---------------- Plot time series ----------------
     subplot(3,1,1); hold on; plot(t_common, err_cn0, '.-', 'DisplayName', ['SV ' num2str(sv)]);
     subplot(3,1,2); hold on; plot(t_common, err_doppler, '.-', 'DisplayName', ['SV ' num2str(sv)]);
-    subplot(3,1,3); hold on; plot(t_common, err_pseudorange, '.-', 'DisplayName', ['SV ' num2str(sv)]);
+    subplot(3,1,3); hold on; plot(t_common, err_pr, '.-', 'DisplayName', ['SV ' num2str(sv)]);
 end
 
 %% ---------------- Finalize time series plots ----------------
@@ -116,13 +115,13 @@ end
 %% ---------------- Histogram plots ----------------
 f2 = figure('Name','Error Histograms','WindowState','maximized');
 
-subplot(3,1,1); histogram(all_err_s1c,'Normalization','probability'); grid on;
+subplot(3,1,1); histogram(all_err_cn0,'Normalization','probability'); grid on;
 xlabel('\Delta C/N0 (dB-Hz)'); ylabel('Probability'); title('Histogram of C/N0 Error');
 
-subplot(3,1,2); histogram(all_err_d1c,'Normalization','probability'); grid on;
+subplot(3,1,2); histogram(all_err_doppler,'Normalization','probability'); grid on;
 xlabel('\Delta Doppler (Hz)'); ylabel('Probability'); title('Histogram of Doppler Error');
 
-subplot(3,1,3); histogram(all_err_c1c,'Normalization','probability'); grid on;
+subplot(3,1,3); histogram(all_err_pr,'Normalization','probability'); grid on;
 xlabel('\Delta Pseudorange (m)'); ylabel('Probability'); title('Histogram of Pseudorange Error');
 
 sgtitle(['Error Histograms: ' experiment ' - ' constellation]);
