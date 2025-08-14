@@ -329,15 +329,15 @@ pos_z_diff_12 = pos_z_1_sync - pos_z_2_sync;
 % Geodetic Position Differences (1 vs 2, and 1 vs 3)
 latitude_diff_12 = latitude_1_sync - latitude_2_sync;
 longitude_diff_12 = longitude_1_sync - longitude_2_sync;
-height_diff_12 = height_1_sync - height_2_sync;
+% height_diff_12 = height_1_sync - height_2_sync;
 
 latitude_diff_13 = latitude_1_sync - latitude_3_sync;
 longitude_diff_13 = longitude_1_sync - longitude_3_sync;
-height_diff_13 = height_1_sync - height_3_sync;
+% height_diff_13 = height_1_sync - height_3_sync;
 
 latitude_diff_23 = latitude_2_sync - latitude_3_sync;
 longitude_diff_23 = longitude_2_sync - longitude_3_sync;
-height_diff_23 = height_2_sync - height_3_sync;
+% height_diff_23 = height_2_sync - height_3_sync;
 
 % Velocity (ECEF) Differences (Only 1 vs 2, as 3 might be ENU)
 vel_x_diff_12 = vel_x_1_sync - vel_x_2_sync;
@@ -795,7 +795,7 @@ if options.SAVE_PLOT
     
         % Define full paths for saving
         fig_filepath = fullfile([output_plots_folder '\fig'], [fig_name_sanitized '.fig']);
-        png_filepath = fullfile([output_plots_folder], [fig_name_sanitized '.png']);
+        png_filepath = fullfile(output_plots_folder, [fig_name_sanitized '.png']);
     
         try
             % Save as MATLAB figure file (.fig)
