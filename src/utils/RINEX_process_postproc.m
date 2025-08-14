@@ -49,7 +49,7 @@ figure('Position', [100, 100, 800, 600]);
 
 % ---- Sx subplot (C/N0) ----
 subplot(2,2,1); hold on;
-cn0_options = {'S1C','S1B','S1X','C1C','C1X'};
+cn0_options = {'S1C','S1B','S1X'};
 cn0_field = intersect(cn0_options, data2.Properties.VariableNames);
 for i = 1:length(satelliteIDs)
     filteredData = data2(data2.SatelliteID == satelliteIDs(i), :);
@@ -88,7 +88,7 @@ if SAVE_PLOT
     if ~exist(result_directory, 'dir')
         mkdir(result_directory);
     end
-    filename = fullfile(result_directory, ['results_short_' experiment '_' constellation '.png']);
+    filename = fullfile(result_directory, [experiment '_' constellation '.png']);
     saveas(gcf, filename);
     disp(['RINEX: ' experiment ' plot saved to ' filename]);
 end
