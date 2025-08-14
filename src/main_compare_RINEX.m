@@ -13,14 +13,14 @@ close all; clearvars; clc;
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src'));
 %% ---------------- Paths & Options -------------------------
 options.SAVE_PLOT = 1;
-options.CLOSE_at_END = 1;
-options.process_individual = false;
+options.CLOSE_at_END = 0;
+options.process_individual = true;
 options.process_comparision = true;
 % COMPARISIONS
 compare_pairs = { ...
-    % {1,2,'GPS'}, ... % Basic vs Advanced GPS
-    % {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
-    % {2,3,'GPS'}, ... % Advanced vs MOSAIC GPS
+    {1,2,'GPS'}, ... % Basic vs Advanced GPS
+    {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
+    {2,3,'GPS'}, ... % Advanced vs MOSAIC GPS
     {1,2,'Galileo'}, ... % Basic vs Advanced Galileo
     {1,3,'Galileo'}, ... % Basic vs MOSAIC Galileo
     {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
