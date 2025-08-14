@@ -16,6 +16,16 @@ options.SAVE_PLOT = 1;
 options.CLOSE_at_END = 1;
 options.SAVE_VIDEO_SKYPLOT = 0;
 
+% COMPARISIONS
+compare_pairs = { ...
+    {1,2,'GPS'}, ... % Basic vs Advanced GPS
+    {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
+    {2,3,'GPS'}, ... % Advanced vs MOSAIC GPS
+    {1,2,'Galileo'}, ... % Basic vs Advanced Galileo
+    {1,3,'Galileo'}, ... % Basic vs MOSAIC Galileo
+    {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
+};
+
 base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
 results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\results\plots_OBS');  % resultados
 
@@ -32,7 +42,7 @@ receptors = struct( ...
     'result_dir', {'figures_rx_basic', 'figures_rx_advanced', 'figures_mosaicX5'} ...
 );
 
-%% ---------------- Process Individual RINEX ----------------
+%% ---------------- Process Individual RINEX gor GPS and GAL ----------------
 for i = 1:numel(receptors)
     exp_name = receptors(i).name;
     mat_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_mat);
@@ -60,15 +70,6 @@ end
 
 
 %% ---------------- Compare RINEX Between Receptors (usar .mat si existe) ---------
-
-compare_pairs = { ...
-    {1,2,'GPS'}, ... % Basic vs Advanced GPS
-    {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
-    {2,3,'GPS'}, ... % Advanced vs MOSAIC GPS
-    {1,2,'Galileo'}, ... % Basic vs Advanced Galileo
-    {1,3,'Galileo'}, ... % Basic vs MOSAIC Galileo
-    {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
-};
 
 for k = 1:numel(compare_pairs)
     idx1 = compare_pairs{k}{1};
