@@ -14,7 +14,6 @@ addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Doc
 %% ---------------- Paths & Options -------------------------
 options.SAVE_PLOT = 1;
 options.CLOSE_at_END = 1;
-options.SAVE_VIDEO_SKYPLOT = 0;
 
 % COMPARISIONS
 compare_pairs = { ...
