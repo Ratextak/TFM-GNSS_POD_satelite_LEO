@@ -19,9 +19,6 @@ options.SAVE_VIDEO_SKYPLOT = 0;
 base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
 results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\results\plots_OBS');  % resultados
 
-% Carpetas de día/ensayo
-day_folder = ''; % <- puedes dejar vacío si no segmentas por día aquí
-
 % RINEX por receptor
 receptors = struct( ...
     'name', {'SCRAB II Basic Rx', 'SCRAB II Advanced Rx', 'SCRAB II MOSAIC-X5'}, ...
