@@ -19,22 +19,23 @@ options.SAVE_VIDEO_SKYPLOT = 0;
 base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
 results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\results\plots_OBS');  % resultados
 
-% RINEX por receptor
+% RINEX por receptor (archivos originales y .mat preprocesados)
 receptors = struct( ...
     'name', {'SCRAB II Basic Rx', 'SCRAB II Advanced Rx', 'SCRAB II MOSAIC-X5'}, ...
     'folder', { ...
-        fullfile('vuelo_2_eme_rx_basic','run_2025-02-05_00-25-57'), ...
-        fullfile('vuelo_2_eme_rx_adv','run_2025-07-05_00-18-38'), ...
+        fullfile('vuelo_2_eme_rx_basic'), ...
+        fullfile('vuelo_2_eme_rx_adv'), ...
         'vuelo_2_mosaicX5' ...
     }, ...
-    'file', {'GSDR036a25.25O', 'GSDR186a18.25O', '1ant1015.obs'}, ...
+    'file_obs', {'run_2025-02-05_00-25-57/GSDR036a25.25O', 'run_2025-07-05_00-18-38/GSDR186a18.25O', '1ant1015.obs'}, ...  % RINEX original
+    'file_mat', {'vuelo_2_eme_rx_basic.mat', 'vuelo_2_eme_rx_adv.mat', 'vuelo_2_mosaicX5.mat'}, ... % struct ya cargado
     'result_dir', {'figures_rx_basic', 'figures_rx_advanced', 'figures_mosaicX5'} ...
 );
 
 %% ---------------- Process Individual RINEX ----------------
 for i = 1:numel(receptors)
     exp_name = receptors(i).name;
-    obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file);
+    obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_obs);
     out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
     satellitePRNs = [];  % todos
 
@@ -49,7 +50,8 @@ for i = 1:numel(receptors)
     RINEX_process_postproc(exp_name, obs_file, out_dir, satellitePRNs, options.SAVE_PLOT);
 end
 
-%% ---------------- Compare RINEX Between Receptors ---------
+%% ---------------- Compare RINEX Between Receptors (usar .mat si existe) ---------
+
 compare_pairs = { ...
     {1,2,'GPS'}, ... % Basic vs Advanced GPS
     {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
@@ -74,16 +76,28 @@ for k = 1:numel(compare_pairs)
     if ~isfolder(result_dir_cmp), mkdir(result_dir_cmp); end
 
     experiment = sprintf('SCRAB II flight - %s vs %s', receptors(idx1).name, receptors(idx2).name);
-    file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file);
-    file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file);
 
-    if ~isfile(file1) || ~isfile(file2)
-        warning('Falta archivo para comparación: %s', experiment);
-        continue
+    % ---------------- Determinar qué cargar: .mat o .obs ----------------
+    mat_file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_mat);
+    mat_file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file_mat);
+
+    if isfile(mat_file1) && isfile(mat_file2)
+        % Cargar structs desde .mat
+        data1 = load(mat_file1); data1 = data1.rinexData1;
+        data2 = load(mat_file2); data2 = data2.rinexData1;
+        fprintf('[%s] Comparando usando .mat preprocesado (%s)...\n', experiment, constellation);
+        compare_rinex_observables(experiment, data1, data2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
+    else
+        % Caer a los archivos .obs originales
+        file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_obs);
+        file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file_obs);
+        if ~isfile(file1) || ~isfile(file2)
+            warning('Falta archivo para comparación: %s', experiment);
+            continue
+        end
+        fprintf('[%s] Comparando usando .obs original (%s)...\n', experiment, constellation);
+        compare_rinex_observables(experiment, file1, file2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
     end
-
-    fprintf('[%s] Comparando %s observables...\n', experiment, constellation);
-    compare_rinex_observables(experiment, file1, file2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
 end
 
 %% ---------------- Skyplot por Receptor/RINEX ----------------
