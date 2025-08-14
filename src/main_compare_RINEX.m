@@ -1,151 +1,104 @@
 %% -----------------------------------------------------------
-%  Script Name:   main_compare_RINEX.m
-%  Description:   Processes GNSS RINEX and PVT from several sources
-%  Author:        gomezlma@inta.es
-%  Date:          [2025-07-28]
-%  Inputs:        RINEX files.
-%  Outputs:       Processed and plots of GNSS data.
-%  Dependencies:  Requires MATLAB R2020b or later.
-%  -----------------------------------------------------------
-close all
-clearvars
-clc
+% Script Name:   main_compare_RINEX.m
+% Description:   Processes GNSS RINEX and PVT from multiple sources
+% Author:        gomezlma@inta.es
+% Date:          2025-07-28
+% Inputs:        RINEX files.
+% Outputs:       Processed GNSS data and plots.
+% Dependencies:  Requires MATLAB R2020b or later, RINEX_process_postproc, compare_rinex_observables.
+%% -----------------------------------------------------------
 
-%%
-% Add that folder plus all subfolders to the path.
-addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src')); 
-SAVE_PLOT = 1
-CLOSE_at_END = 0
-SAVE_VIDEO_SKYPLOT = 0
+close all; clearvars; clc;
+% Add source folder to path
+addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src'));
+%% ---------------- Paths & Options -------------------------
+options.SAVE_PLOT = 1;
+options.CLOSE_at_END = 0;
+options.SAVE_VIDEO_SKYPLOT = 0;
 
-%%
-path_folder='C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\';
-day_folder='17_jul_25\';
-rx_advanced_folder='vuelo_2_eme_rx_adv\run_2025-07-05_00-18-38\';
-rx_basic_folder='vuelo_2_eme_rx_basic\run_2025-02-05_00-25-57\';
-mosaic_x5_folder='septentrio_1_antenna_17_jul_25\';
+base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
+results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\results\plots_OBS');  % resultados
 
-%% -------------------------- OBSERVABLES ----------------------------------
-% Import RINEX
+% Carpetas de día/ensayo
+day_folder = ''; % <- puedes dejar vacío si no segmentas por día aquí
 
-% SCRAB II Basic Rx
-experiment='SCRAB II Basic Rx';
-observation_file = [path_folder day_folder rx_basic_folder 'GSDR036a25.25O'];
-result_directory = [path_folder day_folder 'figures_rx_basic'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-RINEX_process_postproc(experiment, observation_file, result_directory, satellitePRNs, SAVE_PLOT)
+% RINEX por receptor
+receptors = struct( ...
+    'name', {'SCRAB II Basic Rx', 'SCRAB II Advanced Rx', 'SCRAB II MOSAIC-X5'}, ...
+    'folder', { ...
+        fullfile('vuelo_2_eme_rx_basic','run_2025-02-05_00-25-57'), ...
+        fullfile('vuelo_2_eme_rx_adv','run_2025-07-05_00-18-38'), ...
+        'vuelo_2_mosaicX5' ...
+    }, ...
+    'file', {'GSDR036a25.25O', 'GSDR186a18.25O', '1ant1015.obs'}, ...
+    'result_dir', {'figures_rx_basic', 'figures_rx_advanced', 'figures_mosaicX5'} ...
+);
 
-% SCRAB II Advanced Rx
-experiment='SCRAB II Advanced Rx';
-observation_file = [path_folder day_folder rx_advanced_folder 'GSDR186a18.25O'];
-result_directory = [path_folder day_folder 'figures_rx_advanced'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-RINEX_process_postproc(experiment, observation_file, result_directory, satellitePRNs, SAVE_PLOT)
+%% ---------------- Process Individual RINEX ----------------
+for i = 1:numel(receptors)
+    exp_name = receptors(i).name;
+    obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file);
+    out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
+    satellitePRNs = [];  % todos
 
-% SCRAB II MOSAIC-X5
-experiment='SCRAB II MOSAIC-X5';
-observation_file = [path_folder day_folder mosaic_x5_folder '1ant1015.obs'];
-result_directory = [path_folder day_folder 'figures_mosaicX5'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-RINEX_process_postproc(experiment, observation_file, result_directory, satellitePRNs, SAVE_PLOT)
-%%
-close all
+    if ~isfile(obs_file)
+        warning('Falta archivo para "%s": %s', exp_name, obs_file);
+        continue
+    end
 
-%% COMPARE RINEX Advanced Rx vs Basic Rx
-%
-experiment='SCRAB II flight - Advanced Rx vs Basic Rx';
-input_files_eme_rx_adv = [path_folder day_folder rx_advanced_folder 'GSDR186a18.25O']; label1='rx advanced EME';
-input_files_eme_rx_basic = [path_folder day_folder rx_basic_folder 'GSDR036a25.25O']; label2='rx basic EME';
+    if ~isfolder(out_dir), mkdir(out_dir); end
 
-input_files_mosaicX5 = [path_folder day_folder mosaic_x5_folder '1ant1015.obs']; label3='rx MOSAIC';
-result_directory = [path_folder day_folder 'figures_comparision_RINEX'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-
-compare_rinex_observables( experiment, ...
-    input_files_eme_rx_adv, ...
-    input_files_eme_rx_basic, ...
-    result_directory, ...
-    satellitePRNs, ...  % ejemplo de PRNs a comparar
-    true,'GPS');
-%% COMPARE RINEX Advanced Rx vs Mosaic X5
-%
-experiment='SCRAB II flight - Advanced Rx vs Mosaic X5';
-result_directory = [path_folder day_folder 'figures_comparision_RINEX'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-
-compare_rinex_observables( experiment, ...
-    input_files_eme_rx_adv, ...
-    input_files_mosaicX5, ...
-    result_directory, ...
-    satellitePRNs, ...  % ejemplo de PRNs a comparar
-    true,'GPS');
-%% COMPARE RINEX Basic Rx vs Mosaic X5
-%
-experiment='SCRAB II flight - Basic Rx vs Mosaic X5';
-result_directory = [path_folder day_folder 'figures_comparision_RINEX'];
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-satellitePRNs = [];
-
-compare_rinex_observables( experiment, ...
-    input_files_eme_rx_basic, ...
-    input_files_mosaicX5, ...
-    result_directory, ...
-    satellitePRNs, ...  % ejemplo de PRNs a comparar
-    true,'GPS');
-
-
-%% GNSS-SDR PARSER
-% experiment = 'gnss SDR observables ISS';
-% gnss_sdr_matfile =  '../rinex_and_raw/observables.mat'; 
-% result_directory = '../figures/';
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-% startTime = datetime(2024, 5, 25, 16, 0, 0);
-% bin_size=50; 
-% 
-% GNSS_SDR_OBSERVABLES_process_binned(experiment, gnss_sdr_matfile, result_directory, satellitePRNs, startTime, SAVE_PLOT,bin_size)
-%% GNSS-SDR PARSER no clk corr
-% experiment = 'gnss SDR observables ISS no clk corr';
-% gnss_sdr_matfile =  '../rinex_and_raw/observables_no_clk_corr.mat'; 
-% result_directory = '../figures/';
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-% startTime = datetime(2024, 5, 25, 16, 0, 0);
-% bin_size=50;
-% 
-% GNSS_SDR_OBSERVABLES_process_binned(experiment, gnss_sdr_matfile, result_directory, satellitePRNs, startTime, SAVE_PLOT,bin_size)
-%% SPIRENT GT PARSER
-% experiment = 'CSV SPIRENT';
-% spirent_matfile =  '../rinex_and_raw/spirent_GT_table.mat'; 
-% result_directory = '../figures';
-% satellitePRNs = [2, 3, 4, 6, 9, 12, 28];
-% % startTime = datetime(1970, 1, 1, 0, 0, 0) + seconds(1400688000.0); % Tiempo GPS inicial como datetime from CSV
-% startTime = datetime(2024, 5, 19, 00, 0, 0); % la semana del 25 de mayo de 2024 empezo el 19!
-% 
-% SPIRENT_csv_process(experiment, spirent_matfile, result_directory, satellitePRNs, startTime, SAVE_PLOT, SAVE_VIDEO_SKYPLOT)
-%%
-%% -------------------------- PVT ----------------------------------
-% Import PVT
-
-% % experiment = 'ISS WITH clk corr';
-% load('../rinex_and_raw/PVT_ISS_long.mat');
-% experiment = 'ISS WITH clk corr';
-% result_directory = '../figures/';
-% figure
-% geoscatter(latitude, longitude, 15, valid_sats, 'filled') % 15 is marker size
-% colorbar
-% title('WITH clk corr - used SV')
-% filename = fullfile(result_directory, ['PVT geoplot' experiment '.png']);
-% saveas(gcf, filename);
-% disp(['GEOPLOT: ' experiment ' plot saved to ' filename]);
-
-
-%%
-
-if CLOSE_at_END 
-    close all
-    disp('all CLOSED')
+    fprintf('[%s] Procesando RINEX...\n', exp_name);
+    RINEX_process_postproc(exp_name, obs_file, out_dir, satellitePRNs, options.SAVE_PLOT);
 end
+
+%% ---------------- Compare RINEX Between Receptors ---------
+compare_pairs = { ...
+    {1,2,'GPS'}, ... % Basic vs Advanced GPS
+    {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
+    {2,3,'GPS'}, ... % Advanced vs MOSAIC GPS
+    {1,2,'Galileo'}, ... % Basic vs Advanced Galileo
+    {1,3,'Galileo'}, ... % Basic vs MOSAIC Galileo
+    {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
+};
+
+for k = 1:numel(compare_pairs)
+    idx1 = compare_pairs{k}{1};
+    idx2 = compare_pairs{k}{2};
+    constellation  = compare_pairs{k}{3};
+
+    % Nombres limpios de receptores para carpeta
+    name1_clean = regexprep(receptors(idx1).name, '\W', '_'); 
+    name2_clean = regexprep(receptors(idx2).name, '\W', '_'); 
+
+    % Carpeta de resultados automática por par
+    result_dir_cmp = fullfile(results_base_dir, ...
+        sprintf('figures_comparision_%s_vs_%s_%s', name1_clean, name2_clean, constellation));
+    if ~isfolder(result_dir_cmp), mkdir(result_dir_cmp); end
+
+    experiment = sprintf('SCRAB II flight - %s vs %s', receptors(idx1).name, receptors(idx2).name);
+    file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file);
+    file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file);
+
+    if ~isfile(file1) || ~isfile(file2)
+        warning('Falta archivo para comparación: %s', experiment);
+        continue
+    end
+
+    fprintf('[%s] Comparando %s observables...\n', experiment, constellation);
+    compare_rinex_observables(experiment, file1, file2, result_dir_cmp, [], options.SAVE_PLOT, constellation);
+end
+
+%% ---------------- Skyplot por Receptor/RINEX ----------------
+% TODO
+%% ---------------- Optional GNSS-SDR / SPIRENT ----------------
+% TODO
+% GNSS_SDR_OBSERVABLES_process_binned(...)
+% SPIRENT_csv_process(...)
+
+%% ---------------- End script -----------------------------
+if options.CLOSE_at_END
+    close all;
+    disp('All figures closed');
+end
+disp('main_compare_RINEX finished successfully');
