@@ -795,7 +795,7 @@ if options.SAVE_PLOT
     
         % Define full paths for saving
         fig_filepath = fullfile([output_plots_folder '\fig'], [fig_name_sanitized '.fig']);
-        png_filepath = fullfile([output_plots_folder '\png'], [fig_name_sanitized '.png']);
+        png_filepath = fullfile([output_plots_folder], [fig_name_sanitized '.png']);
     
         try
             % Save as MATLAB figure file (.fig)
