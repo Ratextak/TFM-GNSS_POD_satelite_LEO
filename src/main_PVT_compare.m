@@ -177,11 +177,6 @@ vel_n_3 = data_sep.Vn;
 vel_e_3 = data_sep.Ve;
 vel_u_3 = data_sep.Vu;
 
-% Covariance Diagonal Terms
-% cov_xx_2 = data_sep.Cov_xx;
-% cov_yy_2 = data_sep.Cov_yy;
-% cov_zz_2 = data_sep.Cov_zz;
-
 % Ambiguity Resolution
 % AR_ratio_factor_2 = data_sep.AR_ratio;
 % AR_ratio_threshold_2 = data_sep.AR_thresh;
@@ -273,20 +268,6 @@ end
 latitude_3_sync = interp1(abs_time_3, latitude_3, abs_time_sync, 'linear', 'extrap');
 longitude_3_sync = interp1(abs_time_3, longitude_3, abs_time_sync, 'linear', 'extrap');
 height_3_sync = interp1(abs_time_3, height_3, abs_time_sync, 'linear', 'extrap');
-
-% % Velocity mapping: Assuming data3_raw.VelX/Y/Z are actually Vn/Ve/Vu
-% % If data3_raw was read by read_pvt_log, it has VelX/Y/Z. If it was from
-% % data_sep, it would have Vn/Ve/Vu. This needs careful handling.
-% % For now, assuming read_pvt_log was used for data3_raw.
-% if isfield(data3_raw, 'VelX')
-%     vel_x_3_sync = interp1(abs_time_3, vel_x_3, abs_time_sync, 'linear', 'extrap');
-%     vel_y_3_sync = interp1(abs_time_3, vel_y_3, abs_time_sync, 'linear', 'extrap');
-%     vel_z_3_sync = interp1(abs_time_3, vel_z_3, abs_time_sync, 'linear', 'extrap');
-% else % If data3_raw had Vn/Ve/Vu, you'd convert them to ECEF here if needed for comparison
-%     vel_x_3_sync = NaN(size(abs_time_sync)); vel_y_3_sync = NaN(size(abs_time_sync));
-%     vel_z_3_sync = NaN(size(abs_time_sync));
-% end
-
 
 if isfield(data_sep, 'Cov_xx')
     cov_xx_3_sync = interp1(abs_time_3, cov_xx_3, abs_time_sync, 'linear', 'extrap');
