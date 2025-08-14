@@ -35,19 +35,21 @@ receptors = struct( ...
 %% ---------------- Process Individual RINEX ----------------
 for i = 1:numel(receptors)
     exp_name = receptors(i).name;
-    obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_obs);
+    % ---------------- Determinar qué cargar: .mat o .obs ----------------
+    % obs_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_obs);
+    mat_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_mat);
     out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
     satellitePRNs = [];  % todos
 
-    if ~isfile(obs_file)
-        warning('Falta archivo para "%s": %s', exp_name, obs_file);
+    if ~isfile(mat_file)
+        warning('Falta archivo para "%s": %s', exp_name, mat_file);
         continue
     end
 
     if ~isfolder(out_dir), mkdir(out_dir); end
 
     fprintf('[%s] Procesando RINEX...\n', exp_name);
-    RINEX_process_postproc(exp_name, obs_file, out_dir, satellitePRNs, options.SAVE_PLOT);
+    RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, options.SAVE_PLOT);
 end
 
 %% ---------------- Compare RINEX Between Receptors (usar .mat si existe) ---------
