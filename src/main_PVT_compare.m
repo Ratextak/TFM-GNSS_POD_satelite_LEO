@@ -14,7 +14,7 @@ clear;
 close all; clc;
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src')); 
 
-SAVE_PLOT = 0;
+options.SAVE_PLOT = 1;
 cache_file = '../data/pvt_cache_flight_2.mat';
 %% 0. Define Log Files and Read Data
 % --- IMPORTANT: Specify the paths to your two PVT log files ---
@@ -30,7 +30,7 @@ dataset_name_2 = 'EME Rx advanced'; % e.g., 'Dynamic Test', 'Receiver 2'
 dataset_name_3 = 'Mosaic X5'; % e.g., 'Dynamic Test', 'Receiver 2'
 
 output_mat_filename = '..\results\pvt_comparison_processed.mat'; % Name for the output .mat file
-output_plots_folder = '..\results\plots\PVT_Comparison_Plots'; % Folder to save comparison plots
+output_plots_folder = '..\results\plots_PVT'; % Folder to save comparison plots
 
 if exist(cache_file, 'file')
     fprintf('Loading cached PVT data from %s...\n', cache_file);
@@ -792,7 +792,7 @@ sgtitle('2D Position Error Component Distributions (North, East)');
 % TBC save to output_mat_filename
 
 %% 12. Save All Generated Plots
-if SAVE_PLOT
+if options.SAVE_PLOT
     figs = findall(0, 'Type', 'figure');
     for k = 1:length(figs)
         figs(k).WindowState = 'maximized';
@@ -835,7 +835,7 @@ if SAVE_PLOT
     end
 end
 %%
-if SAVE_PLOT
+if options.SAVE_PLOT
 fprintf('----------------------------------------------------------.\n');
 fprintf('All comparison plots generated and data saved successfully.\n');
 else
