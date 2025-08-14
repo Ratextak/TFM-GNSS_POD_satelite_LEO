@@ -17,9 +17,7 @@ addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Doc
 options.SAVE_PLOT = 1;
 cache_file = '../data/pvt_cache_flight_2.mat';
 %% 0. Define Log Files and Read Data
-% --- IMPORTANT: Specify the paths to your two PVT log files ---
-% Replace 'your_pvt_log_file_1.bin' and 'your_pvt_log_file_2.bin'
-% with the actual names/paths of your binary log files.
+
 log_filename1 = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\vuelo_2_eme_rx_basic\run_2025-02-05_00-25-57\PVT.dat'; 
 log_filename2 = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\vuelo_2_eme_rx_adv\run_2025-07-05_00-18-38\PVT.dat'; % e.g., 'pvt_data_run2.bin'
 log_filename_septentrio = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\septentrio_1_antenna_17_jul_25\1ant1015.sbf_SBF_PVTGeodetic2.txt'; 
@@ -72,7 +70,6 @@ else
 end
 
 %% 0.1. Prepare Data for Plotting (Dataset 1)
-% Extract data into simpler variable names for plotting convenience
 % Use the absolute Timestamp directly for plotting
 abs_time_1 = data1.Timestamp; % Now holds datetime array
 
@@ -112,8 +109,6 @@ valid_sats_1 = data1.NumSV;
 solution_type_1 = data1.SolStat; % Using SolStat for consistency with provided data structure
 
 %% 0.2. Prepare Data for Plotting (Dataset 2)
-% Extract data into simpler variable names for plotting convenience
-% Use the absolute Timestamp directly for plotting
 abs_time_2 = data2.Timestamp; % Now holds datetime array
 
 % DOPs
@@ -152,8 +147,6 @@ valid_sats_2 = data2.NumSV;
 solution_type_2 = data2.SolStat; % Using SolStat for consistency with provided data structure
 
 %% 0.3. Prepare Data for Plotting (Dataset 3)
-% Extract data into simpler variable names for plotting convenience
-% Use the absolute Timestamp directly for plotting
 abs_time_3 = data_sep.AbsTime_UTC; % Now holds datetime array
 
 % % DOPs
