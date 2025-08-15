@@ -37,7 +37,8 @@ receptors = struct( ...
         fullfile('vuelo_2_eme_rx_adv'), ...
         'vuelo_2_mosaicX5' ...
     }, ...
-    'file_obs', {'run_2025-02-05_00-25-57/GSDR036a25.25O', 'run_2025-07-05_00-18-38/GSDR186a18.25O', '1ant1015.obs'}, ...  % RINEX original
+    'file_obs', {'run_2025-02-05_00-25-57/GSDR036a25.25O', 'run_2025-07-05_00-18-38/GSDR186a18.25O', '1ant1015.obs'}, ...  % RINEX observation
+    'file_nav', {'run_2025-02-05_00-25-57/GSDR036a25.25P', 'run_2025-07-05_00-18-38/GSDR186a18.25P', '1ant1015_gps.nav'}, ...  % RINEX navigation
     'file_mat', {'vuelo_2_eme_rx_basic.mat', 'vuelo_2_eme_rx_adv.mat', 'vuelo_2_mosaicX5.mat'}, ... % struct ya cargado
     'result_dir', {''} ...
 );
@@ -114,6 +115,17 @@ end
 
 %% ---------------- Skyplot por Receptor/RINEX ----------------
 % TODO
+file1_nav = fullfile(base_path_data, receptors(1).folder, receptors(1).file_nav);
+rinexData = rinexread(file1_nav);
+navData_GPS = rinexData.GPS;
+t = datetime(2025,07,16,8,59,44)
+[satPos,satVel,satID] = gnssconstellation(t,navData_GPS,GNSSFileType="RINEX");
+recPos = [40.3895 -3.7474 0];
+maskAngle = 5;
+[az,el,vis] = lookangles(recPos,satPos,maskAngle);
+fprintf('%d satellites visible at %s.\n',nnz(vis),t)
+figure
+skyplot(az(vis),el(vis),satID(vis),MaskElevation=maskAngle)
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
