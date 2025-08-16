@@ -114,18 +114,50 @@ if options.process_comparision
 end
 
 %% ---------------- Skyplot por Receptor/RINEX ----------------
-% TODO
-file1_nav = fullfile(base_path_data, receptors(1).folder, receptors(1).file_nav);
+idx1=2;
+% Cargar navegación
+file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
 rinexData = rinexread(file1_nav);
+
 navData_GPS = rinexData.GPS;
-t = datetime(2025,07,16,8,59,44)
-[satPos,satVel,satID] = gnssconstellation(t,navData_GPS,GNSSFileType="RINEX");
-recPos = [40.3895 -3.7474 0];
-maskAngle = 5;
-[az,el,vis] = lookangles(recPos,satPos,maskAngle);
-fprintf('%d satellites visible at %s.\n',nnz(vis),t)
+navData_Galileo = rinexData.Galileo;
+[~,satIdx] = unique(navData_Galileo.SatelliteID);
+navData_Galileo = navData_Galileo(satIdx,:);    
+% Época de interés
+t = navData_GPS.Time(1);
+% t = datetime(2025,07,17,11,30,44);
+
+
+% Posiciones satélite
+[satPos_GPS,~,satID_GPS] = gnssconstellation(t,navData_GPS,GNSSFileType="RINEX");
+[satPos_Gal,~,satID_Gal] = gnssconstellation(t,navData_Galileo,GNSSFileType="RINEX");
+
+% Pos receptor y máscara
+recPos = [40.3895, -3.7474, 0]; % [lat deg, lon deg, alt m]
+maskAngle = 1;
+
+% Look angles
+[az_GPS,el_GPS,vis_GPS] = lookangles(recPos,satPos_GPS,maskAngle);
+[az_Gal,el_Gal,vis_Gal] = lookangles(recPos,satPos_Gal,maskAngle);
+
+fprintf('%d GPS satellites visible at %s.\n',nnz(vis_GPS),t)
+fprintf('%d Galileo satellites visible at %s.\n',nnz(vis_Gal),t)
+
+% Unir datos GPS + Galileo visibles
+az_all = [az_GPS(vis_GPS); az_Gal(vis_Gal)];
+el_all = [el_GPS(vis_GPS); el_Gal(vis_Gal)];
+id_all = [satID_GPS(vis_GPS); satID_Gal(vis_Gal)];
+
+% Etiquetas de grupo
+group_all = [repmat("GPS",nnz(vis_GPS),1); repmat("Galileo",nnz(vis_Gal),1)];
+group_all = categorical(group_all);
+
+% Skyplot combinado
 figure
-skyplot(az(vis),el(vis),satID(vis),MaskElevation=maskAngle)
+skyplot(az_all, el_all, id_all, MaskElevation=maskAngle, GroupData=group_all)
+legend('GPS','Galileo')
+title(sprintf('Skyplot at CEDEA; UTC %s', datetime(t)))
+
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
