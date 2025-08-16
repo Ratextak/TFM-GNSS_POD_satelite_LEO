@@ -199,20 +199,17 @@ saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
 save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
 fprintf('Variables guardadas en: %s\n', saveFile);
 
-    % === Animación eficiente usando AzimuthData / ElevationData ===
-figure
-sp = skyplot(az_all(1,:), el_all(1,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
-title(sprintf('Skyplot Trajectory at CEDEA (%s – %s UTC)', ...
-        datestr(timeVecDec(1)), datestr(timeVecDec(end))))
+% === Skyplot final (última posición) ===
+figure('Visible','off') % No mostrar ventana
+skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
+title(sprintf('Skyplot CEDEA (%s – %s UTC)', ...
+        datetime(timeVecDec(1)), datetime(timeVecDec(end))))
 
-for k = 2:numTimesDec
-    try
-        set(sp, 'AzimuthData', az_all(1:k,:), 'ElevationData', el_all(1:k,:));
-        drawnow limitrate
-    catch ME
-        warning('Frame %d skipped: %s', k, ME.message);
-    end
-end
+% Guardar solo la última imagen
+pngFile = fullfile(base_path_data, 'SkyplotTrajectory_Final.png');
+saveas(gcf, pngFile);
+close(gcf)
+fprintf('Skyplot final guardado en: %s\n', pngFile);
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
