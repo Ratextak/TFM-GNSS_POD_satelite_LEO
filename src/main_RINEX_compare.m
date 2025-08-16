@@ -13,7 +13,7 @@ close all; clearvars; clc;
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src'));
 %% ---------------- Paths & Options -------------------------
 options.SAVE_PLOT = 1;
-options.CLOSE_at_END = 0;
+options.CLOSE_at_END = 1;
 options.process_individual = true;
 options.process_comparision = true;
 % COMPARISIONS
@@ -136,7 +136,8 @@ t = navData_GPS.Time(1);
 [satPos_Gal,~,satID_Gal] = gnssconstellation(t,navData_Galileo,GNSSFileType="RINEX");
 
 % Pos receptor y máscara
-recPos = [40.3895, -3.7474, 0]; % [lat deg, lon deg, alt m]
+recPos = [file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lat(1), file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lon(1), file1_pvt_data.PVTvuelo_2_eme_rx_adv.Height(1)]; % [lat deg, lon deg, alt m]
+% recPos = [40.3895, -3.7474, 0]; % [lat deg, lon deg, alt m]
 maskAngle = 1;
 
 % Look angles
@@ -160,6 +161,102 @@ figure
 skyplot(az_all, el_all, id_all, MaskElevation=maskAngle, GroupData=group_all)
 legend('GPS','Galileo')
 title(sprintf('Skyplot at CEDEA; UTC %s', datetime(t)))
+
+%% ---------------- Skyplot por Receptor/RINEX con Trayectoria (decimado) ----------------
+idx1 = 2;
+step = 100; % tomar 1 de cada 10 posiciones
+
+% Archivos
+file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
+file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
+file1_pvt_data = load(file1_pvt);
+
+% Navegación
+rinexData     = rinexread(file1_nav);
+navData_GPS   = rinexData.GPS;
+navData_Gal   = rinexData.Galileo;
+[~,satIdx]    = unique(navData_Gal.SatelliteID);
+navData_Gal   = navData_Gal(satIdx,:);
+
+% Semana GPS y TOW del receptor
+Week     = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Week;
+TOW_ms   = file1_pvt_data.PVTvuelo_2_eme_rx_adv.TOW;
+
+gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
+timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
+
+% Pos receptor (trayectoria PVT)
+recLat = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lat;
+recLon = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lon;
+recHgt = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Height;
+
+% --- Decimación ---
+timeVecDec = timeVec(1:step:end);
+recLatDec  = recLat(1:step:end);
+recLonDec  = recLon(1:step:end);
+recHgtDec  = recHgt(1:step:end);
+numTimesDec = numel(timeVecDec);
+
+maskAngle = 5; % elevación mínima
+
+% Conjunto de todos los PRNs posibles
+allPRN = unique([navData_GPS.SatelliteID; navData_Gal.SatelliteID]);
+numSats = numel(allPRN);
+
+% Inicializar matrices
+az_all = NaN(numTimesDec, numSats);
+el_all = NaN(numTimesDec, numSats);
+grp_all = strings(numSats,1);
+
+% === Bucle temporal decimado ===
+for k = 1:numTimesDec
+    disp([num2str(k) ' / ' num2str(numTimesDec)])
+    t = timeVecDec(k);
+    recPos = [recLatDec(k), recLonDec(k), recHgtDec(k)];
+
+    % Posiciones de satélites
+    [satPos_GPS,~,satID_GPS] = gnssconstellation(t, navData_GPS, GNSSFileType="RINEX");
+    [satPos_Gal,~,satID_Gal] = gnssconstellation(t, navData_Gal, GNSSFileType="RINEX");
+
+    % Look angles
+    [azG, elG, visG] = lookangles(recPos, satPos_GPS, maskAngle);
+    [azE, elE, visE] = lookangles(recPos, satPos_Gal, maskAngle);
+
+    % Llenar columnas por PRN (NaN si no visible)
+    for i = 1:numel(satID_GPS)
+        idxCol = find(allPRN == satID_GPS(i));
+        if visG(i)
+            az_all(k, idxCol) = azG(i);
+            el_all(k, idxCol) = elG(i);
+        end
+        grp_all(idxCol) = "GPS";
+    end
+    for i = 1:numel(satID_Gal)
+        idxCol = find(allPRN == satID_Gal(i));
+        if visE(i)
+            az_all(k, idxCol) = azE(i);
+            el_all(k, idxCol) = elE(i);
+        end
+        grp_all(idxCol) = "Galileo";
+    end
+end
+
+grp_all = categorical(grp_all);
+
+% === Guardar variables en .mat ===
+saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
+save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
+fprintf('Variables guardadas en: %s\n', saveFile);
+
+% === Animación Skyplot decimado ===
+figure
+for k = 1:numTimesDec
+    skyplot(az_all(1:k,:), el_all(1:k,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
+    title(sprintf('Skyplot Trajectory at CEDEA (%s – %s UTC)', ...
+        datetime(timeVecDec(1)), datetime(timeVecDec(k))))
+    legend('GPS','Galileo')
+    drawnow 
+end
 
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
