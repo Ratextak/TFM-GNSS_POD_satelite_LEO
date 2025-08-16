@@ -114,56 +114,8 @@ if options.process_comparision
     end
 end
 
-%% ---------------- Skyplot por Receptor/RINEX ----------------
-idx1=2;
-% Cargar navegación
-file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
-file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
-file1_pvt_data = load(file1_pvt);
-
-rinexData = rinexread(file1_nav);
-navData_GPS = rinexData.GPS;
-navData_Galileo = rinexData.Galileo;
-[~,satIdx] = unique(navData_Galileo.SatelliteID);
-navData_Galileo = navData_Galileo(satIdx,:);    
-% Época de interés
-t = navData_GPS.Time(1);
-% t = datetime(2025,07,17,11,30,44);
-
-
-% Posiciones satélite
-[satPos_GPS,~,satID_GPS] = gnssconstellation(t,navData_GPS,GNSSFileType="RINEX");
-[satPos_Gal,~,satID_Gal] = gnssconstellation(t,navData_Galileo,GNSSFileType="RINEX");
-
-% Pos receptor y máscara
-recPos = [file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lat(1), file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lon(1), file1_pvt_data.PVTvuelo_2_eme_rx_adv.Height(1)]; % [lat deg, lon deg, alt m]
-% recPos = [40.3895, -3.7474, 0]; % [lat deg, lon deg, alt m]
-maskAngle = 1;
-
-% Look angles
-[az_GPS,el_GPS,vis_GPS] = lookangles(recPos,satPos_GPS,maskAngle);
-[az_Gal,el_Gal,vis_Gal] = lookangles(recPos,satPos_Gal,maskAngle);
-
-fprintf('%d GPS satellites visible at %s.\n',nnz(vis_GPS),t)
-fprintf('%d Galileo satellites visible at %s.\n',nnz(vis_Gal),t)
-
-% Unir datos GPS + Galileo visibles
-az_all = [az_GPS(vis_GPS); az_Gal(vis_Gal)];
-el_all = [el_GPS(vis_GPS); el_Gal(vis_Gal)];
-id_all = [satID_GPS(vis_GPS); satID_Gal(vis_Gal)];
-
-% Etiquetas de grupo
-group_all = [repmat("GPS",nnz(vis_GPS),1); repmat("Galileo",nnz(vis_Gal),1)];
-group_all = categorical(group_all);
-
-% Skyplot combinado
-figure
-skyplot(az_all, el_all, id_all, MaskElevation=maskAngle, GroupData=group_all)
-legend('GPS','Galileo')
-title(sprintf('Skyplot at CEDEA; UTC %s', datetime(t)))
-
 %% ---------------- Skyplot por Receptor/RINEX con Trayectoria (decimado) ----------------
-idx1 = 2;
+idx1 = 1;
 step = 100; % tomar 1 de cada 10 posiciones
 
 % Archivos
@@ -179,16 +131,16 @@ navData_Gal   = rinexData.Galileo;
 navData_Gal   = navData_Gal(satIdx,:);
 
 % Semana GPS y TOW del receptor
-Week     = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Week;
-TOW_ms   = file1_pvt_data.PVTvuelo_2_eme_rx_adv.TOW;
+Week     = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Week;
+TOW_ms   = file1_pvt_data.PVTvuelo_2_eme_rx_basic.TOW;
 
 gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
 timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
 
 % Pos receptor (trayectoria PVT)
-recLat = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lat;
-recLon = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Lon;
-recHgt = file1_pvt_data.PVTvuelo_2_eme_rx_adv.Height;
+recLat = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Lat;
+recLon = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Lon;
+recHgt = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Height;
 
 % --- Decimación ---
 timeVecDec = timeVec(1:step:end);
@@ -210,7 +162,6 @@ grp_all = strings(numSats,1);
 
 % === Bucle temporal decimado ===
 for k = 1:numTimesDec
-    disp([num2str(k) ' / ' num2str(numTimesDec)])
     t = timeVecDec(k);
     recPos = [recLatDec(k), recLonDec(k), recHgtDec(k)];
 
@@ -248,16 +199,20 @@ saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
 save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
 fprintf('Variables guardadas en: %s\n', saveFile);
 
-% === Animación Skyplot decimado ===
+    % === Animación eficiente usando AzimuthData / ElevationData ===
 figure
-for k = 1:numTimesDec
-    skyplot(az_all(1:k,:), el_all(1:k,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
-    title(sprintf('Skyplot Trajectory at CEDEA (%s – %s UTC)', ...
-        datetime(timeVecDec(1)), datetime(timeVecDec(k))))
-    legend('GPS','Galileo')
-    drawnow 
-end
+sp = skyplot(az_all(1,:), el_all(1,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
+title(sprintf('Skyplot Trajectory at CEDEA (%s – %s UTC)', ...
+        datestr(timeVecDec(1)), datestr(timeVecDec(end))))
 
+for k = 2:numTimesDec
+    try
+        set(sp, 'AzimuthData', az_all(1:k,:), 'ElevationData', el_all(1:k,:));
+        drawnow limitrate
+    catch ME
+        warning('Frame %d skipped: %s', k, ME.message);
+    end
+end
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
