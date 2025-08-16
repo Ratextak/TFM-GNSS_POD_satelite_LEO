@@ -39,7 +39,8 @@ receptors = struct( ...
     }, ...
     'file_obs', {'run_2025-02-05_00-25-57/GSDR036a25.25O', 'run_2025-07-05_00-18-38/GSDR186a18.25O', '1ant1015.obs'}, ...  % RINEX observation
     'file_nav', {'run_2025-02-05_00-25-57/GSDR036a25.25P', 'run_2025-07-05_00-18-38/GSDR186a18.25P', '1ant1015_gps.nav'}, ...  % RINEX navigation
-    'file_mat', {'vuelo_2_eme_rx_basic.mat', 'vuelo_2_eme_rx_adv.mat', 'vuelo_2_mosaicX5.mat'}, ... % struct ya cargado
+    'file_PVTmat', {'PVTvuelo_2_eme_rx_basic.mat', 'PVTvuelo_2_eme_rx_adv.mat', '1ant1015_gps.nav'}, ...  % PVT
+    'file_RINEXmat', {'RINEXvuelo_2_eme_rx_basic.mat', 'RINEXvuelo_2_eme_rx_adv.mat', 'RINEXvuelo_2_mosaicX5.mat'}, ... % struct ya cargado
     'result_dir', {''} ...
 );
 
@@ -47,7 +48,7 @@ receptors = struct( ...
 if options.process_individual
     for i = 1:numel(receptors)
         exp_name = receptors(i).name;
-        mat_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_mat);
+        mat_file = fullfile(base_path_data, receptors(i).folder, receptors(i).file_RINEXmat);
         out_dir  = fullfile(results_base_dir, receptors(i).result_dir);
         satellitePRNs = [];  % todos
     
@@ -90,8 +91,8 @@ if options.process_comparision
         experiment = sprintf('Flight 2 - %s vs %s', receptors(idx1).name, receptors(idx2).name);
     
         % ---------------- Determinar qué cargar: .mat o .obs ----------------
-        mat_file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_mat);
-        mat_file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file_mat);
+        mat_file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_RINEXmat);
+        mat_file2 = fullfile(base_path_data, receptors(idx2).folder, receptors(idx2).file_RINEXmat);
     
         if isfile(mat_file1) && isfile(mat_file2)
             % Cargar structs desde .mat
@@ -117,8 +118,10 @@ end
 idx1=2;
 % Cargar navegación
 file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
-rinexData = rinexread(file1_nav);
+file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
+file1_pvt_data = load(file1_pvt);
 
+rinexData = rinexread(file1_nav);
 navData_GPS = rinexData.GPS;
 navData_Galileo = rinexData.Galileo;
 [~,satIdx] = unique(navData_Galileo.SatelliteID);
