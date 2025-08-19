@@ -215,16 +215,30 @@ for idx1 =1:numel(receptors)
     saveFile = fullfile(results_base_dir, '../skyplots/SkyplotTrajectory_Decimated.mat');
     save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
     fprintf('Variables guardadas en: %s\n', saveFile);
+    % === Skyplot primera posición ===
+    fig_first = figure('Visible','on');
+    fig_first.WindowState = 'maximized'; 
     
+    skyplot(az_all(1,:), el_all(1,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
+    title(sprintf('%s CEDEA primera posición (%s UTC)', ...
+            receptors(idx1).name, datetime(timeVecDec(1))))
+    legend('GPS','Galileo')
+    
+    pngFileFirst = fullfile(results_base_dir, ['../skyplots/' receptors(idx1).name '_skyplot_first.png']);
+    saveas(fig_first, pngFileFirst);
+    fprintf('Skyplot primera posición guardado en: %s\n', pngFileFirst);
+
     % === Skyplot final (última posición) ===
-    figure('Visible','on')
+    fig = figure('Visible','on');
+    fig.WindowState = 'maximized'; 
+
     skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
     title(sprintf('%s CEDEA (%s – %s UTC)', ...
             receptors(idx1).name, datetime(timeVecDec(1)), datetime(timeVecDec(end))))
     legend('GPS','Galileo')
     % Guardar solo la última imagen
     pngFile = fullfile(results_base_dir, ['../skyplots/' receptors(idx1).name '_skyplot.png']);
-    saveas(gcf, pngFile);
+    saveas(fig, pngFile);
     fprintf('Skyplot final guardado en: %s\n', pngFile);
 end
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
