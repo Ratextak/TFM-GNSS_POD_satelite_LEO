@@ -26,8 +26,8 @@ compare_pairs = { ...
     {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
 };
 
-base_path_data   = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\data\CEDEA');   % datos
-results_base_dir = fullfile('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\results\plots_OBS');  % resultados
+base_path_data   = fullfile('..\data\CEDEA');   % datos
+results_base_dir = fullfile('..\results\plots_OBS');  % resultados
 
 % RINEX por receptor (archivos originales y .mat preprocesados)
 receptors = struct( ...
