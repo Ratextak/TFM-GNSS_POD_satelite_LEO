@@ -131,24 +131,41 @@ for idx1 =1:numel(receptors)
     navData_Gal   = navData_Gal(satIdx,:);
     
     % Semana GPS y TOW del receptor
-    Week     = file1_pvt_data.PVTData.Week;
-    TOW_ms   = file1_pvt_data.PVTData.TOW;
-    
-    gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
-    timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
-    
+    if contains(receptors(idx1).name,'MOSAIC')
+        Week     = file1_pvt_data.PVTData.WNc;
+        TOW   = file1_pvt_data.PVTData.TOW;
+        gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
+        timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW);
+    else
+        Week     = file1_pvt_data.PVTData.Week;
+        TOW_ms   = file1_pvt_data.PVTData.TOW;
+        gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
+        timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
+    end
+
     % Pos receptor (trayectoria PVT)
-    recLat = file1_pvt_data.PVTData.Lat;
-    recLon = file1_pvt_data.PVTData.Lon;
-    recHgt = file1_pvt_data.PVTData.Height;
-    
+    if contains(receptors(idx1).name,'MOSAIC')
+        recLat = rad2deg(file1_pvt_data.PVTData.Latitude);
+        recLat = recLat(~isnan(recLat))';
+        recLon = rad2deg(file1_pvt_data.PVTData.Longitude);
+        recLon = recLon(~isnan(recLon))';
+        recHgt = file1_pvt_data.PVTData.Height;
+        recHgt = recHgt(~isnan(recHgt))';
+        % mantain dimensions compatibility...
+        timeVec = timeVec(~isnan(recHgt))';
+    else
+        recLat = file1_pvt_data.PVTData.Lat;
+        recLon = file1_pvt_data.PVTData.Lon;
+        recHgt = file1_pvt_data.PVTData.Height;
+    end
+
     % --- Decimación ---
     timeVecDec = timeVec(1:step:end);
     recLatDec  = recLat(1:step:end);
     recLonDec  = recLon(1:step:end);
     recHgtDec  = recHgt(1:step:end);
     numTimesDec = numel(timeVecDec);
-    
+
     maskAngle = 5; % elevación mínima
     
     % Conjunto de todos los PRNs posibles
