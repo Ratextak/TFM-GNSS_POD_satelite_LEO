@@ -212,18 +212,18 @@ for idx1 =1:numel(receptors)
     grp_all = categorical(grp_all);
     
     % === Guardar variables en .mat ===
-    saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
+    saveFile = fullfile(results_base_dir, '../skyplots/SkyplotTrajectory_Decimated.mat');
     save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
     fprintf('Variables guardadas en: %s\n', saveFile);
     
     % === Skyplot final (última posición) ===
-    figure('Visible','on') % No mostrar ventana
+    figure('Visible','on')
     skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
     title(sprintf('%s CEDEA (%s – %s UTC)', ...
             receptors(idx1).name, datetime(timeVecDec(1)), datetime(timeVecDec(end))))
     legend('GPS','Galileo')
     % Guardar solo la última imagen
-    pngFile = fullfile(base_path_data, [receptors(idx1).name '_skyplot.png']);
+    pngFile = fullfile(results_base_dir, ['../skyplots/' receptors(idx1).name '_skyplot.png']);
     saveas(gcf, pngFile);
     fprintf('Skyplot final guardado en: %s\n', pngFile);
 end
