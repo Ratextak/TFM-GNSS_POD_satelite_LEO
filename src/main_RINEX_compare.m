@@ -115,7 +115,7 @@ if options.process_comparision
 end
 
 %% ---------------- Skyplot por Receptor/RINEX con Trayectoria (decimado) ----------------
-for idx1 = numel(receptors)
+for idx1 =1:numel(receptors)
     step = 100; % tomar 1 de cada 10 posiciones
     
     % Archivos
@@ -204,7 +204,7 @@ for idx1 = numel(receptors)
     skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
     title(sprintf('%s CEDEA (%s – %s UTC)', ...
             receptors(idx1).name, datetime(timeVecDec(1)), datetime(timeVecDec(end))))
-    
+    legend('GPS','Galileo')
     % Guardar solo la última imagen
     pngFile = fullfile(base_path_data, [receptors(idx1).name '_skyplot.png']);
     saveas(gcf, pngFile);
