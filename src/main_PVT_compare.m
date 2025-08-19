@@ -18,9 +18,9 @@ options.SAVE_PLOT = 1;
 cache_file = '../data/pvt_cache_flight_2.mat';
 %% 0. Define Log Files and Read Data
 
-log_filename1 = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\vuelo_2_eme_rx_basic\run_2025-02-05_00-25-57\PVT.dat'; 
-log_filename2 = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\vuelo_2_eme_rx_adv\run_2025-07-05_00-18-38\PVT.dat'; % e.g., 'pvt_data_run2.bin'
-log_filename_septentrio = 'C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\2 INTA\6 GNSS-flex\data_cedea\17_jul_25\septentrio_1_antenna_17_jul_25\1ant1015.sbf_SBF_PVTGeodetic2.txt'; 
+log_filename1 = '..\data\CEDEA\vuelo_2_eme_rx_basic\run_2025-02-05_00-25-57\PVT.dat'; %EME Rx basic
+log_filename2 = '..\data\CEDEA\vuelo_2_eme_rx_adv\run_2025-07-05_00-18-38\PVT.dat'; % EME Rx advanced
+log_filename_septentrio = '..\data\CEDEA\17_jul_25\vuelo_2_mosaicX5\1ant1015.sbf_SBF_PVTGeodetic2.txt'; 
 
 %% --- Define names/tags for each dataset for clarity in plots and legends ---
 dataset_name_1 = 'EME Rx basic'; % e.g., 'Static Test', 'Receiver 1'
