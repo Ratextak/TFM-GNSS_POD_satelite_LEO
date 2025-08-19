@@ -53,7 +53,7 @@ if options.process_individual
         satellitePRNs = [];  % todos
     
         if ~isfile(mat_file)
-            warning('Falta archivo para "%s": %s', exp_name, mat_file);
+            warning('Falta archivo .MAT para "%s": %s', exp_name, mat_file);
             continue
         end
     
