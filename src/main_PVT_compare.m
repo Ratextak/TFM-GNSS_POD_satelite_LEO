@@ -7,7 +7,7 @@
 % Finally, it saves all processed data into a .mat file for later use and
 % saves all generated comparison plots as .fig and .png files.
 
-% Ensure that 'read_pvt_bin.m' is in the same directory as this script
+% Ensure that 'read_pvt_bin.m' is in the reachable path
 % or is on the MATLAB path.
 
 clear; 
