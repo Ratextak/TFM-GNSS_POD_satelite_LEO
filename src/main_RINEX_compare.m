@@ -96,8 +96,8 @@ if options.process_comparision
     
         if isfile(mat_file1) && isfile(mat_file2)
             % Cargar structs desde .mat
-            data1 = load(mat_file1); data1 = data1.rinexData;
-            data2 = load(mat_file2); data2 = data2.rinexData;
+            data1 = load(mat_file1); data1 = data1.RinexData;
+            data2 = load(mat_file2); data2 = data2.RinexData;
             fprintf('[%s] Comparando usando .mat preprocesado (%s)...\n', experiment, constellation);
             compare_rinex_observables(experiment, data1, data2, out_dir, [], options.SAVE_PLOT, constellation);
         else
