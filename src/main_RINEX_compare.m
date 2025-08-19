@@ -115,101 +115,101 @@ if options.process_comparision
 end
 
 %% ---------------- Skyplot por Receptor/RINEX con Trayectoria (decimado) ----------------
-idx1 = 1;
-step = 100; % tomar 1 de cada 10 posiciones
-
-% Archivos
-file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
-file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
-file1_pvt_data = load(file1_pvt);
-
-% Navegación
-rinexData     = rinexread(file1_nav);
-navData_GPS   = rinexData.GPS;
-navData_Gal   = rinexData.Galileo;
-[~,satIdx]    = unique(navData_Gal.SatelliteID);
-navData_Gal   = navData_Gal(satIdx,:);
-
-% Semana GPS y TOW del receptor
-Week     = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Week;
-TOW_ms   = file1_pvt_data.PVTvuelo_2_eme_rx_basic.TOW;
-
-gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
-timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
-
-% Pos receptor (trayectoria PVT)
-recLat = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Lat;
-recLon = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Lon;
-recHgt = file1_pvt_data.PVTvuelo_2_eme_rx_basic.Height;
-
-% --- Decimación ---
-timeVecDec = timeVec(1:step:end);
-recLatDec  = recLat(1:step:end);
-recLonDec  = recLon(1:step:end);
-recHgtDec  = recHgt(1:step:end);
-numTimesDec = numel(timeVecDec);
-
-maskAngle = 5; % elevación mínima
-
-% Conjunto de todos los PRNs posibles
-allPRN = unique([navData_GPS.SatelliteID; navData_Gal.SatelliteID]);
-numSats = numel(allPRN);
-
-% Inicializar matrices
-az_all = NaN(numTimesDec, numSats);
-el_all = NaN(numTimesDec, numSats);
-grp_all = strings(numSats,1);
-
-% === Bucle temporal decimado ===
-for k = 1:numTimesDec
-    t = timeVecDec(k);
-    recPos = [recLatDec(k), recLonDec(k), recHgtDec(k)];
-
-    % Posiciones de satélites
-    [satPos_GPS,~,satID_GPS] = gnssconstellation(t, navData_GPS, GNSSFileType="RINEX");
-    [satPos_Gal,~,satID_Gal] = gnssconstellation(t, navData_Gal, GNSSFileType="RINEX");
-
-    % Look angles
-    [azG, elG, visG] = lookangles(recPos, satPos_GPS, maskAngle);
-    [azE, elE, visE] = lookangles(recPos, satPos_Gal, maskAngle);
-
-    % Llenar columnas por PRN (NaN si no visible)
-    for i = 1:numel(satID_GPS)
-        idxCol = find(allPRN == satID_GPS(i));
-        if visG(i)
-            az_all(k, idxCol) = azG(i);
-            el_all(k, idxCol) = elG(i);
+for idx1 = numel(receptors)
+    step = 100; % tomar 1 de cada 10 posiciones
+    
+    % Archivos
+    file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
+    file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
+    file1_pvt_data = load(file1_pvt);
+    
+    % Navegación
+    rinexData     = rinexread(file1_nav);
+    navData_GPS   = rinexData.GPS;
+    navData_Gal   = rinexData.Galileo;
+    [~,satIdx]    = unique(navData_Gal.SatelliteID);
+    navData_Gal   = navData_Gal(satIdx,:);
+    
+    % Semana GPS y TOW del receptor
+    Week     = file1_pvt_data.PVTData.Week;
+    TOW_ms   = file1_pvt_data.PVTData.TOW;
+    
+    gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
+    timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
+    
+    % Pos receptor (trayectoria PVT)
+    recLat = file1_pvt_data.PVTData.Lat;
+    recLon = file1_pvt_data.PVTData.Lon;
+    recHgt = file1_pvt_data.PVTData.Height;
+    
+    % --- Decimación ---
+    timeVecDec = timeVec(1:step:end);
+    recLatDec  = recLat(1:step:end);
+    recLonDec  = recLon(1:step:end);
+    recHgtDec  = recHgt(1:step:end);
+    numTimesDec = numel(timeVecDec);
+    
+    maskAngle = 5; % elevación mínima
+    
+    % Conjunto de todos los PRNs posibles
+    allPRN = unique([navData_GPS.SatelliteID; navData_Gal.SatelliteID]);
+    numSats = numel(allPRN);
+    
+    % Inicializar matrices
+    az_all = NaN(numTimesDec, numSats);
+    el_all = NaN(numTimesDec, numSats);
+    grp_all = strings(numSats,1);
+    
+    % === Bucle temporal decimado ===
+    for k = 1:numTimesDec
+        t = timeVecDec(k);
+        recPos = [recLatDec(k), recLonDec(k), recHgtDec(k)];
+    
+        % Posiciones de satélites
+        [satPos_GPS,~,satID_GPS] = gnssconstellation(t, navData_GPS, GNSSFileType="RINEX");
+        [satPos_Gal,~,satID_Gal] = gnssconstellation(t, navData_Gal, GNSSFileType="RINEX");
+    
+        % Look angles
+        [azG, elG, visG] = lookangles(recPos, satPos_GPS, maskAngle);
+        [azE, elE, visE] = lookangles(recPos, satPos_Gal, maskAngle);
+    
+        % Llenar columnas por PRN (NaN si no visible)
+        for i = 1:numel(satID_GPS)
+            idxCol = find(allPRN == satID_GPS(i));
+            if visG(i)
+                az_all(k, idxCol) = azG(i);
+                el_all(k, idxCol) = elG(i);
+            end
+            grp_all(idxCol) = "GPS";
         end
-        grp_all(idxCol) = "GPS";
-    end
-    for i = 1:numel(satID_Gal)
-        idxCol = find(allPRN == satID_Gal(i));
-        if visE(i)
-            az_all(k, idxCol) = azE(i);
-            el_all(k, idxCol) = elE(i);
+        for i = 1:numel(satID_Gal)
+            idxCol = find(allPRN == satID_Gal(i));
+            if visE(i)
+                az_all(k, idxCol) = azE(i);
+                el_all(k, idxCol) = elE(i);
+            end
+            grp_all(idxCol) = "Galileo";
         end
-        grp_all(idxCol) = "Galileo";
     end
+    
+    grp_all = categorical(grp_all);
+    
+    % === Guardar variables en .mat ===
+    saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
+    save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
+    fprintf('Variables guardadas en: %s\n', saveFile);
+    
+    % === Skyplot final (última posición) ===
+    figure('Visible','on') % No mostrar ventana
+    skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
+    title(sprintf('%s CEDEA (%s – %s UTC)', ...
+            receptors(idx1).name, datetime(timeVecDec(1)), datetime(timeVecDec(end))))
+    
+    % Guardar solo la última imagen
+    pngFile = fullfile(base_path_data, [receptors(idx1).name '_skyplot.png']);
+    saveas(gcf, pngFile);
+    fprintf('Skyplot final guardado en: %s\n', pngFile);
 end
-
-grp_all = categorical(grp_all);
-
-% === Guardar variables en .mat ===
-saveFile = fullfile(base_path_data, 'SkyplotTrajectory_Decimated.mat');
-save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
-fprintf('Variables guardadas en: %s\n', saveFile);
-
-% === Skyplot final (última posición) ===
-figure('Visible','off') % No mostrar ventana
-skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
-title(sprintf('Skyplot CEDEA (%s – %s UTC)', ...
-        datetime(timeVecDec(1)), datetime(timeVecDec(end))))
-
-% Guardar solo la última imagen
-pngFile = fullfile(base_path_data, 'SkyplotTrajectory_Final.png');
-saveas(gcf, pngFile);
-close(gcf)
-fprintf('Skyplot final guardado en: %s\n', pngFile);
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
