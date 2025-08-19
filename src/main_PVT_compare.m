@@ -20,7 +20,7 @@ cache_file = '../data/pvt_cache_flight_2.mat';
 
 log_filename1 = '..\data\CEDEA\vuelo_2_eme_rx_basic\run_2025-02-05_00-25-57\PVT.dat'; %EME Rx basic
 log_filename2 = '..\data\CEDEA\vuelo_2_eme_rx_adv\run_2025-07-05_00-18-38\PVT.dat'; % EME Rx advanced
-log_filename_septentrio = '..\data\CEDEA\17_jul_25\vuelo_2_mosaicX5\1ant1015.sbf_SBF_PVTGeodetic2.txt'; 
+log_filename_septentrio = '..\data\CEDEA\vuelo_2_mosaicX5\1ant1015.sbf_SBF_PVTGeodetic2.txt'; 
 
 %% --- Define names/tags for each dataset for clarity in plots and legends ---
 dataset_name_1 = 'EME Rx basic'; % e.g., 'Static Test', 'Receiver 1'
