@@ -26,6 +26,13 @@ compare_pairs = { ...
     {2,3,'Galileo'}      % Advanced vs MOSAIC Galileo
 };
 
+% Events!
+events(1).Label = 'Launch';
+events(1).Time = datetime('2025-07-17 08:30:00');
+
+events(2).Label = 'Recovery';
+events(2).Time = datetime('2025-07-17 09:30:00');
+%%
 base_path_data   = fullfile('..\data\CEDEA');   % datos
 results_base_dir = fullfile('..\results\plots_OBS');  % resultados
 
@@ -64,7 +71,7 @@ if options.process_individual
         % Procesar ambas constelaciones
         for constellation = ["GPS", "Galileo"]
             try
-                RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, options.SAVE_PLOT, char(constellation));
+                RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, events, options.SAVE_PLOT, char(constellation));
             catch ME
                 warning('No se pudo procesar %s para %s: %s', exp_name, constellation, ME.message);
             end
@@ -99,7 +106,7 @@ if options.process_comparision
             data1 = load(mat_file1); data1 = data1.RinexData;
             data2 = load(mat_file2); data2 = data2.RinexData;
             fprintf('[%s] Comparando usando .mat preprocesado (%s)...\n', experiment, constellation);
-            compare_rinex_observables(experiment, data1, data2, out_dir, [], options.SAVE_PLOT, constellation);
+            compare_rinex_observables(experiment, data1, data2, out_dir, [],events, options.SAVE_PLOT, constellation);
         else
             % Caer a los archivos .obs originales
             file1 = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_obs);
@@ -109,31 +116,35 @@ if options.process_comparision
                 continue
             end
             fprintf('[%s] Comparando usando .obs original (%s)...\n', experiment, constellation);
-            compare_rinex_observables(experiment, file1, file2, out_dir, [], options.SAVE_PLOT, constellation);
+            compare_rinex_observables(experiment, file1, file2, out_dir, [], events, options.SAVE_PLOT, constellation);
         end
     end
 end
 
-%% ---------------- Skyplot por Receptor/RINEX con Trayectoria (decimado) ----------------
-for idx1 =1:numel(receptors)
-    step = 100; % tomar 1 de cada 10 posiciones
+
+%% MULTI Skyplot
+fig_multi = figure('Visible','on');
+fig_multi.WindowState = 'maximized';
+
+for idx1 = 1:3  % solo los 3 primeros receptores
+    step = options.decimation_skyplot; % decimación
     
-    % Archivos
+    % --- Archivos ---
     file1_nav = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_nav);
     file1_pvt = fullfile(base_path_data, receptors(idx1).folder, receptors(idx1).file_PVTmat);
     file1_pvt_data = load(file1_pvt);
     
-    % Navegación
+    % --- Navegación ---
     rinexData     = rinexread(file1_nav);
     navData_GPS   = rinexData.GPS;
     navData_Gal   = rinexData.Galileo;
     [~,satIdx]    = unique(navData_Gal.SatelliteID);
     navData_Gal   = navData_Gal(satIdx,:);
     
-    % Semana GPS y TOW del receptor
+    % --- Semana GPS y TOW del receptor ---
     if contains(receptors(idx1).name,'MOSAIC')
         Week     = file1_pvt_data.PVTData.WNc;
-        TOW   = file1_pvt_data.PVTData.TOW;
+        TOW      = file1_pvt_data.PVTData.TOW;
         gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
         timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW);
     else
