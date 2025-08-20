@@ -44,21 +44,38 @@ function Sv_on_view(experiment, input_files, result_directory, events, SAVE_PLOT
     t   = data2.Time;         % datetime array
     prn = data2.SatelliteID;  % numeric PRN
     
-      % ---------------- Plot ----------------
+    % ---------------- Plot ----------------
     figure('Name',['SV on view - ' constellation],'Visible','on');
     hold on;
     
-    plot(t, prn, 'k.', 'MarkerSize', 6); % black dots timeline
+    unique_prns = unique(prn);
+    legend_entries = cell(1,numel(unique_prns));
+
+    % Prefix depending on constellation
+    if strcmpi(constellation,'GPS')
+        prefix = 'G';
+    elseif strcmpi(constellation,'Galileo')
+        prefix = 'E';
+    else
+        prefix = '';
+    end
+
+    for k = 1:numel(unique_prns)
+        idx = prn == unique_prns(k);
+        plot(t(idx), repmat(unique_prns(k), sum(idx), 1), '-', 'LineWidth', 1.2);
+        legend_entries{k} = sprintf('%s%d', prefix, unique_prns(k));
+    end
     
     % Events
     for i = 1:length(events)
-        xline(events(i).Time, '--r', events(i).Label, 'LabelOrientation','horizontal');
+        xline(events(i).Time, '--k', events(i).Label, 'LabelOrientation','horizontal');
     end
     
     xlabel('Time');
     ylabel('PRN');
     title(['Satellites on View - ' constellation]);
     grid on;
+    legend(legend_entries, 'Location','eastoutside');
     hold off;
     
     % ---- Save plot if requested ----
