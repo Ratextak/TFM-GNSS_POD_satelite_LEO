@@ -1,4 +1,4 @@
-function RINEX_process_postproc(experiment, input_files, result_directory, satelliteIDs, SAVE_PLOT, constellation)
+function RINEX_process_postproc(experiment, input_files, result_directory, satelliteIDs, events, SAVE_PLOT, constellation)
 % -----------------------------------------------------------
 %  Function Name:   RINEX_process_postproc
 %  Description:     Processes GNSS data from RINEX files or .mat structs.
@@ -11,7 +11,7 @@ function RINEX_process_postproc(experiment, input_files, result_directory, satel
 %     constellation (string, optional: 'GPS' or 'Galileo')
 % -----------------------------------------------------------
 
-if nargin < 6
+if nargin < 7
     constellation = 'GPS';
 end
 
@@ -56,6 +56,9 @@ for i = 1:length(satelliteIDs)
     if isempty(cn0_field), continue; end
     plot(filteredData.Time, filteredData.(cn0_field{1}), '.-', 'DisplayName', ['SV ' num2str(satelliteIDs(i))]);
 end
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
+end
 xlabel('Time'); ylabel('C/N_0 (dB-Hz)'); grid minor; hold off;
 
 % ---- Doppler subplot ----
@@ -67,6 +70,9 @@ for i = 1:length(satelliteIDs)
     if isempty(doppler_field), continue; end
     plot(filteredData.Time, filteredData.(doppler_field{1}) / 1000, '.-', 'DisplayName', ['SV ' num2str(satelliteIDs(i))]);
 end
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
+end
 xlabel('Time'); ylabel('Doppler Shift (kHz)'); grid minor; hold off;
 
 % ---- Pseudorange subplot ----
@@ -77,6 +83,9 @@ for i = 1:length(satelliteIDs)
     filteredData = data2(data2.SatelliteID == satelliteIDs(i), :);
     if isempty(pr_field), continue; end
     plot(filteredData.Time, filteredData.(pr_field{1}), '.', 'DisplayName', ['SV ' num2str(satelliteIDs(i))]);
+end
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
 end
 xlabel('Time'); ylabel('Pseudorange (m)'); grid minor;
 legend('Location','eastoutside');
