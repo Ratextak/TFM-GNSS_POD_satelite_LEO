@@ -73,7 +73,7 @@ function Sv_on_view(experiment, input_files, result_directory, events, SAVE_PLOT
     
     xlabel('Time');
     ylabel('PRN');
-    title(['Satellites on View - ' constellation]);
+    title([experiment ': SV on View - ' constellation]);
     grid on;
     legend(legend_entries, 'Location','eastoutside');
     hold off;
