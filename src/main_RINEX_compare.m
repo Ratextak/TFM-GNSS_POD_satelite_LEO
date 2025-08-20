@@ -12,11 +12,12 @@ close all; clearvars; clc;
 % Add source folder to path
 addpath(genpath('C:\Users\User\OneDrive - Universidad Politécnica de Madrid\Documentos\repositorios\gnss-flex\src'));
 %% ---------------- Paths & Options -------------------------
-options.SAVE_PLOT = 1;
-options.CLOSE_at_END = 1;
+options.SAVE_PLOT = false;
+options.CLOSE_at_END = false;
 options.process_individual = true;
 options.process_comparision = true;
-% COMPARISIONS
+options.decimation_skyplot = 100;
+% COMPARISIONS to be done
 compare_pairs = { ...
     {1,2,'GPS'}, ... % Basic vs Advanced GPS
     {1,3,'GPS'}, ... % Basic vs MOSAIC GPS
@@ -153,8 +154,8 @@ for idx1 = 1:3  % solo los 3 primeros receptores
         gpsEpoch = datetime(1980,1,6,0,0,0,'TimeZone','UTC');
         timeVec  = gpsEpoch + calweeks(Week) + seconds(TOW_ms/1000);
     end
-
-    % Pos receptor (trayectoria PVT)
+    
+    % --- Pos receptor (trayectoria PVT) ---
     if contains(receptors(idx1).name,'MOSAIC')
         recLat = rad2deg(file1_pvt_data.PVTData.Latitude);
         recLat = recLat(~isnan(recLat))';
@@ -162,45 +163,44 @@ for idx1 = 1:3  % solo los 3 primeros receptores
         recLon = recLon(~isnan(recLon))';
         recHgt = file1_pvt_data.PVTData.Height;
         recHgt = recHgt(~isnan(recHgt))';
-        % mantain dimensions compatibility...
-        timeVec = timeVec(~isnan(recHgt))';
+        timeVec = timeVec(~isnan(recHgt))';  % compatibilidad dimensiones
     else
         recLat = file1_pvt_data.PVTData.Lat;
         recLon = file1_pvt_data.PVTData.Lon;
         recHgt = file1_pvt_data.PVTData.Height;
     end
-
+    
     % --- Decimación ---
     timeVecDec = timeVec(1:step:end);
     recLatDec  = recLat(1:step:end);
     recLonDec  = recLon(1:step:end);
     recHgtDec  = recHgt(1:step:end);
     numTimesDec = numel(timeVecDec);
-
+    
     maskAngle = 5; % elevación mínima
     
-    % Conjunto de todos los PRNs posibles
+    % --- Conjunto de todos los PRNs posibles ---
     allPRN = unique([navData_GPS.SatelliteID; navData_Gal.SatelliteID]);
     numSats = numel(allPRN);
     
-    % Inicializar matrices
+    % --- Inicializar matrices ---
     az_all = NaN(numTimesDec, numSats);
     el_all = NaN(numTimesDec, numSats);
     grp_all = strings(numSats,1);
     
-    % === Bucle temporal decimado ===
+    % --- Bucle temporal decimado ---
     for k = 1:numTimesDec
         t = timeVecDec(k);
         recPos = [recLatDec(k), recLonDec(k), recHgtDec(k)];
-    
+        
         % Posiciones de satélites
         [satPos_GPS,~,satID_GPS] = gnssconstellation(t, navData_GPS, GNSSFileType="RINEX");
         [satPos_Gal,~,satID_Gal] = gnssconstellation(t, navData_Gal, GNSSFileType="RINEX");
-    
+        
         % Look angles
         [azG, elG, visG] = lookangles(recPos, satPos_GPS, maskAngle);
         [azE, elE, visE] = lookangles(recPos, satPos_Gal, maskAngle);
-    
+        
         % Llenar columnas por PRN (NaN si no visible)
         for i = 1:numel(satID_GPS)
             idxCol = find(allPRN == satID_GPS(i));
@@ -222,36 +222,26 @@ for idx1 = 1:3  % solo los 3 primeros receptores
     
     grp_all = categorical(grp_all);
     
-    % === Guardar variables en .mat ===
-    saveFile = fullfile(results_base_dir, '../skyplots/SkyplotTrajectory_Decimated.mat');
-    save(saveFile, 'az_all', 'el_all', 'allPRN', 'grp_all', 'timeVecDec');
-    fprintf('Variables guardadas en: %s\n', saveFile);
-    % === Skyplot primera posición ===
-    fig_first = figure('Visible','on');
-    fig_first.WindowState = 'maximized'; 
-    
+    % --- Skyplots inicial y trayectoria completa para este receptor ---
+    % Primera fila: posición inicial
+    subplot(2,3,idx1)
     skyplot(az_all(1,:), el_all(1,:), allPRN, MaskElevation=maskAngle, GroupData=grp_all);
-    title(sprintf('%s CEDEA primera posición (%s UTC)', ...
-            receptors(idx1).name, datetime(timeVecDec(1))))
+    title(sprintf('%s - %s UTC', receptors(idx1).name, char(timeVecDec(1),'HH:mm:ss')))
     legend('GPS','Galileo')
     
-    pngFileFirst = fullfile(results_base_dir, ['../skyplots/' receptors(idx1).name '_skyplot_first.png']);
-    saveas(fig_first, pngFileFirst);
-    fprintf('Skyplot primera posición guardado en: %s\n', pngFileFirst);
-
-    % === Skyplot final (última posición) ===
-    fig = figure('Visible','on');
-    fig.WindowState = 'maximized'; 
-
+    % Segunda fila: trayectoria completa
+    subplot(2,3,3+idx1)
     skyplot(az_all, el_all, allPRN, MaskElevation=maskAngle, GroupData=grp_all);
-    title(sprintf('%s CEDEA (%s – %s UTC)', ...
-            receptors(idx1).name, datetime(timeVecDec(1)), datetime(timeVecDec(end))))
+    title(sprintf('%s - %s – %s UTC', receptors(idx1).name, ...
+        char(timeVecDec(1),'HH:mm:ss'), char(timeVecDec(end),'HH:mm:ss')))
     legend('GPS','Galileo')
-    % Guardar solo la última imagen
-    pngFile = fullfile(results_base_dir, ['../skyplots/' receptors(idx1).name '_skyplot.png']);
-    saveas(fig, pngFile);
-    fprintf('Skyplot final guardado en: %s\n', pngFile);
 end
+
+% --- Guardar figura completa ---
+pngFileMulti = fullfile(results_base_dir, '../skyplots/Skyplots_trayectoria.png');
+saveas(fig_multi, pngFileMulti);
+fprintf('Skyplots guardados en: %s\n', pngFileMulti);
+
 %% ---------------- Optional GNSS-SDR / SPIRENT ----------------
 % TODO
 % GNSS_SDR_OBSERVABLES_process_binned(...)
