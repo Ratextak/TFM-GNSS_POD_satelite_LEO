@@ -73,6 +73,7 @@ if options.process_individual
         for constellation = ["GPS", "Galileo"]
             try
                 RINEX_process_postproc(exp_name, mat_file, out_dir, satellitePRNs, events, options.SAVE_PLOT, char(constellation));
+                Sv_on_view(exp_name, mat_file, out_dir, events, options.SAVE_PLOT, char(constellation));
             catch ME
                 warning('No se pudo procesar %s para %s: %s', exp_name, constellation, ME.message);
             end
