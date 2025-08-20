@@ -7,9 +7,11 @@ function Sv_on_view(experiment, input_files, result_directory, events, SAVE_PLOT
 %     experiment (string)
 %     input_files (string, cell array, or struct)
 %     result_directory (string)
+%     events (struct array with fields Time, Label)
 %     SAVE_PLOT (boolean)
 %     constellation (string, optional: 'GPS' or 'Galileo')
 % -----------------------------------------------------------
+
     if nargin < 6
         constellation = 'GPS';
     end
@@ -37,19 +39,28 @@ function Sv_on_view(experiment, input_files, result_directory, events, SAVE_PLOT
         error('Constellation "%s" not found in data.', constellation);
     end
     clear data
-   
     
-    % ---- SV on view plot----
+    % ---------------- Extract data ----------------
+    t   = data2.Time;         % datetime array
+    prn = data2.SatelliteID;  % numeric PRN
     
-    for i = 1:length(satelliteIDs)
-       %TO DO
-    end
+      % ---------------- Plot ----------------
+    figure('Name',['SV on view - ' constellation],'Visible','on');
+    hold on;
+    
+    plot(t, prn, 'k.', 'MarkerSize', 6); % black dots timeline
+    
+    % Events
     for i = 1:length(events)
-        xline(events(i).Time, '--k', events(i).Label);
+        xline(events(i).Time, '--r', events(i).Label, 'LabelOrientation','horizontal');
     end
-    xlabel('Time'); ylabel('Sv on View (PRN)'); grid minor; hold off;
     
-      
+    xlabel('Time');
+    ylabel('PRN');
+    title(['Satellites on View - ' constellation]);
+    grid on;
+    hold off;
+    
     % ---- Save plot if requested ----
     if SAVE_PLOT
         if ~exist(result_directory, 'dir')
@@ -59,5 +70,4 @@ function Sv_on_view(experiment, input_files, result_directory, events, SAVE_PLOT
         saveas(gcf, filename);
         disp(['SV on view: ' experiment ' plot saved to ' filename]);
     end
-    
 end
