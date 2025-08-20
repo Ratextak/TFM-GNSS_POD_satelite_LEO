@@ -1,4 +1,4 @@
-function compare_rinex_observables(experiment, rinex1, rinex2, result_directory, satelliteIDs, SAVE_PLOT, constellation)
+function compare_rinex_observables(experiment, rinex1, rinex2, result_directory, satelliteIDs, events, SAVE_PLOT, constellation)
 % -----------------------------------------------------------
 %  Function Name:   compare_rinex_observables
 %  Description:     Compares GNSS observables from two RINEX sources
@@ -11,7 +11,7 @@ function compare_rinex_observables(experiment, rinex1, rinex2, result_directory,
 %     constellation (string): 'GPS', 'Galileo'
 % -----------------------------------------------------------
 
-if nargin < 7
+if nargin < 8
     constellation = 'GPS';  % Default
 end
 
@@ -103,10 +103,18 @@ end
 
 %% ---------------- Finalize time series plots ----------------
 subplot(3,1,1); ylabel('\Delta C/N0 (dB-Hz)'); title('Error in C/N0'); grid minor; legend('Location','eastoutside');
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
+end
 subplot(3,1,2); ylabel('\Delta Doppler (Hz)'); title('Error in Doppler'); grid minor;
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
+end
 subplot(3,1,3); ylabel('\Delta Pseudorange (m)'); xlabel('Time'); title('Error in Pseudorange'); grid minor;
 sgtitle(['Observable Errors: ' experiment ' - ' constellation]);
-
+for i = 1:length(events)
+    xline(events(i).Time, '--k', events(i).Label);
+end
 if SAVE_PLOT
     if ~exist(result_directory, 'dir'), mkdir(result_directory); end
     saveas(f1, fullfile(result_directory, ['errors_rinex_' experiment '_' constellation '.png']));
