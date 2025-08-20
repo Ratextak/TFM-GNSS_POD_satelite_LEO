@@ -29,10 +29,10 @@ compare_pairs = { ...
 
 % Events!
 events(1).Label = 'Launch';
-events(1).Time = datetime('2025-07-17 08:30:00');
+events(1).Time = datetime('2025-07-17 08:32:43');
 
 events(2).Label = 'Recovery';
-events(2).Time = datetime('2025-07-17 09:30:00');
+events(2).Time = datetime('2025-07-17 09:23:11');
 %%
 base_path_data   = fullfile('..\data\CEDEA');   % datos
 results_base_dir = fullfile('..\results\plots_OBS');  % resultados
