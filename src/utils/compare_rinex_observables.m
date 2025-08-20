@@ -1,4 +1,4 @@
-function compare_rinex_observables(experiment, rinex1, rinex2, result_directory, satelliteIDs, SAVE_PLOT, constellation)
+function compare_rinex_observables(experiment, rinex1, rinex2, result_directory, satelliteIDs, events, SAVE_PLOT, constellation)
 % -----------------------------------------------------------
 %  Function Name:   compare_rinex_observables
 %  Description:     Compares GNSS observables from two RINEX sources
