@@ -217,3 +217,9 @@ results/pvt_comparison_processed.mat
 *.asv
 
 *.zip
+
+*.png
+
+*.fig
+
+*.csv
