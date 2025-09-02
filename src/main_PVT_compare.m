@@ -816,3 +816,73 @@ else
 fprintf('----------------------------------------------------------.\n');
 fprintf('All comparison plots generated.\n');
 end
+%% 13. Display Summary Statistics Table
+fprintf('----------------------------------------------------------.\n');
+fprintf('Calculating final summary statistics...\n');
+
+% --- Position Error Calculation ---
+% Calculate the 3D position error magnitude relative to the reference (dataset 3)
+% These are the Root-Sum-Square of the North, East, and Height differences.
+pos_error_3d_13 = sqrt(delta_north_13.^2 + delta_east_13.^2 + height_diff_13.^2);
+pos_error_3d_23 = sqrt(delta_north_23.^2 + delta_east_23.^2 + height_diff_23.^2);
+
+% Calculate mean and standard deviation for position errors
+mean_pos_err_basic = mean(pos_error_3d_13, 'omitnan');
+std_pos_err_basic = std(pos_error_3d_13, 'omitnan');
+mean_pos_err_adv = mean(pos_error_3d_23, 'omitnan');
+std_pos_err_adv = std(pos_error_3d_23, 'omitnan');
+
+% --- Velocity Error Calculation ---
+% First, synchronize the reference receiver's ENU velocity data
+vel_n_3_sync = interp1(abs_time_3, vel_n_3, abs_time_sync, 'linear', 'extrap');
+vel_e_3_sync = interp1(abs_time_3, vel_e_3, abs_time_sync, 'linear', 'extrap');
+vel_u_3_sync = interp1(abs_time_3, vel_u_3, abs_time_sync, 'linear', 'extrap');
+
+% To compare velocities, we must convert EME receivers' ECEF velocity to ENU
+% This requires a coordinate transformation at each point.
+% We will perform this transformation in a vectorized manner.
+
+% Convert lat/lon to radians for trigonometric functions
+lat1_rad = deg2rad(latitude_1_sync);
+lon1_rad = deg2rad(longitude_1_sync);
+lat2_rad = deg2rad(latitude_2_sync);
+lon2_rad = deg2rad(longitude_2_sync);
+
+% Vectorized transformation from ECEF velocity to ENU velocity
+% For Basic EME Receiver (Dataset 1)
+v_east_1  = -sin(lon1_rad) .* vel_x_1_sync + cos(lon1_rad) .* vel_y_1_sync;
+v_north_1 = -sin(lat1_rad) .* cos(lon1_rad) .* vel_x_1_sync - sin(lat1_rad) .* sin(lon1_rad) .* vel_y_1_sync + cos(lat1_rad) .* vel_z_1_sync;
+v_up_1    =  cos(lat1_rad) .* cos(lon1_rad) .* vel_x_1_sync + cos(lat1_rad) .* sin(lon1_rad) .* vel_y_1_sync + sin(lat1_rad) .* vel_z_1_sync;
+
+% For Advanced EME Receiver (Dataset 2)
+v_east_2  = -sin(lon2_rad) .* vel_x_2_sync + cos(lon2_rad) .* vel_y_2_sync;
+v_north_2 = -sin(lat2_rad) .* cos(lon2_rad) .* vel_x_2_sync - sin(lat2_rad) .* sin(lon2_rad) .* vel_y_2_sync + cos(lat2_rad) .* vel_z_2_sync;
+v_up_2    =  cos(lat2_rad) .* cos(lon2_rad) .* vel_x_2_sync + cos(lat2_rad) .* sin(lon2_rad) .* vel_y_2_sync + sin(lat2_rad) .* vel_z_2_sync;
+
+% Calculate 3D velocity error magnitude relative to the reference (dataset 3)
+vel_error_3d_13 = sqrt((v_north_1 - vel_n_3_sync).^2 + (v_east_1 - vel_e_3_sync).^2 + (v_up_1 - vel_u_3_sync).^2);
+vel_error_3d_23 = sqrt((v_north_2 - vel_n_3_sync).^2 + (v_east_2 - vel_e_3_sync).^2 + (v_up_2 - vel_u_3_sync).^2);
+
+% Calculate mean and standard deviation for velocity errors
+mean_vel_err_basic = mean(vel_error_3d_13, 'omitnan');
+std_vel_err_basic = std(vel_error_3d_13, 'omitnan');
+mean_vel_err_adv = mean(vel_error_3d_23, 'omitnan');
+std_vel_err_adv = std(vel_error_3d_23, 'omitnan');
+
+% --- PVT Latency (Placeholder values) ---
+% NOTE: Latency is not calculated from the logs and is provided here as a placeholder.
+latency_basic = 10.5; % Example value
+latency_adv = 8.2;    % Example value
+
+% --- Display Table ---
+fprintf('\n');
+disp('============================== Summary of Receiver Performance ==============================');
+fprintf('%-35s | %-20s | %-20s | %-20s\n', 'Statistic', dataset_name_2, dataset_name_1, dataset_name_3);
+disp('---------------------------------------------------------------------------------------------');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', 'Mean 3D position error (m)', mean_pos_err_adv, mean_pos_err_basic, 'N/A (Reference)');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', 'Position error std dev (m)', std_pos_err_adv, std_pos_err_basic, 'N/A (Reference)');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', 'Mean 3D velocity error (m/s)', mean_vel_err_adv, mean_vel_err_basic, 'N/A (Reference)');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', 'Velocity error std dev (m/s)', std_vel_err_adv, std_vel_err_basic, 'N/A (Reference)');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', 'PVT latency (ms)', 'N/A', 'N/A', 'N/A');
+disp('=============================================================================================');
+fprintf('\n');
