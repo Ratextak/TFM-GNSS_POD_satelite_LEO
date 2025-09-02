@@ -649,7 +649,7 @@ histogram(height_diff_12, 'BinMethod', 'auto', 'Normalization', 'probability');
 xlabel('Height Difference (m)');
 ylabel('Probability');
 title(sprintf('Height Difference Histogram (%s - %s)', dataset_name_1, dataset_name_2));
-grid on;
+grid on;xlim([-50 50])
 grid minor;
 
 subplot(3,1,2);
@@ -657,7 +657,7 @@ histogram(height_diff_13, 'BinMethod', 'auto', 'Normalization', 'probability');
 xlabel('Height Difference (m)');
 ylabel('Probability');
 title(sprintf('Height Difference Histogram (%s - %s)', dataset_name_1, dataset_name_3));
-grid on;
+grid on;xlim([-50 50])
 grid minor;
 
 subplot(3,1,3);
@@ -665,7 +665,7 @@ histogram(height_diff_23, 'BinMethod', 'auto', 'Normalization', 'probability');
 xlabel('Height Difference (m)');
 ylabel('Probability');
 title(sprintf('Height Difference Histogram (%s - %s)', dataset_name_2, dataset_name_3));
-grid on;
+grid on;xlim([-50 50])
 grid minor;
 
 sgtitle('Height Difference Distributions'); % Título general para la figura
