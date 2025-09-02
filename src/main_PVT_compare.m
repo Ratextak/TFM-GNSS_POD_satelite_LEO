@@ -816,71 +816,45 @@ else
 fprintf('----------------------------------------------------------.\n');
 fprintf('All comparison plots generated.\n');
 end
-%% 13. Display Summary Statistics Table
-fprintf('----------------------------------------------------------.\n');
+%% ------------------- 13. Display Summary Statistics Table -------------------
+fprintf('----------------------------------------------------------\n');
 fprintf('Calculating final summary statistics...\n');
 
-% --- Position Error Calculation ---
-% Calculate 3D, 2D (Horizontal), and 1D (Vertical) position error vectors
-% All errors are relative to the reference receiver (dataset 3)
-pos_error_3d_13 = sqrt(delta_north_13.^2 + delta_east_13.^2 + height_diff_13.^2); % Basic vs Ref
-pos_error_3d_23 = sqrt(delta_north_23.^2 + delta_east_23.^2 + height_diff_23.^2); % Advanced vs Ref
+% --- Organize data in structured format ---
+data.differences.position_3D.basic_vs_ref  = pos_error_3d_13;
+data.differences.position_3D.adv_vs_ref    = pos_error_3d_23;
+data.differences.position_2D.basic_vs_ref  = pos_error_2d_13;
+data.differences.position_2D.adv_vs_ref    = pos_error_2d_23;
+data.differences.position_1D.basic_vs_ref  = pos_error_1d_13;
+data.differences.position_1D.adv_vs_ref    = pos_error_1d_23;
 
-pos_error_2d_13 = sqrt(delta_north_13.^2 + delta_east_13.^2); % Basic vs Ref Horizontal
-pos_error_2d_23 = sqrt(delta_north_23.^2 + delta_east_23.^2); % Advanced vs Ref Horizontal
+data.differences.velocity_3D.basic_vs_ref  = vel_error_3d_13;
+data.differences.velocity_3D.adv_vs_ref    = vel_error_3d_23;
 
-pos_error_1d_13 = abs(height_diff_13); % Basic vs Ref Vertical (Absolute)
-pos_error_1d_23 = abs(height_diff_23); % Advanced vs Ref Vertical (Absolute)
+data.differences.solution.fix_percent.basic = fix_percent_basic;
+data.differences.solution.fix_percent.adv   = fix_percent_adv;
 
-% Calculate Mean and 95th Percentile for position errors
-mean_pos_err_3d_basic = mean(pos_error_3d_13, 'omitnan');
-p95_pos_err_3d_basic  = prctile(pos_error_3d_13, 95);
-mean_pos_err_3d_adv   = mean(pos_error_3d_23, 'omitnan');
-p95_pos_err_3d_adv    = prctile(pos_error_3d_23, 95);
+data.differences.solution.mean_sats.basic  = mean_sats_basic;
+data.differences.solution.mean_sats.adv    = mean_sats_adv;
+data.differences.solution.mean_sats.ref    = mean_sats_ref;
 
-mean_pos_err_2d_basic = mean(pos_error_2d_13, 'omitnan');
-p95_pos_err_2d_basic  = prctile(pos_error_2d_13, 95);
-mean_pos_err_2d_adv   = mean(pos_error_2d_23, 'omitnan');
-p95_pos_err_2d_adv    = prctile(pos_error_2d_23, 95);
+data.differences.latency.basic = latency_basic;
+data.differences.latency.adv   = latency_adv;
 
-mean_pos_err_1d_basic = mean(pos_error_1d_13, 'omitnan');
-p95_pos_err_1d_basic  = prctile(pos_error_1d_13, 95);
-mean_pos_err_1d_adv   = mean(pos_error_1d_23, 'omitnan');
-p95_pos_err_1d_adv    = prctile(pos_error_1d_23, 95);
+% --- Compute summary statistics ---
+summary.mean_pos_2D_basic  = mean(pos_error_2d_13,'omitnan');
+summary.mean_pos_2D_adv    = mean(pos_error_2d_23,'omitnan');
+summary.mean_pos_1D_basic  = mean(pos_error_1d_13,'omitnan');
+summary.mean_pos_1D_adv    = mean(pos_error_1d_23,'omitnan');
+summary.p95_pos_2D_basic   = prctile(pos_error_2d_13,95);
+summary.p95_pos_2D_adv     = prctile(pos_error_2d_23,95);
+summary.p95_pos_1D_basic   = prctile(pos_error_1d_13,95);
+summary.p95_pos_1D_adv     = prctile(pos_error_1d_23,95);
 
-% --- Solution Quality Calculation ---
-% NOTE: Assumes a solution status of '5' indicates an RTK Fixed integer solution.
-FIX_STATE_VALUE = 5; 
-fix_percent_basic = (sum(solution_type_1_sync == FIX_STATE_VALUE) / numel(solution_type_1_sync)) * 100;
-fix_percent_adv   = (sum(solution_type_2_sync == FIX_STATE_VALUE) / numel(solution_type_2_sync)) * 100;
-
-% Calculate average number of satellites used in the solution
-mean_sats_basic = mean(valid_sats_1_sync, 'omitnan');
-mean_sats_adv   = mean(valid_sats_2_sync, 'omitnan');
-mean_sats_ref   = mean(valid_sats_3_sync, 'omitnan');
-
-% --- Velocity Error Calculation (from previous step) ---
-vel_n_3_sync = interp1(abs_time_3, vel_n_3, abs_time_sync, 'linear', 'extrap');
-vel_e_3_sync = interp1(abs_time_3, vel_e_3, abs_time_sync, 'linear', 'extrap');
-vel_u_3_sync = interp1(abs_time_3, vel_u_3, abs_time_sync, 'linear', 'extrap');
-lat1_rad = deg2rad(latitude_1_sync); lon1_rad = deg2rad(longitude_1_sync);
-lat2_rad = deg2rad(latitude_2_sync); lon2_rad = deg2rad(longitude_2_sync);
-v_east_1  = -sin(lon1_rad) .* vel_x_1_sync + cos(lon1_rad) .* vel_y_1_sync;
-v_north_1 = -sin(lat1_rad) .* cos(lon1_rad) .* vel_x_1_sync - sin(lat1_rad) .* sin(lon1_rad) .* vel_y_1_sync + cos(lat1_rad) .* vel_z_1_sync;
-v_up_1    =  cos(lat1_rad) .* cos(lon1_rad) .* vel_x_1_sync + cos(lat1_rad) .* sin(lon1_rad) .* vel_y_1_sync + sin(lat1_rad) .* vel_z_1_sync;
-v_east_2  = -sin(lon2_rad) .* vel_x_2_sync + cos(lon2_rad) .* vel_y_2_sync;
-v_north_2 = -sin(lat2_rad) .* cos(lon2_rad) .* vel_x_2_sync - sin(lat2_rad) .* sin(lon2_rad) .* vel_y_2_sync + cos(lat2_rad) .* vel_z_2_sync;
-v_up_2    =  cos(lat2_rad) .* cos(lon2_rad) .* vel_x_2_sync + cos(lat2_rad) .* sin(lon2_rad) .* vel_y_2_sync + sin(lat2_rad) .* vel_z_2_sync;
-vel_error_3d_13 = sqrt((v_north_1 - vel_n_3_sync).^2 + (v_east_1 - vel_e_3_sync).^2 + (v_up_1 - vel_u_3_sync).^2);
-vel_error_3d_23 = sqrt((v_north_2 - vel_n_3_sync).^2 + (v_east_2 - vel_e_3_sync).^2 + (v_up_2 - vel_u_3_sync).^2);
-mean_vel_err_basic = mean(vel_error_3d_13, 'omitnan');
-std_vel_err_basic = std(vel_error_3d_13, 'omitnan');
-mean_vel_err_adv = mean(vel_error_3d_23, 'omitnan');
-std_vel_err_adv = std(vel_error_3d_23, 'omitnan');
-
-% --- PVT Latency (Placeholder values) ---
-latency_basic = 10.5; % Example value
-latency_adv = 8.2;    % Example value
+summary.mean_vel_basic     = mean(vel_error_3d_13,'omitnan');
+summary.std_vel_basic      = std(vel_error_3d_13,'omitnan');
+summary.mean_vel_adv       = mean(vel_error_3d_23,'omitnan');
+summary.std_vel_adv        = std(vel_error_3d_23,'omitnan');
 
 % --- Display Table ---
 fprintf('\n');
@@ -888,15 +862,17 @@ disp('======================================== Summary of Receiver Performance =
 fprintf('%-35s | %-20s | %-20s | %-20s\n', 'Statistic', dataset_name_2, dataset_name_1, dataset_name_3);
 disp('-----------------------------------------------------------------------------------------------------------------');
 fprintf('%s\n', 'POSITION ACCURACY (vs. Reference)');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  Mean Horizontal Error (m)', mean_pos_err_2d_adv, mean_pos_err_2d_basic, 'N/A');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  Mean Vertical Error (m)', mean_pos_err_1d_adv, mean_pos_err_1d_basic, 'N/A');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  95th Percentile Horizontal (m)', p95_pos_err_2d_adv, p95_pos_err_2d_basic, 'N/A');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  95th Percentile Vertical (m)', p95_pos_err_1d_adv, p95_pos_err_1d_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  Mean Horizontal Error (m)', summary.mean_pos_2D_adv, summary.mean_pos_2D_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  Mean Vertical Error (m)', summary.mean_pos_1D_adv, summary.mean_pos_1D_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  95th Percentile Horizontal (m)', summary.p95_pos_2D_adv, summary.p95_pos_2D_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  95th Percentile Vertical (m)', summary.p95_pos_1D_adv, summary.p95_pos_1D_basic, 'N/A');
+
 fprintf('%s\n', 'VELOCITY ACCURACY (vs. Reference)');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  Mean 3D Velocity Error (m/s)', mean_vel_err_adv, mean_vel_err_basic, 'N/A');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  Velocity Error Std Dev (m/s)', std_vel_err_adv, std_vel_err_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  Mean 3D Velocity Error (m/s)', summary.mean_vel_adv, summary.mean_vel_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  Velocity Error Std Dev (m/s)', summary.std_vel_adv, summary.std_vel_basic, 'N/A');
+
 fprintf('%s\n', 'SOLUTION QUALITY & AVAILABILITY');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n', '  Availability (%)', fix_percent_adv, fix_percent_basic, 'N/A');
-fprintf('%-35s | %-20.2f | %-20.2f | %-20.2f\n', '  Average # of Satellites', mean_sats_adv, mean_sats_basic, mean_sats_ref);
+fprintf('%-35s | %-20.2f | %-20.2f | %-20s\n','  Availability (%)', fix_percent_adv, fix_percent_basic, 'N/A');
+fprintf('%-35s | %-20.2f | %-20.2f | %-20.2f\n','  Average # of Satellites', mean_sats_adv, mean_sats_basic, mean_sats_ref);
 disp('=================================================================================================================');
 fprintf('\n');
