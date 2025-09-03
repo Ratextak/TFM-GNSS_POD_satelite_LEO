@@ -223,3 +223,5 @@ results/pvt_comparison_processed.mat
 *.fig
 
 *.csv
+
+*.xlsx
