@@ -227,3 +227,5 @@ results/pvt_comparison_processed.mat
 *.xlsx
 
 data/cache_PVT_data.mat
+
+data/CEDEA/RADAR_GNSS_flex_SCRABII-16-17JUL25/Radar_Flight2_17_jul_25_8_32_UTC.mat
