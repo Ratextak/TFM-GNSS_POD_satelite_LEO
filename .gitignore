@@ -225,3 +225,5 @@ results/pvt_comparison_processed.mat
 *.csv
 
 *.xlsx
+
+data/cache_PVT_data.mat
