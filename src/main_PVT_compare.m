@@ -1,4 +1,4 @@
- %% main.m - Script to Read, Compare, Plot, and Save Two PVT Log Datasets
+%% main_PVT_compare.m - Script to Read, Compare, Plot, and Save Two PVT Log Datasets
 
 % This script reads data from two binary PVT log files using the
 % 'read_pvt_bin' function. It then generates a series of comparison plots
