@@ -56,7 +56,75 @@ grid on;
 % Calculamos qué satélites (ID) son comunes a ambos archivos.
 idSatelites = intersect(unique(obsSpirent.GPS.SatelliteID), unique(obsGnss_sdr.GPS.SatelliteID));
 
-figure(Name="Comparación entre Spirent y GNSS-SDR");
+% Primero pintaremos los valores del pseudorango (C1C), del Doppler (D1C) y de la relación de 
+% densidad de portadora a ruido (C/N0, S1C) para cada satélite común entre ambos archivos.
+variables = ["C1C", "D1C", "S1C"];
+nombres = ["Pseudorango (C1C)", "Doppler (D1C)", "C/N_0 (S1C)"];
+unidades = ["m", "Hz", "dBHz"];
+for i = 1:length(variables)  % Por cada variable.
+    num_col = 4;
+    num_filas = ceil(length(idSatelites)/num_col);
+    var = variables(i);
+
+    figure(Name=nombres(i));
+    sgtitle(nombres(i));
+    for j = 1:length(idSatelites)  % Por cada satélite.
+        datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == idSatelites(j), :);
+        datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == idSatelites(j), :);
+        [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
+
+        subplot(num_filas, num_col, j);
+        plot(tiemposSatelite, datosSpirent.(var)(ia), 'b-', LineWidth=1);
+        hold on;
+        plot(tiemposSatelite, datosGnssSdr.(var)(ib), 'r:', LineWidth=1);
+        title("PRN "+string(idSatelites(j)));
+        xlabel("Tiempo"); ylabel(variables(i)+" ["+unidades(i)+"]");
+    end
+end
+
+% -_-_-_-_-_-_-_-¡¡¡¡NO FUNCIONA!!!!-_-_-_-_-_-_-_-
+% for i = 1:length(idSatelites)
+%     datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == idSatelites(j), :);
+%     datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == idSatelites(j), :);
+% 
+%     figure(Name);
+%     subplot(3, 1, 1);
+%     plot(datosSpirent.Time, datosSpirent.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+%     subplot(3, 1, 2);
+%     plot(datosSpirent.Time, datosSpirent.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+%     subplot(3, 1, 3);
+%     plot(datosSpirent.Time, datosSpirent.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+% 
+%     figure();
+%     subplot(3, 1, 1);
+%     plot(datosGnssSdr.Time, datosGnssSdr.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+%     subplot(3, 1, 2);
+%     plot(datosGnssSdr.Time, datosGnssSdr.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+%     subplot(3, 1, 3);
+%     plot(datosGnssSdr.Time, datosGnssSdr.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+%     hold on;
+% end
+% 
+% subplot(3, 1, 1);
+% title("Pseudorango (C1C)");
+% xlabel("Tiempo"); ylabel("Pseudorango [m]");
+% grid on;
+% subplot(3, 1, 2);
+% title("Doppler (D1C)");
+% xlabel("Tiempo"); ylabel("Doppler [Hz]");
+% legend(Location='eastoutside');
+% grid on;
+% subplot(3, 1, 3);
+% title("C/N_0 (S1C)");
+% xlabel("Tiempo"); ylabel("C/N_0 [dBHz]");
+% grid on;
+
+figure(Name="Comparación de errores entre Spirent y GNSS-SDR");
 
 % Arrays para todos los errores de todos los satélites (necesario en el histograma).
 errores_C1C = [];
@@ -78,15 +146,15 @@ for i = 1:length(idSatelites)
     errores_C1C = [errores_C1C; error_C1C];
     errores_D1C = [errores_D1C; error_D1C];
     errores_L1C = [errores_L1C; error_L1C];
-    
+
     subplot(3, 1, 1);
-    plot(tiemposSatelite, error_C1C, '.-', DisplayName="Sat "+num2str(idSatelites(i)));
+    plot(tiemposSatelite, error_C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
     hold on;
     subplot(3, 1, 2);
-    plot(tiemposSatelite, error_L1C, '-', DisplayName="Sat "+num2str(idSatelites(i)), LineWidth=0.8);
+    plot(tiemposSatelite, error_L1C, '-', DisplayName="Sat "+string(idSatelites(i)), LineWidth=0.8);
     hold on;
     subplot(3, 1, 3);
-    plot(tiemposSatelite, error_D1C, '.-', DisplayName="Sat "+num2str(idSatelites(i)));
+    plot(tiemposSatelite, error_D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
     hold on;
 end
 
