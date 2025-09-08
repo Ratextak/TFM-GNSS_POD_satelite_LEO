@@ -1,3 +1,12 @@
+% Configuración de los gráficos (¡SIN IMPLEMENTAR!).
+constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
+salvarImg = true;  % Salvar automáticamente las imágenes generadas.
+ruta = "results/Comparación_Spirent_y_GNSS-SDR";  % Ruta dónde guardar las imágenes.
+
+constelaciones = containers.Map(["GPS", "GALILEO"], ...
+        {struct('nombre', "GPS", 'letra', "G", 'color', [0 0.4470 0.7410]), ...  % Color azul.
+        struct('nombre', "GALILEO", 'letra', "E", 'color', [0.8500 0.3250 0.0980])});  % Color naranja.
+
 % Abrimos los archivos necesarios y los guardamos en tablas.
 spirent = readtable("data/Spirent/motion_V1.csv");
 gnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
@@ -13,7 +22,7 @@ tInicioSpirentUTC = tiempo0GPS + seconds(tInicioSpirentGPS - 18);  % 18 son los 
 spirent.Time = tInicioSpirentUTC + milliseconds(spirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
 
 % Ahora pintamos la comparación de la latitud, longitud y altitud.
-figure(Name="Comparación entre Spirent y GNSS-SDR");
+figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
 
 subplot(1, 3, 1);
 plot(spirent.Time, rad2deg(spirent.Lat), 'b-', LineWidth=1);
@@ -82,47 +91,47 @@ for i = 1:length(variables)  % Por cada variable.
     end
 end
 
-% -_-_-_-_-_-_-_-¡¡¡¡NO FUNCIONA!!!!-_-_-_-_-_-_-_-
-% for i = 1:length(idSatelites)
-%     datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == idSatelites(j), :);
-%     datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == idSatelites(j), :);
-% 
-%     figure(Name);
-%     subplot(3, 1, 1);
-%     plot(datosSpirent.Time, datosSpirent.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-%     subplot(3, 1, 2);
-%     plot(datosSpirent.Time, datosSpirent.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-%     subplot(3, 1, 3);
-%     plot(datosSpirent.Time, datosSpirent.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-% 
-%     figure();
-%     subplot(3, 1, 1);
-%     plot(datosGnssSdr.Time, datosGnssSdr.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-%     subplot(3, 1, 2);
-%     plot(datosGnssSdr.Time, datosGnssSdr.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-%     subplot(3, 1, 3);
-%     plot(datosGnssSdr.Time, datosGnssSdr.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-%     hold on;
-% end
-% 
-% subplot(3, 1, 1);
-% title("Pseudorango (C1C)");
-% xlabel("Tiempo"); ylabel("Pseudorango [m]");
-% grid on;
-% subplot(3, 1, 2);
-% title("Doppler (D1C)");
-% xlabel("Tiempo"); ylabel("Doppler [Hz]");
-% legend(Location='eastoutside');
-% grid on;
-% subplot(3, 1, 3);
-% title("C/N_0 (S1C)");
-% xlabel("Tiempo"); ylabel("C/N_0 [dBHz]");
-% grid on;
+% Ahora pintamos los parámetros de observación para cada satélite de Spirent y de GNSS-SDR por separado.
+for i = 1:length(idSatelites)
+    datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == idSatelites(i), :);
+    datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == idSatelites(i), :);
+
+    figure(3);
+    subplot(3, 1, 1);
+    plot(datosSpirent.Time, datosSpirent.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+    subplot(3, 1, 2);
+    plot(datosSpirent.Time, datosSpirent.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+    subplot(3, 1, 3);
+    plot(datosSpirent.Time, datosSpirent.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+
+    figure(4);
+    subplot(3, 1, 1);
+    plot(datosGnssSdr.Time, datosGnssSdr.C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+    subplot(3, 1, 2);
+    plot(datosGnssSdr.Time, datosGnssSdr.D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+    subplot(3, 1, 3);
+    plot(datosGnssSdr.Time, datosGnssSdr.S1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
+    hold on;
+end
+
+subplot(3, 1, 1);
+title("Pseudorango (C1C)");
+xlabel("Tiempo"); ylabel("Pseudorango [m]");
+grid on;
+subplot(3, 1, 2);
+title("Doppler (D1C)");
+xlabel("Tiempo"); ylabel("Doppler [Hz]");
+legend(Location='eastoutside');
+grid on;
+subplot(3, 1, 3);
+title("C/N_0 (S1C)");
+xlabel("Tiempo"); ylabel("C/N_0 [dBHz]");
+grid on;
 
 figure(Name="Comparación de errores entre Spirent y GNSS-SDR");
 
@@ -204,77 +213,9 @@ end
 %exportgraphics(f, "aaiuytrfdfghjkl2.png", Resolution=300);
 
 % _________________________________________________________________________
-% Seleccionamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
-numSatelites.Spirent = [];  % Nº de satélites visibles en Spirent.
-numSatelites.Gnss_sdr = [];  % Nº de satélites visibles en GNSS-SDR.
-for i = 1:length(obsSpirent.GPS.Time)
-    i_tiempo = obsSpirent.GPS.Time(i);
-    satelites = obsSpirent.GPS.SatelliteID(obsSpirent.GPS.Time == i_tiempo);
-    numSatelites.Spirent = [numSatelites.Spirent; length(satelites)];
-end
-for i = 1:length(obsGnss_sdr.GPS.Time)
-    i_tiempo = obsGnss_sdr.GPS.Time(i);
-    satelites = obsGnss_sdr.GPS.SatelliteID(obsGnss_sdr.GPS.Time == i_tiempo);
-    numSatelites.Gnss_sdr = [numSatelites.Gnss_sdr; length(satelites)];
-end
-
-figure(Name="Número  de satélites visibles");
-
-subplot(1, 2, 1);
-plot(obsSpirent.GPS.Time, numSatelites.Spirent, LineWidth=1);
-ylim([0, max(numSatelites.Spirent)+1]);
-title("Número de satélites visibles para Spirent");
-xlabel("Tiempo"); ylabel("Nº de satélites");
-grid on;
-subplot(1, 2, 2);
-plot(obsGnss_sdr.GPS.Time, numSatelites.Gnss_sdr, LineWidth=1);
-ylim([0, 13]);
-title("Número de satélites visibles para GNSS-SDR");
-xlabel("Tiempo"); ylabel("Nº de satélites");
-grid on;
-
-% Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado.
-figure(Name="Comparación de la visibilidad de los satélites");
-
-satSpirent = unique(obsSpirent.GPS.SatelliteID);
-satGnssSdr = unique(obsGnss_sdr.GPS.SatelliteID);
-for i = 1:length(satSpirent)  
-    datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == satSpirent(i), :);  % Para cada satélite.
-    % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
-    dt = diff(datosSpirent.Time);  % Diferencia de tiempo entre instancias.
-    idx_hueco = [false; seconds(dt) > 1];  % Buscamos huecos de más de 1s (registros de Gnss-sdr).
-    horasNuevas = datosSpirent.Time(idx_hueco, :) - seconds(1);  % Horas - 1s en las que hay un hueco.
-    datosSpirent{horasNuevas, :} = NaN;  % Añadimos las filas a la tabla con la ID del satélite nula (esto crea el hueco en la línea).
-    datosSpirent = sortrows(datosSpirent);  % Ordenamos por tiempo las nuevas instancias, sino no funciona.
-
-    subplot(1, 2, 1);
-    plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5);
-    hold on;
-end
-for i = 1:length(satGnssSdr)  % Ahora lo mismo para el receptor.
-    datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == satGnssSdr(i), :);
-    dt = diff(datosGnssSdr.Time);
-    idx_hueco = [false; seconds(dt) > 1];
-    horasNuevas = datosGnssSdr.Time(idx_hueco, :) - seconds(1);
-    datosGnssSdr{horasNuevas, :} = NaN;
-    datosGnssSdr = sortrows(datosGnssSdr);
-    
-    subplot(1, 2, 2);
-    plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5);
-    hold on;
-end
-
-subplot(1, 2, 1);
-title("Visibilidad de los satélites en Spirent");
-xlabel("Tiempo"); ylabel("Id del satélite");
-yticks(satSpirent);  % Muestra sólo los valores de la ID de cada satélite (eje Y).
-grid on;
-subplot(1, 2, 2);
-title("Visibilidad de los satélites en GNSS-SDR");
-xlabel("Tiempo"); ylabel("Id del satélite");
-yticks(satGnssSdr);
-grid on;
+% Pintaremos la visibilidad de los satélites.
+visibilidad(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarImg, ruta);
 
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
-skyplots(sat_data, tInicioSpirentUTC, "results/Comparación_Spirent_y_GNSS-SDR");
+skyplots(sat_data, tInicioSpirentUTC, ruta);
