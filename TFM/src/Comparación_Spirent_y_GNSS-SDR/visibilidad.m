@@ -1,5 +1,5 @@
 % Pintaremos los diagramas de visibilidad de Spirent y de GNSS-SDR para la constelación indicada.
-% Son 2 gráficos: uno de el número de satélites visibles y el otro de la visibilidad de cada satélite respecto al tiempo.
+% Son 2 gráficos: uno del número de satélites visibles y el otro de la visibilidad de cada satélite respecto al tiempo.
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               constelacion: struct de la constelación.
@@ -38,6 +38,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     xlabel("Tiempo"); ylabel("Nº de satélites");
     grid on;
     
+    % ---------------------------------------------------------------------
     % Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado respecto al tiempo.
     figure(Name="Comparación de la visibilidad de los satélites "+constelacion.nombre);
     sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre);

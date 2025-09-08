@@ -133,81 +133,11 @@ title("C/N_0 (S1C)");
 xlabel("Tiempo"); ylabel("C/N_0 [dBHz]");
 grid on;
 
-figure(Name="Comparación de errores entre Spirent y GNSS-SDR");
-
-% Arrays para todos los errores de todos los satélites (necesario en el histograma).
-errores_C1C = [];
-errores_D1C = [];
-errores_L1C = [];
-
+% _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
-% Para ello compararemos los valores de cada satélite entre ambos archivos.
-for i = 1:length(idSatelites)
-    datosSpirent = obsSpirent.GPS(obsSpirent.GPS.SatelliteID == idSatelites(i), :);
-    datosGnssSdr = obsGnss_sdr.GPS(obsGnss_sdr.GPS.SatelliteID == idSatelites(i), :);
-    
-    [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
-    
-    error_C1C = datosGnssSdr.C1C(ib) - datosSpirent.C1C(ia);
-    error_D1C = datosGnssSdr.D1C(ib) - datosSpirent.D1C(ia);
-    error_L1C = datosGnssSdr.L1C(ib) - datosSpirent.L1C(ia);
+% Y también pintaremos los histogramas de los errores.
+erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarImg, ruta);
 
-    errores_C1C = [errores_C1C; error_C1C];
-    errores_D1C = [errores_D1C; error_D1C];
-    errores_L1C = [errores_L1C; error_L1C];
-
-    subplot(3, 1, 1);
-    plot(tiemposSatelite, error_C1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-    hold on;
-    subplot(3, 1, 2);
-    plot(tiemposSatelite, error_L1C, '-', DisplayName="Sat "+string(idSatelites(i)), LineWidth=0.8);
-    hold on;
-    subplot(3, 1, 3);
-    plot(tiemposSatelite, error_D1C, '.-', DisplayName="Sat "+string(idSatelites(i)));
-    hold on;
-end
-
-subplot(3, 1, 1);
-title("Error del pseudorango (C1C)");
-xlabel("Tiempo"); ylabel("Error [m]");
-grid on;
-subplot(3, 1, 2);
-title("Error de la fase portadora (L1C)");
-xlabel("Tiempo"); ylabel("Error [ciclos]");
-legend(Location='eastoutside');
-grid on;
-subplot(3, 1, 3);
-title("Error del Doppler (D1C)");
-xlabel("Tiempo"); ylabel("Error [Hz]");
-grid on;
-
-% Pintaremos los histogramas de los errores.
-f = figure(Name="Histogramas de los errores para todos los satélites");
-
-errores = [errores_C1C, errores_L1C, errores_D1C];
-titulos = ["del pseudorango (C1C)", "de la fase portadora (L1C)", "del Doppler (D1C)"];
-unidades = ["m", "ciclos", "Hz"];
-
-for i = 1:width(errores)  % Para cada tipo de error.
-    subplot(3, 1, i);
-    histogram(errores(:, i), Normalization="probability");
-    title("Histograma del error " + titulos(i));
-    xlabel("Error [" + unidades(i) + "]"); ylabel("Probabilidad"); 
-    grid on;
-
-    % Pintaremos la media, la desviación típica y la varianza.
-    media = mean(errores(:, i));
-    xline(media, '--r', "Media = " + round(media, 4), LabelOrientation='horizontal', LineWidth=1, DisplayName="Media");
-    sigma = std(errores(:, i));  % Desviación estándar.
-    x_lim = xlim; y_lim = ylim;  % Límites del eje X e Y.
-    x_patch = [media-sigma, media+sigma, media+sigma, media-sigma];
-    y_patch = [y_lim(1), y_lim(1), y_lim(2), y_lim(2)];
-    patch(x_patch, y_patch, 'g', FaceAlpha=0.25, EdgeColor='none', DisplayName="[Media-\sigma Media+\sigma]");
-    pos = [x_lim(1)+((x_lim(2)-x_lim(1))*0.9), y_lim(2)*0.5];
-    text(pos(1), pos(2), ["\sigma = "+sigma, "\sigma^2 = "+sigma^2], ...
-        FontSize=12, EdgeColor='k', BackgroundColor='w');
-    legend();
-end
 
 %f.Position = [100, 100, 1500, 1200];
 %exportgraphics(f, "aaiuytrfdfghjkl2.png", Resolution=300);
