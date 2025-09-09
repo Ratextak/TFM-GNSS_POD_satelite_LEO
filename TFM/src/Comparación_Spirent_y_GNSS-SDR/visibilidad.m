@@ -26,13 +26,13 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
     
     subplot(1, 2, 1);
-    plot(obsSpirent.Time, numSatSpirent, LineWidth=1);
+    plot(obsSpirent.Time, numSatSpirent, LineWidth=1.3, Color=constelacion.color);
     ylim([0, max(numSatSpirent)+1]);
     title("Nº de satélites visibles para Spirent");
     xlabel("Tiempo"); ylabel("Nº de satélites");
     grid on;
     subplot(1, 2, 2);
-    plot(obsReceptor.Time, numSatGnssSdr, LineWidth=1);
+    plot(obsReceptor.Time, numSatGnssSdr, LineWidth=1.3, Color=constelacion.color);
     ylim([0, max(numSatSpirent)+1]);
     title("Nº de satélites visibles para GNSS-SDR");
     xlabel("Tiempo"); ylabel("Nº de satélites");
@@ -55,7 +55,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
         datosSpirent = sortrows(datosSpirent);  % Ordenamos por tiempo las nuevas instancias, sino no funciona.
     
         subplot(1, 2, 1);
-        plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5);
+        plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
         hold on;
     end
     for i = 1:length(satGnssSdr)  % Ahora lo mismo para el receptor.
@@ -67,7 +67,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
         datosGnssSdr = sortrows(datosGnssSdr);
         
         subplot(1, 2, 2);
-        plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5);
+        plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
         hold on;
     end
     
