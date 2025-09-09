@@ -2,89 +2,79 @@
 % Son 2 gráficos: el de errores de cada parámetro de observación para cada satélite y los histogramas de probabilidad.
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
+%               paramObs: lista de los parámetros de observación que se quieren pintar. Ejemplo: ["C1C", "L1C"].
 %               constelacion: struct de la constelación.
 %               guardar: guardar las imágenes (true/false).  
 %               ruta: ruta donde guardar los resultados.
 
-function erroresObservacion(obsSpirent, obsReceptor, constelacion, guardar, ruta)
+
+function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guardar, ruta)
+    % Parámetros de observación para GPS.
+    parametrosGPS = containers.Map(["C1C", "D1C", "S1C", "L1C"], ...
+        {struct('nombre', "Pseudorango", 'siglas', "C1C", 'unidades', "m"), ...
+        struct('nombre', "Doppler", 'siglas', "D1C", 'unidades', "Hz"), ...
+        struct('nombre', "C/N_0", 'siglas', "S1C", 'unidades', "dBHz"), ...
+        struct('nombre', "Fase portadora", 'siglas', "L1C", 'unidades', "ciclos")});
+    
     % Calculamos qué satélites (ID) son comunes a ambos archivos.
     idSatelites = intersect(unique(obsSpirent.SatelliteID), unique(obsReceptor.SatelliteID));
     
-    % Arrays para todos los errores de todos los satélites (necesario en el histograma).
-    errores_C1C = [];
-    errores_D1C = [];
-    errores_L1C = [];
-    
+    % Celda para todos los errores de todos los satélites de todos los parámetros (necesario en el histograma).
+    errores = cell(length(paramObs), 1);
+
     % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
     figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre);
     sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre);
 
     % Para ello compararemos los valores de cada satélite entre ambos archivos.
-    for i = 1:length(idSatelites)  % Para cada satélite.
-        datosSpirent = obsSpirent(obsSpirent.SatelliteID == idSatelites(i), :);
-        datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == idSatelites(i), :);
+    for p = 1:length(paramObs)  % Para cada parámetro solicitado.
+        param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
+        %errores{p} = [];
+
+        for s = 1:length(idSatelites)  % Para cada satélite.
+            datosSpirent = obsSpirent(obsSpirent.SatelliteID == idSatelites(s), :);
+            datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == idSatelites(s), :);
+            
+            % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
+            [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
+            
+            error_ps = datosGnssSdr.(paramObs(p))(ib) - datosSpirent.(paramObs(p))(ia);
+            errores{p} = [errores{p}, error_ps'];
         
-        % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
-        [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
-        
-        error_C1C = datosGnssSdr.C1C(ib) - datosSpirent.C1C(ia);
-        error_D1C = datosGnssSdr.D1C(ib) - datosSpirent.D1C(ia);
-        error_L1C = datosGnssSdr.L1C(ib) - datosSpirent.L1C(ia);
-    
-        errores_C1C = [errores_C1C; error_C1C];
-        errores_D1C = [errores_D1C; error_D1C];
-        errores_L1C = [errores_L1C; error_L1C];
-    
-        subplot(3, 1, 1);
-        plot(tiemposSatelite, error_C1C, '.-', DisplayName=constelacion.letra+string(idSatelites(i)));
-        hold on;
-        subplot(3, 1, 2);
-        plot(tiemposSatelite, error_L1C, '-', DisplayName=constelacion.letra+string(idSatelites(i)), LineWidth=0.8);
-        hold on;
-        subplot(3, 1, 3);
-        plot(tiemposSatelite, error_D1C, '.-', DisplayName=constelacion.letra+string(idSatelites(i)));
-        hold on;
+            subplot(length(paramObs), 1, p);
+            plot(tiemposSatelite, error_ps, '.-', DisplayName=constelacion.letra+string(idSatelites(s)));
+            hold on;
+        end
+
+        subplot(length(paramObs), 1, p);
+        title("Error de "+param_p.nombre+" ("+param_p.siglas+")");
+        xlabel("Tiempo"); ylabel("Error ["+param_p.unidades+"]");
+        grid on;
     end
-    
-    subplot(3, 1, 1);
-    title("Error del pseudorango (C1C)");
-    xlabel("Tiempo"); ylabel("Error [m]");
-    grid on;
-    subplot(3, 1, 2);
-    title("Error de la fase portadora (L1C)");
-    xlabel("Tiempo"); ylabel("Error [ciclos]");
-    legend(Location='eastoutside');
-    grid on;
-    subplot(3, 1, 3);
-    title("Error del Doppler (D1C)");
-    xlabel("Tiempo"); ylabel("Error [Hz]");
-    grid on;
     
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
     figure(Name="Histogramas de los errores para todos los satélites "+constelacion.nombre);
     sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre);
     
-    errores = [errores_C1C, errores_L1C, errores_D1C];
-    titulos = ["del pseudorango (C1C)", "de la fase portadora (L1C)", "del Doppler (D1C)"];
-    unidades = ["m", "ciclos", "Hz"];
-    
-    for i = 1:width(errores)  % Para cada tipo de error.
-        subplot(3, 1, i);
-        histogram(errores(:, i), Normalization="probability");
-        title("Histograma del error " + titulos(i));
-        xlabel("Error [" + unidades(i) + "]"); ylabel("Probabilidad"); 
+    for p = 1:length(paramObs)  % Para cada parámetro solicitado.
+        param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
+
+        subplot(length(paramObs), 1, p);
+        histogram(errores{p}, Normalization="probability", HandleVisibility='off');
+        title("Histograma del error de "+param_p.nombre+" ("+param_p.siglas+")");
+        xlabel("Error ["+param_p.unidades+"]"); ylabel("Probabilidad"); 
         grid on;
     
         % Pintaremos la media, la desviación típica y la varianza.
-        media = mean(errores(:, i));
+        media = mean(errores{p, :});
         xline(media, '--r', "Media = " + round(media, 4), LabelOrientation='horizontal', LineWidth=1, DisplayName="Media");
-        sigma = std(errores(:, i));  % Desviación estándar.
+        sigma = std(errores{p, :});  % Desviación estándar.
         x_lim = xlim; y_lim = ylim;  % Límites del eje X e Y.
         x_patch = [media-sigma, media+sigma, media+sigma, media-sigma];
         y_patch = [y_lim(1), y_lim(1), y_lim(2), y_lim(2)];
         patch(x_patch, y_patch, 'g', FaceAlpha=0.25, EdgeColor='none', DisplayName="[Media-\sigma Media+\sigma]");
-        pos = [x_lim(1)+((x_lim(2)-x_lim(1))*0.9), y_lim(2)*0.5];
+        pos = [x_lim(1)+((x_lim(2)-x_lim(1))*0.9), y_lim(2)*0.4];
         text(pos(1), pos(2), ["\sigma = "+sigma, "\sigma^2 = "+sigma^2], ...
             FontSize=12, EdgeColor='k', BackgroundColor='w');
         legend();

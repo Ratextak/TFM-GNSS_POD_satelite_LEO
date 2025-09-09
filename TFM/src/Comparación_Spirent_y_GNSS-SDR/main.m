@@ -67,7 +67,7 @@ paramObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarI
 % _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
 % Y también pintaremos los histogramas de los errores.
-erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarImg, ruta);
+erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), salvarImg, ruta);
 
 
 %f.Position = [100, 100, 1500, 1200];
