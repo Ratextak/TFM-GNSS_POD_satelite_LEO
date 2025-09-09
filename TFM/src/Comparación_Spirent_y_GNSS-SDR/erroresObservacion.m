@@ -24,6 +24,7 @@ function erroresObservacion(obsSpirent, obsReceptor, constelacion, guardar, ruta
         datosSpirent = obsSpirent(obsSpirent.SatelliteID == idSatelites(i), :);
         datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == idSatelites(i), :);
         
+        % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
         [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
         
         error_C1C = datosGnssSdr.C1C(ib) - datosSpirent.C1C(ia);
