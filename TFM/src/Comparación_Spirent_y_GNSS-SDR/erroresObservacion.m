@@ -13,7 +13,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
     parametrosGPS = containers.Map(["C1C", "D1C", "S1C", "L1C"], ...
         {struct('nombre', "Pseudorango", 'siglas', "C1C", 'unidades', "m"), ...
         struct('nombre', "Doppler", 'siglas', "D1C", 'unidades', "Hz"), ...
-        struct('nombre', "C/N_0", 'siglas', "S1C", 'unidades', "dBHz"), ...
+        struct('nombre', "C/N_0", 'siglas', "S1C", 'unidades', "dBHz"), ...  % Relación de densidad de portadora a ruido.
         struct('nombre', "Fase portadora", 'siglas', "L1C", 'unidades', "ciclos")});
     
     % Calculamos qué satélites (ID) son comunes a ambos archivos.
@@ -45,7 +45,6 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
             hold on;
         end
 
-        subplot(length(paramObs), 1, p);
         title("Error de "+param_p.nombre+" ("+param_p.siglas+")");
         xlabel("Tiempo"); ylabel("Error ["+param_p.unidades+"]");
         grid on;

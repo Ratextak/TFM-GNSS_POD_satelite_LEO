@@ -62,7 +62,7 @@ grid on;
 
 % Pintaremos los parámetros de observación, es decir: el pseudorango, el Doppler y 
 % la relación de densidad de portadora a ruido (C/N0, S1C).
-paramObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarImg, ruta);
+paramObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), salvarImg, ruta);
 
 % _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
