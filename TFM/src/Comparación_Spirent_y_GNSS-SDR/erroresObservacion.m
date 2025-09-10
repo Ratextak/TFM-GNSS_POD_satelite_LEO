@@ -29,7 +29,6 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
     % Para ello compararemos los valores de cada satélite entre ambos archivos.
     for p = 1:length(paramObs)  % Para cada parámetro solicitado.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
-        %errores{p} = [];
 
         for s = 1:length(idSatelites)  % Para cada satélite.
             datosSpirent = obsSpirent(obsSpirent.SatelliteID == idSatelites(s), :);
@@ -50,6 +49,9 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
         title("Error de "+param_p.nombre+" ("+param_p.siglas+")");
         xlabel("Tiempo"); ylabel("Error ["+param_p.unidades+"]");
         grid on;
+        if p == ceil(length(paramObs)/2)  % Ponemos la leyenda en el subplot central.
+            legend(Location='eastoutside');
+        end
     end
     
     % ---------------------------------------------------------------------
@@ -67,9 +69,9 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
         grid on;
     
         % Pintaremos la media, la desviación típica y la varianza.
-        media = mean(errores{p, :});
+        media = mean(errores{p});
         xline(media, '--r', "Media = " + round(media, 4), LabelOrientation='horizontal', LineWidth=1, DisplayName="Media");
-        sigma = std(errores{p, :});  % Desviación estándar.
+        sigma = std(errores{p});  % Desviación estándar.
         x_lim = xlim; y_lim = ylim;  % Límites del eje X e Y.
         x_patch = [media-sigma, media+sigma, media+sigma, media-sigma];
         y_patch = [y_lim(1), y_lim(1), y_lim(2), y_lim(2)];
