@@ -6,6 +6,7 @@
 %               guardar: guardar las imágenes (true/false).  
 %               ruta: ruta donde guardar los resultados.
 
+
 function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     % Recontamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
@@ -22,7 +23,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     end
     
     % Pintamos el número de satélites visibles.
-    figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
+    fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
     
     subplot(1, 2, 1);
@@ -40,7 +41,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     
     % ---------------------------------------------------------------------
     % Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado respecto al tiempo.
-    figure(Name="Comparación de la visibilidad de los satélites "+constelacion.nombre);
+    fig2 = figure(Name="Comparación de la visibilidad de los satélites "+constelacion.nombre);
     sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre);
     
     satSpirent = unique(obsSpirent.SatelliteID);
@@ -83,4 +84,15 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     yticks(satGnssSdr);
     yticklabels(constelacion.letra+satGnssSdr);
     grid on;
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos los gráficos si se desea.
+    if guardar
+        imagen1 = "/Número_satélites_visibles-" + constelacion.nombre;
+        imagen2 = "/Visibilidad_satélites-" + constelacion.nombre;
+        fig1.Position = [200, 200, 900, 400];
+        exportgraphics(fig1, ruta+imagen1+".png", Resolution=300);
+        fig2.Position = [100, 100, 950, 550];
+        exportgraphics(fig2, ruta+imagen2+".png", Resolution=300);
+    end
 end

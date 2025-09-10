@@ -69,14 +69,10 @@ paramObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constel
 % Y también pintaremos los histogramas de los errores.
 erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), salvarImg, ruta);
 
-
-%f.Position = [100, 100, 1500, 1200];
-%exportgraphics(f, "aaiuytrfdfghjkl2.png", Resolution=300);
-
 % _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.
 visibilidad(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), salvarImg, ruta);
 
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
-skyplots(sat_data, tInicioSpirentUTC, ruta);
+skyplots(sat_data, tInicioSpirentUTC, salvarImg, ruta);

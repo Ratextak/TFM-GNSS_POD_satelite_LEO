@@ -23,11 +23,13 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guard
     num_col = 4;
     num_filas = ceil(length(idSatelites)/num_col);
     
-    % Primero pintaremos los valores de cada parámetro seleccionado para cada satélite común entre ambos archivos. 
+    % Primero pintaremos los valores de cada parámetro seleccionado para cada satélite común entre ambos archivos.
+    fig1 = [];  % Array de las figuras (para guardar).
     for p = 1:length(paramObs)  % Por cada variable.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
     
-        figure(Name=param_p.nombre+" de los satélites "+constelacion.nombre);
+        fig = figure(Name=param_p.nombre+" de los satélites "+constelacion.nombre, WindowState='maximized');
+        fig1 = [fig1, fig];
         sgtitle(param_p.nombre+" de los satélites "+constelacion.nombre);
 
         for s = 1:length(idSatelites)  % Por cada satélite.
@@ -50,7 +52,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guard
     
     % ---------------------------------------------------------------------
     % Ahora pintamos los parámetros de observación para cada satélite de Spirent.
-    figure(Name="Parámetros de observación "+constelacion.nombre+" de Spirent");
+    fig2a = figure(Name="Parámetros de observación "+constelacion.nombre+" de Spirent", WindowState='maximized');
     sgtitle("Parámetros de observación "+constelacion.nombre+" de Spirent");
 
     for p = 1:length(paramObs)  % Por cada variable.
@@ -73,7 +75,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guard
     end
 
     % Y a continuación hacemos lo mismo para los de GNSS-SDR por separado.
-    figure(Name="Parámetros de observación "+constelacion.nombre+" de GNSS-SDR");
+    fig2b = figure(Name="Parámetros de observación "+constelacion.nombre+" de GNSS-SDR", WindowState='maximized');
     sgtitle("Parámetros de observación "+constelacion.nombre+" de GNSS-SDR");
 
     for p = 1:length(paramObs)  % Por cada variable.
@@ -93,5 +95,20 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guard
         if p == ceil(length(paramObs)/2)  % Ponemos la leyenda en el subplot central.
             legend(Location='eastoutside');
         end
+    end
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos los gráficos si se desea.
+    if guardar
+        aux = "";
+        for p = 1:length(paramObs)
+            aux = aux + "_" + paramObs(p);
+            imagen = "/Comparación_" + paramObs(p);
+            exportgraphics(fig1(p), ruta+imagen+".png", Resolution=300);
+        end
+        imagen1 = "/Parámetros" + aux + "-Spirent";
+        imagen2 = "/Parámetros" + aux + "-GNSS-SDR";
+        exportgraphics(fig2a, ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig2b, ruta+imagen2+".png", Resolution=300);
     end
 end

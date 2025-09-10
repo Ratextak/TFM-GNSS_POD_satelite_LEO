@@ -23,7 +23,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
     errores = cell(length(paramObs), 1);
 
     % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
-    figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre);
+    fig1 = figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre, WindowState='maximized');
     sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre);
 
     % Para ello compararemos los valores de cada satélite entre ambos archivos.
@@ -55,7 +55,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
     
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
-    figure(Name="Histogramas de los errores para todos los satélites "+constelacion.nombre);
+    fig2 = figure(Name="Histogramas de los errores para todos los satélites "+constelacion.nombre, WindowState='maximized');
     sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre);
     
     for p = 1:length(paramObs)  % Para cada parámetro solicitado.
@@ -79,5 +79,18 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
         text(pos(1), pos(2), ["\sigma = "+sigma, "\sigma^2 = "+sigma^2], ...
             FontSize=12, EdgeColor='k', BackgroundColor='w');
         legend();
+    end
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos los gráficos si se desea.
+    if guardar
+        imagen1 = "/Errores";
+        imagen2 = "/Histogramas_errores";
+        for p = 1:length(paramObs)
+            imagen1 = imagen1 + "_" + paramObs(p);
+            imagen2 = imagen2 + "_" + paramObs(p);
+        end
+        exportgraphics(fig1, ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig2, ruta+imagen2+".png", Resolution=300);
     end
 end
