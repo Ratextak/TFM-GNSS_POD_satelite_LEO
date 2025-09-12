@@ -15,9 +15,9 @@ obsGnss_sdr = rinexread("data/GNSS-SDR/GSDR225p56.25O");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 
 
-% Ambos archivos no empiezan exactamente en el mismo momento, el de Spirent empieza antes y acaba después.
+% Ambos archivos no empiezan exactamente en el mismo momento, el de Spirent empieza antes y puede acabar después.
 % El archivo de GNSS-SDR tiene datos cada 100 ms, mientras que el de Spirent es cada 10 ms.
-tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time.
+tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
 tInicioSpirentUTC = tiempo0GPS + seconds(tInicioSpirentGPS - 18);  % 18 son los segundos intercalares (leap seconds).
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.

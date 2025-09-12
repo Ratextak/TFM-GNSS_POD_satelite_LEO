@@ -48,12 +48,9 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     satGnssSdr = unique(obsReceptor.SatelliteID);
     for i = 1:length(satSpirent)  
         datosSpirent = obsSpirent(obsSpirent.SatelliteID == satSpirent(i), :);  % Para cada satélite.
+
         % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
-        dt = diff(datosSpirent.Time);  % Diferencia de tiempo entre instancias.
-        idx_hueco = [false; seconds(dt) > 1];  % Buscamos huecos de más de 1s (registros de Gnss-sdr).
-        horasNuevas = datosSpirent.Time(idx_hueco, :) - seconds(1);  % Horas - 1s en las que hay un hueco.
-        datosSpirent{horasNuevas, :} = NaN;  % Añadimos las filas a la tabla con la ID del satélite nula (esto crea el hueco en la línea).
-        datosSpirent = sortrows(datosSpirent);  % Ordenamos por tiempo las nuevas instancias, sino no funciona.
+        datosSpirent = crear_huecos(datosSpirent, 1);
     
         subplot(1, 2, 1);
         plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
@@ -61,11 +58,9 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
     end
     for i = 1:length(satGnssSdr)  % Ahora lo mismo para el receptor.
         datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == satGnssSdr(i), :);
-        dt = diff(datosGnssSdr.Time);
-        idx_hueco = [false; seconds(dt) > 1];
-        horasNuevas = datosGnssSdr.Time(idx_hueco, :) - seconds(1);
-        datosGnssSdr{horasNuevas, :} = NaN;
-        datosGnssSdr = sortrows(datosGnssSdr);
+        
+        % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
+        datosGnssSdr = crear_huecos(datosGnssSdr, 1);
         
         subplot(1, 2, 2);
         plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
@@ -92,7 +87,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
         imagen2 = "/Visibilidad_satélites-" + constelacion.nombre;
         fig1.Position = [200, 200, 900, 400];
         exportgraphics(fig1, ruta+imagen1+".png", Resolution=300);
-        fig2.Position = [100, 100, 950, 550];
+        fig2.Position = [100, 100, 1100, 650];
         exportgraphics(fig2, ruta+imagen2+".png", Resolution=300);
     end
 end
