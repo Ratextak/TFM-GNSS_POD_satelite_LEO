@@ -1,3 +1,7 @@
+% Ruta dónde guardar el archivo con la órbita generada y ruta del TLE.
+rutaResultado = "results/Órbita_Matlab/";
+tle = "data/tle_UPMSat-2.tle";
+
 % Creamos el escenario donde estará nuestro satélite (1 día de simulación o 1 órbita).
 tiempoInicio = datetime(2023, 1, 20, 10, 6, 27);
 tiempoFin = tiempoInicio + minutes(60*24);  % 1 día de simulación.
@@ -6,7 +10,7 @@ tiempoMuestreo = 10;  % 10s entre las muestras.
 escenario = satelliteScenario();  % 1 órbita.
 
 % Creamos el satélite y su órbita con el fichero TLE.
-sat = satellite(escenario, "tle_UPMSat-2.tle");
+sat = satellite(escenario, tle);
 
 % Muestra los elementos orbitales al inicio de la epoch por pantalla.
 elemOrbitales0 = orbitalElements(sat)
@@ -45,7 +49,7 @@ T_MOTB = table(segundos, MOTB, veh_mot, lat, lon, alt, vNorth, vEast, -vUp, ...
     VariableNames=["Tiempo", "Comando", "Veh_mot", "Latitud", "Longitud", "Altitud", ...
     "Velocidad N", "Velocidad E", "Velocidad D", "Aceleración N", "Aceleración E", "Aceleración D", ...
     "Deriva N", "Deriva E", "Deriva D"]);
-writetable(T_MOTB, "orbita_UPMSat2_MOTB.txt", WriteMode="overwrite");
+writetable(T_MOTB, rutaResultado+"orbita_UPMSat2_MOTB.txt", WriteMode="overwrite");
 % Comando MOT.
 MOT = createArray(length(tiempos), 1, FillValue={'MOT'});
 T_MOT = table(segundos, MOT, veh_mot, pos_ecef(:,1), pos_ecef(:,2), pos_ecef(:,3), ...
@@ -54,7 +58,7 @@ T_MOT = table(segundos, MOT, veh_mot, pos_ecef(:,1), pos_ecef(:,2), pos_ecef(:,3
     VariableNames=["Tiempo", "Comando", "Veh_mot", "Posición X", "Posición Y", "Posición Z", ...
     "Velocidad X", "Velocidad Y", "Velocidad Z", "Aceleración X", "Aceleración Y", "Aceleración Z", ...
     "Deriva X", "Deriva Y", "Deriva Z"]);
-writetable(T_MOT, "orbita_UPMSat2_MOT.txt", WriteMode="overwrite");
+writetable(T_MOT, rutaResultado+"orbita_UPMSat2_MOT.txt", WriteMode="overwrite");
 
 % Creamos la vista en 3D de la órbita de nuestro satélite.
 vista = satelliteScenarioViewer(escenario, position=[450 250 700 700]);

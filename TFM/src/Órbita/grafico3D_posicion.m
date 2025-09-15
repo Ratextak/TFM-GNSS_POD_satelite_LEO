@@ -1,5 +1,5 @@
-function grafico3D_posicion(x, y, z, unidades)
-    figure(Name="Figurita prueba");
+function grafico3D_posicion(x, y, z, unidades, opciones)
+    fig = figure(Name="Figurita prueba");
     plot3(x, y, z, 'b', LineWidth=1);
     hold on;
     
@@ -14,4 +14,12 @@ function grafico3D_posicion(x, y, z, unidades)
     title("Órbita UPMSat-2");
     grid on;
     view(3);
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos el gráfico si se desea.
+    if opciones.salvarImg
+        imagen = "Órbita_3D";
+        fig.Position = [100, 100, 800, 800];
+        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+    end
 end

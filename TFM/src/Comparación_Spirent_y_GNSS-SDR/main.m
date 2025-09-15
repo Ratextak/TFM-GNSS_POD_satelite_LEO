@@ -1,7 +1,7 @@
 % Configuración de los gráficos y el tiempo de inicio de Spirent.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results";  % Ruta dónde guardar las imágenes.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR";  % Ruta dónde guardar las imágenes.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
 
 % Configuraciones para cada constelación.

@@ -1,5 +1,5 @@
-function grafico2D_elemOrbitales(elemOrb, t, titulo)
-    figure(Name="Figurita prueba");
+function grafico2D_elemOrbitales(elemOrb, t, titulo, opciones)
+    fig = figure(Name="Figurita prueba", WindowState='maximized');
     sgtitle(titulo);
 
     titles = ["Semieje mayor", "Excentricidad", "Inclinación", "Longitud del nodo ascendente", "Argumento del periápside", "Anomalía media"];
@@ -12,5 +12,12 @@ function grafico2D_elemOrbitales(elemOrb, t, titulo)
         xlabel("Tiempo [s]");
         ylabel(labels(i));
         grid on;
+    end
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos el gráfico si se desea.
+    if opciones.salvarImg
+        imagen = "Elementos_orbitales";
+        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
     end
 end

@@ -1,5 +1,5 @@
-function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord)
-    figure(Name="Figurita prueba");
+function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord, opciones)
+    fig = figure(Name="Figurita prueba", WindowState='maximized');
     sgtitle(titulo);
 
     if sistCoord == "ECEF"
@@ -20,5 +20,12 @@ function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord)
         legend("Posición", "Velocidad");
         title(titles(i));
         grid on;
+    end
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos el gráfico si se desea.
+    if opciones.salvarImg
+        imagen = "Posición_vs_velocidad_" + sistCoord;
+        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
     end
 end

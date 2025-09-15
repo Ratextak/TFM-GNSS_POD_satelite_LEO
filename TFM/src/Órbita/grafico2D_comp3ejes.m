@@ -1,5 +1,5 @@
-function grafico2D_comp3ejes(x, y, z, titulo, tipoGrafico, unidades, sistCoord)
-    figure(Name="Figurita prueba");
+function grafico2D_comp3ejes(x, y, z, titulo, tipoGrafico, unidades, sistCoord, opciones)
+    fig = figure(Name="Figurita prueba");
     sgtitle(titulo);
 
     if sistCoord == "ECEF"
@@ -23,5 +23,13 @@ function grafico2D_comp3ejes(x, y, z, titulo, tipoGrafico, unidades, sistCoord)
         xlabel(labels(i,1) + "[" + unidades + "]");
         ylabel(labels(i,2) + "[" + unidades + "]");
         grid on;
+    end
+
+    % ---------------------------------------------------------------------
+    % Por último guardaremos el gráfico si se desea.
+    if opciones.salvarImg
+        imagen = tipoGrafico + "_" + sistCoord;
+        fig.Position = [100, 100, 1500, 700];
+        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
     end
 end
