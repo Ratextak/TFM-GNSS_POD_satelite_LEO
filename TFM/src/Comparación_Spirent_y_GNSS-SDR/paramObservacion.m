@@ -6,11 +6,10 @@
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               paramObs: lista de los parámetros de observación que se quieren pintar. Ejemplo: ["C1C", "L1C"].
 %               constelacion: struct de la constelación.
-%               guardar: guardar las imágenes (true/false).  
-%               ruta: ruta donde guardar los resultados.
+%               opciones: opciones para guardar las imágenes.
 
 
-function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guardar, ruta)
+function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opciones)
     % Parámetros de observación para GPS.
     parametrosGPS = containers.Map(["C1C", "D1C", "S1C", "L1C"], ...
         {struct('nombre', "Pseudorango", 'siglas', "C1C", 'unidades', "m"), ...
@@ -99,16 +98,16 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guard
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
-    if guardar
+    if opciones.salvarImg
         aux = "";
         for p = 1:length(paramObs)
             aux = aux + "_" + paramObs(p);
             imagen = "/Comparación_" + paramObs(p);
-            exportgraphics(fig1(p), ruta+imagen+".png", Resolution=300);
+            exportgraphics(fig1(p), opciones.ruta+imagen+".png", Resolution=300);
         end
         imagen1 = "/Parámetros" + aux + "-Spirent";
         imagen2 = "/Parámetros" + aux + "-GNSS-SDR";
-        exportgraphics(fig2a, ruta+imagen1+".png", Resolution=300);
-        exportgraphics(fig2b, ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig2a, opciones.ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig2b, opciones.ruta+imagen2+".png", Resolution=300);
     end
 end

@@ -1,11 +1,10 @@
 % Pintaremos los diagramas de comparación de la latitud, longitud y altitud entre Spirent y GNSS-SDR.
 % Parámetros:   pvtSpirent: archivo motion_V1.csv de Spirent en formato tabla.
 %               pvtReceptor: archivo PVT de GNSS-SDR en formato tabla.
-%               guardar: guardar las imágenes (true/false).  
-%               ruta: ruta donde guardar los resultados.
+%               opciones: opciones para guardar las imágenes.
 
 
-function pvt(pvtSpirent, pvtReceptor, guardar, ruta)
+function pvt(pvtSpirent, pvtReceptor, opciones)
     % Ahora pintamos la comparación de la latitud, longitud y altitud.
     fig = figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
     sgtitle("Comparación de posición entre Spirent y GNSS-SDR");
@@ -42,9 +41,9 @@ function pvt(pvtSpirent, pvtReceptor, guardar, ruta)
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
-    if guardar
+    if opciones.salvarImg
         imagen = "/Comparación_posición";
         fig.Position = [100, 100, 1500, 750];
-        exportgraphics(fig, ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
     end
 end

@@ -1,11 +1,10 @@
 % Pintaremos los skyplots de Spirent para todas las constelaciones disponibles, los datos los obtenemos de sat_data_V1A1.csv.
 % Parámetros:   sat_data: archivo sat_data_V1A1.csv en formato tabla.
 %               t0_UTC: tiempo de inicio de los datos en formato datetime. 
-%               guardar: guardar las imágenes (true/false).
-%               ruta: ruta donde guardar los resultados.
+%               opciones: opciones para guardar las imágenes.
 
 
-function skyplots(sat_data, t0_UTC, guardar, ruta)
+function skyplots(sat_data, t0_UTC, opciones)
     tiempos = unique(sat_data.Time_ms);  % Cada 10 ms.
     tiempos = tiempos(1:100:end);  % Cada 1 s.
     
@@ -59,24 +58,24 @@ function skyplots(sat_data, t0_UTC, guardar, ruta)
             subtitulo.String = sprintf("Tiempo: %s", datestr(t, 'dd-mm-yyyy HH:MM:SS'));
             
             % Guardaremos los gráficos si se desea en gif.
-            if guardar
+            if opciones.salvarImg
                 frame = getframe(gcf);
                 img = frame2im(frame);
                 [A, map] = rgb2ind(img, 256);
         
                 if i == 1
-                    imwrite(A, map, ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", LoopCount=Inf, DelayTime=0.05);
+                    imwrite(A, map, opciones.ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", LoopCount=Inf, DelayTime=0.05);
                 else
-                    imwrite(A, map, ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", WriteMode="append", DelayTime=0.05);
+                    imwrite(A, map, opciones.ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", WriteMode="append", DelayTime=0.05);
                 end
             end
         end
         
         % Por último guardaremos los gráficos si se desea en png.
-        if guardar
+        if opciones.salvarImg
             imagen = "/Skyplot-" + tipo_sat(k);
             fig.Position = [200, 200, 850, 540];
-            exportgraphics(fig, ruta+imagen+".png", Resolution=300);
+            exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
         end
     end
 end

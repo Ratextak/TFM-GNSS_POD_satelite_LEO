@@ -4,11 +4,10 @@
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               paramObs: lista de los parámetros de observación que se quieren pintar. Ejemplo: ["C1C", "L1C"].
 %               constelacion: struct de la constelación.
-%               guardar: guardar las imágenes (true/false).  
-%               ruta: ruta donde guardar los resultados.
+%               opciones: opciones para guardar las imágenes.
 
 
-function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, guardar, ruta)
+function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opciones)
     % Parámetros de observación para GPS.
     parametrosGPS = containers.Map(["C1C", "D1C", "S1C", "L1C"], ...
         {struct('nombre', "Pseudorango", 'siglas', "C1C", 'unidades', "m"), ...
@@ -83,14 +82,14 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, gua
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
-    if guardar
+    if opciones.salvarImg
         imagen1 = "/Errores";
         imagen2 = "/Histogramas_errores";
         for p = 1:length(paramObs)
             imagen1 = imagen1 + "_" + paramObs(p);
             imagen2 = imagen2 + "_" + paramObs(p);
         end
-        exportgraphics(fig1, ruta+imagen1+".png", Resolution=300);
-        exportgraphics(fig2, ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
     end
 end

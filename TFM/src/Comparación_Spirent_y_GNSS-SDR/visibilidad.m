@@ -3,11 +3,10 @@
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               constelacion: struct de la constelación.
-%               guardar: guardar las imágenes (true/false).  
-%               ruta: ruta donde guardar los resultados.
+%               opciones: opciones para guardar las imágenes.
 
 
-function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
+function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     % Recontamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
     numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
@@ -82,12 +81,12 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, guardar, ruta)
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
-    if guardar
+    if opciones.salvarImg
         imagen1 = "/Número_satélites_visibles-" + constelacion.nombre;
         imagen2 = "/Visibilidad_satélites-" + constelacion.nombre;
         fig1.Position = [200, 200, 900, 400];
-        exportgraphics(fig1, ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
         fig2.Position = [100, 100, 1100, 650];
-        exportgraphics(fig2, ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
     end
 end
