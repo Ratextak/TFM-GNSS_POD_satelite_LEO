@@ -62,18 +62,19 @@ function skyplots(sat_data, t0_UTC, opciones)
                 frame = getframe(gcf);
                 img = frame2im(frame);
                 [A, map] = rgb2ind(img, 256);
+                imagen = "Skyplot-" + tipo_sat(k);
         
                 if i == 1
-                    imwrite(A, map, opciones.ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", LoopCount=Inf, DelayTime=0.05);
+                    imwrite(A, map, opciones.ruta+imagen+".gif", "gif", LoopCount=Inf, DelayTime=0.05);
                 else
-                    imwrite(A, map, opciones.ruta+"/Skyplot-"+tipo_sat(k)+".gif", "gif", WriteMode="append", DelayTime=0.05);
+                    imwrite(A, map, opciones.ruta+imagen+".gif", "gif", WriteMode="append", DelayTime=0.05);
                 end
             end
         end
         
         % Por último guardaremos los gráficos si se desea en png.
         if opciones.salvarImg
-            imagen = "/Skyplot-" + tipo_sat(k);
+            imagen = "Skyplot-" + tipo_sat(k);
             fig.Position = [200, 200, 850, 540];
             exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
         end

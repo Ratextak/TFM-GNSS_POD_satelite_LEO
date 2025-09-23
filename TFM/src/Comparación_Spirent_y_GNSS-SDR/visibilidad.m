@@ -82,8 +82,8 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen1 = "/Número_satélites_visibles-" + constelacion.nombre;
-        imagen2 = "/Visibilidad_satélites-" + constelacion.nombre;
+        imagen1 = "Número_satélites_visibles-" + constelacion.nombre;
+        imagen2 = "Visibilidad_satélites-" + constelacion.nombre;
         fig1.Position = [200, 200, 900, 400];
         exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
         fig2.Position = [100, 100, 1100, 650];

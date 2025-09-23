@@ -83,8 +83,8 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opc
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen1 = "/Errores";
-        imagen2 = "/Histogramas_errores";
+        imagen1 = "Errores";
+        imagen2 = "Histogramas_errores";
         for p = 1:length(paramObs)
             imagen1 = imagen1 + "_" + paramObs(p);
             imagen2 = imagen2 + "_" + paramObs(p);

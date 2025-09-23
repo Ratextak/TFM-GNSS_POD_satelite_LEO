@@ -42,7 +42,7 @@ function pvt(pvtSpirent, pvtReceptor, opciones)
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen = "/Comparación_posición";
+        imagen = "Comparación_posición";
         fig.Position = [100, 100, 1500, 750];
         exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
     end
