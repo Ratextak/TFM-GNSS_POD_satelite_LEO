@@ -1,8 +1,12 @@
-% Configuración de los gráficos y el tiempo de inicio de Spirent.
+% Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR";  % Ruta dónde guardar las imágenes.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/";  % Ruta dónde guardar las imágenes.
+
+% Configuración de parámetros para Spirent y GNSS-SDR.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
+configuracion.canalesGnssSdr = 18;  % Número de canales del receptor GNSS-SDR.
+configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 
 % Configuraciones para cada constelación.
 constelaciones = containers.Map(["GPS", "GALILEO"], ...
@@ -16,6 +20,9 @@ pvtGnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 obsGnss_sdr = rinexread("data/GNSS-SDR/GSDR225p56.25O");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
+for c = 1:configuracion.canalesGnssSdr
+    trkGnss_sdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
+end
 
 
 % Ambos archivos no empiezan exactamente en el mismo momento, el de Spirent empieza antes y puede acabar después.
@@ -49,3 +56,7 @@ visibilidad(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), configuracio
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
 skyplots(sat_data, tInicioSpirentUTC, configuracion);
+
+% _________________________________________________________________________
+% Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
+tracking(trkGnss_sdr, configuracion.frecMuestreoGnssSdr, configuracion);
