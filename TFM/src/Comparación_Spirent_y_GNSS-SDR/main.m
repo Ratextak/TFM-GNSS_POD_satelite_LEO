@@ -32,8 +32,11 @@ tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS - 18); 
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
 
 % -------------------------------------------------------------------------
+% Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
+mapa2D_latLon(rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), configuracion);
+
 % Ahora pintamos la comparación de la latitud, la longitud y la altitud.
-pvt(pvtSpirent, pvtGnss_sdr, configuracion);
+pvt(pvtSpirent, pvtGnss_sdr, 'lla', configuracion);
 
 % -------------------------------------------------------------------------
 % A continuación vamos a analizar los RINEX de observación.
