@@ -16,9 +16,11 @@ constelaciones = containers.Map(["GPS", "GALILEO"], ...
 
 % Abrimos los archivos necesarios y los guardamos en tablas.
 pvtSpirent = readtable("data/Spirent/motion_V1.csv");
-pvtGnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
+%pvtGnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
+pvtGnss_sdr = load("data/GNSS-SDR/pvt.mat");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 obsGnss_sdr = rinexread("data/GNSS-SDR/GSDR225p56.25O");
+obs = load("data/GNSS-SDR/observables.mat");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 for c = 1:configuracion.canalesGnssSdr
     trkGnss_sdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
@@ -28,8 +30,12 @@ end
 % Ambos archivos no empiezan exactamente en el mismo momento, el de Spirent empieza antes y puede acabar después.
 % El archivo de GNSS-SDR tiene datos cada 100 ms, mientras que el de Spirent es cada 10 ms.
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
-tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS - 18);  % 18 son los segundos intercalares (leap seconds).
+leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
+tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS - leap_sec);
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
+
+pvtGnss_sdr.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + milliseconds(pvtGnss_sdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
+obs.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obs.TOW_at_current_symbol_s - seconds(leap_sec));
 
 % -------------------------------------------------------------------------
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
