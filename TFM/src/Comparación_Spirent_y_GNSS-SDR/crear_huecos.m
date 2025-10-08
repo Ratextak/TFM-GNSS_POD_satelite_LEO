@@ -9,7 +9,22 @@ function [datosHuecos] = crear_huecos(datos, hueco)
     datosHuecos = datos;
     dt = diff(datos.Time);  % Diferencia de tiempo entre instancias.
     idx_hueco = [false; seconds(dt) > hueco];  % Buscamos espacios de más de hueco segundos.
-    horasNuevas = datos.Time(idx_hueco, :) - seconds(1);  % Horas - 1s en las que hay un hueco.
-    datosHuecos{horasNuevas, :} = NaN;  % Añadimos las filas a la tabla con la ID del satélite nula (esto crea el hueco en la línea).
-    datosHuecos = sortrows(datosHuecos);  % Ordenamos por tiempo las nuevas instancias, sino no funciona.
+    horasNuevas = datos.Time(idx_hueco) - seconds(1);  % Horas - 1s en las que hay un hueco.
+    n = length(horasNuevas);
+    
+    % Creamos las filas para las horas nuevas y rellenamos las demás columnas con valores nulos,
+    % la ID del satélite o el PRN (esto crea el hueco en la línea).
+    if n ~= 0
+        if istimetable(datos)  % Timetable.
+            datosHuecos{horasNuevas, :} = NaN;
+        else  % Tabla normal.
+            colNom = datos.Properties.VariableNames;  % Nombres de las columnas de la tabla.
+            aux = table(VariableNames=colNom, Size=[n width(datos)], VariableTypes=datos.Properties.VariableTypes);
+            aux(:, colNom ~= "Time") = array2table(NaN(n, width(datos)-1), VariableNames=colNom(colNom ~= "Time"));
+            aux.Time = horasNuevas;
+            datosHuecos = [datosHuecos; aux];  % Añadimos las nuevas filas.
+        end
+    end
+
+    datosHuecos = sortrows(datosHuecos, "Time");  % Ordenamos por tiempo las nuevas instancias, sino no funciona.
 end

@@ -7,6 +7,21 @@
 
 
 function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
+    % Lo primero que debemos hacer es convertir en una tabla la struct obsReceptor, para que sea más fácil de manejar.
+    campos = fieldnames(obsReceptor);
+    [nCanales, nMuestras] = size(obsReceptor.(campos{1}));
+    
+    aux = struct();
+    aux.Channel = repelem((1:nCanales)', nMuestras);
+    for c = 1:length(campos)  % Por cada campo del fichero de observación de GNSS-SDR.
+        aux.(campos{c}) = reshape(obsReceptor.(campos{c})', [], 1);
+    end
+    
+    obsReceptor = struct2table(aux);
+    % Ignoramos los satélites con PRN = 0, ya que esto ocurre cuando hay una pérdida de señal.
+    obsReceptor = obsReceptor(obsReceptor.PRN ~= 0, :);
+
+    % ---------------------------------------------------------------------
     % Recontamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
     numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
@@ -15,9 +30,10 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         satelites = obsSpirent.SatelliteID(obsSpirent.Time == i_tiempo);
         numSatSpirent = [numSatSpirent; length(satelites)];
     end
-    for i = 1:length(obsReceptor.Time)  % Para cada instante de tiempo del receptor.
-        i_tiempo = obsReceptor.Time(i);
-        satelites = obsReceptor.SatelliteID(obsReceptor.Time == i_tiempo);
+    tiemposGnssSdr = unique(obsReceptor.Time);
+    for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo del receptor.
+        i_tiempo = tiemposGnssSdr(i);
+        satelites = obsReceptor.PRN(obsReceptor.Time == i_tiempo);
         numSatGnssSdr = [numSatGnssSdr; length(satelites)];
     end
     
@@ -32,7 +48,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     xlabel("Tiempo"); ylabel("Nº de satélites");
     grid on;
     subplot(1, 2, 2);
-    plot(obsReceptor.Time, numSatGnssSdr, LineWidth=1.3, Color=constelacion.color);
+    plot(tiemposGnssSdr, numSatGnssSdr, LineWidth=1.3, Color=constelacion.color);
     ylim([0, max(numSatSpirent)+1]);
     title("Nº de satélites visibles para GNSS-SDR");
     xlabel("Tiempo"); ylabel("Nº de satélites");
@@ -44,7 +60,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre);
     
     satSpirent = unique(obsSpirent.SatelliteID);
-    satGnssSdr = unique(obsReceptor.SatelliteID);
+    satGnssSdr = unique(obsReceptor.PRN);
     for i = 1:length(satSpirent)  
         datosSpirent = obsSpirent(obsSpirent.SatelliteID == satSpirent(i), :);  % Para cada satélite.
 
@@ -55,14 +71,14 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
         hold on;
     end
-    for i = 1:length(satGnssSdr)  % Ahora lo mismo para el receptor.
-        datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == satGnssSdr(i), :);
+    for c = 1:opciones.canalesGnssSdr  % Por cada canal del receptor.
+        datosGnssSdr = obsReceptor(obsReceptor.Channel == c, :);
         
         % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
         datosGnssSdr = crear_huecos(datosGnssSdr, 1);
         
         subplot(1, 2, 2);
-        plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
+        plot(datosGnssSdr.Time, datosGnssSdr.PRN, '-', LineWidth=1.5, DisplayName="Canal "+string(c-1));
         hold on;
     end
     
@@ -77,6 +93,8 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     xlabel("Tiempo"); ylabel("Id del satélite");
     yticks(satGnssSdr);
     yticklabels(constelacion.letra+satGnssSdr);
+    colororder(opciones.colores);
+    legend(Location='eastoutside');
     grid on;
 
     % ---------------------------------------------------------------------

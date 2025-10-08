@@ -2,10 +2,11 @@
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
 configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/";  % Ruta dónde guardar las imágenes.
+configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
-configuracion.canalesGnssSdr = 18;  % Número de canales del receptor GNSS-SDR.
+configuracion.canalesGnssSdr = 12;  % Número de canales del receptor GNSS-SDR.
 configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 
 % Configuraciones para cada constelación.
@@ -19,8 +20,8 @@ pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 %pvtGnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
 pvtGnss_sdr = load("data/GNSS-SDR/pvt.mat");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
-obsGnss_sdr = rinexread("data/GNSS-SDR/GSDR225p56.25O");
-obs = load("data/GNSS-SDR/observables.mat");
+obsGnss_sdr_rinex = rinexread("data/GNSS-SDR/GSDR225p56.25O");
+obsGnss_sdr = load("data/GNSS-SDR/observables.mat");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 for c = 1:configuracion.canalesGnssSdr
     trkGnss_sdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
@@ -35,7 +36,9 @@ tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS - leap_
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
 
 pvtGnss_sdr.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + milliseconds(pvtGnss_sdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
-obs.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obs.TOW_at_current_symbol_s - seconds(leap_sec));
+for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
+    obsGnss_sdr.Time(c, :) = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obs.RX_time(c, :) - leap_sec);
+end
 
 % -------------------------------------------------------------------------
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
