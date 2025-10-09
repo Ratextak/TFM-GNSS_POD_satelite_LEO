@@ -53,6 +53,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
     % Ahora pintamos los parámetros de observación para cada satélite de Spirent.
     fig2a = figure(Name="Parámetros de observación "+constelacion.nombre+" de Spirent", WindowState='maximized');
     sgtitle("Parámetros de observación "+constelacion.nombre+" de Spirent");
+    colororder(opciones.colores);
 
     for p = 1:length(paramObs)  % Por cada variable.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
@@ -76,6 +77,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
     % Y a continuación hacemos lo mismo para los de GNSS-SDR por separado.
     fig2b = figure(Name="Parámetros de observación "+constelacion.nombre+" de GNSS-SDR", WindowState='maximized');
     sgtitle("Parámetros de observación "+constelacion.nombre+" de GNSS-SDR");
+    colororder(opciones.colores);
 
     for p = 1:length(paramObs)  % Por cada variable.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.

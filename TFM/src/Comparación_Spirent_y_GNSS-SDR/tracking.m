@@ -31,7 +31,7 @@ function tracking(trkReceptor, frecMuestreo, opciones)
 
         % Diagrama del discriminador PLL sin filtrar.
         subplot(3, 3, 4);
-        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).carr_error_hz, 'r');
+        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).carr_error_hz, Color=opciones.colores(7, :));
         title("Discriminador PLL sin filtrar");
         xlabel("Tiempo [s]"); ylabel("Amplitud [Hz]");
         grid on;
@@ -51,21 +51,21 @@ function tracking(trkReceptor, frecMuestreo, opciones)
 
         % Diagrama del discriminador PLL filtrado.
         subplot(3, 3, 7);
-        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).carr_error_filt_hz, 'b');
+        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).carr_error_filt_hz, Color=opciones.colores(6, :), LineWidth=1);
         title("Discriminador PLL filtrado");
         xlabel("Tiempo [s]"); ylabel("Amplitud [Hz]");
         grid on;
 
         % Diagrama del discriminador DLL sin filtrar.
         subplot(3, 3, 8);
-        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).code_error_chips, 'r');
+        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).code_error_chips, Color=opciones.colores(7, :));
         title("Discriminador DLL sin filtrar");
         xlabel("Tiempo [s]"); ylabel("Amplitud [chips]");
         grid on;
 
         % Diagrama del discriminador DLL filtrado.
         subplot(3, 3, 9);
-        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).code_error_filt_chips, 'b');
+        plot(trkReceptor(c).PRN_start_time_s, trkReceptor(c).code_error_filt_chips, Color=opciones.colores(6, :));
         title("Discriminador DLL filtrado");
         xlabel("Tiempo [s]"); ylabel("Amplitud [chips]");
         grid on;

@@ -36,11 +36,11 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         satelites = obsReceptor.PRN(obsReceptor.Time == i_tiempo);
         numSatGnssSdr = [numSatGnssSdr; length(satelites)];
     end
-    
+
     % Pintamos el número de satélites visibles.
     fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
-    
+
     subplot(1, 2, 1);
     plot(obsSpirent.Time, numSatSpirent, LineWidth=1.3, Color=constelacion.color);
     ylim([0, max(numSatSpirent)+1]);
@@ -104,7 +104,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         imagen2 = "Visibilidad_satélites-" + constelacion.nombre;
         fig1.Position = [200, 200, 900, 400];
         exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
-        fig2.Position = [100, 100, 1100, 650];
+        fig2.Position = [100, 100, 1400, 850];
         exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
     end
 end
