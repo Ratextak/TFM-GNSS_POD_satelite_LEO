@@ -37,7 +37,7 @@ pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añad
 
 pvtGnss_sdr.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + milliseconds(pvtGnss_sdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
 for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
-    obsGnss_sdr.Time(c, :) = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obs.RX_time(c, :) - leap_sec);
+    obsGnss_sdr.Time(c, :) = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obsGnss_sdr.RX_time(c, :) - leap_sec);
 end
 
 % -------------------------------------------------------------------------
@@ -63,7 +63,7 @@ erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], const
 
 % _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.
-visibilidad(obsSpirent.GPS, obsGnss_sdr.GPS, constelaciones("GPS"), configuracion);
+visibilidad(obsSpirent.GPS, obsGnss_sdr, constelaciones("GPS"), configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.

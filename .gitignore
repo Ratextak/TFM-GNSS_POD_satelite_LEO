@@ -235,3 +235,5 @@ data/CEDEA/RADAR_GNSS_flex_SCRABII-16-17JUL25/Radar_Flight2_17_jul_25_8_32_UTC.m
 TFM/data/Spirent/*.csv
 TFM/data/Spirent/rinex-obs_V1_A1-spacecraft.txt
 *.gif
+TFM/data/Spirent/*.int8
+*.mat
