@@ -32,7 +32,7 @@ end
 % El archivo de GNSS-SDR tiene datos cada 100 ms, mientras que el de Spirent es cada 10 ms.
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
 leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
-tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS - leap_sec);
+tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
 
 pvtGnss_sdr.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + milliseconds(pvtGnss_sdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
@@ -71,4 +71,4 @@ skyplots(sat_data, tInicioSpirentUTC, configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
-tracking(trkGnss_sdr, configuracion.frecMuestreoGnssSdr, configuracion);
+tracking(trkGnss_sdr, configuracion.frecMuestreoGnssSdr, tInicioSpirentUTC, configuracion);
