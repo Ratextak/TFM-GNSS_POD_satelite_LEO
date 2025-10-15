@@ -17,27 +17,31 @@ constelaciones = containers.Map(["GPS", "GALILEO"], ...
 
 % Abrimos los archivos necesarios y los guardamos en tablas.
 pvtSpirent = readtable("data/Spirent/motion_V1.csv");
-%pvtGnss_sdr = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
-pvtGnss_sdr = load("data/GNSS-SDR/pvt.mat");
+pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
+pvtGnssSdr = load("data/GNSS-SDR/pvt.mat");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
-obsGnss_sdr_rinex = rinexread("data/GNSS-SDR/GSDR225p56.25O");
-obsGnss_sdr = load("data/GNSS-SDR/observables.mat");
+obsGnssSdr_rinex = rinexread("data/GNSS-SDR/GSDR225p56.25O");
+obsGnssSdr = load("data/GNSS-SDR/observables.mat");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 for c = 1:configuracion.canalesGnssSdr
-    trkGnss_sdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
+    trkGnssSdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
 end
 
 
-% Ambos archivos no empiezan exactamente en el mismo momento, el de Spirent empieza antes y puede acabar después.
-% El archivo de GNSS-SDR tiene datos cada 100 ms, mientras que el de Spirent es cada 10 ms.
+% Los archivos de Spirent y GNSS-SDR no tienen por que empezar y acabar en el mismo momento.
+% También pueden tener diferentes tiempos de muestreo (100 ms, 10 ms o 1 s).
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
 leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
-tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
-pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);  % Añadimos una columna Time con el tiempo convertido a Datetime.
 
-pvtGnss_sdr.Time = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + milliseconds(pvtGnss_sdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
+% Dicho esto vamos a calcular el tiempo absoluto UTC para poder unificarlos y compararlos.
+% Añadimos una columna Time con el tiempo convertido a Datetime.
+tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
+pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);
+pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
 for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
-    obsGnss_sdr.Time(c, :) = tiempo0GPS + days(pvtGnss_sdr.week(1)*7) + seconds(obsGnss_sdr.RX_time(c, :) - leap_sec);
+    obsGnssSdr.Time(c, :) = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :) - leap_sec);
+    trkGnssSdr(c).PRN_start_time_s = trkGnssSdr(c).PRN_start_sample_count/configuracion.frecMuestreoGnssSdr;  % Primero convertimos a segundos desde el inicio.
+    trkGnssSdr(c).Time = tInicioSpirentUTC + seconds(trkGnssSdr(c).PRN_start_time_s);  % Y luego a UTC.
 end
 
 % -------------------------------------------------------------------------
@@ -45,25 +49,23 @@ end
 mapa2D_latLon(rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), configuracion);
 
 % Ahora pintamos la comparación de la latitud, la longitud y la altitud.
-pvt(pvtSpirent, pvtGnss_sdr, 'lla', configuracion);
+pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
 
 % -------------------------------------------------------------------------
 % A continuación vamos a analizar los RINEX de observación.
-% Esta vez los tiempos de Spirent serán cada 100 ms y los de GNSS-SDR cada 1 s.
-% También, como antes, los datos de Spirent empiezan antes y acaban después.
 
 % Pintaremos los parámetros de observación, es decir: el pseudorango, el Doppler y 
 % la relación de densidad de portadora a ruido (C/N0, S1C).
-paramObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
+paramObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
 % Y también pintaremos los histogramas de los errores.
-erroresObservacion(obsSpirent.GPS, obsGnss_sdr.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
+erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
 
 % _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.
-visibilidad(obsSpirent.GPS, obsGnss_sdr, constelaciones("GPS"), configuracion);
+visibilidad(obsSpirent.GPS, obsGnssSdr, constelaciones("GPS"), configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
@@ -71,4 +73,4 @@ skyplots(sat_data, tInicioSpirentUTC, configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
-tracking(trkGnss_sdr, configuracion.frecMuestreoGnssSdr, tInicioSpirentUTC, configuracion);
+tracking(trkGnssSdr, configuracion);
