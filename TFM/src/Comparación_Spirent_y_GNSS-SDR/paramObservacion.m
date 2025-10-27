@@ -36,12 +36,15 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
             datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == idSatelites(s), :);
 
             % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
-            [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
+            %[tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
+
+            datosSpirent = crear_huecos(datosSpirent, 1);
+            datosGnssSdr = crear_huecos(datosGnssSdr, 1);
     
             subplot(num_filas, num_col, s);
-            plot(tiemposSatelite, datosSpirent.(paramObs(p))(ia), 'b-', LineWidth=1, DisplayName="Spirent");
+            plot(datosSpirent.Time, datosSpirent.(paramObs(p)), 'b-', LineWidth=1, DisplayName="Spirent");
             hold on;
-            plot(tiemposSatelite, datosGnssSdr.(paramObs(p))(ib), 'r:', LineWidth=1, DisplayName="GNSS-SDR");
+            plot(datosGnssSdr.Time, datosGnssSdr.(paramObs(p)), 'r:', LineWidth=1, DisplayName="GNSS-SDR");
             title("PRN "+constelacion.letra+string(idSatelites(s)));
             xlabel("Tiempo"); ylabel(param_p.siglas+" ["+param_p.unidades+"]");
             grid on;

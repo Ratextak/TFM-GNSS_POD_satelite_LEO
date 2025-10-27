@@ -7,6 +7,10 @@
 
 
 function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
+    % Con esto marcaremos si hay huecos en los datos.
+    pvtSpirent = crear_huecos(pvtSpirent, 1);
+    pvtReceptor = crear_huecos(pvtReceptor, 1);
+    
     % Primero pintaremos la posición.
     fig1 = figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
     sgtitle("Comparación de la posición entre Spirent y GNSS-SDR");
@@ -14,13 +18,13 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     if tipoPosicion == "lla"  % Para lat, long y alt.
         % La altitud se expresará en km.
         posSpirent = [rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), pvtSpirent.Height/10^3];
-        posReceptor = [pvtReceptor.latitude', pvtReceptor.longitude', pvtReceptor.height'/10^3];
+        posReceptor = [pvtReceptor.latitude, pvtReceptor.longitude, pvtReceptor.height/10^3];
         titulos = ["Latitud", "Longitud", "Altitud"];
         unidades = [char(176), char(176), "km"];
     else  % tipoPosicion == "ecef".
         posSpirent = [pvtSpirent.Pos_X, pvtSpirent.Pos_Y, pvtSpirent.Pos_Z];
         %posReceptor = lla2ecef([pvtReceptor.Shape.Latitude, pvtReceptor.Shape.Longitude, pvtReceptor.Elevation]);
-        posReceptor = [pvtReceptor.pos_x', pvtReceptor.pos_y', pvtReceptor.pos_z'];
+        posReceptor = [pvtReceptor.pos_x, pvtReceptor.pos_y, pvtReceptor.pos_z];
         titulos = ["Posición X", "Posición Y", "Posición Z"];
         unidades = ["m", "m", "m"];
     end
@@ -29,7 +33,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         subplot(1, 3, i);
         plot(pvtSpirent.Time, posSpirent(:, i), 'b-', LineWidth=1);
         hold on;
-        plot(pvtReceptor.Time, posReceptor(:, i), 'r--', LineWidth=1);
+        plot(pvtReceptor.Time, posReceptor(:, i), 'r:', LineWidth=1);
         title(titulos(i));
         xlabel("Tiempo"); ylabel(titulos(i)+" ["+unidades(i)+"]");
         legend("Spirent", "GNSS-SDR");
@@ -42,14 +46,14 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     sgtitle("Comparación de la velocidad entre Spirent y GNSS-SDR");
     
     velSpirent = [pvtSpirent.Vel_X, pvtSpirent.Vel_Y, pvtSpirent.Vel_Z];
-    velReceptor = [pvtReceptor.vel_x', pvtReceptor.vel_y', pvtReceptor.vel_z'];
+    velReceptor = [pvtReceptor.vel_x, pvtReceptor.vel_y, pvtReceptor.vel_z];
     titulos = ["Velocidad X", "Velocidad Y", "Velocidad Z"];
     
     for i = 1:3
         subplot(1, 3, i);
         plot(pvtSpirent.Time, velSpirent(:, i), 'b-', LineWidth=1);
         hold on;
-        plot(pvtReceptor.Time, velReceptor(:, i), 'r--', LineWidth=1);
+        plot(pvtReceptor.Time, velReceptor(:, i), 'r:', LineWidth=1);
         title(titulos(i));
         xlabel("Tiempo"); ylabel("Velocidad [m/s]");
         legend("Spirent", "GNSS-SDR");

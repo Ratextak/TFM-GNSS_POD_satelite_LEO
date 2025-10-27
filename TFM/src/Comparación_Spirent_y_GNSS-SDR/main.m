@@ -1,12 +1,12 @@
 % Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/";  % Ruta dónde guardar las imágenes.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Arreglo_chi-cuadrado/";  % Ruta dónde guardar las imágenes.
 configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
-configuracion.canalesGnssSdr = 12;  % Número de canales del receptor GNSS-SDR.
+configuracion.canalesGnssSdr = 19;  % Número de canales del receptor GNSS-SDR.
 configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 
 % Configuraciones para cada constelación.
@@ -17,14 +17,14 @@ constelaciones = containers.Map(["GPS", "GALILEO"], ...
 
 % Abrimos los archivos necesarios y los guardamos en tablas.
 pvtSpirent = readtable("data/Spirent/motion_V1.csv");
-pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/pvt.dat_250813_155628.gpx");
-pvtGnssSdr = load("data/GNSS-SDR/pvt.mat");
+pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt_251024_123927.gpx");
+pvtGnssSdr = load("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt.mat");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
-obsGnssSdr_rinex = rinexread("data/GNSS-SDR/GSDR225p56.25O");
-obsGnssSdr = load("data/GNSS-SDR/observables.mat");
+obsGnssSdr_rinex = rinexread("data/GNSS-SDR/Arreglo_chi-cuadrado/GSDR297m39.25O");
+obsGnssSdr = load("data/GNSS-SDR/Arreglo_chi-cuadrado/observables.mat");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 for c = 1:configuracion.canalesGnssSdr
-    trkGnssSdr(c) = load("data/GNSS-SDR/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
+    trkGnssSdr(c) = load("data/GNSS-SDR/Arreglo_chi-cuadrado/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
 end
 
 
@@ -43,6 +43,31 @@ for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
     trkGnssSdr(c).PRN_start_time_s = trkGnssSdr(c).PRN_start_sample_count/configuracion.frecMuestreoGnssSdr;  % Primero convertimos a segundos desde el inicio.
     trkGnssSdr(c).Time = tInicioSpirentUTC + seconds(trkGnssSdr(c).PRN_start_time_s);  % Y luego a UTC.
 end
+
+% Vamos a convertir en una tabla la struct obsGnssSdr, para que sea más fácil de manejar.
+campos = fieldnames(obsGnssSdr);
+[nCanales, nMuestras] = size(obsGnssSdr.(campos{1}));
+aux = struct();
+aux.Channel = repelem((1:nCanales)', nMuestras);
+for c = 1:length(campos)  % Por cada campo del fichero de observación de GNSS-SDR.
+    aux.(campos{c}) = reshape(obsGnssSdr.(campos{c})', [], 1);
+end
+obsGnssSdr = struct2table(aux);
+% Ignoramos los satélites con PRN = 0, ya que esto ocurre cuando hay una pérdida de señal.
+obsGnssSdr = obsGnssSdr(obsGnssSdr.PRN ~= 0, :);
+obsGnssSdr = renamevars(obsGnssSdr, ["Carrier_Doppler_hz", "Carrier_phase_cycles", "PRN", "Pseudorange_m"], ["D1C", "L1C", "SatelliteID", "C1C"]);
+
+% También convertiremos en una tabla la struct pvtGnssSdr.
+campos = fieldnames(pvtGnssSdr);
+for c = 1:length(campos)  % Por cada campo del fichero de observación de GNSS-SDR.
+    pvtGnssSdr.(campos{c}) = reshape(pvtGnssSdr.(campos{c})', [], 1);
+end
+pvtGnssSdr = struct2table(pvtGnssSdr);
+
+% Eliminamos la columna Shape del GPX y la cambiamos por 2 de Latitude y Longitude.
+pvtGnssSdr_gpx.Latitude = pvtGnssSdr_gpx.Shape.Latitude;
+pvtGnssSdr_gpx.Longitude = pvtGnssSdr_gpx.Shape.Longitude;
+pvtGnssSdr_gpx = removevars(pvtGnssSdr_gpx, "Shape");
 
 % -------------------------------------------------------------------------
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.

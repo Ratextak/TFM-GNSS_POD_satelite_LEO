@@ -7,33 +7,19 @@
 
 
 function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
-    % Lo primero que debemos hacer es convertir en una tabla la struct obsReceptor, para que sea más fácil de manejar.
-    campos = fieldnames(obsReceptor);
-    [nCanales, nMuestras] = size(obsReceptor.(campos{1}));
-    
-    aux = struct();
-    aux.Channel = repelem((1:nCanales)', nMuestras);
-    for c = 1:length(campos)  % Por cada campo del fichero de observación de GNSS-SDR.
-        aux.(campos{c}) = reshape(obsReceptor.(campos{c})', [], 1);
-    end
-    
-    obsReceptor = struct2table(aux);
-    % Ignoramos los satélites con PRN = 0, ya que esto ocurre cuando hay una pérdida de señal.
-    obsReceptor = obsReceptor(obsReceptor.PRN ~= 0, :);
-
-    % ---------------------------------------------------------------------
     % Recontamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
-    numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
-    for i = 1:length(obsSpirent.Time)  % Para cada instante de tiempo de Spirent.
-        i_tiempo = obsSpirent.Time(i);
+    tiemposSpirent = unique(obsSpirent.Time);
+    for i = 1:length(tiemposSpirent)  % Para cada instante de tiempo diferente de Spirent.
+        i_tiempo = tiemposSpirent(i);
         satelites = obsSpirent.SatelliteID(obsSpirent.Time == i_tiempo);
         numSatSpirent = [numSatSpirent; length(satelites)];
     end
+    numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
     tiemposGnssSdr = unique(obsReceptor.Time);
-    for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo del receptor.
+    for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo diferente del receptor.
         i_tiempo = tiemposGnssSdr(i);
-        satelites = obsReceptor.PRN(obsReceptor.Time == i_tiempo);
+        satelites = obsReceptor.SatelliteID(obsReceptor.Time == i_tiempo);
         numSatGnssSdr = [numSatGnssSdr; length(satelites)];
     end
 
@@ -42,7 +28,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
 
     subplot(1, 2, 1);
-    plot(obsSpirent.Time, numSatSpirent, LineWidth=1.3, Color=constelacion.color);
+    plot(tiemposSpirent, numSatSpirent, LineWidth=1.3, Color=constelacion.color);
     ylim([0, max(numSatSpirent)+1]);
     title("Nº de satélites visibles para Spirent");
     xlabel("Tiempo"); ylabel("Nº de satélites");
@@ -60,7 +46,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre);
     
     satSpirent = unique(obsSpirent.SatelliteID);
-    satGnssSdr = unique(obsReceptor.PRN);
+    satGnssSdr = unique(obsReceptor.SatelliteID);
     for i = 1:length(satSpirent)  
         datosSpirent = obsSpirent(obsSpirent.SatelliteID == satSpirent(i), :);  % Para cada satélite.
 
@@ -78,7 +64,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         datosGnssSdr = crear_huecos(datosGnssSdr, 1);
         
         subplot(1, 2, 2);
-        plot(datosGnssSdr.Time, datosGnssSdr.PRN, '-', LineWidth=1.5, DisplayName="Canal "+string(c-1));
+        plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-', LineWidth=1.5, DisplayName="Canal "+string(c-1));
         hold on;
     end
     
