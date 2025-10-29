@@ -11,11 +11,11 @@ configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-
 
 % Configuraciones para cada constelación.
 constelaciones = containers.Map(["GPS", "GALILEO"], ...
-        {struct('nombre', "GPS", 'letra', "G", 'color', [0 0.4470 0.7410]), ...  % Color azul.
-        struct('nombre', "GALILEO", 'letra', "E", 'color', [0.8500 0.3250 0.0980])});  % Color naranja.
+        {struct('nombre', "GPS", 'letra', "G", 'color', configuracion.colores(1, :)), ...  % Color azul.
+        struct('nombre', "GALILEO", 'letra', "E", 'color', configuracion.colores(2, :))});  % Color naranja.
 
 
-% Abrimos los archivos necesarios y los guardamos en tablas.
+% Abrimos los archivos necesarios y los guardamos en tablas o structs.
 pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt_251024_123927.gpx");
 pvtGnssSdr = load("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt.mat");

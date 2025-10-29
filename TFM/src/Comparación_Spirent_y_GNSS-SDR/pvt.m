@@ -31,7 +31,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
 
     for i = 1:3
         subplot(1, 3, i);
-        plot(pvtSpirent.Time, posSpirent(:, i), 'b-', LineWidth=1);
+        plot(pvtSpirent.Time, posSpirent(:, i), 'b-', LineWidth=1, Color=opciones.colores(1, :));
         hold on;
         plot(pvtReceptor.Time, posReceptor(:, i), 'r:', LineWidth=1);
         title(titulos(i));
@@ -51,7 +51,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     
     for i = 1:3
         subplot(1, 3, i);
-        plot(pvtSpirent.Time, velSpirent(:, i), 'b-', LineWidth=1);
+        plot(pvtSpirent.Time, velSpirent(:, i), 'b-', LineWidth=1, Color=opciones.colores(1, :));
         hold on;
         plot(pvtReceptor.Time, velReceptor(:, i), 'r:', LineWidth=1);
         title(titulos(i));

@@ -42,14 +42,14 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
             datosGnssSdr = crear_huecos(datosGnssSdr, 1);
     
             subplot(num_filas, num_col, s);
-            plot(datosSpirent.Time, datosSpirent.(paramObs(p)), 'b-', LineWidth=1, DisplayName="Spirent");
+            plot(datosSpirent.Time, datosSpirent.(paramObs(p)), '-', LineWidth=1, DisplayName="Spirent", Color=opciones.colores(1, :));
             hold on;
             plot(datosGnssSdr.Time, datosGnssSdr.(paramObs(p)), 'r:', LineWidth=1, DisplayName="GNSS-SDR");
             title("PRN "+constelacion.letra+string(idSatelites(s)));
             xlabel("Tiempo"); ylabel(param_p.siglas+" ["+param_p.unidades+"]");
             grid on;
         end
-        legend();  % Leyenda sólo en el último subplot.
+        legend(Location='southwest');  % Leyenda sólo en el último subplot.
     end
     
     % ---------------------------------------------------------------------
