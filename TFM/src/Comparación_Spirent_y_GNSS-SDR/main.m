@@ -37,9 +37,9 @@ leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
 % Añadimos una columna Time con el tiempo convertido a Datetime.
 tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);
-pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms) - seconds(leap_sec);
+pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms);
 for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
-    obsGnssSdr.Time(c, :) = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :) - leap_sec);
+    obsGnssSdr.Time(c, :) = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :));
     trkGnssSdr(c).PRN_start_time_s = trkGnssSdr(c).PRN_start_sample_count/configuracion.frecMuestreoGnssSdr;  % Primero convertimos a segundos desde el inicio.
     trkGnssSdr(c).Time = tInicioSpirentUTC + seconds(trkGnssSdr(c).PRN_start_time_s);  % Y luego a UTC.
 end
@@ -59,7 +59,7 @@ obsGnssSdr = renamevars(obsGnssSdr, ["Carrier_Doppler_hz", "Carrier_phase_cycles
 
 % También convertiremos en una tabla la struct pvtGnssSdr.
 campos = fieldnames(pvtGnssSdr);
-for c = 1:length(campos)  % Por cada campo del fichero de observación de GNSS-SDR.
+for c = 1:length(campos)  % Por cada campo del fichero de pvt de GNSS-SDR.
     pvtGnssSdr.(campos{c}) = reshape(pvtGnssSdr.(campos{c})', [], 1);
 end
 pvtGnssSdr = struct2table(pvtGnssSdr);
