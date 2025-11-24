@@ -27,6 +27,14 @@ for c = 1:configuracion.canalesGnssSdr
     trkGnssSdr(c) = load("data/GNSS-SDR/Arreglo_chi-cuadrado/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
 end
 
+pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/Canal_para_cada_satélite/pvt_251010_114848.gpx");
+pvtGnssSdr = load("data/GNSS-SDR/Canal_para_cada_satélite/pvt.mat");
+obsGnssSdr_rinex = rinexread("data/GNSS-SDR/Canal_para_cada_satélite/GSDR283l48.25O");
+obsGnssSdr = load("data/GNSS-SDR/Canal_para_cada_satélite/observables.mat");
+for c = 1:configuracion.canalesGnssSdr
+    trkGnssSdr(c) = load("data/GNSS-SDR/Canal_para_cada_satélite/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
+end
+
 
 % Los archivos de Spirent y GNSS-SDR no tienen por que empezar y acabar en el mismo momento.
 % También pueden tener diferentes tiempos de muestreo (100 ms, 10 ms o 1 s).
@@ -86,7 +94,9 @@ paramObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], co
 % _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
 % Y también pintaremos los histogramas de los errores.
-erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
+erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], false, 0, constelaciones("GPS"), configuracion);
+% También los podemos pintar por el método de las dobles diferencias.
+erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C"], true, 17, constelaciones("GPS"), configuracion);
 
 % _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.

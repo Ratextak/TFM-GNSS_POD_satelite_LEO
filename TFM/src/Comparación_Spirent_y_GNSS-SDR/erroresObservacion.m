@@ -3,11 +3,13 @@
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               paramObs: lista de los parámetros de observación que se quieren pintar. Ejemplo: ["C1C", "L1C"].
+%               doblesDiferencias: será true cuando se quiera hallar los errores por el método del las dobles diferencias.
+%               satRef: número del satélite que se utilizará de referencia. Ejemplo: para G17 -> 17.
 %               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
 
 
-function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opciones)
+function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias, satRef, constelacion, opciones)
     % Parámetros de observación para GPS.
     parametrosGPS = containers.Map(["C1C", "D1C", "S1C", "L1C"], ...
         {struct('nombre', "Pseudorango", 'siglas', "C1C", 'unidades', "m"), ...
@@ -21,6 +23,21 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opc
     % Celda para todos los errores de todos los satélites de todos los parámetros (necesario en el histograma).
     errores = cell(length(paramObs), 1);
 
+    % Para el método de las dobles diferencias debemos tomar un satélite de referencia y primero calculamos su error.
+    if doblesDiferencias
+        idSatelites = idSatelites(idSatelites ~= satRef);  % Lo eliminamos de la lista de satélites.
+           
+        satRef_Spirent = obsSpirent(obsSpirent.SatelliteID == satRef, :);
+        satRef_GnssSdr = obsReceptor(obsReceptor.SatelliteID == satRef, :);
+        [tiemposSatRef, ia, ib] = intersect(satRef_Spirent.Time, satRef_GnssSdr.Time);
+        
+        errores_ref = cell(length(paramObs), 1);
+        for p = 1:length(paramObs)  % Por cada parámetro.
+            error = satRef_GnssSdr.(paramObs(p))(ib) - satRef_Spirent.(paramObs(p))(ia);
+            errores_ref{p} = error;
+        end
+    end        
+     
     % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
     fig1 = figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre, WindowState='maximized');
     sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre);
@@ -35,13 +52,21 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opc
             datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == idSatelites(s), :);
             
             % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
-            [tiemposSatelite, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
+            [tiempos, ia, ib] = intersect(datosSpirent.Time, datosGnssSdr.Time);
             
-            error_ps = datosGnssSdr.(paramObs(p))(ib) - datosSpirent.(paramObs(p))(ia);
-            errores{p} = [errores{p}, error_ps'];
+            error = datosGnssSdr.(paramObs(p))(ib) - datosSpirent.(paramObs(p))(ia);  % Error diferencia simple.
+            
+            % Ahora hacemos la doble diferencia respecto al satélite de referencia.
+            if doblesDiferencias
+                [tiempos, is, ir] = intersect(tiempos, tiemposSatRef);
+                error = error(is) - errores_ref{p}(ir);  % Error doble diferencia.
+                errores{p} = [errores{p}, error'];
+            else
+                errores{p} = [errores{p}, error'];
+            end
         
             subplot(length(paramObs), 1, p);
-            plot(tiemposSatelite, error_ps, '.-', DisplayName=constelacion.letra+string(idSatelites(s)));
+            plot(tiempos, error, '.-', DisplayName=constelacion.letra+string(idSatelites(s)));
             hold on;
         end
 
