@@ -7,7 +7,11 @@
 
 
 function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
-    % Recontamos el nº de satélites visibles para cada instante de tiempo tanto en Spirent como en GNSS-SDR.
+    % Pintamos el número de satélites visibles.
+    fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
+    sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
+
+    % Recontamos el nº de satélites visibles para cada instante de tiempo para Spirent.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
     tiemposSpirent = unique(obsSpirent.Time);
     for i = 1:length(tiemposSpirent)  % Para cada instante de tiempo diferente de Spirent.
@@ -15,6 +19,12 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         satelites = obsSpirent.SatelliteID(obsSpirent.Time == i_tiempo);
         numSatSpirent = [numSatSpirent; length(satelites)];
     end
+    aux = crear_huecos(table(tiemposSpirent, numSatSpirent, VariableNames=["Time", "numSatSpirent"]), 1);
+
+    plot(aux.Time, aux.numSatSpirent, LineWidth=1.5, Color=constelacion.color, DisplayName="Spirent");
+    hold on;
+
+    % Recontamos el nº de satélites visibles para cada instante de tiempo para GNSS-SDR.
     numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
     tiemposGnssSdr = unique(obsReceptor.Time);
     for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo diferente del receptor.
@@ -22,23 +32,18 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
         satelites = obsReceptor.SatelliteID(obsReceptor.Time == i_tiempo);
         numSatGnssSdr = [numSatGnssSdr; length(satelites)];
     end
+    aux = crear_huecos(table(tiemposGnssSdr, numSatGnssSdr, VariableNames=["Time", "numSatGnssSdr"]), 1);
 
-    % Pintamos el número de satélites visibles.
-    fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
-    sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
-
-    subplot(1, 2, 1);
-    plot(tiemposSpirent, numSatSpirent, LineWidth=1.3, Color=constelacion.color);
+    if constelacion.nombre == "GPS"
+        color2 = opciones.colores(5, :);
+    else  % Galileo.
+        color2 = opciones.colores(3, :);
+    end
+    plot(aux.Time, aux.numSatGnssSdr, ':', LineWidth=1.5, Color=color2, DisplayName="GNSS-SDR");
     ylim([0, max(numSatSpirent)+1]);
-    title("Nº de satélites visibles para Spirent");
     xlabel("Tiempo"); ylabel("Nº de satélites");
     grid on;
-    subplot(1, 2, 2);
-    plot(tiemposGnssSdr, numSatGnssSdr, LineWidth=1.3, Color=constelacion.color);
-    ylim([0, max(numSatSpirent)+1]);
-    title("Nº de satélites visibles para GNSS-SDR");
-    xlabel("Tiempo"); ylabel("Nº de satélites");
-    grid on;
+    legend(Location='southeast');
     
     % ---------------------------------------------------------------------
     % Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado respecto al tiempo.
@@ -88,7 +93,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     if opciones.salvarImg
         imagen1 = "Número_satélites_visibles-" + constelacion.nombre;
         imagen2 = "Visibilidad_satélites-" + constelacion.nombre;
-        fig1.Position = [200, 200, 900, 400];
+        fig1.Position = [200, 200, 1050, 650];
         exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
         fig2.Position = [100, 100, 1400, 850];
         exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
