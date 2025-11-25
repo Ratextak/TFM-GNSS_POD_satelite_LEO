@@ -108,4 +108,4 @@ skyplots(sat_data, tInicioSpirentUTC, configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
-tracking(trkGnssSdr, configuracion);
+tracking(trkGnssSdr, constelaciones("GPS"), configuracion);

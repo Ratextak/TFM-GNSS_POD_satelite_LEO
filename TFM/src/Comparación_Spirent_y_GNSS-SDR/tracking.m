@@ -3,13 +3,22 @@
 % segundo un diagrama de bits del mensaje de navegación, diagramas del discriminador PLL raw y filtrado, 
 % diagramas del discriminador DLL raw y filtrado, y por último un diagrama de correlación entre los componentes I y Q.
 % Parámetros:   trkReceptor: struct con los datos de tracking para cada canal de GNSS-SDR.
+%               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
 
 
-function tracking(trkReceptor, opciones)
+function tracking(trkReceptor, constelacion, opciones)
     for c = 1:length(trkReceptor)  % Por cada canal.
+        % Sacamos el PRN de los satélites de cada canal y lo indicamos en el título del gráfico.
+        PRN = unique(trkReceptor(c).PRN);
+        if length(PRN) > 1  % Más de un satélite.
+            PRN_string = strjoin(constelacion.letra+string(PRN(1:end-1)), ", ") + " y " + constelacion.letra+string(PRN(end));
+        else  % 1 satélite.
+            PRN_string = constelacion.letra + string(PRN);
+        end
+        
         fig = figure(Name="Tracking canal "+string(c-1), WindowState='maximized');
-        sgtitle("Tracking del canal "+string(c-1));
+        sgtitle("Tracking del canal "+string(c-1)+" (PRN "+PRN_string+")");
 
         % Diagrama de dispersión de componentes En-fase (I) puntual y Cuadratura (Q) puntual de tiempo discreto.
         subplot(3, 3, 1);
