@@ -76,6 +76,10 @@ mapa2D_latLon(rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), configuracion);
 % Ahora pintamos la comparación de la latitud, la longitud y la altitud.
 pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
 
+% También vamos a pintar el factor de degradación de la precisión, la DOP, 
+% para ver que tan precisa es la PVT que hemos obtenido.
+dop(pvtSpirent, pvtGnssSdr, configuracion);
+
 % -------------------------------------------------------------------------
 % A continuación vamos a analizar los RINEX de observación.
 
