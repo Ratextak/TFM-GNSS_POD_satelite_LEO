@@ -104,6 +104,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
         text(pos(1), pos(2), ["\sigma = "+sigma, "\sigma^2 = "+sigma^2], ...
             FontSize=12, EdgeColor='k', BackgroundColor='w');
         legend();
+        ylim(y_lim);  % Esto evita que los límites dinámicos se expandan y queden feas las franjas verdes.
     end
 
     % ---------------------------------------------------------------------

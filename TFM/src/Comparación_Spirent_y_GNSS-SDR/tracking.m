@@ -28,6 +28,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         title("Diagrama de dispersión de tiempo discreto");
         xlabel("Prompt I"); ylabel("Prompt Q");
         grid on;
+        box on;  % Para que no desaparezcan los bordes derecho y superior.
 
         % Diagrama de bits del mensaje de navegación.
         subplot(3, 3, [2 3]);
@@ -62,6 +63,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         xlabel("Tiempo");
         legend(Interpreter='latex', FontSize=10);
         grid on;
+        box on;  % Para que no desaparezcan los bordes derecho y superior.
         if pintarFranjas
             franjasErrores(false);
         end

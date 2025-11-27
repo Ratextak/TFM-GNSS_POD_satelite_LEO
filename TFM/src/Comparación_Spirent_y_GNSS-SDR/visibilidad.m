@@ -94,6 +94,7 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones, pintarFran
     colororder(opciones.colores);
     legend(Location='eastoutside');
     grid on;
+    box on;  % Para que no desaparezcan los bordes derecho y superior.
     if pintarFranjas
         franjasErrores(true);
     end

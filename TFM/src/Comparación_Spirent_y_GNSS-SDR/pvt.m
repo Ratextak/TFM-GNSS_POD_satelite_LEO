@@ -23,7 +23,6 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         unidades = [char(176), char(176), "km"];
     else  % tipoPosicion == "ecef".
         posSpirent = [pvtSpirent.Pos_X, pvtSpirent.Pos_Y, pvtSpirent.Pos_Z];
-        %posReceptor = lla2ecef([pvtReceptor.Shape.Latitude, pvtReceptor.Shape.Longitude, pvtReceptor.Elevation]);
         posReceptor = [pvtReceptor.pos_x, pvtReceptor.pos_y, pvtReceptor.pos_z];
         titulos = ["Posición X", "Posición Y", "Posición Z"];
         unidades = ["m", "m", "m"];
@@ -31,9 +30,9 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
 
     for i = 1:3
         subplot(1, 3, i);
-        plot(pvtSpirent.Time, posSpirent(:, i), 'b-', LineWidth=1, Color=opciones.colores(1, :));
+        plot(pvtSpirent.Time, posSpirent(:, i), '-', LineWidth=1.3, Color=opciones.colores(1, :));
         hold on;
-        plot(pvtReceptor.Time, posReceptor(:, i), 'r:', LineWidth=1);
+        plot(pvtReceptor.Time, posReceptor(:, i), 'r:', LineWidth=1.3);
         title(titulos(i));
         xlabel("Tiempo"); ylabel(titulos(i)+" ["+unidades(i)+"]");
         legend("Spirent", "GNSS-SDR");
@@ -51,9 +50,9 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     
     for i = 1:3
         subplot(1, 3, i);
-        plot(pvtSpirent.Time, velSpirent(:, i), 'b-', LineWidth=1, Color=opciones.colores(1, :));
+        plot(pvtSpirent.Time, velSpirent(:, i), '-', LineWidth=1.3, Color=opciones.colores(1, :));
         hold on;
-        plot(pvtReceptor.Time, velReceptor(:, i), 'r:', LineWidth=1);
+        plot(pvtReceptor.Time, velReceptor(:, i), 'r:', LineWidth=1.3);
         title(titulos(i));
         xlabel("Tiempo"); ylabel("Velocidad [m/s]");
         legend("Spirent", "GNSS-SDR");
