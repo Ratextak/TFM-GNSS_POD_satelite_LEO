@@ -6,9 +6,10 @@
 %               canalInicio: canal en el que empiezan los datos (para datos multiconstelación, si sólo hay una poner 0).
 %               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
+%               pintarFranjas: pinta con colores las franjas donde hay errores.
 
 
-function tracking(trkReceptor, canalInicio, constelacion, opciones)
+function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranjas)
     for c = 1:length(trkReceptor)  % Por cada canal.
         % Sacamos el PRN de los satélites de cada canal y lo indicamos en el título del gráfico.
         PRN = unique(trkReceptor(c).PRN);
@@ -30,10 +31,14 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
 
         % Diagrama de bits del mensaje de navegación.
         subplot(3, 3, [2 3]);
-        plot(trkReceptor(c).Time, trkReceptor(c).Prompt_I);
+        plot(trkReceptor(c).Time, trkReceptor(c).Prompt_I, HandleVisibility='off');
         title("Bits del mensaje de navegación");
         xlabel("Tiempo"); ylabel("Prompt I");
         grid on;
+        if pintarFranjas
+            franjasErrores(true);
+            legend();
+        end
 
         % Diagrama del discriminador PLL sin filtrar.
         subplot(3, 3, 4);
@@ -41,6 +46,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
         title("Discriminador PLL sin filtrar");
         xlabel("Tiempo"); ylabel("Amplitud [Hz]");
         grid on;
+        if pintarFranjas
+            franjasErrores(false);
+        end
 
         % Diagrama de correlación entre los componentes I y Q para momentos VE, E, P, L y VL.
         subplot(3, 3, [5 6]);
@@ -54,6 +62,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
         xlabel("Tiempo");
         legend(Interpreter='latex', FontSize=10);
         grid on;
+        if pintarFranjas
+            franjasErrores(false);
+        end
 
         % Diagrama del discriminador PLL filtrado.
         subplot(3, 3, 7);
@@ -61,6 +72,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
         title("Discriminador PLL filtrado");
         xlabel("Tiempo"); ylabel("Amplitud [Hz]");
         grid on;
+        if pintarFranjas
+            franjasErrores(false);
+        end
 
         % Diagrama del discriminador DLL sin filtrar.
         subplot(3, 3, 8);
@@ -68,6 +82,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
         title("Discriminador DLL sin filtrar");
         xlabel("Tiempo"); ylabel("Amplitud [chips]");
         grid on;
+        if pintarFranjas
+            franjasErrores(false);
+        end
 
         % Diagrama del discriminador DLL filtrado.
         subplot(3, 3, 9);
@@ -75,6 +92,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones)
         title("Discriminador DLL filtrado");
         xlabel("Tiempo"); ylabel("Amplitud [chips]");
         grid on;
+        if pintarFranjas
+            franjasErrores(false);
+        end
 
         % -----------------------------------------------------------------
         % Por último guardaremos los gráficos si se desea.

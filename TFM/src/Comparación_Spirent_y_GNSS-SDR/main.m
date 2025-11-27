@@ -78,7 +78,7 @@ pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
 
 % También vamos a pintar el factor de degradación de la precisión, la DOP, 
 % para ver que tan precisa es la PVT que hemos obtenido.
-dop(pvtSpirent, pvtGnssSdr, configuracion);
+dop(pvtSpirent, pvtGnssSdr, configuracion, false);
 
 % -------------------------------------------------------------------------
 % A continuación vamos a analizar los RINEX de observación.
@@ -96,7 +96,7 @@ erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C"], 
 
 % _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.
-visibilidad(obsSpirent.GPS, obsGnssSdr, constelaciones("GPS"), configuracion);
+visibilidad(obsSpirent.GPS, obsGnssSdr, constelaciones("GPS"), configuracion, false);
 
 % _________________________________________________________________________
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
@@ -104,5 +104,5 @@ skyplots(sat_data, tInicioSpirentUTC, configuracion);
 
 % _________________________________________________________________________
 % Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
-tracking(trkGnssSdr, 0, constelaciones("GPS"), configuracion);
-%tracking(trkGnssSdr(9:end), 8, constelaciones("GALILEO"), configuracion);
+tracking(trkGnssSdr, 0, constelaciones("GPS"), configuracion, false);
+%tracking(trkGnssSdr(9:end), 8, constelaciones("GALILEO"), configuracion, false);

@@ -4,9 +4,10 @@
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
 %               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
+%               pintarFranjas: pinta con colores las franjas donde hay errores.
 
 
-function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
+function visibilidad(obsSpirent, obsReceptor, constelacion, opciones, pintarFranjas)
     % Pintamos el número de satélites visibles.
     fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
@@ -44,6 +45,9 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     xlabel("Tiempo"); ylabel("Nº de satélites");
     grid on;
     legend(Location='southeast');
+    if pintarFranjas
+        franjasErrores(true);
+    end
     
     % ---------------------------------------------------------------------
     % Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado respecto al tiempo.
@@ -79,6 +83,9 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     yticks(satSpirent);  % Muestra sólo los valores de la ID de cada satélite (eje Y).
     yticklabels(constelacion.letra+satSpirent);  % Pone la letra de la constelación delante de la ID.
     grid on;
+    if pintarFranjas
+        franjasErrores(false);
+    end
     subplot(1, 2, 2);
     title("Visibilidad de los satélites en GNSS-SDR");
     xlabel("Tiempo"); ylabel("Id del satélite");
@@ -87,6 +94,9 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones)
     colororder(opciones.colores);
     legend(Location='eastoutside');
     grid on;
+    if pintarFranjas
+        franjasErrores(true);
+    end
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
