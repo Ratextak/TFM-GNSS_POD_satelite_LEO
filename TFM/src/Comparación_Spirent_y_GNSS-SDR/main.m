@@ -1,7 +1,8 @@
 % Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Arreglo_chi-cuadrado/";  % Ruta dónde guardar las imágenes.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Max_lock_fail/";  % Ruta dónde guardar las imágenes.
+configuracion.rutaDatos = "data/GNSS-SDR/Max_lock_fail/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
@@ -16,26 +17,28 @@ constelaciones = containers.Map(["GPS", "GALILEO"], ...
 
 
 % Abrimos los archivos necesarios y los guardamos en tablas o structs.
+% Archivos Spirent.
 pvtSpirent = readtable("data/Spirent/motion_V1.csv");
-pvtGnssSdr_gpx = readgeotable("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt_251024_123927.gpx");
-pvtGnssSdr = load("data/GNSS-SDR/Arreglo_chi-cuadrado/pvt.mat");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
-obsGnssSdr_rinex = rinexread("data/GNSS-SDR/Arreglo_chi-cuadrado/GSDR297m39.25O");
-obsGnssSdr = load("data/GNSS-SDR/Arreglo_chi-cuadrado/observables.mat");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
+% Archivos GNSS-SDR.
+pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251203_090120.gpx");
+pvtGnssSdr = load(configuracion.rutaDatos+"pvt.mat");
+obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR337j01.25O");
+obsGnssSdr = load(configuracion.rutaDatos+"observables.mat");
 for c = 1:configuracion.canalesGnssSdr
-    trkGnssSdr(c) = load("data/GNSS-SDR/Arreglo_chi-cuadrado/Tracking/epl_tracking_ch_"+string(c-1)+".mat");
+    trkGnssSdr(c) = load(configuracion.rutaDatos+"Tracking/epl_tracking_ch_"+string(c-1)+".mat");
 end
 
 
-% Los archivos de Spirent y GNSS-SDR no tienen por que empezar y acabar en el mismo momento.
-% También pueden tener diferentes tiempos de muestreo (100 ms, 10 ms o 1 s).
+% Hay que tener en cuenta que los archivos de Spirent y GNSS-SDR no tienen por que empezar y acabar 
+% en el mismo momento. También pueden tener diferentes tiempos de muestreo (100 ms, 10 ms o 1 s).
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
 leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
+tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
 
 % Dicho esto vamos a calcular el tiempo absoluto UTC para poder unificarlos y compararlos.
 % Añadimos una columna Time con el tiempo convertido a Datetime.
-tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);
 pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms);
 for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
@@ -69,10 +72,15 @@ pvtGnssSdr_gpx.Latitude = pvtGnssSdr_gpx.Shape.Latitude;
 pvtGnssSdr_gpx.Longitude = pvtGnssSdr_gpx.Shape.Longitude;
 pvtGnssSdr_gpx = removevars(pvtGnssSdr_gpx, "Shape");
 
-% -------------------------------------------------------------------------
+
+% ------------------------ Vista general de la órbita ---------------------
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
 mapa2D_latLon(rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), configuracion);
 
+% Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
+skyplots(sat_data, tInicioSpirentUTC, configuracion);
+
+% ------------------------ Gráficos PVT -----------------------------------
 % Ahora pintamos la comparación de la latitud, la longitud y la altitud.
 pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
 
@@ -80,29 +88,23 @@ pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
 % para ver que tan precisa es la PVT que hemos obtenido.
 dop(pvtSpirent, pvtGnssSdr, configuracion, false);
 
-% -------------------------------------------------------------------------
-% A continuación vamos a analizar los RINEX de observación.
+% ------------------------ Gráficos de observación ------------------------
+% A continuación vamos a analizar los archivos de observación (RINEX u observables.mat).
 
 % Pintaremos los parámetros de observación, es decir: el pseudorango, el Doppler y 
 % la relación de densidad de portadora a ruido (C/N0, S1C).
 paramObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
 
-% _________________________________________________________________________
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
 % Y también pintaremos los histogramas de los errores.
 erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], false, 0, constelaciones("GPS"), configuracion);
 % También los podemos pintar por el método de las dobles diferencias.
 erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C"], true, 17, constelaciones("GPS"), configuracion);
 
-% _________________________________________________________________________
 % Pintaremos la visibilidad de los satélites.
 visibilidad(obsSpirent.GPS, obsGnssSdr, constelaciones("GPS"), configuracion, false);
 
-% _________________________________________________________________________
-% Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
-skyplots(sat_data, tInicioSpirentUTC, configuracion);
-
-% _________________________________________________________________________
+% ------------------------ Gráficos de tracking ---------------------------
 % Pintaremos los diagramas de la fase de tracking de GNSS-SDR.
 tracking(trkGnssSdr, 0, constelaciones("GPS"), configuracion, false);
 %tracking(trkGnssSdr(9:end), 8, constelaciones("GALILEO"), configuracion, false);
