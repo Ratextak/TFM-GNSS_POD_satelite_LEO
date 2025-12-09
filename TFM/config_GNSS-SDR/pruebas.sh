@@ -22,14 +22,19 @@ echo -e "Los resultados de todas las pruebas se guardarán en: ${ruta_resultados
 #gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS.conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Arreglo_chi-cuadrado"
 #echo -e "~~~~~~~~ Tercera prueba concluida ~~~~~~~~\n"
 
-echo "------------------------------------------------------------------------------"
-echo "---> Ejecutando la cuarta prueba..."
-gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(max_lock_fail).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Max_lock_fail"
-echo -e "~~~~~~~~ Cuarta prueba concluida ~~~~~~~~\n"
+#echo "------------------------------------------------------------------------------"
+#echo "---> Ejecutando la cuarta prueba..."
+#gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(max_lock_fail).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Max_lock_fail"
+#echo -e "~~~~~~~~ Cuarta prueba concluida ~~~~~~~~\n"
+
+#echo "------------------------------------------------------------------------------"
+#echo "---> Ejecutando la quinta prueba..."
+#gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(high_dynamics).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/High_dynamics"
+#echo -e "~~~~~~~~ Quinta prueba concluida ~~~~~~~~\n"
 
 echo "------------------------------------------------------------------------------"
-echo "---> Ejecutando la quinta prueba..."
-gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(high_dynamics).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/High_dynamics"
-echo -e "~~~~~~~~ Quinta prueba concluida ~~~~~~~~\n"
+echo "---> Ejecutando la sexta prueba..."
+gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(combinación).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Combinación"
+echo -e "~~~~~~~~ Sexta prueba concluida ~~~~~~~~\n"
 
 # Demás pruebas...

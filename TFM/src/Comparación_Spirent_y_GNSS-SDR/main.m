@@ -1,8 +1,8 @@
 % Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Max_lock_fail/";  % Ruta dónde guardar las imágenes.
-configuracion.rutaDatos = "data/GNSS-SDR/Max_lock_fail/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Combinación/";  % Ruta dónde guardar las imágenes.
+configuracion.rutaDatos = "data/GNSS-SDR/Combinación/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
@@ -22,9 +22,9 @@ pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 % Archivos GNSS-SDR.
-pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251203_090120.gpx");
+pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251205_100148.gpx");
 pvtGnssSdr = load(configuracion.rutaDatos+"pvt.mat");
-obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR337j01.25O");
+obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR339k01.25O");
 obsGnssSdr = load(configuracion.rutaDatos+"observables.mat");
 for c = 1:configuracion.canalesGnssSdr
     trkGnssSdr(c) = load(configuracion.rutaDatos+"Tracking/epl_tracking_ch_"+string(c-1)+".mat");
