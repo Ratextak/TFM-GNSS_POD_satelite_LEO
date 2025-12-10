@@ -12,6 +12,11 @@ Configuraciones de GNSS-SDR:
 	Frecuencia de muestreo: 30 MHz
 	19 canales: 19 GPS (cada canal rastrea un satélite diferente de los visibles durante el fragmento de la simulación)
 	Nº máximo de fallos de lock antes de descartar un satélite bajado: Tracking_1C.max_lock_fail = 20 (defecto = 50)
+- Config_canal_para_cada_sat-GPS(max_lock_fail_5).conf:
+	Frecuencia de muestreo: 30 MHz
+	19 canales: 19 GPS (cada canal rastrea un satélite diferente de los visibles durante el fragmento de la simulación)
+	Función de alta dinámica desactivada: Tracking_1C.high_dynamics = false
+	Nº máximo de fallos de lock antes de descartar un satélite bajado: Tracking_1C.max_lock_fail = 5 (defecto = 50)
 - Config_canal_para_cada_sat-GPS.conf:
 	Frecuencia de muestreo: 30 MHz
 	19 canales: 19 GPS (cada canal rastrea un satélite diferente de los visibles durante el fragmento de la simulación)
