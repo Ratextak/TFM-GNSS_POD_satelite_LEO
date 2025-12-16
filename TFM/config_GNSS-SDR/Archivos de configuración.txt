@@ -23,6 +23,8 @@ Configuraciones de GNSS-SDR:
 - Config_pruebitas.conf:
 	Frecuencia de muestreo: 30 MHz
 	16 canales: 8 GPS y 8 Galileo
+-Config_rapida.conf:
+	Configuración para que la simulación vaya más deprisa
 - simIQ_gnss_sdr.conf:
 	Frecuencia de muestreo: 30 MHz
 	12 canales: 12 GPS
