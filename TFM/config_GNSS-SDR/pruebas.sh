@@ -8,9 +8,9 @@ ruta_signal="${ruta_TFM}/data/Spirent/2025_08_13_12_44_05.int8"
 
 echo -e "Los resultados de todas las pruebas se guardarán en: ${ruta_resultados}\n"
 
-#echo "---> Ejecutando la primera prueba..."
-#gnss-sdr --config_file="${ruta_config}/Config_pruebitas.conf" --signal_source=$ruta_signal --log_dir=$ruta_TFM
-#echo -e "~~~~~~~~ Primera prueba concluida ~~~~~~~~\n"
+echo "---> Ejecutando la primera prueba..."
+gnss-sdr --config_file="${ruta_config}/Config_pruebitas.conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/GPS_Galileo"
+echo -e "~~~~~~~~ Primera prueba concluida ~~~~~~~~\n"
 
 #echo "------------------------------------------------------------------------------"
 #echo "---> Ejecutando la segunda prueba..."
@@ -37,9 +37,9 @@ echo -e "Los resultados de todas las pruebas se guardarán en: ${ruta_resultados
 #gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(combinación).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Combinación"
 #echo -e "~~~~~~~~ Sexta prueba concluida ~~~~~~~~\n"
 
-echo "------------------------------------------------------------------------------"
-echo "---> Ejecutando la séptima prueba..."
-gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(max_lock_fail_5).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Max_lock_fail_5"
-echo -e "~~~~~~~~ Séptima prueba concluida ~~~~~~~~\n"
+#echo "------------------------------------------------------------------------------"
+#echo "---> Ejecutando la séptima prueba..."
+#gnss-sdr --config_file="${ruta_config}/Config_canal_para_cada_sat-GPS(max_lock_fail_5).conf" --signal_source=$ruta_signal --log_dir="${ruta_resultados}/Max_lock_fail_5"
+#echo -e "~~~~~~~~ Séptima prueba concluida ~~~~~~~~\n"
 
 # Demás pruebas...
