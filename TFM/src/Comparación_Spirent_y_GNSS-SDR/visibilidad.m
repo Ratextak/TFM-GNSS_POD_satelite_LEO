@@ -2,12 +2,13 @@
 % Son 2 gráficos: uno del número de satélites visibles y el otro de la visibilidad de cada satélite respecto al tiempo.
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
+%               rinexReceptor: si se utiliza el RINEX en vez de observables.mat para el receptor (no pinta los canales).
 %               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
 %               pintarFranjas: pinta con colores las franjas donde hay errores.
 
 
-function visibilidad(obsSpirent, obsReceptor, constelacion, opciones, pintarFranjas)
+function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opciones, pintarFranjas)
     % Pintamos el número de satélites visibles.
     fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
@@ -66,15 +67,28 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones, pintarFran
         plot(datosSpirent.Time, datosSpirent.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
         hold on;
     end
-    for c = 1:opciones.canalesGnssSdr  % Por cada canal del receptor.
-        datosGnssSdr = obsReceptor(obsReceptor.Channel == c, :);
+    if rinexReceptor
+        for i = 1:length(satGnssSdr)  
+            datosGnssSdr = obsReceptor(obsReceptor.SatelliteID == satGnssSdr(i), :);  % Para cada satélite.
+    
+            % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
+            datosGnssSdr = crear_huecos(datosGnssSdr, 1);
         
-        % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
-        datosGnssSdr = crear_huecos(datosGnssSdr, 1);
-        
-        subplot(1, 2, 2);
-        plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-', LineWidth=1.5, DisplayName="Canal "+string(c-1));
-        hold on;
+            subplot(1, 2, 2);
+            plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-b', LineWidth=1.5, Color=constelacion.color);
+            hold on;
+        end
+    else
+        for c = 1:opciones.canalesGnssSdr  % Por cada canal del receptor.
+            datosGnssSdr = obsReceptor(obsReceptor.Channel == c, :);
+            
+            % Para que las líneas se corten en la gráfica, y no sigan continuas entre puntos distantes.
+            datosGnssSdr = crear_huecos(datosGnssSdr, 1);
+            
+            subplot(1, 2, 2);
+            plot(datosGnssSdr.Time, datosGnssSdr.SatelliteID, '-', LineWidth=1.5, DisplayName="Canal "+string(c-1));
+            hold on;
+        end
     end
     
     subplot(1, 2, 1);
@@ -91,8 +105,10 @@ function visibilidad(obsSpirent, obsReceptor, constelacion, opciones, pintarFran
     xlabel("Tiempo"); ylabel("Id del satélite");
     yticks(satGnssSdr);
     yticklabels(constelacion.letra+satGnssSdr);
-    colororder(opciones.colores);
-    legend(Location='eastoutside');
+    if ~rinexReceptor  % Si hay canales pone la leyenda.
+        colororder(opciones.colores);
+        legend(Location='eastoutside');
+    end
     grid on;
     box on;  % Para que no desaparezcan los bordes derecho y superior.
     if pintarFranjas

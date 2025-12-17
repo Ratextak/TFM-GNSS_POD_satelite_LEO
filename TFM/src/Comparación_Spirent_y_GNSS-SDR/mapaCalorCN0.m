@@ -20,15 +20,24 @@ function mapaCalorCN0(obsReceptor, constelacion, opciones)
             end
         end
     end
-
-    imagesc(tiempos, 1:length(satelites), CN0);
+    
+    x = imagesc(tiempos, 1:length(satelites), CN0);
+    colormap("turbo");
+    caxis([25 60]);  % Rango común de C/N_0 para facilitar la comparación entre escenarios.
     cb = colorbar;
     cb.Label.String = "C/N_0 [dBHz]";
-    caxis([25 60]);  % Rango común de C/N_0 para facilitar la comparación entre escenarios.
     xlabel("Tiempo"); ylabel("Satélite (PRN)");
     axis xy;  % Pone el menor valor abajo del eje Y.
     yticks(1:length(satelites));  % Muestra sólo los valores de la ID de cada satélite (eje Y).
     yticklabels(constelacion.letra+satelites);  % Pone la letra de la constelación delante de la ID.
+    grid on;
+    ax = gca;  % Get Current Axes.
+    ax.YGrid = "off";
+
+    % Para que los valores NaN se muestren en gris y se diferencien de las señales de baja potencia.
+    datosNaN = ~isnan(CN0);
+    set(x, AlphaData=datosNaN);
+    ax.Color = [0.8 0.8 0.8];
 
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.

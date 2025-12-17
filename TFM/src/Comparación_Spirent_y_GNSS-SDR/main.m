@@ -1,8 +1,8 @@
 % Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/GPS_Galileo/";  % Ruta dónde guardar las imágenes.
-configuracion.rutaDatos = "data/GNSS-SDR/GPS_Galileo/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Primera_prueba/";  % Ruta dónde guardar las imágenes.
+configuracion.rutaDatos = "data/GNSS-SDR/Primera_prueba/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
@@ -22,9 +22,9 @@ pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 % Archivos GNSS-SDR.
-pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251010_114848.gpx");
+pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt.dat_250813_155628.gpx");
 pvtGnssSdr = load(configuracion.rutaDatos+"pvt.mat");
-obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR283l48.25O");
+obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR225p56.25O");
 obsGnssSdr = load(configuracion.rutaDatos+"observables.mat");
 for c = 1:configuracion.canalesGnssSdr
     trkGnssSdr(c) = load(configuracion.rutaDatos+"Tracking/epl_tracking_ch_"+string(c-1)+".mat");
@@ -67,10 +67,12 @@ for c = 1:length(campos)  % Por cada campo del fichero de pvt de GNSS-SDR.
 end
 pvtGnssSdr = struct2table(pvtGnssSdr);
 
-% Eliminamos la columna Shape del GPX y la cambiamos por 2 de Latitude y Longitude.
-pvtGnssSdr_gpx.Latitude = pvtGnssSdr_gpx.Shape.Latitude;
-pvtGnssSdr_gpx.Longitude = pvtGnssSdr_gpx.Shape.Longitude;
-pvtGnssSdr_gpx = removevars(pvtGnssSdr_gpx, "Shape");
+% Eliminamos las columnas Shape y Elevation del GPX y las cambiamos por 2 de latitude 
+% y longitude y otra de height. Esto es para unificar con el archivo pvt.mat.
+pvtGnssSdr_gpx.latitude = pvtGnssSdr_gpx.Shape.Latitude;
+pvtGnssSdr_gpx.longitude = pvtGnssSdr_gpx.Shape.Longitude;
+pvtGnssSdr_gpx.height = pvtGnssSdr_gpx.Elevation;
+pvtGnssSdr_gpx = removevars(pvtGnssSdr_gpx, ["Shape", "Elevation"]);
 
 
 % ------------------------ Vista general de la órbita ---------------------
@@ -102,7 +104,7 @@ erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], 
 erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C"], true, 17, constelaciones("GPS"), configuracion);
 
 % Pintaremos la visibilidad de los satélites.
-visibilidad(obsSpirent.GPS, obsGnssSdr, constelaciones("GPS"), configuracion, false);
+visibilidad(obsSpirent.GPS, obsGnssSdr, false, constelaciones("GPS"), configuracion, false);
 
 % Pintaremos el mapa de calor de C/N0 para cada satélite visible por el receptor.
 mapaCalorCN0(obsGnssSdr_rinex.GPS, constelaciones("GPS"), configuracion);
