@@ -1,6 +1,7 @@
 % Configuración de los gráficos y la constelación.
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
+configuracion.formatoImg = "svg";  % Formato en el que se guardarán los gráficos (siempre en minúsculas).
 configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Primera_prueba/";  % Ruta dónde guardar las imágenes.
 configuracion.rutaDatos = "data/GNSS-SDR/Primera_prueba/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 configuracion.colores = [lines(7); 0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Colores para varias líneas.

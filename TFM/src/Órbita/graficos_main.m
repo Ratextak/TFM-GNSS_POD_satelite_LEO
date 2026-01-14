@@ -1,5 +1,6 @@
 % Configuración de los gráficos.
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
+configuracion.formatoImg = "png";  % Formato en el que se guardarán los gráficos (siempre en minúsculas).
 configuracion.ruta = "results/Órbita_Matlab/Gráficas/";  % Ruta dónde guardar las imágenes.
 
 

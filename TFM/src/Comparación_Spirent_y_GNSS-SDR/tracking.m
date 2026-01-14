@@ -102,7 +102,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         % Por último guardaremos los gráficos si se desea.
         if opciones.salvarImg
             imagen = "Tracking/Tracking_canal_" + string(c-1+canalInicio);
-            exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
         end
     end
 end

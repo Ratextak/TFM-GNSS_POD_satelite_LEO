@@ -108,11 +108,11 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
         for p = 1:length(paramObs)
             aux = aux + "_" + paramObs(p);
             imagen = "Comparación_" + paramObs(p);
-            exportgraphics(fig1(p), opciones.ruta+imagen+".png", Resolution=300);
+            exportgraphics(fig1(p), opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
         end
         imagen1 = "Parámetros" + aux + "-Spirent";
         imagen2 = "Parámetros" + aux + "-GNSS-SDR";
-        exportgraphics(fig2a, opciones.ruta+imagen1+".png", Resolution=300);
-        exportgraphics(fig2b, opciones.ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig2a, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
+        exportgraphics(fig2b, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
     end
 end

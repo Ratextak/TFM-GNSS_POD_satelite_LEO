@@ -66,7 +66,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         imagen2 = "Comparación_velocidad";
         fig1.Position = [100, 100, 1500, 750];
         fig2.Position = [100, 100, 1500, 750];
-        exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
-        exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
+        exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
     end
 end

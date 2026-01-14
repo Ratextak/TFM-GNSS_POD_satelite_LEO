@@ -18,6 +18,6 @@ function grafico2D_elemOrbitales(elemOrb, t, titulo, opciones)
     % Por último guardaremos el gráfico si se desea.
     if opciones.salvarImg
         imagen = "Elementos_orbitales";
-        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
     end
 end

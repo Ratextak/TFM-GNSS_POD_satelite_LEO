@@ -30,6 +30,6 @@ function grafico2D_comp3ejes(x, y, z, titulo, tipoGrafico, unidades, sistCoord, 
     if opciones.salvarImg
         imagen = tipoGrafico + "_" + sistCoord;
         fig.Position = [100, 100, 1500, 700];
-        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
     end
 end

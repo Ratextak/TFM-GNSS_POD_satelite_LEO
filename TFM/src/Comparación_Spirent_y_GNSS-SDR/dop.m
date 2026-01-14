@@ -48,6 +48,6 @@ function dop(pvtSpirent, pvtReceptor, opciones, pintarFranjas)
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
         imagen = "Comparación_DOP";
-        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
     end
 end

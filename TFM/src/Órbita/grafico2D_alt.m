@@ -12,6 +12,6 @@ function grafico2D_alt(alt, t, titulo, opciones)
     if opciones.salvarImg
         imagen = "Altitud";
         fig.Position = [100, 100, 1000, 500];
-        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
     end
 end

@@ -44,6 +44,6 @@ function mapaCalorCN0(obsReceptor, constelacion, opciones)
     if opciones.salvarImg
         imagen = "Mapa_calor_CN0-" + constelacion.nombre;
         fig.Position = [200, 200, 1050, 650];
-        exportgraphics(fig, opciones.ruta+imagen+".png", Resolution=300);
+        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
     end
 end

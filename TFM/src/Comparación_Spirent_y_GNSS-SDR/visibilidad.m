@@ -121,8 +121,8 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
         imagen1 = "Número_satélites_visibles-" + constelacion.nombre;
         imagen2 = "Visibilidad_satélites-" + constelacion.nombre;
         fig1.Position = [200, 200, 1050, 650];
-        exportgraphics(fig1, opciones.ruta+imagen1+".png", Resolution=300);
+        exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
         fig2.Position = [100, 100, 1400, 850];
-        exportgraphics(fig2, opciones.ruta+imagen2+".png", Resolution=300);
+        exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
     end
 end
