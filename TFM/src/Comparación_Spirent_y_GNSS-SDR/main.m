@@ -35,15 +35,20 @@ end
 % Hay que tener en cuenta que los archivos de Spirent y GNSS-SDR no tienen por que empezar y acabar 
 % en el mismo momento. También pueden tener diferentes tiempos de muestreo (100 ms, 10 ms o 1 s).
 tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
-leap_sec = 18;  % Segundos intercalares a partir de 2017 para tiempo GPS.
-tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS);  % No es tiempo GPS.
+leap_sec = seconds(18);  % Segundos intercalares a partir de 2017 para tiempo GPS.
+tInicioSpirentUTC = tiempo0GPS + seconds(configuracion.tInicioSpirentGPS) - leap_sec;
 
 % Dicho esto vamos a calcular el tiempo absoluto UTC para poder unificarlos y compararlos.
-% Añadimos una columna Time con el tiempo convertido a Datetime.
+% Todos los archivos están en tiempo GPS, excepto el GPX que es UTC.
+% Añadimos una columna Time con el tiempo convertido a Datetime o la modificamos si ya existe.
+obsSpirent.GPS.Time = obsSpirent.GPS.Time - leap_sec;
+obsSpirent.Galileo.Time = obsSpirent.Galileo.Time - leap_sec;
+obsGnssSdr_rinex.GPS.Time = obsGnssSdr_rinex.GPS.Time - leap_sec;
+%obsGnssSdr_rinex.Galileo.Time = obsGnssSdr_rinex.Galileo.Time - leap_sec;
 pvtSpirent.Time = tInicioSpirentUTC + milliseconds(pvtSpirent.Time_ms);
-pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms);
+pvtGnssSdr.Time = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms) - leap_sec;
 for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
-    obsGnssSdr.Time(c, :) = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :));
+    obsGnssSdr.Time(c, :) = tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :)) - leap_sec;
     trkGnssSdr(c).PRN_start_time_s = trkGnssSdr(c).PRN_start_sample_count/configuracion.frecMuestreoGnssSdr;  % Primero convertimos a segundos desde el inicio.
     trkGnssSdr(c).Time = tInicioSpirentUTC + seconds(trkGnssSdr(c).PRN_start_time_s);  % Y luego a UTC.
 end
