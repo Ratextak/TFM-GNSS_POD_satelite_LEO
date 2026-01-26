@@ -238,3 +238,4 @@ TFM/data/Spirent/rinex-obs_V1_A1-spacecraft.txt
 TFM/data/Spirent/*.int8
 *.mat
 *.svg
+*.pdf

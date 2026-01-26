@@ -76,7 +76,11 @@ function skyplots(sat_data, t0_UTC, opciones)
         if opciones.salvarImg
             imagen = "Skyplot-" + tipo_sat(k);
             fig.Position = [200, 200, 850, 540];
-            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+            if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+                exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
+            else  % PNG o JPG.
+                exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+            end
         end
     end
 end

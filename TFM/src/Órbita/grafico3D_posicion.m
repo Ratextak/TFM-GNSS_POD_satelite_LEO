@@ -20,6 +20,10 @@ function grafico3D_posicion(x, y, z, unidades, opciones)
     if opciones.salvarImg
         imagen = "Órbita_3D";
         fig.Position = [100, 100, 800, 800];
-        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end

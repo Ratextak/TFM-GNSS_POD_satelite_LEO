@@ -116,7 +116,12 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
             imagen1 = imagen1 + "_" + paramObs(p);
             imagen2 = imagen2 + "_" + paramObs(p);
         end
-        exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
-        exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, ContentType="vector");
+            exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
+            exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end

@@ -35,6 +35,10 @@ function mapa2D_latLon(lat, lon, opciones)
     if opciones.salvarImg
         imagen = "Mapa_trayectoria";
         fig.Position = [100, 100, 800, 750];
-        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end

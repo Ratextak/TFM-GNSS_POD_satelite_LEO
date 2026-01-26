@@ -47,7 +47,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     velSpirent = [pvtSpirent.Vel_X, pvtSpirent.Vel_Y, pvtSpirent.Vel_Z];
     velReceptor = [pvtReceptor.vel_x, pvtReceptor.vel_y, pvtReceptor.vel_z];
     titulos = ["Velocidad X", "Velocidad Y", "Velocidad Z"];
-    
+
     for i = 1:3
         subplot(1, 3, i);
         plot(pvtSpirent.Time, velSpirent(:, i), '-', LineWidth=1.3, Color=opciones.colores(1, :));
@@ -66,7 +66,12 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         imagen2 = "Comparación_velocidad";
         fig1.Position = [100, 100, 1500, 750];
         fig2.Position = [100, 100, 1500, 750];
-        exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
-        exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, ContentType="vector");
+            exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
+            exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end

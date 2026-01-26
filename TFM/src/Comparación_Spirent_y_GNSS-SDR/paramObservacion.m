@@ -108,11 +108,20 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
         for p = 1:length(paramObs)
             aux = aux + "_" + paramObs(p);
             imagen = "Comparación_" + paramObs(p);
-            exportgraphics(fig1(p), opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+            if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+                exportgraphics(fig1(p), opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
+            else  % PNG o JPG.
+                exportgraphics(fig1(p), opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+            end
         end
         imagen1 = "Parámetros" + aux + "-Spirent";
         imagen2 = "Parámetros" + aux + "-GNSS-SDR";
-        exportgraphics(fig2a, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
-        exportgraphics(fig2b, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig2a, opciones.ruta+imagen1+"."+opciones.formatoImg, ContentType="vector");
+            exportgraphics(fig2b, opciones.ruta+imagen2+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig2a, opciones.ruta+imagen1+"."+opciones.formatoImg, Resolution=300);
+            exportgraphics(fig2b, opciones.ruta+imagen2+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end

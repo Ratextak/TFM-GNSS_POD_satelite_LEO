@@ -26,6 +26,10 @@ function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord, opciones)
     % Por último guardaremos el gráfico si se desea.
     if opciones.salvarImg
         imagen = "Posición_vs_velocidad_" + sistCoord;
-        exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
+        else  % PNG o JPG.
+            exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, Resolution=300);
+        end
     end
 end
