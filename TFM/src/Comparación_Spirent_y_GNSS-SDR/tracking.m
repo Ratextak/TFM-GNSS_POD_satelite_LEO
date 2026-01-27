@@ -21,6 +21,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         
         fig = figure(Name="Tracking canal "+string(c-1+canalInicio), WindowState='maximized');
         sgtitle("Tracking del canal "+string(c-1+canalInicio)+" (PRN "+PRN_string+")");
+        colororder(opciones.colores);
 
         % Diagrama de dispersión de componentes En-fase (I) puntual y Cuadratura (Q) puntual de tiempo discreto.
         subplot(3, 3, 1);
@@ -102,6 +103,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         % Por último guardaremos los gráficos si se desea.
         if opciones.salvarImg
             imagen = "Tracking/Tracking_canal_" + string(c-1+canalInicio);
+            fig.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
             if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
                 exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
             else  % PNG o JPG.

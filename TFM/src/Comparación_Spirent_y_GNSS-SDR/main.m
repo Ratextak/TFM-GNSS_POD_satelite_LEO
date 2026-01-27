@@ -2,8 +2,8 @@
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
 configuracion.formatoImg = "png";  % Formato en el que se guardarán los gráficos (siempre en minúsculas).
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/GPS_Galileo/";  % Ruta dónde guardar las imágenes.
-configuracion.rutaDatos = "data/GNSS-SDR/GPS_Galileo/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Canal_para_cada_satélite/";  % Ruta dónde guardar las imágenes.
+configuracion.rutaDatos = "data/GNSS-SDR/Canal_para_cada_satélite/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 colores12 = orderedcolors("gem12");
 configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas. Azul oscuro.
     0.8500 0.3250 0.0980;  % Naranja oscuro. lines(7) hasta la versión R2024b.
@@ -12,12 +12,13 @@ configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas
     0.4660 0.6740 0.1880;  % Verde claro.
     0.3010 0.7450 0.9330;  % Azul claro.
     0.6350 0.0780 0.1840;  % Granate.
-    colores12(8:12, :);  % Amarillo pollo, azul-morado, naranja neón, verde turquesa y marrón claro.
-    0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927];  % Personalizados rosa y verde prado.
+    0.8359 0.3672 0.5664; 0.1406 0.5859 0.2927;  % Personalizados rosa y verde prado.
+    colores12(8:12, :)];  % Amarillo pollo, azul-morado, naranja neón, verde turquesa y marrón claro.
+
 
 % Configuración de parámetros para Spirent y GNSS-SDR.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
-configuracion.canalesGnssSdr = 16;  % Número de canales del receptor GNSS-SDR.
+configuracion.canalesGnssSdr = 19;  % Número de canales del receptor GNSS-SDR.
 configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 
 % Configuraciones para cada constelación.
@@ -32,9 +33,9 @@ pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 % Archivos GNSS-SDR.
-pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251006_104557.gpx");
+pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251010_114848.gpx");
 pvtGnssSdr = load(configuracion.rutaDatos+"pvt.mat");
-obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR225p56.25O");
+obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR283l48.25O");
 obsGnssSdr = load(configuracion.rutaDatos+"observables.mat");
 for c = 1:configuracion.canalesGnssSdr
     trkGnssSdr(c) = load(configuracion.rutaDatos+"Tracking/epl_tracking_ch_"+string(c-1)+".mat");

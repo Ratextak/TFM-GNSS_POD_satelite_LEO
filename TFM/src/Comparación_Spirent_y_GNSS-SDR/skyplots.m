@@ -37,6 +37,7 @@ function skyplots(sat_data, t0_UTC, opciones)
     
         % Pintamos el skyplot animado y lo guardamos en un gif.
         fig = figure(Name="Skyplot animado "+tipo_sat(k));
+        fig.Position = [300, 300, 650, 400];  % Tamaño del gif.
     
         subplot(1, 2, 1);
         skyArriba = skyplot(acimuts(1, :), elevArriba(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
@@ -72,10 +73,10 @@ function skyplots(sat_data, t0_UTC, opciones)
             end
         end
         
-        % Por último guardaremos los gráficos si se desea en png.
+        % Por último guardaremos los gráficos si se desea en png (imagen final).
         if opciones.salvarImg
             imagen = "Skyplot-" + tipo_sat(k);
-            fig.Position = [200, 200, 850, 540];
+            fig.Position = [200, 200, 850, 540];  % Tamaño de la imagen.
             if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
                 exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
             else  % PNG o JPG.
