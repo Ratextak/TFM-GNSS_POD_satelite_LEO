@@ -47,7 +47,8 @@ function dop(pvtSpirent, pvtReceptor, opciones, pintarFranjas)
     % -----------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen = "Comparación_DOP";
+        imagen = "DOP_comparación";
+        fig.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
             exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
         else  % PNG o JPG.

@@ -39,6 +39,14 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         grid on;
     end
 
+    % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
+    [~, ia, ib] = intersect(pvtSpirent.Time, pvtGnssSdr.Time);
+    print("Porcentajes de error global de la posición:");
+    for i = 1:3
+        error = sum(abs(posReceptor(ib, i)-posSpirent(ia, i))) ./ sum(abs(posSpirent(ia, i))) * 100;
+        print("Error de "+titulos(i)+" = "+string(error)+"%");
+    end
+
     % ---------------------------------------------------------------------
     % Luego pintaremos la velocidad en coordenadas ECEF.
     fig2 = figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
@@ -62,8 +70,8 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen1 = "Comparación_posición_" + tipoPosicion;
-        imagen2 = "Comparación_velocidad";
+        imagen1 = "Posición_" + tipoPosicion;
+        imagen2 = "Velocidad";
         fig1.Position = [100, 100, 1500, 750];
         fig2.Position = [100, 100, 1500, 750];
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.

@@ -2,8 +2,8 @@
 configuracion.constelacion = ["GPS", "GALILEO"];  % Constelaciones a pintar (en mayúsculas).
 configuracion.salvarImg = true;  % Salvar automáticamente las imágenes generadas.
 configuracion.formatoImg = "png";  % Formato en el que se guardarán los gráficos (siempre en minúsculas).
-configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/Canal_para_cada_satélite/";  % Ruta dónde guardar las imágenes.
-configuracion.rutaDatos = "data/GNSS-SDR/Canal_para_cada_satélite/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
+configuracion.ruta = "results/Comparación_Spirent_y_GNSS-SDR/High_dynamics/";  % Ruta dónde guardar las imágenes.
+configuracion.rutaDatos = "data/GNSS-SDR/High_dynamics/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 colores12 = orderedcolors("gem12");
 configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas. Azul oscuro.
     0.8500 0.3250 0.0980;  % Naranja oscuro. lines(7) hasta la versión R2024b.
@@ -33,9 +33,9 @@ pvtSpirent = readtable("data/Spirent/motion_V1.csv");
 obsSpirent = rinexread("data/Spirent/rinex-obs_V1_A1-spacecraft.txt");
 sat_data = readtable("data/Spirent/sat_data_V1A1.csv");
 % Archivos GNSS-SDR.
-pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251010_114848.gpx");
+pvtGnssSdr_gpx = readgeotable(configuracion.rutaDatos+"pvt_251203_092409.gpx");
 pvtGnssSdr = load(configuracion.rutaDatos+"pvt.mat");
-obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR283l48.25O");
+obsGnssSdr_rinex = rinexread(configuracion.rutaDatos+"GSDR337j24.25O");
 obsGnssSdr = load(configuracion.rutaDatos+"observables.mat");
 for c = 1:configuracion.canalesGnssSdr
     trkGnssSdr(c) = load(configuracion.rutaDatos+"Tracking/epl_tracking_ch_"+string(c-1)+".mat");
@@ -111,7 +111,7 @@ dop(pvtSpirent, pvtGnssSdr, configuracion, false);
 
 % Pintaremos los parámetros de observación, es decir: el pseudorango, el Doppler y 
 % la relación de densidad de portadora a ruido (C/N0, S1C).
-paramObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], constelaciones("GPS"), configuracion);
+paramObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C", "S1C"], constelaciones("GPS"), configuracion);
 
 % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
 % Y también pintaremos los histogramas de los errores.
@@ -120,7 +120,7 @@ erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "S1C"], 
 erroresObservacion(obsSpirent.GPS, obsGnssSdr_rinex.GPS, ["C1C", "D1C", "L1C"], true, 17, constelaciones("GPS"), configuracion);
 
 % Pintaremos la visibilidad de los satélites.
-visibilidad(obsSpirent.GPS, obsGnssSdr, false, constelaciones("GPS"), configuracion, false);
+visibilidad(obsSpirent.GPS, {obsGnssSdr, obsGnssSdr_rinex.GPS}, false, constelaciones("GPS"), configuracion, false);
 
 % Pintaremos el mapa de calor de C/N0 para cada satélite visible por el receptor.
 mapaCalorCN0(obsGnssSdr_rinex.GPS, constelaciones("GPS"), configuracion);
