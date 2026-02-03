@@ -39,12 +39,13 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         grid on;
     end
 
-    % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
-    [~, ia, ib] = intersect(pvtSpirent.Time, pvtGnssSdr.Time);
-    print("Porcentajes de error global de la posición:");
+    % Calculamos el error de la posición en cada eje/parámetro y lo sacamos por la consola.
+    [~, ia, ib] = intersect(pvtSpirent.Time, pvtReceptor.Time);
+    fprintf("Porcentajes de error global de la posición:\n");
     for i = 1:3
-        error = sum(abs(posReceptor(ib, i)-posSpirent(ia, i))) ./ sum(abs(posSpirent(ia, i))) * 100;
-        print("Error de "+titulos(i)+" = "+string(error)+"%");
+        % Habrá que incluir 'omitnan' ya que hemos utilizado crear_huecos.
+        error = sum(abs(posReceptor(ib, i)-posSpirent(ia, i)), 'omitnan') ./ sum(abs(posSpirent(ia, i)), 'omitnan') * 100;
+        fprintf("\t- Error de "+titulos(i)+" = %f%%\n", error);
     end
 
     % ---------------------------------------------------------------------
@@ -65,6 +66,15 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
         xlabel("Tiempo"); ylabel("Velocidad [m/s]");
         legend("Spirent", "GNSS-SDR");
         grid on;
+    end
+
+    % Calculamos el error de la velocidad en cada eje y lo sacamos por la consola.
+    [~, ia, ib] = intersect(pvtSpirent.Time, pvtReceptor.Time);
+    fprintf("Porcentajes de error global de la velocidad:\n");
+    for i = 1:3
+        % Habrá que incluir 'omitnan' ya que hemos utilizado crear_huecos.
+        error = sum(abs(velReceptor(ib, i)-velSpirent(ia, i)), 'omitnan') ./ sum(abs(velSpirent(ia, i)), 'omitnan') * 100;
+        fprintf("\t- Error de "+titulos(i)+" = %f%%\n", error);
     end
 
     % ---------------------------------------------------------------------
