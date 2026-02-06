@@ -239,3 +239,4 @@ TFM/data/Spirent/*.int8
 *.mat
 *.svg
 *.pdf
+TFM/results/Órbita_Matlab/*.txt
