@@ -240,3 +240,7 @@ TFM/data/Spirent/*.int8
 *.svg
 *.pdf
 TFM/results/Órbita_Matlab/*.txt
+
+# Archivos de navegación.
+*.26N    
+*.gpx

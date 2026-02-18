@@ -20,7 +20,17 @@ Configuraciones de GNSS-SDR:
 - Config_canal_para_cada_sat-GPS.conf:
 	Frecuencia de muestreo: 30 MHz
 	19 canales: 19 GPS (cada canal rastrea un satélite diferente de los visibles durante el fragmento de la simulación)
-- Config_pruebitas.conf:
+- Config_dinámicos_xHD_MLFx-GPS.conf:
+	Frecuencia de muestreo: 5 MHz
+	12 canales dinámicos: 12 GPS 
+	HD/sinHD: Función de alta dinámica activada/desactivada
+	MLF50/20/5: Nº máximo de fallos de lock antes de descartar un satélite
+- Config_estáticos_xHD_MLFx-GPS.conf:
+	Frecuencia de muestreo: 5 MHz
+	19 canales estáticos: 19 GPS (cada canal rastrea un satélite diferente de los visibles durante el fragmento de la simulación)
+	HD/sinHD: Función de alta dinámica activada/desactivada
+	MLF50/20/5: Nº máximo de fallos de lock antes de descartar un satélite
+- Config_pruebitas-Galileo-GPS.conf:
 	Frecuencia de muestreo: 30 MHz
 	16 canales: 8 GPS y 8 Galileo
 -Config_rapida.conf:
