@@ -19,7 +19,7 @@ configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas
 % Configuración de parámetros para Spirent y GNSS-SDR.
 configuracion.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
 configuracion.canalesGnssSdr = 19;  % Número de canales del receptor GNSS-SDR.
-configuracion.frecMuestreoGnssSdr = 30000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
+configuracion.frecMuestreoGnssSdr = 5000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 
 % Configuraciones para cada constelación.
 constelaciones = containers.Map(["GPS", "GALILEO"], ...
@@ -99,8 +99,11 @@ mapa2D_latLon(rad2deg(pvtSpirent.Lat), rad2deg(pvtSpirent.Long), configuracion);
 skyplots(sat_data, tInicioSpirentUTC, configuracion);
 
 % ------------------------ Gráficos PVT -----------------------------------
-% Ahora pintamos la comparación de la latitud, la longitud y la altitud.
+% Ahora pintamos la comparación de la posición y la velocidad.
 pvt(pvtSpirent, pvtGnssSdr, 'lla', configuracion);
+
+% Además, pintaremos los errores de PVT para cada eje ECEF y sus histogramas.
+erroresPVT(pvtSpirent, pvtGnssSdr, true, configuracion);
 
 % También vamos a pintar el factor de degradación de la precisión, la DOP, 
 % para ver que tan precisa es la PVT que hemos obtenido.
