@@ -108,7 +108,7 @@ function erroresPVT(pvtSpirent, pvtReceptor, velocidad, opciones)
         x_patch = [media-sigma, media+sigma, media+sigma, media-sigma];
         y_patch = [y_lim(1), y_lim(1), y_lim(2), y_lim(2)];
         patch(x_patch, y_patch, 'g', FaceAlpha=0.25, EdgeColor='none', DisplayName="[Media-\sigma Media+\sigma]");
-        pos = [x_lim(1)+((x_lim(2)-x_lim(1))*0.9), y_lim(2)*0.4];
+        pos = [x_lim(1)+((x_lim(2)-x_lim(1))*0.8), y_lim(2)*0.4];
         text(pos(1), pos(2), ["\sigma = "+sigma, "\sigma^2 = "+sigma^2], ...
             FontSize=12, EdgeColor='k', BackgroundColor='w');
         legend();
@@ -120,6 +120,8 @@ function erroresPVT(pvtSpirent, pvtReceptor, velocidad, opciones)
     if opciones.salvarImg
         imagen1 = "Errores_PVT";
         imagen2 = "Histogramas_errores_PVT";
+        fig1.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
+        fig2.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
             exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, ContentType="vector");
             exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, ContentType="vector");

@@ -116,6 +116,8 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
             imagen1 = imagen1 + "_" + paramObs(p);
             imagen2 = imagen2 + "_" + paramObs(p);
         end
+        fig1.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
+        fig2.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
             exportgraphics(fig1, opciones.ruta+imagen1+"."+opciones.formatoImg, ContentType="vector");
             exportgraphics(fig2, opciones.ruta+imagen2+"."+opciones.formatoImg, ContentType="vector");

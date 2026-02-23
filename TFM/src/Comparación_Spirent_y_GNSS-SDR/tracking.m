@@ -102,6 +102,9 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         % -----------------------------------------------------------------
         % Por último guardaremos los gráficos si se desea.
         if opciones.salvarImg
+            if ~exist(opciones.ruta+"Tracking", "dir")  % Si no existe el directorio lo creamos.
+                mkdir(opciones.ruta+"Tracking");
+            end
             imagen = "Tracking/Tracking_canal_" + string(c-1+canalInicio);
             fig.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
             if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
