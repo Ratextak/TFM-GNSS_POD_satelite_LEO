@@ -45,10 +45,10 @@ datosSpirent.pvt.Time = tiempo.tInicioSpirentUTC + milliseconds(datosSpirent.pvt
 
 % ------------------------ Vista general de la órbita ---------------------
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
-%mapa2D_latLon(rad2deg(datosSpirent.pvt.Lat), rad2deg(datosSpirent.pvt.Long), configuracion);
+mapa2D_latLon(rad2deg(datosSpirent.pvt.Lat), rad2deg(datosSpirent.pvt.Long), configuracion);
 
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
-%skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, configuracion);
+skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, configuracion);
 
 % -------------------------------------------------------------------------
 % Si es una batería de varias pruebas es útil no tener que seleccionar cada carpeta y archivos.
@@ -76,7 +76,7 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     pvt(datosSpirent.pvt, datosGnssSdr.pvt, 'ecef', configuracion);
     
     % Además, pintaremos los errores de PVT para cada eje ECEF y sus histogramas.
-    erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, true, configuracion);
+    erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, configuracion);
     
     % También vamos a pintar el factor de degradación de la precisión, la DOP, 
     % para ver que tan precisa es la PVT que hemos obtenido.
