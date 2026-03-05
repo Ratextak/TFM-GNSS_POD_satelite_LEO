@@ -44,6 +44,8 @@ datosSpirent.obs.Galileo.Time = datosSpirent.obs.Galileo.Time - tiempo.leap_sec;
 datosSpirent.pvt.Time = tiempo.tInicioSpirentUTC + milliseconds(datosSpirent.pvt.Time_ms);
 
 % ------------------------ Vista general de la órbita ---------------------
+configuracion.ruta = configuracion.dirResultados;  % Ruta dónde guardar las imágenes de la vista general.
+
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
 mapa2D_latLon(rad2deg(datosSpirent.pvt.Lat), rad2deg(datosSpirent.pvt.Long), configuracion);
 
