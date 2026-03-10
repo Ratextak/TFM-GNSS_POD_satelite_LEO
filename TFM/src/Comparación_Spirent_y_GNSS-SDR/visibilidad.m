@@ -18,7 +18,7 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
 
     % Pintamos el número de satélites visibles.
     fig1 = figure(Name="Comparación número de satélites visibles de "+constelacion.nombre);
-    sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre);
+    sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
 
     % Recontamos el nº de satélites visibles para cada instante de tiempo para Spirent.
     numSatSpirent = [];  % Nº de satélites visibles en Spirent.
@@ -79,7 +79,7 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
     % ---------------------------------------------------------------------
     % Ahora pintaremos la visibilidad durante el trayecto para cada satélite por separado respecto al tiempo.
     fig2 = figure(Name="Comparación de la visibilidad de los satélites "+constelacion.nombre);
-    sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre);
+    sgtitle("Comparación de la visibilidad de los satélites "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
 
     satSpirent = unique(obsSpirent.SatelliteID);
     satGnssSdr = unique(obsReceptor.SatelliteID);
@@ -120,6 +120,7 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
     subplot(1, 2, 1);
     title("Visibilidad de los satélites en Spirent");
     xlabel("Tiempo"); ylabel("Id del satélite");
+    ylim([0, max(satSpirent)+1]);
     yticks(satSpirent);  % Muestra sólo los valores de la ID de cada satélite (eje Y).
     yticklabels(constelacion.letra+satSpirent);  % Pone la letra de la constelación delante de la ID.
     grid on;
@@ -129,6 +130,7 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
     subplot(1, 2, 2);
     title("Visibilidad de los satélites en GNSS-SDR");
     xlabel("Tiempo"); ylabel("Id del satélite");
+    ylim([0, max(satSpirent)+1]);
     yticks(satGnssSdr);
     yticklabels(constelacion.letra+satGnssSdr);
     if ~rinexReceptor  % Si hay canales pone la leyenda.

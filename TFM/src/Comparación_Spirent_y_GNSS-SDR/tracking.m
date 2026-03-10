@@ -20,7 +20,7 @@ function tracking(trkReceptor, canalInicio, constelacion, opciones, pintarFranja
         end
         
         fig = figure(Name="Tracking canal "+string(c-1+canalInicio), WindowState='maximized');
-        sgtitle("Tracking del canal "+string(c-1+canalInicio)+" (PRN "+PRN_string+")");
+        sgtitle("Tracking del canal "+string(c-1+canalInicio)+" (PRN "+PRN_string+") ["+opciones.nombrePrueba+"]");
         colororder(opciones.colores);
 
         % Diagrama de dispersión de componentes En-fase (I) puntual y Cuadratura (Q) puntual de tiempo discreto.

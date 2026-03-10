@@ -13,7 +13,7 @@ function dop(pvtSpirent, pvtReceptor, opciones, pintarFranjas)
     pvtReceptor = crear_huecos(pvtReceptor, 1);
 
     fig = figure(Name="Comparación del DOP", WindowState='maximized');
-    sgtitle("Comparación de la DOP entre Spirent y GNSS-SDR");
+    sgtitle("Comparación de la DOP entre Spirent y GNSS-SDR ["+opciones.nombrePrueba+"]");
     
     % Calculamos TDOP de GNSS-SDR con la fórmula GDOP = sqrt(PDOP^2 + TDOP^2).
     TDOP_GnssSdr = sqrt(pvtReceptor.gdop.^2 - pvtReceptor.pdop.^2);

@@ -40,7 +40,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
      
     % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
     fig1 = figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre, WindowState='maximized');
-    sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre);
+    sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
     colororder(opciones.colores);
 
     % Para ello compararemos los valores de cada satélite entre ambos archivos.
@@ -81,7 +81,7 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
     fig2 = figure(Name="Histogramas de los errores para todos los satélites "+constelacion.nombre, WindowState='maximized');
-    sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre);
+    sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
     
     for p = 1:length(paramObs)  % Para cada parámetro solicitado.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.

@@ -9,10 +9,10 @@
 function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % Celda para todos los errores de la posición y de la velocidad.
     errores = cell(6, 1);
-
+    
     % Pintaremos los errores de la posición, y de la velocidad si procede.
     fig1 = figure(Name="Comparación de errores PVT entre Spirent y GNSS-SDR", WindowState='maximized');
-    sgtitle("Comparación de errores entre Spirent y GNSS-SDR");
+    sgtitle("Comparación de errores entre Spirent y GNSS-SDR ["+opciones.nombrePrueba+"]");
     colororder(opciones.colores);
 
     posSpirent = [pvtSpirent.Pos_X, pvtSpirent.Pos_Y, pvtSpirent.Pos_Z];
@@ -31,14 +31,14 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
         errores{e} = error;
 
         subplot(2, 1, 1);
-        plot(tiempos, error, '.-', DisplayName=leyendasPos(e));
+        plot(tiempos, errores{e}, '.-', DisplayName=leyendasPos(e));
         hold on;
 
         error = velReceptor(ib, e) - velSpirent(ia, e);   
         errores{e+3} = error;
 
         subplot(2, 1, 2);
-        plot(tiempos, error, '.-', DisplayName=leyendasVel(e));
+        plot(tiempos, errores{e+3}, '.-', DisplayName=leyendasVel(e));
         hold on;
     end
 
@@ -73,7 +73,7 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
     fig2 = figure(Name="Histogramas de los errores PVT", WindowState='maximized');
-    sgtitle("Histogramas de los errores totales de PVT");
+    sgtitle("Histogramas de los errores totales de PVT ["+opciones.nombrePrueba+"]");
     posSubplot = [1, 3, 5, 2, 4, 6];  % Para posicionar las posiciones y las velocidades en distintas columnas.
     
     for e = 1:6  % Para cada eje de cada parámetro.

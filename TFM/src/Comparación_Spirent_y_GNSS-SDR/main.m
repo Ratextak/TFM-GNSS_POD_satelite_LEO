@@ -60,6 +60,7 @@ carpetas = carpetas([carpetas.isdir]);
 
 for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     configuracion.rutaDatos = fullfile(carpetas(c).folder, carpetas(c).name);  % Carpeta de datos actual.
+    configuracion.nombrePrueba = strrep(carpetas(c).name, '_', '\_');  % El nombre de la prueba, para ponerlo en el título de las gráficas.
     fprintf("---> Procesando: %s\n", configuracion.rutaDatos);
 
     % Creamos la carpeta para los resultados. pwd es la ruta absoluta a la carpeta del proyecto (.../TFM).

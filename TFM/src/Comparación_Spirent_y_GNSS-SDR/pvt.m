@@ -13,7 +13,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     
     % Primero pintaremos la posición.
     fig1 = figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
-    sgtitle("Comparación de la posición entre Spirent y GNSS-SDR");
+    sgtitle("Comparación de la posición entre Spirent y GNSS-SDR ["+opciones.nombrePrueba+"]");
     
     if tipoPosicion == "lla"  % Para lat, long y alt.
         % La altitud se expresará en km.
@@ -53,7 +53,7 @@ function pvt(pvtSpirent, pvtReceptor, tipoPosicion, opciones)
     % ---------------------------------------------------------------------
     % Luego pintaremos la velocidad en coordenadas ECEF.
     fig2 = figure(Name="Comparación entre PVT Spirent y GNSS-SDR");
-    sgtitle("Comparación de la velocidad entre Spirent y GNSS-SDR");
+    sgtitle("Comparación de la velocidad entre Spirent y GNSS-SDR ["+opciones.nombrePrueba+"]");
     
     velSpirent = [pvtSpirent.Vel_X, pvtSpirent.Vel_Y, pvtSpirent.Vel_Z];
     velReceptor = [pvtReceptor.vel_x, pvtReceptor.vel_y, pvtReceptor.vel_z];

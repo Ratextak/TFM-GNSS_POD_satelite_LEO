@@ -6,7 +6,7 @@
 
 function mapaCalorCN0(obsReceptor, constelacion, opciones)
     fig = figure(Name="Mapa de calor de C/N_0 por cada satélite "+constelacion.nombre);
-    sgtitle("Mapa de calor de C/N_0 por cada satélite "+constelacion.nombre+" visible por GNSS-SDR");
+    sgtitle("Mapa de calor de C/N_0 por cada satélite "+constelacion.nombre+" visible por GNSS-SDR ["+opciones.nombrePrueba+"]");
     
     satelites = unique(obsReceptor.SatelliteID);
     tiempos = min(obsReceptor.Time):seconds(1):max(obsReceptor.Time);  % Los Rinex tienen datos cada segundo.

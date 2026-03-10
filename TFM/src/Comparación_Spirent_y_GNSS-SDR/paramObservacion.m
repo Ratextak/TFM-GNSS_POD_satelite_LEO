@@ -29,7 +29,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
     
         fig = figure(Name=param_p.nombre+" de los satélites "+constelacion.nombre, WindowState='maximized');
         fig1 = [fig1, fig];
-        sgtitle(param_p.nombre+" de los satélites "+constelacion.nombre);
+        sgtitle(param_p.nombre+" de los satélites "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
 
         for s = 1:length(idSatelites)  % Por cada satélite.
             datosSpirent = obsSpirent(obsSpirent.SatelliteID == idSatelites(s), :);
@@ -55,7 +55,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
     % ---------------------------------------------------------------------
     % Ahora pintamos los parámetros de observación para cada satélite de Spirent.
     fig2a = figure(Name="Parámetros de observación "+constelacion.nombre+" de Spirent", WindowState='maximized');
-    sgtitle("Parámetros de observación "+constelacion.nombre+" de Spirent");
+    sgtitle("Parámetros de observación "+constelacion.nombre+" de Spirent ["+opciones.nombrePrueba+"]");
     colororder(opciones.colores);
 
     for p = 1:length(paramObs)  % Por cada variable.
@@ -79,7 +79,7 @@ function paramObservacion(obsSpirent, obsReceptor, paramObs, constelacion, opcio
 
     % Y a continuación hacemos lo mismo para los de GNSS-SDR por separado.
     fig2b = figure(Name="Parámetros de observación "+constelacion.nombre+" de GNSS-SDR", WindowState='maximized');
-    sgtitle("Parámetros de observación "+constelacion.nombre+" de GNSS-SDR");
+    sgtitle("Parámetros de observación "+constelacion.nombre+" de GNSS-SDR ["+opciones.nombrePrueba+"]");
     colororder(opciones.colores);
 
     for p = 1:length(paramObs)  % Por cada variable.
