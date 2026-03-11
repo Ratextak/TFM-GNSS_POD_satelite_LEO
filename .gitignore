@@ -244,3 +244,8 @@ TFM/results/Órbita_Matlab/*.txt
 # Archivos de navegación.
 *.26N    
 *.gpx
+
+# Grisolia
+data/grisolia/static_spirent_8bits_8.192msps_1antenna.dat
+data/grisolia/Original_jamming/
+

@@ -1,0 +1,515 @@
+Log file created at: 2026/03/09 13:15:44
+Running on machine: MSI
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260309 13:15:44.373946  1588 gnss_block_factory.cc:731] Getting SignalSource SignalSource with implementation File_Signal_Source
+I20260309 13:15:44.377588  1588 gnss_block_factory.cc:781] Getting SignalConditioner with DataTypeAdapter implementation: Pass_Through, InputFilter implementation: Pass_Through, and Resampler implementation: Pass_Through
+I20260309 13:15:44.377652  1588 gnss_block_factory.cc:815] Getting Observables with implementation Hybrid_Observables
+I20260309 13:15:44.383370  1588 hybrid_observables_gs.cc:149] Observables dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/observables.dat
+I20260309 13:15:44.384019  1588 gnss_block_factory.cc:831] Getting PVT with implementation RTKLIB_PVT
+I20260309 13:15:44.400650  1588 rtklib_solver.cc:144] PVT lib dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/pvt.dat
+I20260309 13:15:44.400668  1588 gnss_block_factory.cc:929] Getting 12 GPS L1 C/A channels
+I20260309 13:15:44.400674  1588 gnss_block_factory.cc:883] Instantiating Channel 0 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.410286  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 0
+I20260309 13:15:44.411439  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 0 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_0.dat
+I20260309 13:15:44.429689  1588 gnss_block_factory.cc:883] Instantiating Channel 1 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.494874  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 1
+I20260309 13:15:44.502830  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 1 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_1.dat
+I20260309 13:15:44.514777  1588 gnss_block_factory.cc:883] Instantiating Channel 2 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.586987  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 2
+I20260309 13:15:44.607708  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 2 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_2.dat
+I20260309 13:15:44.625293  1588 gnss_block_factory.cc:883] Instantiating Channel 3 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.671449  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 3
+I20260309 13:15:44.691093  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 3 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_3.dat
+I20260309 13:15:44.702721  1588 gnss_block_factory.cc:883] Instantiating Channel 4 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.712641  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 4
+I20260309 13:15:44.713442  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 4 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_4.dat
+I20260309 13:15:44.718370  1588 gnss_block_factory.cc:883] Instantiating Channel 5 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.724493  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 5
+I20260309 13:15:44.726128  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 5 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_5.dat
+I20260309 13:15:44.731142  1588 gnss_block_factory.cc:883] Instantiating Channel 6 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.738584  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 6
+I20260309 13:15:44.739205  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 6 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_6.dat
+I20260309 13:15:44.744316  1588 gnss_block_factory.cc:883] Instantiating Channel 7 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.748941  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 7
+I20260309 13:15:44.749940  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 7 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_7.dat
+I20260309 13:15:44.754917  1588 gnss_block_factory.cc:883] Instantiating Channel 8 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.759616  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 8
+I20260309 13:15:44.777635  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 8 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_8.dat
+I20260309 13:15:44.784050  1588 gnss_block_factory.cc:883] Instantiating Channel 9 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.789233  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 9
+I20260309 13:15:44.795243  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 9 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_9.dat
+I20260309 13:15:44.800230  1588 gnss_block_factory.cc:883] Instantiating Channel 10 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.815929  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 10
+I20260309 13:15:44.819531  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 10 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_10.dat
+I20260309 13:15:44.824800  1588 gnss_block_factory.cc:883] Instantiating Channel 11 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260309 13:15:44.836014  1588 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 11
+I20260309 13:15:44.837479  1588 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 11 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia/GNSS-SDR/Dinámicos_sinHD_MLF50-GPS/Dinámicos_sinHD_MLF50-Prueba10/Tracking/epl_tracking_ch_11.dat
+I20260309 13:15:44.842517  1588 gnss_block_factory.cc:929] Getting 0 GPS L2C (M) channels
+I20260309 13:15:44.843868  1588 gnss_block_factory.cc:929] Getting 0 GPS L5 channels
+I20260309 13:15:44.843943  1588 gnss_block_factory.cc:929] Getting 0 GALILEO E1 B (I/NAV OS) channels
+I20260309 13:15:44.843964  1588 gnss_block_factory.cc:929] Getting 0 GALILEO E5a I (F/NAV OS) channels
+I20260309 13:15:44.843981  1588 gnss_block_factory.cc:929] Getting 0 GALILEO E6 (B/C HAS) channels
+I20260309 13:15:44.843997  1588 gnss_block_factory.cc:929] Getting 0 GLONASS L1 C/A channels
+I20260309 13:15:44.844780  1588 gnss_block_factory.cc:929] Getting 0 GLONASS L2 C/A channels
+I20260309 13:15:44.844839  1588 gnss_block_factory.cc:929] Getting 0 BEIDOU B1I channels
+I20260309 13:15:44.844856  1588 gnss_block_factory.cc:929] Getting 0 BEIDOU B3I channels
+I20260309 13:15:44.844868  1588 gnss_block_factory.cc:929] Getting 0 GALILEO E5b I (I/NAV OS) channels
+I20260309 13:15:44.845587  1588 gnss_flowgraph.cc:410] Connecting flowgraph
+I20260309 13:15:44.852175  1588 gnss_flowgraph.cc:1042] connecting sig_source_ 0 stream 0 to conditioner 0
+I20260309 13:15:44.854862  1588 gnss_flowgraph.cc:1182] Created 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.854892  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.854915  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.856594  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.856616  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.856634  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.856653  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.858497  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.858518  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.858538  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.860270  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.860299  1588 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 19 taps and decimation factor of 4
+I20260309 13:15:44.860970  1588 gnss_flowgraph.cc:573] Channel 0 assigned to GPS PRN 01 (Block IIF) Signal 1C
+I20260309 13:15:44.860977  1588 gnss_flowgraph.cc:590] Channel 0 connected to observables and ready for acquisition
+I20260309 13:15:44.861512  1588 gnss_flowgraph.cc:573] Channel 1 assigned to GPS PRN 02 (Block IIR) Signal 1C
+I20260309 13:15:44.861527  1588 gnss_flowgraph.cc:590] Channel 1 connected to observables and ready for acquisition
+I20260309 13:15:44.861529  1588 gnss_flowgraph.cc:573] Channel 2 assigned to GPS PRN 03 (Block IIF) Signal 1C
+I20260309 13:15:44.861532  1588 gnss_flowgraph.cc:590] Channel 2 connected to observables and ready for acquisition
+I20260309 13:15:44.861938  1588 gnss_flowgraph.cc:573] Channel 3 assigned to GPS PRN 04 (Block III) Signal 1C
+I20260309 13:15:44.861944  1588 gnss_flowgraph.cc:590] Channel 3 connected to observables and ready for acquisition
+I20260309 13:15:44.861946  1588 gnss_flowgraph.cc:573] Channel 4 assigned to GPS PRN 05 (Block IIR-M) Signal 1C
+I20260309 13:15:44.861948  1588 gnss_flowgraph.cc:590] Channel 4 connected to observables and ready for acquisition
+I20260309 13:15:44.861950  1588 gnss_flowgraph.cc:573] Channel 5 assigned to GPS PRN 06 (Block IIF) Signal 1C
+I20260309 13:15:44.862462  1588 gnss_flowgraph.cc:590] Channel 5 connected to observables and ready for acquisition
+I20260309 13:15:44.862474  1588 gnss_flowgraph.cc:573] Channel 6 assigned to GPS PRN 07 (Block IIR-M) Signal 1C
+I20260309 13:15:44.862478  1588 gnss_flowgraph.cc:590] Channel 6 connected to observables and ready for acquisition
+I20260309 13:15:44.862480  1588 gnss_flowgraph.cc:573] Channel 7 assigned to GPS PRN 08 (Block IIF) Signal 1C
+I20260309 13:15:44.862916  1588 gnss_flowgraph.cc:590] Channel 7 connected to observables and ready for acquisition
+I20260309 13:15:44.862927  1588 gnss_flowgraph.cc:573] Channel 8 assigned to GPS PRN 09 (Block IIF) Signal 1C
+I20260309 13:15:44.862931  1588 gnss_flowgraph.cc:590] Channel 8 connected to observables and ready for acquisition
+I20260309 13:15:44.862933  1588 gnss_flowgraph.cc:573] Channel 9 assigned to GPS PRN 10 (Block IIF) Signal 1C
+I20260309 13:15:44.862937  1588 gnss_flowgraph.cc:590] Channel 9 connected to observables and ready for acquisition
+I20260309 13:15:44.863361  1588 gnss_flowgraph.cc:573] Channel 10 assigned to GPS PRN 11 (Block III) Signal 1C
+I20260309 13:15:44.863379  1588 gnss_flowgraph.cc:590] Channel 10 connected to observables and ready for acquisition
+I20260309 13:15:44.863381  1588 gnss_flowgraph.cc:573] Channel 11 assigned to GPS PRN 12 (Block IIR-M) Signal 1C
+I20260309 13:15:44.863385  1588 gnss_flowgraph.cc:590] Channel 11 connected to observables and ready for acquisition
+I20260309 13:15:44.863787  1588 gnss_flowgraph.cc:598] The GNU Radio flowgraph for the current GNSS-SDR configuration has been successfully connected
+I20260309 13:15:44.863804  1588 gnss_flowgraph.cc:446] Flowgraph connected
+I20260309 13:15:44.863812  1588 control_thread.cc:399] Flowgraph connected
+I20260309 13:15:44.871340  1588 control_thread.cc:409] Flowgraph started
+I20260309 13:15:44.900249  1632 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -12032 ( -0.00146875 s)
+I20260309 13:15:44.900314  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -12192 ( -0.00148828 s)
+I20260309 13:15:44.900343  1638 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -12032 ( -0.00146875 s)
+I20260309 13:15:44.900354  1622 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -12192 ( -0.00148828 s)
+I20260309 13:15:44.900435  1634 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -12032 ( -0.00146875 s)
+I20260309 13:15:44.909795  1632 dll_pll_veml_tracking.cc:1821] GPS L1 C/A tracking synchronization time limit reached in channel 4 for satellite GPS PRN 05 (Block IIR-M)
+I20260309 13:15:44.909816  1638 dll_pll_veml_tracking.cc:1821] GPS L1 C/A tracking synchronization time limit reached in channel 1 for satellite GPS PRN 02 (Block IIR)
+I20260309 13:15:44.912461  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -1530 ( -0.000186768 s)
+I20260309 13:15:44.917781  1626 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 2 ( 2.44141e-07 s)
+I20260309 13:15:44.945544  1638 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:300001 code_lock_fail_counter : 1)
+I20260309 13:15:44.945566  1632 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:299999 code_lock_fail_counter : 1)
+I20260309 13:15:45.778030  1640 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 347122 ( 0.0423733 s)
+I20260309 13:15:45.782855  1628 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 347987 ( 0.0424789 s)
+I20260309 13:15:45.782867  1620 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 347987 ( 0.0424789 s)
+I20260309 13:15:45.787213  1632 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 332229 ( 0.0405553 s)
+I20260309 13:15:45.832283  1624 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 163098 ( 0.0199094 s)
+I20260309 13:15:45.850385  1638 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32532 ( 0.00397119 s)
+I20260309 13:15:48.384907  1622 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260309 13:15:48.384945  1634 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:15:48.384917  1618 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:15:48.387228  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:15:48.389978  1634 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 13746 ( 0.00167798 s)
+I20260309 13:15:48.390069  1622 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 16210 ( 0.00197876 s)
+I20260309 13:15:48.390093  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 12546 ( 0.00153149 s)
+I20260309 13:15:48.534147  1636 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 24593 ( 0.00300208 s)
+I20260309 13:15:49.456607  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 35351 ( 0.00431531 s)
+I20260309 13:15:53.582913  1628 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 6 for satellite GPS PRN 02 (Block IIR)
+I20260309 13:15:53.585126  1620 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 10 for satellite GPS PRN 05 (Block IIR-M)
+I20260309 13:15:53.588440  1624 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 8 for satellite GPS PRN 30 (Block IIF)
+I20260309 13:15:53.593760  1632 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 4 for satellite GPS PRN 29 (Block IIR-M)
+I20260309 13:15:53.594412  1638 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 1 for satellite GPS PRN 09 (Block IIF)
+I20260309 13:15:55.329142  1626 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:15:55.333902  1626 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 31487 ( 0.00384363 s)
+I20260309 13:15:55.956290  1640 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260309 13:15:55.962883  1640 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 49238 ( 0.0060105 s)
+I20260309 13:15:56.139628  1622 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 9 for satellite GPS PRN 10 (Block IIF)
+I20260309 13:15:57.367218  1618 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 11 for satellite GPS PRN 12 (Block IIR-M)
+I20260309 13:15:57.369642  1634 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 3 for satellite GPS PRN 04 (Block III)
+I20260309 13:15:57.375109  1636 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 2 for satellite GPS PRN 17 (Block IIR-M)
+I20260309 13:15:59.499500  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:16:05.182868  1640 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 0 for satellite GPS PRN 24 (Block IIF)
+I20260309 13:16:05.184633  1626 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 7 for satellite GPS PRN 13 (Block IIR)
+I20260309 13:16:12.973965  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.74: point pos error ()
+I20260309 13:16:12.986966  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.76: point pos error ()
+I20260309 13:16:12.999975  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.78: point pos error ()
+I20260309 13:16:13.012907  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.80: point pos error ()
+I20260309 13:16:13.025996  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.82: point pos error ()
+I20260309 13:16:13.039029  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.84: point pos error ()
+I20260309 13:16:13.052497  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.86: point pos error ()
+I20260309 13:16:13.065145  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.88: point pos error ()
+I20260309 13:16:13.078267  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.90: point pos error ()
+I20260309 13:16:13.091019  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.92: point pos error ()
+I20260309 13:16:13.105250  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.94: point pos error ()
+I20260309 13:16:13.117628  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.96: point pos error ()
+I20260309 13:16:13.131554  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:41.98: point pos error ()
+I20260309 13:16:13.144675  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.00: point pos error ()
+I20260309 13:16:13.157744  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.02: point pos error ()
+I20260309 13:16:13.170467  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.04: point pos error ()
+I20260309 13:16:13.183236  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.06: point pos error ()
+I20260309 13:16:13.196177  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.08: point pos error ()
+I20260309 13:16:13.208899  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.10: point pos error ()
+I20260309 13:16:13.220950  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.12: point pos error ()
+I20260309 13:16:13.233744  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.14: point pos error ()
+I20260309 13:16:13.246878  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.16: point pos error ()
+I20260309 13:16:13.259833  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.18: point pos error ()
+I20260309 13:16:13.272264  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.20: point pos error ()
+I20260309 13:16:13.285622  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.22: point pos error ()
+I20260309 13:16:13.298779  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.24: point pos error ()
+I20260309 13:16:13.311401  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.26: point pos error ()
+I20260309 13:16:13.324327  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.28: point pos error ()
+I20260309 13:16:13.337723  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.30: point pos error ()
+I20260309 13:16:13.350318  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.32: point pos error ()
+I20260309 13:16:13.363533  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.34: point pos error ()
+I20260309 13:16:13.376302  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.36: point pos error ()
+I20260309 13:16:13.389772  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.38: point pos error ()
+I20260309 13:16:13.402925  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.40: point pos error ()
+I20260309 13:16:13.415897  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.42: point pos error ()
+I20260309 13:16:13.429035  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.44: point pos error ()
+I20260309 13:16:13.442266  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.46: point pos error ()
+I20260309 13:16:13.455729  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.48: point pos error ()
+I20260309 13:16:13.468112  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.50: point pos error ()
+I20260309 13:16:13.480988  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.52: point pos error ()
+I20260309 13:16:13.493948  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.54: point pos error ()
+I20260309 13:16:13.506578  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.56: point pos error ()
+I20260309 13:16:13.520002  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.58: point pos error ()
+I20260309 13:16:13.533402  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.60: point pos error ()
+I20260309 13:16:13.546463  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.62: point pos error ()
+I20260309 13:16:13.560083  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.64: point pos error ()
+I20260309 13:16:13.574282  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.66: point pos error ()
+I20260309 13:16:13.587064  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.68: point pos error ()
+I20260309 13:16:13.600576  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.70: point pos error ()
+I20260309 13:16:13.614182  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.72: point pos error ()
+I20260309 13:16:13.627614  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.74: point pos error ()
+I20260309 13:16:13.641083  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.76: point pos error ()
+I20260309 13:16:13.654261  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.78: point pos error ()
+I20260309 13:16:13.667604  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.80: point pos error ()
+I20260309 13:16:13.680783  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.82: point pos error ()
+I20260309 13:16:13.693972  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.84: point pos error ()
+I20260309 13:16:13.706466  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.86: point pos error ()
+I20260309 13:16:13.719173  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.88: point pos error ()
+I20260309 13:16:13.732285  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.90: point pos error ()
+I20260309 13:16:13.744640  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.92: point pos error ()
+I20260309 13:16:13.757880  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.94: point pos error ()
+I20260309 13:16:13.770201  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.96: point pos error ()
+I20260309 13:16:13.783286  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:42.98: point pos error ()
+I20260309 13:16:13.796253  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.00: point pos error ()
+I20260309 13:16:13.809453  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.02: point pos error ()
+I20260309 13:16:13.822394  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.04: point pos error ()
+I20260309 13:16:13.835978  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.06: point pos error ()
+I20260309 13:16:13.849315  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.08: point pos error ()
+I20260309 13:16:13.861865  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.10: point pos error ()
+I20260309 13:16:13.874935  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.12: point pos error ()
+I20260309 13:16:13.888036  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.14: point pos error ()
+I20260309 13:16:13.901130  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.16: point pos error ()
+I20260309 13:16:13.914302  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.18: point pos error ()
+I20260309 13:16:13.926599  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.20: point pos error ()
+I20260309 13:16:13.940166  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.22: point pos error ()
+I20260309 13:16:13.953536  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.24: point pos error ()
+I20260309 13:16:13.966154  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.26: point pos error ()
+I20260309 13:16:13.978973  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.28: point pos error ()
+I20260309 13:16:13.991760  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.30: point pos error ()
+I20260309 13:16:14.005321  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.32: point pos error ()
+I20260309 13:16:14.018102  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.34: point pos error ()
+I20260309 13:16:14.031666  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.36: point pos error ()
+I20260309 13:16:14.045362  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.38: point pos error ()
+I20260309 13:16:14.058461  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.40: point pos error ()
+I20260309 13:16:14.072069  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.42: point pos error ()
+I20260309 13:16:14.085090  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.44: point pos error ()
+I20260309 13:16:14.098565  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.46: point pos error ()
+I20260309 13:16:14.111925  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.48: point pos error ()
+I20260309 13:16:14.125346  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.50: point pos error ()
+I20260309 13:16:14.137544  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.52: point pos error ()
+I20260309 13:16:14.150553  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.54: point pos error ()
+I20260309 13:16:14.163851  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.56: point pos error ()
+I20260309 13:16:14.176909  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.58: point pos error ()
+I20260309 13:16:14.189344  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.60: point pos error ()
+I20260309 13:16:14.202508  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.62: point pos error ()
+I20260309 13:16:14.216171  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.64: point pos error ()
+I20260309 13:16:14.229444  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.66: point pos error ()
+I20260309 13:16:14.242379  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.68: point pos error ()
+I20260309 13:16:14.256014  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:43.70: point pos error ()
+I20260309 13:16:14.256069  1643 rtklib_pvt_gs.cc:2317] PVT: Number of consecutive position solver error reached, Sent reset to observables.
+I20260309 13:16:14.256103  1642 hybrid_observables_gs.cc:235] Received reset observables TOW command from PVT
+I20260309 13:16:14.461254  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.00: point pos error ()
+I20260309 13:16:14.474949  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.02: point pos error ()
+I20260309 13:16:14.487715  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.04: point pos error ()
+I20260309 13:16:14.501600  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.06: point pos error ()
+I20260309 13:16:14.514489  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.08: point pos error ()
+I20260309 13:16:14.527540  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.10: point pos error ()
+I20260309 13:16:14.542074  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.12: point pos error ()
+I20260309 13:16:14.556116  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.14: point pos error ()
+I20260309 13:16:14.569582  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.16: point pos error ()
+I20260309 13:16:14.582932  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.18: point pos error ()
+I20260309 13:16:14.596154  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.20: point pos error ()
+I20260309 13:16:14.609228  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.22: point pos error ()
+I20260309 13:16:14.622715  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.24: point pos error ()
+I20260309 13:16:14.635829  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.26: point pos error ()
+I20260309 13:16:14.649211  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.28: point pos error ()
+I20260309 13:16:14.662566  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.30: point pos error ()
+I20260309 13:16:14.675798  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.32: point pos error ()
+I20260309 13:16:14.688877  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.34: point pos error ()
+I20260309 13:16:14.701653  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.36: point pos error ()
+I20260309 13:16:14.715018  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.38: point pos error ()
+I20260309 13:16:14.728523  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.40: point pos error ()
+I20260309 13:16:14.742136  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.42: point pos error ()
+I20260309 13:16:14.755041  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.44: point pos error ()
+I20260309 13:16:14.768350  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.46: point pos error ()
+I20260309 13:16:14.781947  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.48: point pos error ()
+I20260309 13:16:14.795061  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.50: point pos error ()
+I20260309 13:16:14.808275  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.52: point pos error ()
+I20260309 13:16:14.821802  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.54: point pos error ()
+I20260309 13:16:14.833730  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.56: point pos error ()
+I20260309 13:16:14.846776  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.58: point pos error ()
+I20260309 13:16:14.859993  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.60: point pos error ()
+I20260309 13:16:14.873063  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.62: point pos error ()
+I20260309 13:16:14.886036  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.64: point pos error ()
+I20260309 13:16:14.899780  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.66: point pos error ()
+I20260309 13:16:14.912781  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.68: point pos error ()
+I20260309 13:16:14.925422  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.70: point pos error ()
+I20260309 13:16:14.938396  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.72: point pos error ()
+I20260309 13:16:14.951869  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.74: point pos error ()
+I20260309 13:16:14.965196  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.76: point pos error ()
+I20260309 13:16:14.978610  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.78: point pos error ()
+I20260309 13:16:14.991770  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.80: point pos error ()
+I20260309 13:16:15.004978  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.82: point pos error ()
+I20260309 13:16:15.017573  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.84: point pos error ()
+I20260309 13:16:15.031340  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.86: point pos error ()
+I20260309 13:16:15.044417  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.88: point pos error ()
+I20260309 13:16:15.057893  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.90: point pos error ()
+I20260309 13:16:15.071650  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.92: point pos error ()
+I20260309 13:16:15.084941  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.94: point pos error ()
+I20260309 13:16:15.097975  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.96: point pos error ()
+I20260309 13:16:15.110911  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:44.98: point pos error ()
+I20260309 13:16:15.123829  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.00: point pos error ()
+I20260309 13:16:15.137072  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.02: point pos error ()
+I20260309 13:16:15.150336  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.04: point pos error ()
+I20260309 13:16:15.163393  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.06: point pos error ()
+I20260309 13:16:15.175993  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.08: point pos error ()
+I20260309 13:16:15.189134  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.10: point pos error ()
+I20260309 13:16:15.202198  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.12: point pos error ()
+I20260309 13:16:15.215618  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.14: point pos error ()
+I20260309 13:16:15.228713  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.16: point pos error ()
+I20260309 13:16:15.241550  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.18: point pos error ()
+I20260309 13:16:15.253499  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.20: point pos error ()
+I20260309 13:16:15.267084  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.22: point pos error ()
+I20260309 13:16:15.280290  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.24: point pos error ()
+I20260309 13:16:15.293282  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.26: point pos error ()
+I20260309 13:16:15.307305  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.28: point pos error ()
+I20260309 13:16:15.320227  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.30: point pos error ()
+I20260309 13:16:15.332887  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.32: point pos error ()
+I20260309 13:16:15.345665  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.34: point pos error ()
+I20260309 13:16:15.358548  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.36: point pos error ()
+I20260309 13:16:15.371513  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.38: point pos error ()
+I20260309 13:16:15.384747  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.40: point pos error ()
+I20260309 13:16:15.397889  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.42: point pos error ()
+I20260309 13:16:15.410514  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.44: point pos error ()
+I20260309 13:16:15.423635  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.46: point pos error ()
+I20260309 13:16:15.436964  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.48: point pos error ()
+I20260309 13:16:15.450570  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.50: point pos error ()
+I20260309 13:16:15.463392  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.52: point pos error ()
+I20260309 13:16:15.476377  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.54: point pos error ()
+I20260309 13:16:15.489182  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.56: point pos error ()
+I20260309 13:16:15.502236  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.58: point pos error ()
+I20260309 13:16:15.515785  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.60: point pos error ()
+I20260309 13:16:15.529126  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.62: point pos error ()
+I20260309 13:16:15.541879  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.64: point pos error ()
+I20260309 13:16:15.555770  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.66: point pos error ()
+I20260309 13:16:15.569430  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.68: point pos error ()
+I20260309 13:16:15.583603  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.70: point pos error ()
+I20260309 13:16:15.597139  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.72: point pos error ()
+I20260309 13:16:15.610412  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.74: point pos error ()
+I20260309 13:16:15.624356  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.76: point pos error ()
+I20260309 13:16:15.637914  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.78: point pos error ()
+I20260309 13:16:15.651707  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.80: point pos error ()
+I20260309 13:16:15.665553  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.82: point pos error ()
+I20260309 13:16:15.678999  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.84: point pos error ()
+I20260309 13:16:15.692783  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.86: point pos error ()
+I20260309 13:16:15.705451  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.88: point pos error ()
+I20260309 13:16:15.718437  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.90: point pos error ()
+I20260309 13:16:15.732376  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.92: point pos error ()
+I20260309 13:16:15.745151  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.94: point pos error ()
+I20260309 13:16:15.757781  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.96: point pos error ()
+I20260309 13:16:15.770435  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:45.98: point pos error ()
+I20260309 13:16:15.770486  1643 rtklib_pvt_gs.cc:2317] PVT: Number of consecutive position solver error reached, Sent reset to observables.
+I20260309 13:16:15.770507  1642 hybrid_observables_gs.cc:235] Received reset observables TOW command from PVT
+I20260309 13:16:15.965847  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.28: point pos error ()
+I20260309 13:16:15.979570  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.30: point pos error ()
+I20260309 13:16:15.992775  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.32: point pos error ()
+I20260309 13:16:16.005784  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.34: point pos error ()
+I20260309 13:16:16.019848  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.36: point pos error ()
+I20260309 13:16:16.034039  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.38: point pos error ()
+I20260309 13:16:16.047873  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.40: point pos error ()
+I20260309 13:16:16.060926  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.42: point pos error ()
+I20260309 13:16:16.074275  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.44: point pos error ()
+I20260309 13:16:16.087872  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.46: point pos error ()
+I20260309 13:16:16.103689  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.48: point pos error ()
+I20260309 13:16:16.116397  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.50: point pos error ()
+I20260309 13:16:16.128968  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.52: point pos error ()
+I20260309 13:16:16.141952  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.54: point pos error ()
+I20260309 13:16:16.155975  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.56: point pos error ()
+I20260309 13:16:16.169114  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.58: point pos error ()
+I20260309 13:16:16.182498  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.60: point pos error ()
+I20260309 13:16:16.195436  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.62: point pos error ()
+I20260309 13:16:16.207806  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.64: point pos error ()
+I20260309 13:16:16.220675  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.66: point pos error ()
+I20260309 13:16:16.233460  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.68: point pos error ()
+I20260309 13:16:16.246734  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.70: point pos error ()
+I20260309 13:16:16.259750  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.72: point pos error ()
+I20260309 13:16:16.273262  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.74: point pos error ()
+I20260309 13:16:16.286196  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.76: point pos error ()
+I20260309 13:16:16.299239  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.78: point pos error ()
+I20260309 13:16:16.312292  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.80: point pos error ()
+I20260309 13:16:16.325394  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.82: point pos error ()
+I20260309 13:16:16.338024  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.84: point pos error ()
+I20260309 13:16:16.351289  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.86: point pos error ()
+I20260309 13:16:16.364614  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.88: point pos error ()
+I20260309 13:16:16.377460  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.90: point pos error ()
+I20260309 13:16:16.390225  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.92: point pos error ()
+I20260309 13:16:16.403357  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.94: point pos error ()
+I20260309 13:16:16.416112  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.96: point pos error ()
+I20260309 13:16:16.428694  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:46.98: point pos error ()
+I20260309 13:16:16.441845  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.00: point pos error ()
+I20260309 13:16:16.454969  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.02: point pos error ()
+I20260309 13:16:16.468796  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.04: point pos error ()
+I20260309 13:16:16.481498  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.06: point pos error ()
+I20260309 13:16:16.494212  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.08: point pos error ()
+I20260309 13:16:16.507584  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.10: point pos error ()
+I20260309 13:16:16.520560  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.12: point pos error ()
+I20260309 13:16:16.534150  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.14: point pos error ()
+I20260309 13:16:16.547003  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.16: point pos error ()
+I20260309 13:16:16.560361  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.18: point pos error ()
+I20260309 13:16:16.573504  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.20: point pos error ()
+I20260309 13:16:16.587350  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.22: point pos error ()
+I20260309 13:16:16.599984  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.24: point pos error ()
+I20260309 13:16:16.613900  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.26: point pos error ()
+I20260309 13:16:16.627288  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.28: point pos error ()
+I20260309 13:16:16.643220  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.30: point pos error ()
+I20260309 13:16:16.656863  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.32: point pos error ()
+I20260309 13:16:16.670151  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.34: point pos error ()
+I20260309 13:16:16.683646  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.36: point pos error ()
+I20260309 13:16:16.696926  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.38: point pos error ()
+I20260309 13:16:16.710300  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.40: point pos error ()
+I20260309 13:16:16.723469  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.42: point pos error ()
+I20260309 13:16:16.736639  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.44: point pos error ()
+I20260309 13:16:16.750219  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.46: point pos error ()
+I20260309 13:16:16.762759  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.48: point pos error ()
+I20260309 13:16:16.775709  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.50: point pos error ()
+I20260309 13:16:16.788723  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.52: point pos error ()
+I20260309 13:16:16.801960  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.54: point pos error ()
+I20260309 13:16:16.815140  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.56: point pos error ()
+I20260309 13:16:16.828289  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.58: point pos error ()
+I20260309 13:16:16.841845  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.60: point pos error ()
+I20260309 13:16:16.854537  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.62: point pos error ()
+I20260309 13:16:16.867844  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.64: point pos error ()
+I20260309 13:16:16.881053  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.66: point pos error ()
+I20260309 13:16:16.894326  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.68: point pos error ()
+I20260309 13:16:16.907382  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:00:47.70: point pos error ()
+I20260309 13:16:16.921744  1643 rtklib_pvt_gs.cc:2261] PVT: Sent clock offset correction to observables: -0.0769153[s]
+I20260309 13:16:16.921769  1642 hybrid_observables_gs.cc:220] Corrected new RX Time offset: -77[ms]
+I20260309 13:16:23.833218  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = -9474 ( -0.00115649 s)
+I20260309 13:16:26.987560  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:16:33.121855  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 31412 ( 0.00383447 s)
+I20260309 13:16:43.107125  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:16:47.001415  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 27129 ( 0.00331165 s)
+I20260309 13:16:57.490715  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.332365  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32833 ( 0.00400793 s)
+I20260309 13:17:07.905252  1640 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.906635  1620 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.923447  1632 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.928522  1624 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.932085  1618 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.936841  1636 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.953197  1634 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.960675  1638 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.979933  1622 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:07.992296  1628 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:08.034863  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 151640 ( 0.0185107 s)
+I20260309 13:17:08.055342  1626 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:08.147802  1620 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 340842 ( 0.0416067 s)
+I20260309 13:17:08.182277  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:02:05.20: point pos error ()
+I20260309 13:17:08.201390  1643 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:02:05.22: point pos error ()
+I20260309 13:17:10.748860  1636 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348879 ( 0.0425878 s)
+I20260309 13:17:10.879421  1634 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348644 ( 0.0425591 s)
+I20260309 13:17:14.930635  1632 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 306669 ( 0.0374352 s)
+I20260309 13:17:15.050382  1638 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 347128 ( 0.042374 s)
+I20260309 13:17:15.582582  1624 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 201177 ( 0.0245577 s)
+I20260309 13:17:20.190920  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:20.999717  1618 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:21.081189  1620 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 10)
+I20260309 13:17:22.924644  1620 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 150516 ( 0.0183735 s)
+I20260309 13:17:23.345917  1636 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:23.466341  1634 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:24.195253  1622 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348997 ( 0.0426022 s)
+I20260309 13:17:24.410425  1640 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348942 ( 0.0425955 s)
+I20260309 13:17:24.412262  1628 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348986 ( 0.0426008 s)
+I20260309 13:17:27.391147  1632 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 7)
+I20260309 13:17:27.502580  1638 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:27.985864  1634 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 174189 ( 0.0212633 s)
+I20260309 13:17:28.074591  1624 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:29.666919  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 82154 ( 0.0100286 s)
+I20260309 13:17:32.576428  1624 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 49231 ( 0.00600964 s)
+I20260309 13:17:35.535328  1620 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:36.763115  1622 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:36.984282  1640 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:36.985108  1628 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:39.566790  1632 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 348622 ( 0.0425564 s)
+I20260309 13:17:41.109144  1634 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:42.745450  1638 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 356760 ( 0.0435498 s)
+I20260309 13:17:43.018450  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 9)
+I20260309 13:17:43.889525  1620 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 353462 ( 0.0431472 s)
+I20260309 13:17:44.885766  1640 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 347518 ( 0.0424216 s)
+I20260309 13:17:45.292924  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 50929 ( 0.00621692 s)
+I20260309 13:17:46.109472  1624 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:48.363233  1628 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 124598 ( 0.0152097 s)
+I20260309 13:17:48.802654  1626 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 106878 ( 0.0130466 s)
+I20260309 13:17:50.361811  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 42775 ( 0.00522156 s)
+I20260309 13:17:52.742405  1632 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:52.943274  1636 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 29919 ( 0.00365222 s)
+I20260309 13:17:52.946635  1634 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 22060 ( 0.00269287 s)
+I20260309 13:17:52.951161  1624 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 36998 ( 0.00451636 s)
+I20260309 13:17:52.975457  1632 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 37107 ( 0.00452966 s)
+I20260309 13:17:52.988863  1622 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 48803 ( 0.0059574 s)
+I20260309 13:17:55.051121  1638 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:55.064424  1638 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 36485 ( 0.00445374 s)
+I20260309 13:17:55.860836  1620 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:55.875617  1620 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 39656 ( 0.00484082 s)
+I20260309 13:17:56.598033  1640 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:56.624768  1640 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 28731 ( 0.0035072 s)
+I20260309 13:17:56.932735  1630 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260309 13:17:57.025032  1630 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32550 ( 0.00397339 s)
+I20260309 13:17:59.310546  1628 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:17:59.714810  1626 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:18:00.467720  1632 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 4 for satellite GPS PRN 05 (Block IIR-M)
+I20260309 13:18:00.469892  1624 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 8 for satellite GPS PRN 04 (Block III)
+I20260309 13:18:00.470526  1636 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 2 for satellite GPS PRN 10 (Block IIF)
+I20260309 13:18:00.471372  1622 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 9 for satellite GPS PRN 30 (Block IIF)
+I20260309 13:18:00.477689  1634 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 3 for satellite GPS PRN 13 (Block IIR)
+I20260309 13:18:01.149942  1618 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:18:01.155416  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 33204 ( 0.00405322 s)
+I20260309 13:18:04.746428  1620 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 10 for satellite GPS PRN 02 (Block IIR)
+I20260309 13:18:04.747910  1630 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 5 for satellite GPS PRN 12 (Block IIR-M)
+I20260309 13:18:04.756606  1638 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 1 for satellite GPS PRN 17 (Block IIR-M)
+I20260309 13:18:04.756763  1640 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 0 for satellite GPS PRN 29 (Block IIR-M)
+I20260309 13:18:09.869612  1626 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32805 ( 0.00400452 s)
+I20260309 13:18:12.396080  1618 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:18:12.401530  1618 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32792 ( 0.00400293 s)
+I20260309 13:18:19.587831  1628 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 32855 ( 0.00401062 s)
+I20260309 13:18:20.610534  1626 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260309 13:18:21.170989  1618 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 11 for satellite GPS PRN 24 (Block IIF)
+I20260309 13:18:25.260768  1626 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 28689 ( 0.00350208 s)
+I20260309 13:18:29.913736  1628 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 2)
+I20260309 13:18:33.141902  1600 gnss_sdr_valve.cc:75] Stopping receiver, 1978701824 samples processed
+I20260309 13:18:33.142179  1588 control_thread.cc:974] Received action STOP
+I20260309 13:18:33.145074  1588 gnss_flowgraph.cc:453] Disconnecting flowgraph
+I20260309 13:18:33.145167  1588 gnss_flowgraph.cc:470] Flowgraph disconnected
+I20260309 13:18:33.145217  1588 control_thread.cc:489] Flowgraph stopped
