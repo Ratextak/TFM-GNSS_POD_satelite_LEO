@@ -1,8 +1,8 @@
 % Pintaremos los diagramas de los errores de PVT de Spirent y de GNSS-SDR.
 % También indicaremos por consola los porcentajes de error global para cada eje.
 % Son 2 gráficos: el de errores de cada eje ECEF y los histogramas de probabilidad.
-% Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
-%               obsReceptor: archivo de observación de una constelación de GNSS-SDR.
+% Parámetros:   pvtSpirent: archivo motion_V1.csv de Spirent en formato tabla.
+%               pvtReceptor: archivo PVT de GNSS-SDR en formato tabla.
 %               opciones: opciones para guardar las imágenes.
 
 
@@ -56,10 +56,13 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % ---------------------------------------------------------------------
     % Calculamos la media de los errores absolutos y el porcentaje de error de la 
     % posición y de la velocidad en cada eje y lo sacamos por la consola.
+    datos = nan(6, 1);  % Datos de la media del error absolutos para añadir al CSV.
+
     fprintf("Media del error absoluto y porcentaje de error global de la posición:\n");
     for e = 1:3  % Para cada eje.
         porcentaje = sum(abs(errores{e})) ./ sum(abs(posSpirent(ia, e))) * 100;
         media = sum(abs(errores{e})) ./ length(errores{e});
+        datos(e) = media;
         fprintf("\t- "+leyendasPos(e)+": \tMedia = %f m \tPorcentaje = %f%%\n", media, porcentaje);
     end
 
@@ -67,8 +70,11 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     for e = 1:3  % Para cada eje.
         porcentaje = sum(abs(errores{e+3})) ./ sum(abs(velSpirent(ia, e))) * 100;
         media = sum(abs(errores{e+3})) ./ length(errores{e+3});
+        datos(e+3) = media;
         fprintf("\t- "+leyendasVel(e)+": \tMedia = %f m/s \tPorcentaje = %f%%\n", media, porcentaje);
     end
+
+    guardarEnCSV("Errores_absolutos.csv", datos, opciones);
 
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
