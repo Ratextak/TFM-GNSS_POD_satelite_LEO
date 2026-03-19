@@ -245,7 +245,16 @@ TFM/results/Órbita_Matlab/*.txt
 *.26N    
 *.gpx
 
-# Grisolia
+# Grisolia.
 data/grisolia/static_spirent_8bits_8.192msps_1antenna.dat
 data/grisolia/Original_jamming/
 
+# Grisolia 10 min.
+data/grisolia_usrpx310_4_Estrella/gps_L1_4msps.iq
+*.bin
+*.sp3
+*.umt
+data/grisolia_usrpx310_4_Estrella/2026_03_13_12_30_50_UTC_plus_00_00/nmea.txt
+rinex-obs_V1_A2*
+rinex-obs_V1_A3*
+rinex-obs_V1_A4*

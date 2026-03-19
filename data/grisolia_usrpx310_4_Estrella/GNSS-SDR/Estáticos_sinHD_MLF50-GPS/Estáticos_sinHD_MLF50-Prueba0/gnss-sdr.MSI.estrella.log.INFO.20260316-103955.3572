@@ -1,0 +1,250 @@
+Log file created at: 2026/03/16 10:19:12
+Running on machine: MSI
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260316 10:19:12.410617  2116 gnss_block_factory.cc:731] Getting SignalSource SignalSource with implementation File_Signal_Source
+I20260316 10:19:12.418638  2116 gnss_block_factory.cc:781] Getting SignalConditioner with DataTypeAdapter implementation: Ishort_To_Complex, InputFilter implementation: Pass_Through, and Resampler implementation: Pass_Through
+I20260316 10:19:12.419200  2116 gnss_block_factory.cc:815] Getting Observables with implementation Hybrid_Observables
+I20260316 10:19:12.429219  2116 hybrid_observables_gs.cc:149] Observables dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/observables.dat
+I20260316 10:19:12.429792  2116 gnss_block_factory.cc:831] Getting PVT with implementation RTKLIB_PVT
+I20260316 10:19:12.451294  2116 rtklib_solver.cc:144] PVT lib dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/pvt.dat
+I20260316 10:19:12.451318  2116 gnss_block_factory.cc:929] Getting 12 GPS L1 C/A channels
+I20260316 10:19:12.451324  2116 gnss_block_factory.cc:883] Instantiating Channel 0 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.479743  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 0
+I20260316 10:19:12.480810  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 0 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_0.dat
+I20260316 10:19:12.486048  2116 gnss_block_factory.cc:883] Instantiating Channel 1 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.490309  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 1
+I20260316 10:19:12.491263  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 1 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_1.dat
+I20260316 10:19:12.496258  2116 gnss_block_factory.cc:883] Instantiating Channel 2 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.500181  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 2
+I20260316 10:19:12.501233  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 2 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_2.dat
+I20260316 10:19:12.506083  2116 gnss_block_factory.cc:883] Instantiating Channel 3 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.510644  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 3
+I20260316 10:19:12.511091  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 3 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_3.dat
+I20260316 10:19:12.516055  2116 gnss_block_factory.cc:883] Instantiating Channel 4 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.522382  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 4
+I20260316 10:19:12.522990  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 4 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_4.dat
+I20260316 10:19:12.528041  2116 gnss_block_factory.cc:883] Instantiating Channel 5 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.531620  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 5
+I20260316 10:19:12.532150  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 5 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_5.dat
+I20260316 10:19:12.537119  2116 gnss_block_factory.cc:883] Instantiating Channel 6 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.540588  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 6
+I20260316 10:19:12.541190  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 6 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_6.dat
+I20260316 10:19:12.546231  2116 gnss_block_factory.cc:883] Instantiating Channel 7 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.549719  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 7
+I20260316 10:19:12.550292  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 7 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_7.dat
+I20260316 10:19:12.555208  2116 gnss_block_factory.cc:883] Instantiating Channel 8 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.559223  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 8
+I20260316 10:19:12.559788  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 8 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_8.dat
+I20260316 10:19:12.564610  2116 gnss_block_factory.cc:883] Instantiating Channel 9 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.569221  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 9
+I20260316 10:19:12.570050  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 9 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_9.dat
+I20260316 10:19:12.575417  2116 gnss_block_factory.cc:883] Instantiating Channel 10 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.579178  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 10
+I20260316 10:19:12.579700  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 10 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_10.dat
+I20260316 10:19:12.585028  2116 gnss_block_factory.cc:883] Instantiating Channel 11 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260316 10:19:12.589013  2116 dll_pll_veml_tracking.cc:1687] Tracking Channel set to 11
+I20260316 10:19:12.589527  2116 dll_pll_veml_tracking.cc:1703] Tracking dump enabled on channel 11 Log file: /mnt/c/users/Estrella/gnss-flex/data/grisolia_usrpx310_4_Estrella/GNSS-SDR/Dinámicos_HD_MLF50-GPS/Dinámicos_HD_MLF50-Prueba9/Tracking/epl_tracking_ch_11.dat
+I20260316 10:19:12.594607  2116 gnss_block_factory.cc:929] Getting 0 GPS L2C (M) channels
+I20260316 10:19:12.594617  2116 gnss_block_factory.cc:929] Getting 0 GPS L5 channels
+I20260316 10:19:12.594619  2116 gnss_block_factory.cc:929] Getting 0 GALILEO E1 B (I/NAV OS) channels
+I20260316 10:19:12.594620  2116 gnss_block_factory.cc:929] Getting 0 GALILEO E5a I (F/NAV OS) channels
+I20260316 10:19:12.594851  2116 gnss_block_factory.cc:929] Getting 0 GALILEO E6 (B/C HAS) channels
+I20260316 10:19:12.594871  2116 gnss_block_factory.cc:929] Getting 0 GLONASS L1 C/A channels
+I20260316 10:19:12.594878  2116 gnss_block_factory.cc:929] Getting 0 GLONASS L2 C/A channels
+I20260316 10:19:12.594880  2116 gnss_block_factory.cc:929] Getting 0 BEIDOU B1I channels
+I20260316 10:19:12.594882  2116 gnss_block_factory.cc:929] Getting 0 BEIDOU B3I channels
+I20260316 10:19:12.594883  2116 gnss_block_factory.cc:929] Getting 0 GALILEO E5b I (I/NAV OS) channels
+I20260316 10:19:12.595182  2116 gnss_flowgraph.cc:410] Connecting flowgraph
+I20260316 10:19:12.596968  2116 gnss_flowgraph.cc:1042] connecting sig_source_ 0 stream 0 to conditioner 0
+I20260316 10:19:12.597036  2116 gnss_flowgraph.cc:1182] Created 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597059  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597224  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597252  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597273  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597430  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597456  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597481  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597499  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597652  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597685  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.597705  2116 gnss_flowgraph.cc:1188] Found existing 1C acquisition resampler for RF channel 0 with 9 taps and decimation factor of 2
+I20260316 10:19:12.598464  2116 gnss_flowgraph.cc:573] Channel 0 assigned to GPS PRN 01 (Block IIF) Signal 1C
+I20260316 10:19:12.598471  2116 gnss_flowgraph.cc:590] Channel 0 connected to observables and ready for acquisition
+I20260316 10:19:12.598474  2116 gnss_flowgraph.cc:573] Channel 1 assigned to GPS PRN 02 (Block IIR) Signal 1C
+I20260316 10:19:12.598475  2116 gnss_flowgraph.cc:590] Channel 1 connected to observables and ready for acquisition
+I20260316 10:19:12.598476  2116 gnss_flowgraph.cc:573] Channel 2 assigned to GPS PRN 03 (Block IIF) Signal 1C
+I20260316 10:19:12.598662  2116 gnss_flowgraph.cc:590] Channel 2 connected to observables and ready for acquisition
+I20260316 10:19:12.598666  2116 gnss_flowgraph.cc:573] Channel 3 assigned to GPS PRN 04 (Block III) Signal 1C
+I20260316 10:19:12.598675  2116 gnss_flowgraph.cc:590] Channel 3 connected to observables and ready for acquisition
+I20260316 10:19:12.598680  2116 gnss_flowgraph.cc:573] Channel 4 assigned to GPS PRN 05 (Block IIR-M) Signal 1C
+I20260316 10:19:12.598809  2116 gnss_flowgraph.cc:590] Channel 4 connected to observables and ready for acquisition
+I20260316 10:19:12.598812  2116 gnss_flowgraph.cc:573] Channel 5 assigned to GPS PRN 06 (Block IIF) Signal 1C
+I20260316 10:19:12.598816  2116 gnss_flowgraph.cc:590] Channel 5 connected to observables and ready for acquisition
+I20260316 10:19:12.598819  2116 gnss_flowgraph.cc:573] Channel 6 assigned to GPS PRN 07 (Block IIR-M) Signal 1C
+I20260316 10:19:12.598829  2116 gnss_flowgraph.cc:590] Channel 6 connected to observables and ready for acquisition
+I20260316 10:19:12.598954  2116 gnss_flowgraph.cc:573] Channel 7 assigned to GPS PRN 08 (Block IIF) Signal 1C
+I20260316 10:19:12.598961  2116 gnss_flowgraph.cc:590] Channel 7 connected to observables and ready for acquisition
+I20260316 10:19:12.598963  2116 gnss_flowgraph.cc:573] Channel 8 assigned to GPS PRN 09 (Block IIF) Signal 1C
+I20260316 10:19:12.598965  2116 gnss_flowgraph.cc:590] Channel 8 connected to observables and ready for acquisition
+I20260316 10:19:12.599059  2116 gnss_flowgraph.cc:573] Channel 9 assigned to GPS PRN 10 (Block IIF) Signal 1C
+I20260316 10:19:12.599066  2116 gnss_flowgraph.cc:590] Channel 9 connected to observables and ready for acquisition
+I20260316 10:19:12.599067  2116 gnss_flowgraph.cc:573] Channel 10 assigned to GPS PRN 11 (Block III) Signal 1C
+I20260316 10:19:12.599071  2116 gnss_flowgraph.cc:590] Channel 10 connected to observables and ready for acquisition
+I20260316 10:19:12.599071  2116 gnss_flowgraph.cc:573] Channel 11 assigned to GPS PRN 12 (Block IIR-M) Signal 1C
+I20260316 10:19:12.599159  2116 gnss_flowgraph.cc:590] Channel 11 connected to observables and ready for acquisition
+I20260316 10:19:12.599164  2116 gnss_flowgraph.cc:598] The GNU Radio flowgraph for the current GNSS-SDR configuration has been successfully connected
+I20260316 10:19:12.599165  2116 gnss_flowgraph.cc:446] Flowgraph connected
+I20260316 10:19:12.599167  2116 control_thread.cc:399] Flowgraph connected
+I20260316 10:19:12.605170  2116 control_thread.cc:409] Flowgraph started
+I20260316 10:19:15.375633  2150 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172631 ( 0.0431578 s)
+I20260316 10:19:16.537604  2154 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:19:16.607947  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176615 ( 0.0441537 s)
+I20260316 10:19:16.613085  2152 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164439 ( 0.0411098 s)
+I20260316 10:19:16.613147  2162 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164443 ( 0.0411108 s)
+I20260316 10:19:16.636977  2164 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168437 ( 0.0421093 s)
+I20260316 10:19:16.651913  2158 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:19:16.661485  2168 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168421 ( 0.0421052 s)
+I20260316 10:19:16.667160  2148 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172583 ( 0.0431457 s)
+I20260316 10:19:16.693717  2146 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:19:16.984653  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:19:19.502822  2156 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:19:20.493368  2162 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 3 for satellite GPS PRN 12 (Block IIR-M)
+I20260316 10:19:20.519147  2152 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 8 for satellite GPS PRN 02 (Block IIR)
+I20260316 10:19:20.520262  2168 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 0 for satellite GPS PRN 04 (Block III)
+I20260316 10:19:20.520381  2164 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 2 for satellite GPS PRN 10 (Block IIF)
+I20260316 10:19:20.521481  2158 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 5 for satellite GPS PRN 24 (Block IIF)
+I20260316 10:19:20.521724  2146 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 11 for satellite GPS PRN 29 (Block IIR-M)
+I20260316 10:19:20.521833  2148 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 10 for satellite GPS PRN 13 (Block IIR)
+I20260316 10:19:20.521939  2160 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 4 for satellite GPS PRN 09 (Block IIF)
+I20260316 10:19:20.932196  2150 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:19:21.448522  2154 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260316 10:19:21.486039  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 7)
+I20260316 10:19:21.598299  2150 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168423 ( 0.0421057 s)
+I20260316 10:19:21.610769  2154 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176615 ( 0.0441537 s)
+I20260316 10:19:22.594739  2156 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 6 for satellite GPS PRN 30 (Block IIF)
+I20260316 10:19:23.785413  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:19:25.307286  2154 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 7 for satellite GPS PRN 05 (Block IIR-M)
+I20260316 10:19:25.309142  2150 dll_pll_veml_tracking.cc:1869] GPS L1 C/A tracking bit synchronization locked in channel 9 for satellite GPS PRN 17 (Block IIR-M)
+I20260316 10:19:26.350812  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 13)
+I20260316 10:19:28.835685  2171 rtklib_pvt_gs.cc:2261] PVT: Sent clock offset correction to observables: -0.062868[s]
+I20260316 10:19:28.835695  2170 hybrid_observables_gs.cc:220] Corrected new RX Time offset: -63[ms]
+I20260316 10:20:18.688383  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:20:19.954677  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:21.981573  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:20:22.543711  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:28.419103  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:31.295691  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:20:35.466439  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:20:36.560568  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:40.781912  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:41.304656  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:20:49.039094  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:20:56.355234  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 169730 ( 0.0424325 s)
+I20260316 10:21:00.048147  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:21:01.370260  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 2)
+I20260316 10:21:05.115013  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 21)
+I20260316 10:21:08.512009  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:21:15.999105  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:31.391770  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172567 ( 0.0431417 s)
+I20260316 10:21:33.336508  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:21:35.254067  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:37.123616  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:37.953234  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:21:38.614104  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172436 ( 0.043109 s)
+I20260316 10:21:40.835258  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:41.484316  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:45.464078  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168421 ( 0.0421052 s)
+I20260316 10:21:49.486503  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:21:50.732538  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:21:54.819622  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:02.687700  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:22:05.274891  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172639 ( 0.0431597 s)
+I20260316 10:22:06.918001  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:09.456655  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:10.625943  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:22:18.243119  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:20.275087  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172615 ( 0.0431537 s)
+I20260316 10:22:21.391551  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 170424 ( 0.042606 s)
+I20260316 10:22:23.587273  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:24.692535  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 10)
+I20260316 10:22:25.843474  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172615 ( 0.0431537 s)
+I20260316 10:22:33.601879  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:37.604630  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168453 ( 0.0421132 s)
+I20260316 10:22:41.256556  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:22:41.840004  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:122 code_lock_fail_counter : 51)
+I20260316 10:22:44.615389  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:22:45.685817  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:50.214273  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.749871  2146 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.754051  2156 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.763484  2152 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.772418  2158 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.777098  2150 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.777601  2168 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.801703  2148 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.845707  2164 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.850687  2154 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:55.859935  2162 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:22:56.078480  2171 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:08:42.48: point pos error ()
+I20260316 10:22:56.099895  2171 rtklib_solver.cc:1502] RTKLIB rtkpos error: 10:08:42.50: point pos error ()
+I20260316 10:22:59.238718  2168 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:00.020218  2156 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:02.780949  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:02.848399  2150 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 174348 ( 0.043587 s)
+I20260316 10:23:04.937274  2148 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172638 ( 0.0431595 s)
+I20260316 10:23:06.154886  2146 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 169945 ( 0.0424863 s)
+I20260316 10:23:07.292573  2162 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:09.489123  2154 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168435 ( 0.0421088 s)
+I20260316 10:23:12.270640  2168 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:12.863837  2156 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:13.110071  2158 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168437 ( 0.0421093 s)
+I20260316 10:23:13.363376  2168 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:23:14.883402  2160 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 4 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 7)
+I20260316 10:23:14.935289  2150 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:15.778687  2152 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:16.776916  2148 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260316 10:23:17.964969  2146 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:18.424083  2156 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176622 ( 0.0441555 s)
+I20260316 10:23:19.134521  2162 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:21.603927  2154 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:23.253775  2148 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 160797 ( 0.0401992 s)
+I20260316 10:23:24.819519  2150 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172659 ( 0.0431648 s)
+I20260316 10:23:25.708900  2158 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:25.965833  2168 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:26.685050  2164 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168437 ( 0.0421093 s)
+I20260316 10:23:28.801245  2152 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:28.950248  2146 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:29.642534  2168 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176613 ( 0.0441532 s)
+I20260316 10:23:30.436395  2154 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164485 ( 0.0411212 s)
+I20260316 10:23:31.429745  2156 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:31.555850  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164453 ( 0.0411132 s)
+I20260316 10:23:32.366606  2156 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172503 ( 0.0431257 s)
+I20260316 10:23:35.480800  2148 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:36.484825  2162 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164437 ( 0.0411092 s)
+I20260316 10:23:36.893831  2150 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 9 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:37.046383  2158 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 164449 ( 0.0411123 s)
+I20260316 10:23:38.372238  2164 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:39.626883  2164 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:39.711156  2148 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172631 ( 0.0431578 s)
+I20260316 10:23:39.980021  2152 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 170536 ( 0.042634 s)
+I20260316 10:23:40.225847  2146 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 11 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:40.723587  2168 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 0 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:41.488359  2154 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 7 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:42.658809  2166 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 1 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:43.576541  2156 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 6 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 4)
+I20260316 10:23:44.245543  2146 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 168421 ( 0.0421052 s)
+I20260316 10:23:48.344396  2162 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 3 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:49.060909  2158 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 5 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:49.399118  2168 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:49.899349  2166 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176615 ( 0.0441537 s)
+I20260316 10:23:51.679592  2158 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 172629 ( 0.0431573 s)
+I20260316 10:23:52.028584  2164 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 2 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 2)
+I20260316 10:23:52.107451  2148 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 10 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260316 10:23:52.459656  2152 dll_pll_veml_tracking.cc:1025] Loss of lock in channel 8 (carrier_lock_fail_counter:5001 code_lock_fail_counter : 9)
+I20260316 10:23:52.584586  2160 dll_pll_veml_tracking.cc:1790] Number of samples between Acquisition and Tracking = 176629 ( 0.0441573 s)
+I20260316 10:23:54.560312  2128 gnss_sdr_valve.cc:75] Stopping receiver, 4799480000 samples processed
+I20260316 10:23:54.560366  2116 control_thread.cc:974] Received action STOP
+I20260316 10:23:54.565822  2116 gnss_flowgraph.cc:453] Disconnecting flowgraph
+I20260316 10:23:54.565936  2116 gnss_flowgraph.cc:470] Flowgraph disconnected
+I20260316 10:23:54.566027  2116 control_thread.cc:489] Flowgraph stopped
