@@ -1,17 +1,15 @@
 % Pintaremos los skyplots de Spirent para todas las constelaciones disponibles, los datos los obtenemos de sat_data_V1A1.csv.
 % Parámetros:   sat_data: archivo sat_data_V1A1.csv en formato tabla.
-%               t0_UTC: tiempo de inicio de los datos en formato datetime. 
+%               t0_UTC: tiempo de inicio de los datos en formato datetime.
+%               constelaciones: propiedades visuales para cada constelación disponible.
 %               opciones: opciones para guardar las imágenes.
 
 
-function skyplots(sat_data, t0_UTC, opciones)
+function skyplots(sat_data, t0_UTC, constelaciones, opciones)
     tiempos = unique(sat_data.Time_ms);  % Cada 10 ms.
     tiempos = tiempos(1:100:end);  % Cada 1 s.
     
     tipo_sat = string(unique(sat_data.Sat_type));
-    constelaciones = containers.Map(["GPS", "GALILEO"], ...
-        {struct('letra', "G", 'color', [0 0.4470 0.7410]), ...  % Color azul.
-        struct('letra', "E", 'color', [0.8500 0.3250 0.0980])});  % Color naranja.
     
     % Creamos un skyplot por cada constelación.
     for k = 1:length(tipo_sat)
@@ -30,35 +28,42 @@ function skyplots(sat_data, t0_UTC, opciones)
             end   
         end
         
-        % Haremos un skyplot para elevaciones positivas y otro para las negativas.
+        % Haremos un skyplot para elevaciones positivas y, si corresponde, otro para las negativas.
         elevArriba = elevaciones; elevAbajo = -elevaciones;
         elevArriba(elevaciones < 0) = NaN;  % Ponemos valor nulo a las elevaciones negativas, ya que no se pueden representar en el skyplot.
         elevAbajo(elevaciones > 0) = NaN;  % Ponemos valor nulo a las elevaciones positivas (que ahora son negativas).
     
         % Pintamos el skyplot animado y lo guardamos en un gif.
         fig = figure(Name="Skyplot animado "+tipo_sat(k));
-        fig.Position = [300, 300, 650, 400];  % Tamaño del gif.
-    
-        subplot(1, 2, 1);
-        skyArriba = skyplot(acimuts(1, :), elevArriba(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
-        title("(Elevación positiva)");
-        subplot(1, 2, 2);
-        skyAbajo = skyplot(acimuts(1, :), elevAbajo(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
-        title("(Elevación negativa)");
+        
+        if any(~isnan(elevAbajo), 'all')  % Si algún satélite tiene elevación negativa.
+            fig.Position = [300, 300, 650, 400];  % Tamaño del gif.
+            subplot(1, 2, 1);
+            skyArriba = skyplot(acimuts(1, :), elevArriba(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
+            title("(Elevación positiva)");
+            subplot(1, 2, 2);
+            skyAbajo = skyplot(acimuts(1, :), elevAbajo(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
+            title("(Elevación negativa)");
+        else  % Si ningún satélite tiene elevación negativa.
+            fig.Position = [300, 300, 325, 400];  % Tamaño del gif.
+            skyArriba = skyplot(acimuts(1, :), elevArriba(1, :), constelaciones(tipo_sat(k)).letra+string(PRN));
+        end
         annotation('textbox', [0 0.9 1 0.05], String="Skyplot " + tipo_sat(k), ...
                 EdgeColor='none', HorizontalAlignment='center', FontSize=14);
-        subtitulo = annotation('textbox', [0 0.15 1 0.05], String="", ...
+        subtitulo = annotation('textbox', [0 0.1 1 0.05], String="", ...
                 EdgeColor='none', HorizontalAlignment='center', FontSize=11);
         
         for i = 1:height(acimuts)
             set(skyArriba, AzimuthData=acimuts(1:i, :), ElevationData=elevArriba(1:i, :), ColorOrder=constelaciones(tipo_sat(k)).color);
-            set(skyAbajo, AzimuthData=acimuts(1:i, :), ElevationData=elevAbajo(1:i, :), ColorOrder=constelaciones(tipo_sat(k)).color);
-            drawnow
+            if any(~isnan(elevAbajo), 'all')  % Si algún satélite tiene elevación negativa.
+                set(skyAbajo, AzimuthData=acimuts(1:i, :), ElevationData=elevAbajo(1:i, :), ColorOrder=constelaciones(tipo_sat(k)).color);
+            end
+            drawnow;
         
             t = t0_UTC + milliseconds(tiempos(i));
             subtitulo.String = sprintf("Tiempo: %s", datestr(t, 'dd-mm-yyyy HH:MM:SS'));
             
-            % Guardaremos los gráficos si se desea en gif.
+            % Guardaremos la animación, si se desea, en formato gif.
             if opciones.salvarImg
                 frame = getframe(gcf);
                 img = frame2im(frame);
@@ -73,10 +78,15 @@ function skyplots(sat_data, t0_UTC, opciones)
             end
         end
         
-        % Por último guardaremos los gráficos si se desea en png (imagen final).
+        % Por último guardaremos la imagen final, si se desea, en el formato indicado.
         if opciones.salvarImg
+            pause(0.8);  % Para que de tiempo a que acabe el gif y así se guarde la imagen con el tamaño indicado.
             imagen = "Skyplot-" + tipo_sat(k);
-            fig.Position = [200, 200, 850, 540];  % Tamaño de la imagen.
+            if any(~isnan(elevAbajo), 'all')  % Si algún satélite tiene elevación negativa.
+                fig.Position = [200, 200, 810, 500];  % Tamaño de la imagen.
+            else  % Si ningún satélite tiene elevación negativa.
+                fig.Position = [200, 200, 400, 500];  % Tamaño de la imagen.
+            end
             if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
                 exportgraphics(fig, opciones.ruta+imagen+"."+opciones.formatoImg, ContentType="vector");
             else  % PNG o JPG.

@@ -26,9 +26,10 @@ tiempo.leap_sec = seconds(18);  % Segundos intercalares a partir de 2017 para ti
 tiempo.tInicioSpirentUTC = tiempo.tiempo0GPS + seconds(tiempo.tInicioSpirentGPS) - tiempo.leap_sec;
 
 % Configuraciones para cada constelación.
-constelaciones = containers.Map(["GPS", "GALILEO"], ...
+constelaciones = containers.Map(["GPS", "GALILEO", "EGNOS"], ...
         {struct('nombre', "GPS", 'letra', "G", 'color', configuracion.colores(1, :)), ...  % Color azul.
-        struct('nombre', "GALILEO", 'letra', "E", 'color', configuracion.colores(2, :))});  % Color naranja.
+        struct('nombre', "GALILEO", 'letra', "E", 'color', configuracion.colores(2, :)) ...  % Color naranja.
+        struct('nombre', "EGNOS", 'letra', "SE", 'color', configuracion.colores(5, :))});  % Color verde.
 
 % Creamos un array que contendrá los errores de PVT para un conjunto de pruebas, las que están 
 % contenidas en la variable "carpetas" (sirve para sacar los histogramas del error global de PVT).
@@ -54,7 +55,7 @@ configuracion.ruta = configuracion.dirResultados;  % Ruta dónde guardar las im�
 mapa2D_latLon(rad2deg(datosSpirent.pvt.Lat), rad2deg(datosSpirent.pvt.Long), configuracion);
 
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
-skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, configuracion);
+skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, constelaciones, configuracion);
 
 % -------------------------------------------------------------------------
 % Si es una batería de varias pruebas es útil no tener que seleccionar cada carpeta y archivos.
