@@ -30,6 +30,10 @@ constelaciones = containers.Map(["GPS", "GALILEO"], ...
         {struct('nombre', "GPS", 'letra', "G", 'color', configuracion.colores(1, :)), ...  % Color azul.
         struct('nombre', "GALILEO", 'letra', "E", 'color', configuracion.colores(2, :))});  % Color naranja.
 
+% Creamos un array que contendrá los errores de PVT para un conjunto de pruebas, las que están 
+% contenidas en la variable "carpetas" (sirve para sacar los histogramas del error global de PVT).
+erroresTotales = cell(6, 1);
+
 % -------------------------------------------------------------------------
 % Abrimos los archivos de Spirent, ya que siempre son los mismos, y los guardamos en tablas.
 datosSpirent.pvt = readtable("data/Spirent/motion_V1.csv");
@@ -79,7 +83,11 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     pvt(datosSpirent.pvt, datosGnssSdr.pvt, 'ecef', configuracion);
     
     % Además, pintaremos los errores de PVT para cada eje ECEF y sus histogramas.
-    erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, configuracion);
+    errores = erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, configuracion);
+    % Añadimos los errores de cada prueba al total.
+    for e = 1:6  % Para cada eje.
+		erroresTotales{e} = [erroresTotales{e}; errores{e}];
+    end
     
     % También vamos a pintar el factor de degradación de la precisión, la DOP, 
     % para ver que tan precisa es la PVT que hemos obtenido.
@@ -113,3 +121,6 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     %input("Pulse Enter...");  % Espera a que se pulse la tecla Enter.
     close all;  % Cierra todas las figuras antes de continuar con la siguiente prueba.
 end
+
+% ----------------- Histogramas de todos los errores PVT ------------------
+histogramasErroresPVT(erroresTotales, configuracion);

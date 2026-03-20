@@ -4,9 +4,10 @@
 % Parámetros:   pvtSpirent: archivo motion_V1.csv de Spirent en formato tabla.
 %               pvtReceptor: archivo PVT de GNSS-SDR en formato tabla.
 %               opciones: opciones para guardar las imágenes.
+% Salidas:      errores: cell(6,1) con los errores de la posición y de la velocidad.
 
 
-function erroresPVT(pvtSpirent, pvtReceptor, opciones)
+function errores = erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % Celda para todos los errores de la posición y de la velocidad.
     errores = cell(6, 1);
     
@@ -56,7 +57,7 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % ---------------------------------------------------------------------
     % Calculamos la media de los errores absolutos y el porcentaje de error de la 
     % posición y de la velocidad en cada eje y lo sacamos por la consola.
-    datos = nan(6, 1);  % Datos de la media del error absolutos para añadir al CSV.
+    datos = nan(6, 1);  % Datos de la media del error absoluto para añadir al CSV.
 
     fprintf("Media del error absoluto y porcentaje de error global de la posición:\n");
     for e = 1:3  % Para cada eje.
@@ -84,7 +85,10 @@ function erroresPVT(pvtSpirent, pvtReceptor, opciones)
     
     for e = 1:6  % Para cada eje de cada parámetro.
         subplot(3, 2, posSubplot(e));
-        histogram(errores{e}, Normalization="probability", HandleVisibility='off');
+        h = histogram(errores{e}, Normalization="probability", HandleVisibility='off');
+        if h.NumBins < 15  % Fijamos un mínimo de 15 contenedores para el histograma.
+            h.NumBins = 15;
+        end
         grid on;
         if e <= 3  % Posición.
             title("Histograma del error de "+leyendasPos(e));

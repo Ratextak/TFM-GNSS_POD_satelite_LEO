@@ -87,9 +87,12 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
 
         subplot(length(paramObs), 1, p);
-        histogram(errores{p}, Normalization="probability", HandleVisibility='off');
+        h = histogram(errores{p}, Normalization="probability", HandleVisibility='off');
         title("Histograma del error de "+param_p.nombre+" ("+param_p.siglas+")");
         xlabel("Error ["+param_p.unidades+"]"); ylabel("Probabilidad"); 
+        if h.NumBins < 15  % Fijamos un mínimo de 15 contenedores para el histograma.
+            h.NumBins = 15;
+        end
         grid on;
     
         % Pintaremos la media, la desviación típica y la varianza.

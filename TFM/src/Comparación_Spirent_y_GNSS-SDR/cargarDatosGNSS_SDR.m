@@ -2,7 +2,7 @@
 % tiempos a UTC y los arreglaremos para que sean más legibles.
 % Parámetros:   configuracion: struct con las diferentes configuraciones que hemos fijado en main.
 %               tiempo: struct con variables relativas al tiempo y a sus conversiones.
-% Salidas:      satosGnssSdr: struct con los datos de pvt, pvt_gpx, obs, obs_rinex y trk.
+% Salidas:      datosGnssSdr: struct con los datos de pvt, pvt_gpx, obs, obs_rinex y trk.
 
 
 function [datosGnssSdr] = cargarDatosGNSS_SDR(configuracion, tiempo)
