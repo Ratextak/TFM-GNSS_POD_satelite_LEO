@@ -10,7 +10,11 @@ function guardarEnCSV(archivo, datos, opciones)
 
     % Escribir línea.
     for i = 1:length(datos)
-        fprintf(fichero, "%f", datos(i));
+        if isstring(datos(i))  % Si es un string (para cabeceras).
+            fprintf(fichero, "%s", datos(i));
+        else  % Si es un número, lo ponemos en formato float.
+            fprintf(fichero, "%f", datos(i));
+        end
         if i ~= length(datos)  % Si no es el último elemento de la línea añadimos una coma.
             fprintf(fichero, ",");
         end

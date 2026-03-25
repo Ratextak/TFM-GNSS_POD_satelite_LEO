@@ -1,15 +1,26 @@
 % Pintaremos los histogramas de probabilidad de los errores de PVT globales de un conjunto de pruebas.
-% Parámetros:   errores: cell(6,1) con los errores de todas las pruebas para cada eje ECEF (posición y velocidad).
+% Parámetros:   errores: cell(6,1) con los errores/medias/sigmas de todas las pruebas para cada eje ECEF (posición y velocidad).
+%               tipoDatos: tipo de datos que se van a pintar. Disponibles: "errores", "medias" y "sigmas".
 %               opciones: opciones para guardar las imágenes.
 
 
-function histogramasErroresPVT(errores, opciones)
+function histogramasErroresPVT(errores, tipoDatos, opciones)
     leyendasPos = ["Posición X", "Posición Y", "Posición Z"];
     leyendasVel = ["Velocidad X", "Velocidad Y", "Velocidad Z"];
 
+    % Para cada tipo de histograma disponible.
+    switch tipoDatos
+        case "errores"
+            nombres = ["", "del error", "Error"];
+        case "medias"
+            nombres = [" de las medias muestrales", "de la media", "Media"];
+        case "sigmas"
+            nombres = [" de las desviaciones típicas muestrales", "de la \sigma", "\sigma"];
+    end
+
     % Pintaremos los histogramas de los errores.
-    fig = figure(Name="Histogramas de los errores totales PVT", WindowState='maximized');
-    sgtitle("Histogramas de los errores totales de PVT");
+    fig = figure(Name="Histogramas de los errores totales PVT ["+opciones.nombreConjPruebas+"]", WindowState='maximized');
+    sgtitle("Histogramas"+nombres(1)+" de los errores de PVT ["+opciones.nombreConjPruebas+"]");
     posSubplot = [1, 3, 5, 2, 4, 6];  % Para posicionar las posiciones y las velocidades en distintas columnas.
     
     for e = 1:6  % Para cada eje de cada parámetro.
@@ -20,11 +31,11 @@ function histogramasErroresPVT(errores, opciones)
         end
         grid on;
         if e <= 3  % Posición.
-            title("Histograma del error de "+leyendasPos(e));
-            xlabel("Error [m]"); ylabel("Probabilidad");
+            title("Histograma "+nombres(2)+" de "+leyendasPos(e));
+            xlabel(nombres(3)+" [m]"); ylabel("Probabilidad");
         else  % Velocidad.
-            title("Histograma del error de "+leyendasVel(e-3));
-            xlabel("Error [m/s]"); ylabel("Probabilidad"); 
+            title("Histograma "+nombres(2)+" de "+leyendasVel(e-3));
+            xlabel(nombres(3)+" [m/s]"); ylabel("Probabilidad"); 
         end
     
         % Pintaremos la media, la desviación típica y la varianza.
@@ -45,7 +56,7 @@ function histogramasErroresPVT(errores, opciones)
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen = "Histogramas_errores_totales_PVT";
+        imagen = "Histogramas_"+tipoDatos+"_totales_PVT-"+strrep(opciones.nombreConjPruebas, '\_', '_');
         fig.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
             exportgraphics(fig, opciones.dirResultados+imagen+"."+opciones.formatoImg, ContentType="vector");

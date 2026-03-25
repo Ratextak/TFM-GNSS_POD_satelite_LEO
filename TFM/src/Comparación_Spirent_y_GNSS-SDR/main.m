@@ -34,6 +34,7 @@ constelaciones = containers.Map(["GPS", "GALILEO", "EGNOS"], ...
 % Creamos un array que contendrá los errores de PVT para un conjunto de pruebas, las que están 
 % contenidas en la variable "carpetas" (sirve para sacar los histogramas del error global de PVT).
 erroresTotales = cell(6, 1);
+mediasSigmasTotales = cell(12, 1);  % Además, también guardaremos las medias y sigmas de los histogramas.
 
 % -------------------------------------------------------------------------
 % Abrimos los archivos de Spirent, ya que siempre son los mismos, y los guardamos en tablas.
@@ -62,6 +63,7 @@ skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, constelaciones, config
 % Por ello meteremos todas las carpetas y subcarpetas implicadas en una struct.
 carpetas = dir(configuracion.dirDatos+"Dinámicos*/*Prueba*");
 carpetas = carpetas([carpetas.isdir]);
+configuracion.nombreConjPruebas = "Dinámicos\_HD";  % El nombre del conjunto de pruebas de "carpetas".
 
 for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     configuracion.rutaDatos = fullfile(carpetas(c).folder, carpetas(c).name);  % Carpeta de datos actual.
@@ -84,10 +86,12 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     pvt(datosSpirent.pvt, datosGnssSdr.pvt, 'ecef', configuracion);
     
     % Además, pintaremos los errores de PVT para cada eje ECEF y sus histogramas.
-    errores = erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, configuracion);
-    % Añadimos los errores de cada prueba al total.
+    [errores, medias_sigmas] = erroresPVT(datosSpirent.pvt, datosGnssSdr.pvt, configuracion);
+    % Añadimos los errores, medias y sigmas de cada prueba al total.
     for e = 1:6  % Para cada eje.
 		erroresTotales{e} = [erroresTotales{e}; errores{e}];
+        mediasSigmasTotales{e} = [mediasSigmasTotales{e}; medias_sigmas{e}];
+		mediasSigmasTotales{e+6} = [mediasSigmasTotales{e+6}; medias_sigmas{e+6}];
     end
     
     % También vamos a pintar el factor de degradación de la precisión, la DOP, 
@@ -124,4 +128,6 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
 end
 
 % ----------------- Histogramas de todos los errores PVT ------------------
-histogramasErroresPVT(erroresTotales, configuracion);
+histogramasErroresPVT(erroresTotales, "errores", configuracion);
+histogramasErroresPVT(mediasSigmasTotales(1:6), "medias", configuracion);
+histogramasErroresPVT(mediasSigmasTotales(7:end), "sigmas", configuracion);

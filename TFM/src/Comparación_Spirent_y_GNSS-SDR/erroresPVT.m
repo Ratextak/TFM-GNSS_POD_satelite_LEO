@@ -5,9 +5,10 @@
 %               pvtReceptor: archivo PVT de GNSS-SDR en formato tabla.
 %               opciones: opciones para guardar las imágenes.
 % Salidas:      errores: cell(6,1) con los errores de la posición y de la velocidad.
+%               medias_sigmas: cell (12,1) con las medias y las desviaciones típicas de los histogramas.
 
 
-function errores = erroresPVT(pvtSpirent, pvtReceptor, opciones)
+function [errores, medias_sigmas] = erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % Celda para todos los errores de la posición y de la velocidad.
     errores = cell(6, 1);
     
@@ -83,6 +84,8 @@ function errores = erroresPVT(pvtSpirent, pvtReceptor, opciones)
     sgtitle("Histogramas de los errores totales de PVT ["+opciones.nombrePrueba+"]");
     posSubplot = [1, 3, 5, 2, 4, 6];  % Para posicionar las posiciones y las velocidades en distintas columnas.
     
+    medias_sigmas = cell(12, 1);  % Datos de las medias y sigmas de los histogramas.
+
     for e = 1:6  % Para cada eje de cada parámetro.
         subplot(3, 2, posSubplot(e));
         h = histogram(errores{e}, Normalization="probability", HandleVisibility='off');
@@ -102,6 +105,8 @@ function errores = erroresPVT(pvtSpirent, pvtReceptor, opciones)
         media = mean(errores{e});
         xline(media, '--r', "Media = " + round(media, 4), LabelOrientation='horizontal', LineWidth=1, DisplayName="Media");
         sigma = std(errores{e});  % Desviación estándar.
+        medias_sigmas{e} = media;
+        medias_sigmas{e+6} = sigma;
         x_lim = xlim; y_lim = ylim;  % Límites del eje X e Y.
         x_patch = [media-sigma, media+sigma, media+sigma, media-sigma];
         y_patch = [y_lim(1), y_lim(1), y_lim(2), y_lim(2)];
@@ -116,8 +121,8 @@ function errores = erroresPVT(pvtSpirent, pvtReceptor, opciones)
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen1 = "Errores_PVT";
-        imagen2 = "Histogramas_errores_PVT";
+        imagen1 = "Errores_PVT_limpios";
+        imagen2 = "Histogramas_errores_PVT_limpios";
         fig1.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         fig2.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
