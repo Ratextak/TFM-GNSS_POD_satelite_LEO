@@ -5,7 +5,7 @@ configuracion.ruta = "results/Órbita_Matlab/Gráficas/";  % Ruta dónde guardar
 
 
 % Órbita del satélite alrededor de la Tierra (posición). 
-grafico3D_posicion(pos_ecef(:,1)/10^3, pos_ecef(:,2)/10^3, pos_ecef(:,3)/10^3, "km", configuracion);
+grafico3D_posicion(pos_ecef(:,1), pos_ecef(:,2), pos_ecef(:,3), configuracion);
 
 % Mapa de la trayectoria sobre la superficie terrestre.
 mapa2D_latLon(lla(:,1), lla(:,2), configuracion);

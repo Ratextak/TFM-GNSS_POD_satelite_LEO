@@ -1,3 +1,9 @@
+% Pintaremos la órbita del satélite sobre un mapa terrestre, indicando los puntos de inicio y del final.
+% Parámetros:   lat: array de latitudes (en grados).
+%               lon: array de longitudes (en grados).
+%               opciones: opciones para guardar las imágenes.
+
+
 function mapa2D_latLon(lat, lon, opciones)
     % Quitamos, si hay, los saltos de 180 a -180 grados en longitud para evitar rayas que atraviesen la gráfica. 
     dLon = abs(diff(lon));  % Diferencia de longitud entre instancias.
