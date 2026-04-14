@@ -230,12 +230,13 @@ data/cache_PVT_data.mat
 
 data/CEDEA/RADAR_GNSS_flex_SCRABII-16-17JUL25/Radar_Flight2_17_jul_25_8_32_UTC.mat
 
+# Señales GNSS.
+*.iq
+*.int8
 
 # Archivos de datos pesados.
-TFM/data/Spirent/*.csv
-TFM/data/Spirent/rinex-obs_V1_A1-spacecraft.txt
+TFM/data/Spirent/
 *.gif
-TFM/data/Spirent/*.int8
 *.mat
 *.svg
 *.pdf
@@ -250,7 +251,6 @@ data/grisolia/static_spirent_8bits_8.192msps_1antenna.dat
 data/grisolia/Original_jamming/
 
 # Grisolia 10 min.
-data/grisolia_usrpx310_4_Estrella/gps_L1_4msps.iq
 *.bin
 *.sp3
 *.umt
