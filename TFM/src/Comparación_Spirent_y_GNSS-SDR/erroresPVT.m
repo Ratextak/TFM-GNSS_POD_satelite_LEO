@@ -121,8 +121,8 @@ function [errores, medias_sigmas] = erroresPVT(pvtSpirent, pvtReceptor, opciones
     % ---------------------------------------------------------------------
     % Por último guardaremos los gráficos si se desea.
     if opciones.salvarImg
-        imagen1 = "Errores_PVT_limpios";
-        imagen2 = "Histogramas_errores_PVT_limpios";
+        imagen1 = "Errores_PVT";
+        imagen2 = "Histogramas_errores_PVT";
         fig1.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         fig2.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.

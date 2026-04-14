@@ -40,7 +40,11 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
      
     % Pintaremos los errores del pseudorango, el Doppler y la fase portadora.
     fig1 = figure(Name="Comparación de errores entre Spirent y GNSS-SDR para "+constelacion.nombre, WindowState='maximized');
-    sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    if doblesDiferencias
+        sgtitle("Comparación de errores entre Spirent y GNSS-SDR (DD respecto "+constelacion.letra+string(satRef)+") para cada satélite "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    else
+        sgtitle("Comparación de errores entre Spirent y GNSS-SDR para cada satélite "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    end
     colororder(opciones.colores);
 
     % Para ello compararemos los valores de cada satélite entre ambos archivos.
@@ -81,7 +85,11 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
     % ---------------------------------------------------------------------
     % Pintaremos los histogramas de los errores.
     fig2 = figure(Name="Histogramas de los errores para todos los satélites "+constelacion.nombre, WindowState='maximized');
-    sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    if doblesDiferencias
+        sgtitle("Histogramas de los errores totales de observación (DD respecto "+constelacion.letra+string(satRef)+") para "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    else
+        sgtitle("Histogramas de los errores totales de observación para "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
+    end
     
     for p = 1:length(paramObs)  % Para cada parámetro solicitado.
         param_p = parametrosGPS(paramObs(p));  % Struct del parámetro p.
@@ -115,6 +123,10 @@ function erroresObservacion(obsSpirent, obsReceptor, paramObs, doblesDiferencias
     if opciones.salvarImg
         imagen1 = "Errores_obs";
         imagen2 = "Histogramas_errores_obs";
+        if doblesDiferencias
+            imagen1 = imagen1 + "_dd";
+            imagen2 = imagen2 + "_dd";
+        end
         for p = 1:length(paramObs)
             imagen1 = imagen1 + "_" + paramObs(p);
             imagen2 = imagen2 + "_" + paramObs(p);

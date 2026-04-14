@@ -16,11 +16,11 @@ configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas
 
 % Configuración de parámetros para GNSS-SDR.
 configuracion.canalesGnssSdr = 12;  % Número de canales del receptor GNSS-SDR.
-configuracion.frecMuestreoGnssSdr = 5000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
+configuracion.frecMuestreoGnssSdr = 4000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 configuracion.dirDatos = "data/GNSS-SDR/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 
 % Configuración y variables relativas al tiempo.
-tiempo.tInicioSpirentGPS = 1358244405.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
+tiempo.tInicioSpirentGPS = 1358244387.0;  % Segundos desde el momento 0 del GPS time (1ª línea 5º campo de motion_v1).
 tiempo.tiempo0GPS = datetime(1980, 1, 6, 0, 0, 0);  % Tiempo 0 del GPS time.
 tiempo.leap_sec = seconds(18);  % Segundos intercalares a partir de 2017 para tiempo GPS.
 tiempo.tInicioSpirentUTC = tiempo.tiempo0GPS + seconds(tiempo.tInicioSpirentGPS) - tiempo.leap_sec;
@@ -54,6 +54,9 @@ configuracion.ruta = configuracion.dirResultados;  % Ruta dónde guardar las im�
 
 % Primero de todo, vamos a pintar el fragmento de órbita que hemos simulado.
 mapa2D_latLon(rad2deg(datosSpirent.pvt.Lat), rad2deg(datosSpirent.pvt.Long), configuracion);
+
+% Luego pintaremos la órbita en 3D.
+grafico3D_posicion(datosSpirent.pvt.Pos_X, datosSpirent.pvt.Pos_Y, datosSpirent.pvt.Pos_Z, configuracion);
 
 % Pintaremos los skyplots de Spirent, los datos los obtenemos de sat_data_V1A1.csv.
 skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, constelaciones, configuracion);
@@ -96,7 +99,7 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     
     % También vamos a pintar el factor de degradación de la precisión, la DOP, 
     % para ver que tan precisa es la PVT que hemos obtenido.
-    dop(datosSpirent.pvt, datosGnssSdr.pvt, configuracion, false);
+    dop(datosSpirent.pvt, datosGnssSdr.pvt, false, configuracion, false);
     
     % ---------------------- Gráficos de observación ----------------------
     % A continuación vamos a analizar los archivos de observación (RINEX u observables.mat).
