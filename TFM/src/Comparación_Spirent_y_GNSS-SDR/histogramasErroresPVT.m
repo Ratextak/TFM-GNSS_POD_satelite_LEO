@@ -59,9 +59,9 @@ function histogramasErroresPVT(errores, tipoDatos, opciones)
         imagen = "Histogramas_"+tipoDatos+"_totales_PVT-"+strrep(opciones.nombreConjPruebas, '\_', '_');
         fig.Position = get(0, "ScreenSize");  % Tamaño completo (mejor que figure(WindowState='maximized')).
         if ismember(opciones.formatoImg, ["svg", "pdf", "eps"])  % Imágenes vectoriales.
-            exportgraphics(fig, opciones.dirResultados+imagen+"."+opciones.formatoImg, ContentType="vector");
+            exportgraphics(fig, opciones.ruta+"../"+imagen+"."+opciones.formatoImg, ContentType="vector");
         else  % PNG o JPG.
-            exportgraphics(fig, opciones.dirResultados+imagen+"."+opciones.formatoImg, Resolution=300);
+            exportgraphics(fig, opciones.ruta+"../"+imagen+"."+opciones.formatoImg, Resolution=300);
         end
     end
 end

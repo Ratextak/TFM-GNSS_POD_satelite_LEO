@@ -50,6 +50,9 @@ function [datosGnssSdr] = cargarDatosGNSS_SDR(configuracion, tiempo)
         pvtGnssSdr.(campos{c}) = reshape(pvtGnssSdr.(campos{c})', [], 1);
     end
     pvtGnssSdr = struct2table(pvtGnssSdr);
+    % Eliminamos las filas repetidas.
+    [~, it, ~] = unique(pvtGnssSdr.Time);
+    pvtGnssSdr = pvtGnssSdr(it, :);
     
     % Eliminamos las columnas Shape y Elevation del GPX y las cambiamos por 2 de latitude 
     % y longitude y otra de height. Esto es para unificar con el archivo pvt.mat.
