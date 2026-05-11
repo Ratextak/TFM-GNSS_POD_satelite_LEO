@@ -274,16 +274,76 @@ ruta_signal="${ruta_TFM}/data/Spirent/L1_4mhz_UPMsat2_16bits_IQ.iq"
 # done
 # echo -e "~~~~~~~~~~ [1] Pruebas concluidas ~~~~~~~~~~\n"
 
-echo "---> [1] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50..."
+# echo "---> [1] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50..."
+# echo "------------------------------------------------------------------------------"
+# ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos-GPS"
+# num_pruebas=1
+# for ((i=0; i<$num_pruebas; i++))
+# do
+	# echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
+	# ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos-GPS-Prueba$i"
+	# mkdir -p $ruta_subprueba
+	# sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos-GPS.conf > ${ruta_config}/temp.conf
+	# gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
+	# echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
+# done
+# echo -e "~~~~~~~~~~ [1] Pruebas concluidas ~~~~~~~~~~\n"
+
+# echo "---> [1] Ejecutando las pruebas: canales dinámicos, High_dynamics, Max_lock_fail=50, sin Filtro de Kalman..."
+# echo "------------------------------------------------------------------------------"
+# ruta_prueba="${ruta_resultados}/Nueva_señal_sinFK-GPS"
+# num_pruebas=10
+# for ((i=0; i<$num_pruebas; i++))
+# do
+	# echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
+	# ruta_subprueba="${ruta_prueba}/Nueva_señal_sinFK-GPS-Prueba$i"
+	# mkdir -p $ruta_subprueba
+	# sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_sinFK-GPS.conf > ${ruta_config}/temp.conf
+	# gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
+	# echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
+# done
+# echo -e "~~~~~~~~~~ [1] Pruebas concluidas ~~~~~~~~~~\n"
+
+# echo "---> [1] Ejecutando las pruebas: canales dinámicos, High_dynamics, Max_lock_fail=50, con chi-cuadrado..."
+# echo "------------------------------------------------------------------------------"
+# ruta_prueba="${ruta_resultados}/Nueva_señal_conChi2-GPS"
+# num_pruebas=1
+# for ((i=0; i<$num_pruebas; i++))
+# do
+	# echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
+	# ruta_subprueba="${ruta_prueba}/Nueva_señal_conChi2-GPS-Prueba$i"
+	# mkdir -p $ruta_subprueba
+	# sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_conChi2-GPS.conf > ${ruta_config}/temp.conf
+	# gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
+	# echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
+# done
+# echo -e "~~~~~~~~~~ [1] Pruebas concluidas ~~~~~~~~~~\n"
+
+# echo "---> [2] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50, sin Filtro de Kalman..."
+# echo "------------------------------------------------------------------------------"
+# ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos_sinFK-GPS"
+# num_pruebas=5
+# for ((i=0; i<$num_pruebas; i++))
+# do
+	# echo "---> [2] Ejecutando prueba $((i+1))/$num_pruebas..."
+	# ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos_sinFK-GPS-Prueba$i"
+	# mkdir -p $ruta_subprueba
+	# sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos_sinFK-GPS.conf > ${ruta_config}/temp.conf
+	# gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
+	# echo "~~~~~~ [2] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
+# done
+# echo -e "~~~~~~~~~~ [2] Pruebas concluidas ~~~~~~~~~~\n"
+
+echo "---> [1] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50, sin Filtro de Kalman, varios cambios..."
 echo "------------------------------------------------------------------------------"
-ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos-GPS"
+ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos_variosCambios-GPS"
 num_pruebas=1
 for ((i=0; i<$num_pruebas; i++))
 do
 	echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
-	ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos-GPS-Prueba$i"
+	ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos_variosCambios-GPS-Prueba$i"
 	mkdir -p $ruta_subprueba
-	sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos-GPS.conf > ${ruta_config}/temp.conf
+	sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos_sinFK-GPS-variosCambios.conf > ${ruta_config}/temp.conf
 	gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
 	echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
 done
