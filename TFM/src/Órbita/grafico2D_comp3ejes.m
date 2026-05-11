@@ -1,5 +1,5 @@
 function grafico2D_comp3ejes(x, y, z, titulo, tipoGrafico, unidades, sistCoord, opciones)
-    fig = figure(Name="Figurita prueba");
+    fig = figure(Name=tipoGrafico + " — " + sistCoord);
     sgtitle(titulo);
 
     if sistCoord == "ECEF"

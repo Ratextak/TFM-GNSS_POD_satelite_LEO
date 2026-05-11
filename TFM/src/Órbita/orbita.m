@@ -1,5 +1,6 @@
 % Ruta dónde guardar el archivo con la órbita generada y ruta del TLE.
 rutaResultado = "results/Órbita_Matlab/";
+if ~exist(rutaResultado, "dir"), mkdir(rutaResultado); end
 tle = "data/tle_UPMSat-2.tle";
 
 % Creamos el escenario donde estará nuestro satélite (1 día de simulación o 1 órbita).
@@ -24,7 +25,7 @@ elemOrbitales0 = orbitalElements(sat)
 % Hallamos la posición y velocidad ECEF, y latitud, longitud y altitud.
 [pos_ecef, vel_ecef] = states(sat, CoordinateFrame="ecef");
 pos_ecef = pos_ecef'; vel_ecef = vel_ecef';  % Trasponemos ambas matrices.
-lla = states(sat, CoordinateFrame="geographic")';  % Lon (°), lat (°) y alt (m).
+lla = states(sat, CoordinateFrame="geographic")';  % Lat (°), lon (°) y alt (m).
 % La función states introduce una muestra extra para tiempo(end+1)=StopTime si el resto de (StopTime-StartTime)/SampleTime 
 % es distinto de 0. Es decir que la última muestra de states tendrá un tiempo de muestreo menor respecto a la anterior 
 % muestra que las demás, por eso la eliminamos para poder calcular la aceleración y el jerk correctamente.
@@ -66,7 +67,7 @@ escenario.StartTime = escenario.StartTime + seconds(escenario.SampleTime*2);
 % Podemos calcular la variación de los elementos orbitales en el transcurso de la órbita.
 [pos_efi, vel_efi] = states(sat, CoordinateFrame="inertial");
 [a, e, i, O, o, M] = rv2orb(pos_efi, vel_efi, 3.986004418 * 10^14);
-elemOrbClasicos = [a', e', rad2deg(i'), rad2deg(O'), rad2deg(o'), rad2deg(M')];
+elemOrbClasicos = [a'/1e3, e', rad2deg(i'), rad2deg(O'), rad2deg(o'), rad2deg(M')];  % a: m → km
 
 % Preparamos las demás entradas para Spirent. Las ' trasponen las matrices.
 segundos = seconds(tiempos - tiempos(1))';  % Convertimos tipo datetime a segundos desde el inicio de la simulación.

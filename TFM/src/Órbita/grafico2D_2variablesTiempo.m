@@ -1,5 +1,5 @@
 function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord, opciones)
-    fig = figure(Name="Figurita prueba", WindowState='maximized');
+    fig = figure(Name="Posición y velocidad — " + sistCoord, WindowState='maximized');
     sgtitle(titulo);
 
     if sistCoord == "ECEF"

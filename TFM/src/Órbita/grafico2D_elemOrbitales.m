@@ -1,5 +1,5 @@
 function grafico2D_elemOrbitales(elemOrb, t, titulo, opciones)
-    fig = figure(Name="Figurita prueba", WindowState='maximized');
+    fig = figure(Name="Elementos orbitales", WindowState='maximized');
     sgtitle(titulo);
 
     titles = ["Semieje mayor", "Excentricidad", "Inclinación", "Longitud del nodo ascendente", "Argumento del periápside", "Anomalía media"];

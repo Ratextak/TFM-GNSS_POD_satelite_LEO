@@ -23,7 +23,7 @@ function mapa2D_latLon(lat, lon, opciones)
     lon_huecos(contador) = lon(end);
 
     % Pintamos la trayectoria.
-    fig = figure(Name="Figurita prueba");
+    fig = figure(Name="Trayectoria lat/lon UPMSat-2");
     geoplot(lat_huecos, lon_huecos, 'b', LineWidth=1.5, DisplayName="UPMSat-2");
     hold on;
 

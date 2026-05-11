@@ -1,5 +1,5 @@
 function grafico2D_alt(alt, t, titulo, opciones)
-    fig = figure(Name="Figurita prueba");
+    fig = figure(Name="Altitud vs tiempo");
     
     plot(t, alt, 'b', LineWidth=1);
     title(titulo);
