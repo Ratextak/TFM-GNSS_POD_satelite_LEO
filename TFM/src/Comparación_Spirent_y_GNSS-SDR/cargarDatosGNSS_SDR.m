@@ -23,7 +23,7 @@ function [datosGnssSdr] = cargarDatosGNSS_SDR(configuracion, tiempo)
     % Añadimos una columna Time con el tiempo convertido a Datetime o la modificamos si ya existe.
     obsGnssSdr_rinex.GPS.Time = obsGnssSdr_rinex.GPS.Time - tiempo.leap_sec;
     %obsGnssSdr_rinex.Galileo.Time = obsGnssSdr_rinex.Galileo.Time - tiempo.leap_sec;
-    pvtGnssSdr.Time = tiempo.tiempo0GPS + days(pvtGnssSdr.week(1)*7) + milliseconds(pvtGnssSdr.TOW_at_current_symbol_ms) - tiempo.leap_sec;
+    pvtGnssSdr.Time = tiempo.tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(pvtGnssSdr.RX_time - pvtGnssSdr.user_clk_offset) - tiempo.leap_sec;
     for c = 1:configuracion.canalesGnssSdr  % Por cada canal.
         obsGnssSdr.Time(c, :) = tiempo.tiempo0GPS + days(pvtGnssSdr.week(1)*7) + seconds(obsGnssSdr.RX_time(c, :)) - tiempo.leap_sec;
         trkGnssSdr(c).PRN_start_time_s = trkGnssSdr(c).PRN_start_sample_count/configuracion.frecMuestreoGnssSdr;  % Primero convertimos a segundos desde el inicio.

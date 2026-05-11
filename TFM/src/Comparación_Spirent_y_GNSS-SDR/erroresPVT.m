@@ -25,22 +25,24 @@ function [errores, medias_sigmas] = erroresPVT(pvtSpirent, pvtReceptor, opciones
     velReceptor = [pvtReceptor.vel_x, pvtReceptor.vel_y, pvtReceptor.vel_z];
     leyendasVel = ["Velocidad X", "Velocidad Y", "Velocidad Z"];
 
-    % Como ambos están en formato datetime podremos hacer una intersección para seleccionarlos.
-    [tiempos, ia, ib] = intersect(pvtSpirent.Time, pvtReceptor.Time);
+    % Tendremos que utilizar la interpolación lineal, ya que ahora tenemos en cuenta el offset  
+    % en Time y suele ser menor que 10 ms (tiempo de muestreo de Spirent).
+    posSpirent_interp = interp1(pvtSpirent.Time, posSpirent, pvtReceptor.Time);
+    velSpirent_interp = interp1(pvtSpirent.Time, velSpirent, pvtReceptor.Time);
 
     for e = 1:3  % Para cada eje.
-        error = posReceptor(ib, e) - posSpirent(ia, e);
+        error = posReceptor(:, e) - posSpirent_interp(:, e);
         errores{e} = error;
 
         subplot(2, 1, 1);
-        plot(tiempos, errores{e}, '.-', DisplayName=leyendasPos(e));
+        plot(pvtReceptor.Time, errores{e}, '.-', DisplayName=leyendasPos(e));
         hold on;
 
-        error = velReceptor(ib, e) - velSpirent(ia, e);   
+        error = velReceptor(:, e) - velSpirent_interp(:, e);   
         errores{e+3} = error;
 
         subplot(2, 1, 2);
-        plot(tiempos, errores{e+3}, '.-', DisplayName=leyendasVel(e));
+        plot(pvtReceptor.Time, errores{e+3}, '.-', DisplayName=leyendasVel(e));
         hold on;
     end
 
@@ -62,7 +64,7 @@ function [errores, medias_sigmas] = erroresPVT(pvtSpirent, pvtReceptor, opciones
 
     fprintf("Media del error absoluto y porcentaje de error global de la posición:\n");
     for e = 1:3  % Para cada eje.
-        porcentaje = sum(abs(errores{e})) ./ sum(abs(posSpirent(ia, e))) * 100;
+        porcentaje = sum(abs(errores{e})) ./ sum(abs(posSpirent_interp(:, e))) * 100;
         media = sum(abs(errores{e})) ./ length(errores{e});
         datos(e) = media;
         fprintf("\t- "+leyendasPos(e)+": \tMedia = %f m \tPorcentaje = %f%%\n", media, porcentaje);
@@ -70,7 +72,7 @@ function [errores, medias_sigmas] = erroresPVT(pvtSpirent, pvtReceptor, opciones
 
     fprintf("Media del error absoluto y porcentaje de error global de la velocidad:\n");
     for e = 1:3  % Para cada eje.
-        porcentaje = sum(abs(errores{e+3})) ./ sum(abs(velSpirent(ia, e))) * 100;
+        porcentaje = sum(abs(errores{e+3})) ./ sum(abs(velSpirent_interp(:, e))) * 100;
         media = sum(abs(errores{e+3})) ./ length(errores{e+3});
         datos(e+3) = media;
         fprintf("\t- "+leyendasVel(e)+": \tMedia = %f m/s \tPorcentaje = %f%%\n", media, porcentaje);
