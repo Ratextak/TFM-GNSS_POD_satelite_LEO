@@ -1,14 +1,16 @@
 % Pintaremos los diagramas de visibilidad de Spirent y de GNSS-SDR para la constelación indicada.
-% Son 2 gráficos: uno del número de satélites visibles y el otro de la visibilidad de cada satélite respecto al tiempo.
+% Son 2 gráficos: uno del número de satélites visibles y utilizados en la solución PVT,
+% y el otro de la visibilidad de cada satélite respecto al tiempo.
 % Parámetros:   obsSpirent: archivo de observación de una constelación de Spirent.
 %               obsReceptor: cell con 1 o 2 archivos de observación de una constelación de GNSS-SDR. Si hay 2 el RINEX va el último.
 %               rinexReceptor: si se utiliza el RINEX en vez de observables.mat para el receptor (no pinta los canales).
+%               pvtReceptor: archivo de PVT de GNSS-SDR para obtener valid_sats.
 %               constelacion: struct de la constelación.
 %               opciones: opciones para guardar las imágenes.
 %               pintarFranjas: pinta con colores las franjas donde hay errores.
 
 
-function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opciones, pintarFranjas)
+function visibilidad(obsSpirent, obsReceptor, rinexReceptor, pvtReceptor, constelacion, opciones, pintarFranjas)
     if length(obsReceptor) == 1  % Si sólo hay un archivo de observación.
         obsReceptor = obsReceptor{1};
     else  % Si hay dos archivos de observación. 
@@ -21,26 +23,16 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
     sgtitle("Comparación del número de satélites visibles de "+constelacion.nombre+" ["+opciones.nombrePrueba+"]");
 
     % Recontamos el nº de satélites visibles para cada instante de tiempo para Spirent.
-    numSatSpirent = [];  % Nº de satélites visibles en Spirent.
-    tiemposSpirent = unique(obsSpirent.Time);
-    for i = 1:length(tiemposSpirent)  % Para cada instante de tiempo diferente de Spirent.
-        i_tiempo = tiemposSpirent(i);
-        satelites = obsSpirent.SatelliteID(obsSpirent.Time == i_tiempo);
-        numSatSpirent = [numSatSpirent; length(satelites)];
-    end
+    [tiemposSpirent, ~, gruposTiempos] = unique(obsSpirent.Time);
+    numSatSpirent = accumarray(gruposTiempos, 1);  % Nº de satélites visibles en Spirent.
     aux = crear_huecos(table(tiemposSpirent, numSatSpirent, VariableNames=["Time", "numSatSpirent"]), 1);
 
     plot(aux.Time, aux.numSatSpirent, LineWidth=1.5, Color=constelacion.color, DisplayName="Spirent");
     hold on;
 
     % Recontamos el nº de satélites visibles para cada instante de tiempo para GNSS-SDR.
-    numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
-    tiemposGnssSdr = unique(obsReceptor.Time);
-    for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo diferente del receptor.
-        i_tiempo = tiemposGnssSdr(i);
-        satelites = obsReceptor.SatelliteID(obsReceptor.Time == i_tiempo);
-        numSatGnssSdr = [numSatGnssSdr; length(satelites)];
-    end
+    [tiemposGnssSdr, ~, gruposTiempos] = unique(obsReceptor.Time);
+    numSatGnssSdr = accumarray(gruposTiempos, 1);  % Nº de satélites visibles en GNSS-SDR.
     aux = crear_huecos(table(tiemposGnssSdr, numSatGnssSdr, VariableNames=["Time", "numSatGnssSdr"]), 1);
 
     if constelacion.nombre == "GPS"
@@ -56,17 +48,16 @@ function visibilidad(obsSpirent, obsReceptor, rinexReceptor, constelacion, opcio
 
     % Si tenemos dos ficheros del receptor, el segundo es el RINEX.
     if exist('obsReceptor1', 'var')
-        numSatGnssSdr = [];  % Nº de satélites visibles en GNSS-SDR.
-        tiemposGnssSdr = unique(obsReceptor1.Time);
-        for i = 1:length(tiemposGnssSdr)  % Para cada instante de tiempo diferente del receptor.
-            i_tiempo = tiemposGnssSdr(i);
-            satelites = obsReceptor1.SatelliteID(obsReceptor1.Time == i_tiempo);
-            numSatGnssSdr = [numSatGnssSdr; length(satelites)];
-        end
+        [tiemposGnssSdr, ~, gruposTiempos] = unique(obsReceptor1.Time);
+        numSatGnssSdr = accumarray(gruposTiempos, 1);  % Nº de satélites visibles en GNSS-SDR.
         aux = crear_huecos(table(tiemposGnssSdr, numSatGnssSdr, VariableNames=["Time", "numSatGnssSdr"]), 1);
 
         plot(aux.Time, aux.numSatGnssSdr, '-.', LineWidth=1.5, Color=opciones.colores(4, :), DisplayName="GNSS-SDR (RINEX)");
     end
+
+    % Además, pintamos el nº de satélites utilizados en la solución PVT (válidos).
+    aux = crear_huecos(table(pvtReceptor.Time, pvtReceptor.valid_sats, VariableNames=["Time", "numSatPVT"]), 1);
+    plot(aux.Time, aux.numSatPVT, '.-', Color=opciones.colores(8, :), DisplayName="Válidos (PVT)");
 
     ylim([0, max(numSatSpirent)+1]);
     xlabel("Tiempo"); ylabel("Nº de satélites");
