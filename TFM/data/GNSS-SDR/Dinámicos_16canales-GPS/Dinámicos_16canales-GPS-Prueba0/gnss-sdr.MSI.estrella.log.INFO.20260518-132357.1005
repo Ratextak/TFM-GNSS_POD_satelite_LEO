@@ -1,0 +1,563 @@
+Log file created at: 2026/05/18 13:23:57
+Running on machine: MSI
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I20260518 13:23:57.533900  1005 gnss_block_factory.cc:942] Getting SignalSource SignalSource with implementation File_Signal_Source
+I20260518 13:23:57.594668  1005 gnss_block_factory.cc:990] Getting SignalConditioner with DataTypeAdapter implementation: , InputFilter implementation: Pass_Through, and Resampler implementation: Pass_Through
+I20260518 13:23:57.599251  1005 gnss_block_factory.cc:923] Getting Observables with implementation Hybrid_Observables
+I20260518 13:23:57.658941  1005 hybrid_observables_gs.cc:151] Observables dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/observables.dat
+I20260518 13:23:57.662951  1005 gnss_block_factory.cc:923] Getting PVT with implementation RTKLIB_PVT
+I20260518 13:23:57.770843  1005 rtklib_solver.cc:146] PVT lib dump enabled Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/pvt.dat
+I20260518 13:23:57.771029  1005 gnss_block_factory.cc:1092] Getting 16 GPS L1 C/A channels
+I20260518 13:23:57.771081  1005 gnss_block_factory.cc:1055] Instantiating Channel 0 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:57.861579  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 0
+I20260518 13:23:57.867257  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 0 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_0.dat
+I20260518 13:23:57.868146  1005 gnss_block_factory.cc:1055] Instantiating Channel 1 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:57.916152  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 1
+I20260518 13:23:57.921005  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 1 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_1.dat
+I20260518 13:23:57.921721  1005 gnss_block_factory.cc:1055] Instantiating Channel 2 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:57.962306  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 2
+I20260518 13:23:57.965312  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 2 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_2.dat
+I20260518 13:23:57.965974  1005 gnss_block_factory.cc:1055] Instantiating Channel 3 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:57.985641  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 3
+I20260518 13:23:57.987036  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 3 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_3.dat
+I20260518 13:23:57.987075  1005 gnss_block_factory.cc:1055] Instantiating Channel 4 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.005198  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 4
+I20260518 13:23:58.011161  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 4 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_4.dat
+I20260518 13:23:58.011229  1005 gnss_block_factory.cc:1055] Instantiating Channel 5 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.027506  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 5
+I20260518 13:23:58.032011  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 5 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_5.dat
+I20260518 13:23:58.032446  1005 gnss_block_factory.cc:1055] Instantiating Channel 6 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.050607  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 6
+I20260518 13:23:58.051458  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 6 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_6.dat
+I20260518 13:23:58.053175  1005 gnss_block_factory.cc:1055] Instantiating Channel 7 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.068028  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 7
+I20260518 13:23:58.070199  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 7 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_7.dat
+I20260518 13:23:58.070595  1005 gnss_block_factory.cc:1055] Instantiating Channel 8 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.087761  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 8
+I20260518 13:23:58.088532  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 8 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_8.dat
+I20260518 13:23:58.088578  1005 gnss_block_factory.cc:1055] Instantiating Channel 9 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.101395  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 9
+I20260518 13:23:58.105078  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 9 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_9.dat
+I20260518 13:23:58.105129  1005 gnss_block_factory.cc:1055] Instantiating Channel 10 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.120321  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 10
+I20260518 13:23:58.121503  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 10 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_10.dat
+I20260518 13:23:58.121934  1005 gnss_block_factory.cc:1055] Instantiating Channel 11 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.135646  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 11
+I20260518 13:23:58.137343  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 11 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_11.dat
+I20260518 13:23:58.138343  1005 gnss_block_factory.cc:1055] Instantiating Channel 12 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.152057  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 12
+I20260518 13:23:58.166078  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 12 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_12.dat
+I20260518 13:23:58.166175  1005 gnss_block_factory.cc:1055] Instantiating Channel 13 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.219352  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 13
+I20260518 13:23:58.225112  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 13 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_13.dat
+I20260518 13:23:58.225334  1005 gnss_block_factory.cc:1055] Instantiating Channel 14 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.276533  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 14
+I20260518 13:23:58.282545  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 14 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_14.dat
+I20260518 13:23:58.282953  1005 gnss_block_factory.cc:1055] Instantiating Channel 15 with Acquisition Implementation: GPS_L1_CA_PCPS_Acquisition, Tracking Implementation: GPS_L1_CA_DLL_PLL_Tracking, Telemetry Decoder implementation: GPS_L1_CA_Telemetry_Decoder
+I20260518 13:23:58.320309  1005 dll_pll_veml_tracking.cc:1849] Tracking Channel set to 15
+I20260518 13:23:58.324195  1005 dll_pll_veml_tracking.cc:1865] Tracking dump enabled on channel 15 Log file: /mnt/c/users/Estrella/gnss-flex/TFM/data/GNSS-SDR/Pruebitaaaaaaaaaaaaaaaaaa/Nueva_señal_estáticos_variosCambios-GPS-Prueba0/Tracking/epl_tracking_ch_15.dat
+I20260518 13:23:58.324795  1005 gnss_block_factory.cc:1092] Getting 0 GPS L2C (M) channels
+I20260518 13:23:58.324808  1005 gnss_block_factory.cc:1092] Getting 0 GPS L5 channels
+I20260518 13:23:58.324815  1005 gnss_block_factory.cc:1092] Getting 0 GALILEO E1 B (I/NAV OS) channels
+I20260518 13:23:58.324822  1005 gnss_block_factory.cc:1092] Getting 0 GALILEO E5a I (F/NAV OS) channels
+I20260518 13:23:58.324828  1005 gnss_block_factory.cc:1092] Getting 0 GALILEO E6 (B/C HAS) channels
+I20260518 13:23:58.325256  1005 gnss_block_factory.cc:1092] Getting 0 GLONASS L1 C/A channels
+I20260518 13:23:58.325270  1005 gnss_block_factory.cc:1092] Getting 0 GLONASS L2 C/A channels
+I20260518 13:23:58.325279  1005 gnss_block_factory.cc:1092] Getting 0 BEIDOU B1I channels
+I20260518 13:23:58.325289  1005 gnss_block_factory.cc:1092] Getting 0 BEIDOU B3I channels
+I20260518 13:23:58.325294  1005 gnss_block_factory.cc:1092] Getting 0 GALILEO E5b I (I/NAV OS) channels
+I20260518 13:23:58.325863  1005 gnss_block_factory.cc:1092] Getting 0 QZSS L1 C/A channels
+I20260518 13:23:58.325873  1005 gnss_block_factory.cc:1092] Getting 0 QZSS L5 channels
+I20260518 13:23:58.326366  1005 gnss_flowgraph.cc:415] Connecting flowgraph
+I20260518 13:23:58.359885  1005 gnss_flowgraph.cc:1047] connecting sig_source_ 0 stream 0 to conditioner 0
+I20260518 13:23:58.360018  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.360040  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.360607  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.360656  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.360673  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.361426  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.361469  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.361485  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.361500  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362078  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362102  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362118  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362133  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362857  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362900  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.362918  1005 gnss_flowgraph.cc:1220] Disabled acquisition resampler because the input sampling frequency is too low
+I20260518 13:23:58.367915  1005 gnss_flowgraph.cc:578] Channel 0 assigned to GPS PRN 01 (Block IIF) Signal 1C
+I20260518 13:23:58.368716  1005 gnss_flowgraph.cc:595] Channel 0 connected to observables and ready for acquisition
+I20260518 13:23:58.368813  1005 gnss_flowgraph.cc:578] Channel 1 assigned to GPS PRN 02 (Block IIR) Signal 1C
+I20260518 13:23:58.368835  1005 gnss_flowgraph.cc:595] Channel 1 connected to observables and ready for acquisition
+I20260518 13:23:58.368844  1005 gnss_flowgraph.cc:578] Channel 2 assigned to GPS PRN 03 (Block IIF) Signal 1C
+I20260518 13:23:58.369421  1005 gnss_flowgraph.cc:595] Channel 2 connected to observables and ready for acquisition
+I20260518 13:23:58.369436  1005 gnss_flowgraph.cc:578] Channel 3 assigned to GPS PRN 04 (Block III) Signal 1C
+I20260518 13:23:58.369454  1005 gnss_flowgraph.cc:595] Channel 3 connected to observables and ready for acquisition
+I20260518 13:23:58.369462  1005 gnss_flowgraph.cc:578] Channel 4 assigned to GPS PRN 05 (Block IIR-M) Signal 1C
+I20260518 13:23:58.369474  1005 gnss_flowgraph.cc:595] Channel 4 connected to observables and ready for acquisition
+I20260518 13:23:58.370007  1005 gnss_flowgraph.cc:578] Channel 5 assigned to GPS PRN 06 (Block IIF) Signal 1C
+I20260518 13:23:58.370028  1005 gnss_flowgraph.cc:595] Channel 5 connected to observables and ready for acquisition
+I20260518 13:23:58.370038  1005 gnss_flowgraph.cc:578] Channel 6 assigned to GPS PRN 07 (Block IIR-M) Signal 1C
+I20260518 13:23:58.370051  1005 gnss_flowgraph.cc:595] Channel 6 connected to observables and ready for acquisition
+I20260518 13:23:58.370651  1005 gnss_flowgraph.cc:578] Channel 7 assigned to GPS PRN 08 (Block IIF) Signal 1C
+I20260518 13:23:58.370713  1005 gnss_flowgraph.cc:595] Channel 7 connected to observables and ready for acquisition
+I20260518 13:23:58.370723  1005 gnss_flowgraph.cc:578] Channel 8 assigned to GPS PRN 09 (Block IIF) Signal 1C
+I20260518 13:23:58.370734  1005 gnss_flowgraph.cc:595] Channel 8 connected to observables and ready for acquisition
+I20260518 13:23:58.370743  1005 gnss_flowgraph.cc:578] Channel 9 assigned to GPS PRN 10 (Block IIF) Signal 1C
+I20260518 13:23:58.371443  1005 gnss_flowgraph.cc:595] Channel 9 connected to observables and ready for acquisition
+I20260518 13:23:58.371464  1005 gnss_flowgraph.cc:578] Channel 10 assigned to GPS PRN 11 (Block III) Signal 1C
+I20260518 13:23:58.371486  1005 gnss_flowgraph.cc:595] Channel 10 connected to observables and ready for acquisition
+I20260518 13:23:58.371495  1005 gnss_flowgraph.cc:578] Channel 11 assigned to GPS PRN 12 (Block IIR-M) Signal 1C
+I20260518 13:23:58.372110  1005 gnss_flowgraph.cc:595] Channel 11 connected to observables and ready for acquisition
+I20260518 13:23:58.372124  1005 gnss_flowgraph.cc:578] Channel 12 assigned to GPS PRN 13 (Block IIR) Signal 1C
+I20260518 13:23:58.372145  1005 gnss_flowgraph.cc:595] Channel 12 connected to observables and ready for acquisition
+I20260518 13:23:58.372153  1005 gnss_flowgraph.cc:578] Channel 13 assigned to GPS PRN 14 (Block III) Signal 1C
+I20260518 13:23:58.372166  1005 gnss_flowgraph.cc:595] Channel 13 connected to observables and ready for acquisition
+I20260518 13:23:58.372779  1005 gnss_flowgraph.cc:578] Channel 14 assigned to GPS PRN 15 (Block IIR-M) Signal 1C
+I20260518 13:23:58.372804  1005 gnss_flowgraph.cc:595] Channel 14 connected to observables and ready for acquisition
+I20260518 13:23:58.372816  1005 gnss_flowgraph.cc:578] Channel 15 assigned to GPS PRN 16 (Block IIR) Signal 1C
+I20260518 13:23:58.372831  1005 gnss_flowgraph.cc:595] Channel 15 connected to observables and ready for acquisition
+I20260518 13:23:58.373435  1005 gnss_flowgraph.cc:603] The GNU Radio flowgraph for the current GNSS-SDR configuration has been successfully connected
+I20260518 13:23:58.373448  1005 gnss_flowgraph.cc:451] Flowgraph connected
+I20260518 13:23:58.373459  1005 control_thread.cc:399] Flowgraph connected
+I20260518 13:23:58.406673  1005 control_thread.cc:409] Flowgraph started
+I20260518 13:23:58.454772  1033 pcps_acquisition.cc:333] Successful acquisition in channel 12 for satellite G 10
+I20260518 13:23:58.455766  1031 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35059 ( 0.0175295 s)for satellite GPS PRN 10 (Block IIF) in channel 12
+I20260518 13:23:58.457026  1048 pcps_acquisition.cc:333] Successful acquisition in channel 7 for satellite G 14
+I20260518 13:23:58.457145  1030 pcps_acquisition.cc:333] Successful acquisition in channel 13 for satellite G 13
+I20260518 13:23:58.457772  1028 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 37789 ( 0.0188945 s)for satellite GPS PRN 13 (Block IIR) in channel 13
+I20260518 13:23:58.458006  1046 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 39823 ( 0.0199115 s)for satellite GPS PRN 14 (Block III) in channel 7
+I20260518 13:23:58.459447  1051 pcps_acquisition.cc:333] Successful acquisition in channel 6 for satellite G 7
+I20260518 13:23:58.460366  1049 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 41941 ( 0.0209705 s)for satellite GPS PRN 07 (Block IIR-M) in channel 6
+I20260518 13:23:58.464365  1039 pcps_acquisition.cc:333] Successful acquisition in channel 10 for satellite G 20
+I20260518 13:23:58.465260  1037 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 17187 ( 0.0085935 s)for satellite GPS PRN 20 (Block IIR) in channel 10
+I20260518 13:23:58.474366  1063 pcps_acquisition.cc:333] Successful acquisition in channel 2 for satellite G 9
+I20260518 13:23:58.477596  1061 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30548 ( 0.015274 s)for satellite GPS PRN 09 (Block IIF) in channel 2
+I20260518 13:23:58.489488  1060 pcps_acquisition.cc:333] Successful acquisition in channel 3 for satellite G 4
+I20260518 13:23:58.489674  1058 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 12483 ( 0.0062415 s)for satellite GPS PRN 04 (Block III) in channel 3
+I20260518 13:23:58.504237  1057 pcps_acquisition.cc:333] Successful acquisition in channel 4 for satellite G 22
+I20260518 13:23:58.506819  1055 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26324 ( 0.013162 s)for satellite GPS PRN 22 (Block IIR) in channel 4
+I20260518 13:23:58.543361  1066 pcps_acquisition.cc:333] Successful acquisition in channel 1 for satellite G 21
+I20260518 13:23:58.544417  1064 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 19449 ( 0.0097245 s)for satellite GPS PRN 21 (Block IIR) in channel 1
+I20260518 13:23:58.581574  1071 pcps_acquisition.cc:333] Successful acquisition in channel 0 for satellite G 16
+I20260518 13:23:58.581588  1067 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22931 ( 0.0114655 s)for satellite GPS PRN 16 (Block IIR) in channel 0
+I20260518 13:23:58.717617  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 8
+I20260518 13:23:58.719522  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 27415 ( 0.0137075 s)for satellite GPS PRN 08 (Block IIF) in channel 9
+I20260518 13:23:58.931457  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 19
+I20260518 13:23:58.932235  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30891 ( 0.0154455 s)for satellite GPS PRN 19 (Block IIR) in channel 15
+I20260518 13:23:59.388944  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 29517 ( 0.0147585 s)for satellite GPS PRN 02 (Block IIR) in channel 14
+I20260518 13:23:59.388958  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 2
+I20260518 13:24:00.937146  1031 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 12 for satellite GPS PRN 10 (Block IIF)
+I20260518 13:24:00.938104  1049 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 6 for satellite GPS PRN 07 (Block IIR-M)
+I20260518 13:24:00.940248  1028 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 13 for satellite GPS PRN 13 (Block IIR)
+I20260518 13:24:00.945001  1037 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 10 for satellite GPS PRN 20 (Block IIR)
+I20260518 13:24:00.952085  1061 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 2 for satellite GPS PRN 09 (Block IIF)
+I20260518 13:24:00.953512  1058 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 3 for satellite GPS PRN 04 (Block III)
+I20260518 13:24:00.961932  1055 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 4 for satellite GPS PRN 22 (Block IIR)
+I20260518 13:24:00.978979  1064 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 1 for satellite GPS PRN 21 (Block IIR)
+I20260518 13:24:00.996169  1067 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 0 for satellite GPS PRN 16 (Block IIR)
+I20260518 13:24:01.088148  1040 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 9 for satellite GPS PRN 08 (Block IIF)
+I20260518 13:24:01.237267  1022 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 15 for satellite GPS PRN 19 (Block IIR)
+I20260518 13:24:01.721596  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 47381 ( 0.0236905 s)for satellite GPS PRN 18 (Block III) in channel 8
+I20260518 13:24:01.721596  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 18
+I20260518 13:24:02.502170  1046 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 7, satellite GPS PRN 14 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:02.741554  1048 pcps_acquisition.cc:333] Successful acquisition in channel 7 for satellite G 14
+I20260518 13:24:02.741812  1046 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 47541 ( 0.0237705 s)for satellite GPS PRN 14 (Block III) in channel 7
+I20260518 13:24:03.006788  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 02 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:03.261931  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 28
+I20260518 13:24:03.263106  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 34581 ( 0.0172905 s)for satellite GPS PRN 28 (Block III) in channel 14
+I20260518 13:24:04.600515  1046 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 7 for satellite GPS PRN 14 (Block III)
+I20260518 13:24:05.002064  1043 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 8, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 4)
+I20260518 13:24:06.937672  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:08.898140  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 5
+I20260518 13:24:08.898953  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22531 ( 0.0112655 s)for satellite GPS PRN 05 (Block IIR-M) in channel 11
+I20260518 13:24:10.213765  1038 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 10 for GPS L1 satellite GPS PRN 20 (Block IIR) at d_sample_counter=1318
+I20260518 13:24:10.214056  1059 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 3 for GPS L1 satellite GPS PRN 04 (Block III) at d_sample_counter=1317
+I20260518 13:24:10.214219  1050 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 6 for GPS L1 satellite GPS PRN 07 (Block IIR-M) at d_sample_counter=1319
+I20260518 13:24:10.216537  1029 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 13 for GPS L1 satellite GPS PRN 13 (Block IIR) at d_sample_counter=1319
+I20260518 13:24:10.217491  1056 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 4 for GPS L1 satellite GPS PRN 22 (Block IIR) at d_sample_counter=1316
+I20260518 13:24:10.217919  1068 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 0 for GPS L1 satellite GPS PRN 16 (Block IIR) at d_sample_counter=1312
+I20260518 13:24:10.218694  1065 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 1 for GPS L1 satellite GPS PRN 21 (Block IIR) at d_sample_counter=1314
+I20260518 13:24:10.219417  1062 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 2 for GPS L1 satellite GPS PRN 09 (Block IIF) at d_sample_counter=1318
+I20260518 13:24:10.219765  1041 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 9 for GPS L1 satellite GPS PRN 08 (Block IIF) at d_sample_counter=1301
+I20260518 13:24:10.219897  1032 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 12 for GPS L1 satellite GPS PRN 10 (Block IIF) at d_sample_counter=1320
+I20260518 13:24:10.221719  1023 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 15 for GPS L1 satellite GPS PRN 19 (Block IIR) at d_sample_counter=1282
+I20260518 13:24:10.605124  1069 hybrid_observables_gs.cc:223] Corrected new RX Time offset: -66[ms]
+I20260518 13:24:10.605106  1070 rtklib_pvt_gs.cc:2195] PVT: Sent clock offset correction to observables: -0.0660706[s]
+I20260518 13:24:10.694594  1070 rtklib_pvt_gs.cc:2396] First position fix at 2023-Jan-20 10:07:01.400000 UTC is Lat = 3.43282 [deg], Long = 179.827 [deg], Height = 506696 [m], with GDOP = 3.2466
+Time to First Fix: 12.9236 [s] (wall clock)
+Time to First Fix: 33.7885 [s] (processing time)
+I20260518 13:24:12.329973  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 05 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:14.165874  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 6
+I20260518 13:24:14.166774  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25632 ( 0.012816 s)for satellite GPS PRN 06 (Block IIF) in channel 5
+I20260518 13:24:14.576390  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 12
+I20260518 13:24:14.577131  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25494 ( 0.012747 s)for satellite GPS PRN 12 (Block IIR-M) in channel 14
+I20260518 13:24:16.284022  1047 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 7 for GPS L1 satellite GPS PRN 14 (Block III) at d_sample_counter=1643
+I20260518 13:24:16.429766  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 26
+I20260518 13:24:16.430588  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 39605 ( 0.0198025 s)for satellite GPS PRN 26 (Block IIF) in channel 8
+I20260518 13:24:17.572017  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 06 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:17.810559  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:19.816453  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 25
+I20260518 13:24:19.816857  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22884 ( 0.011442 s)for satellite GPS PRN 25 (Block IIF) in channel 14
+I20260518 13:24:20.064613  1043 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 8, satellite GPS PRN 26 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:20.825722  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 24
+I20260518 13:24:20.826144  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 33168 ( 0.016584 s)for satellite GPS PRN 24 (Block IIF) in channel 11
+I20260518 13:24:21.130311  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468470 s, for satellite G19, signal 1C
+I20260518 13:24:21.137027  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468470 s, for satellite G19, signal 1C
+I20260518 13:24:21.291014  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468471 s, for satellite G19, signal 1C
+I20260518 13:24:21.305207  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468471 s, for satellite G19, signal 1C
+I20260518 13:24:21.373327  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468471 s, for satellite G19, signal 1C
+I20260518 13:24:21.658388  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468472 s, for satellite G19, signal 1C
+I20260518 13:24:21.766085  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468472 s, for satellite G19, signal 1C
+I20260518 13:24:21.945864  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468473 s, for satellite G19, signal 1C
+I20260518 13:24:22.139122  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468473 s, for satellite G19, signal 1C
+I20260518 13:24:22.256835  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468474 s, for satellite G19, signal 1C
+I20260518 13:24:22.320689  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468474 s, for satellite G19, signal 1C
+I20260518 13:24:22.328153  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468474 s, for satellite G19, signal 1C
+I20260518 13:24:22.374562  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468474 s, for satellite G19, signal 1C
+I20260518 13:24:22.516656  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468475 s, for satellite G19, signal 1C
+I20260518 13:24:22.706914  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 19 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:22.727824  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468475 s, for satellite G19, signal 1C
+I20260518 13:24:22.733634  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 15 at RX time 468475 s, for satellite G19, signal 1C
+I20260518 13:24:23.586642  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 25 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260518 13:24:24.704252  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 24 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:36.221372  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 27
+I20260518 13:24:36.222957  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30559 ( 0.0152795 s)for satellite GPS PRN 27 (Block IIF) in channel 11
+I20260518 13:24:37.057338  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 3
+I20260518 13:24:37.057542  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 27908 ( 0.013954 s)for satellite GPS PRN 03 (Block IIF) in channel 14
+I20260518 13:24:38.269366  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 28
+I20260518 13:24:38.270658  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 44550 ( 0.022275 s)for satellite GPS PRN 28 (Block III) in channel 8
+I20260518 13:24:40.178157  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 27 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:40.770749  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 03 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:41.818684  1043 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 8, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:41.998514  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 32951 ( 0.0164755 s)for satellite GPS PRN 31 (Block IIR-M) in channel 14
+I20260518 13:24:41.998555  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 31
+I20260518 13:24:46.148763  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:49.388093  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 18
+I20260518 13:24:49.388537  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 31909 ( 0.0159545 s)for satellite GPS PRN 18 (Block III) in channel 5
+I20260518 13:24:52.473078  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 12
+I20260518 13:24:52.474591  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 23826 ( 0.011913 s)for satellite GPS PRN 12 (Block IIR-M) in channel 14
+I20260518 13:24:54.587754  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:57.640322  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:24:58.636857  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 12
+I20260518 13:24:58.637730  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 23198 ( 0.011599 s)for satellite GPS PRN 12 (Block IIR-M) in channel 8
+I20260518 13:25:00.474376  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 18
+I20260518 13:25:00.475348  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 33246 ( 0.016623 s)for satellite GPS PRN 18 (Block III) in channel 14
+I20260518 13:25:03.607396  1043 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 8, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:05.244292  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:06.863516  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 17
+I20260518 13:25:06.864630  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30970 ( 0.015485 s)for satellite GPS PRN 17 (Block IIR-M) in channel 5
+I20260518 13:25:10.242831  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 12
+I20260518 13:25:10.243294  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35336 ( 0.017668 s)for satellite GPS PRN 12 (Block IIR-M) in channel 14
+I20260518 13:25:11.775565  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 17 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:13.448017  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 6
+I20260518 13:25:13.449304  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26574 ( 0.013287 s)for satellite GPS PRN 06 (Block IIF) in channel 5
+I20260518 13:25:14.863651  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 30
+I20260518 13:25:14.864185  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 37131 ( 0.0185655 s)for satellite GPS PRN 30 (Block IIF) in channel 8
+I20260518 13:25:14.907119  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:18.616631  1043 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 8, satellite GPS PRN 30 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:18.732587  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 18
+I20260518 13:25:18.733407  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35837 ( 0.0179185 s)for satellite GPS PRN 18 (Block III) in channel 14
+I20260518 13:25:20.905215  1052 dll_pll_veml_tracking.cc:2005] GPS L1 C/A tracking synchronization time limit reached in channel 5 for satellite GPS PRN 06 (Block IIF)
+I20260518 13:25:20.905659  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 06 (Block IIF) (carrier_lock_fail_counter:299999 code_lock_fail_counter : 0)
+I20260518 13:25:21.109972  1045 pcps_acquisition.cc:333] Successful acquisition in channel 8 for satellite G 6
+I20260518 13:25:21.110649  1043 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 40743 ( 0.0203715 s)for satellite GPS PRN 06 (Block IIF) in channel 8
+I20260518 13:25:21.298499  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 1
+I20260518 13:25:21.299285  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 40169 ( 0.0200845 s)for satellite GPS PRN 01 (Block IIF) in channel 5
+I20260518 13:25:22.167802  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:22.891244  1043 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 8 for satellite GPS PRN 06 (Block IIF)
+I20260518 13:25:23.275192  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30734 ( 0.015367 s)for satellite GPS PRN 28 (Block III) in channel 15
+I20260518 13:25:23.275177  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 28
+I20260518 13:25:23.826437  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 51516 ( 0.025758 s)for satellite GPS PRN 11 (Block III) in channel 14
+I20260518 13:25:23.826438  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 11
+I20260518 13:25:24.295671  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 01 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:26.079340  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:26.976051  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 11 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:27.319587  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 3
+I20260518 13:25:27.320364  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 23355 ( 0.0116775 s)for satellite GPS PRN 03 (Block IIF) in channel 15
+I20260518 13:25:31.454926  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 03 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:32.343253  1044 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 8 for GPS L1 satellite GPS PRN 06 (Block IIF) at d_sample_counter=1470
+I20260518 13:25:33.462891  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 29
+I20260518 13:25:33.464210  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 23434 ( 0.011717 s)for satellite GPS PRN 29 (Block IIR-M) in channel 11
+I20260518 13:25:34.633489  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 28
+I20260518 13:25:34.635145  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25965 ( 0.0129825 s)for satellite GPS PRN 28 (Block III) in channel 15
+I20260518 13:25:35.539753  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 11
+I20260518 13:25:35.541031  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 39442 ( 0.019721 s)for satellite GPS PRN 11 (Block III) in channel 5
+I20260518 13:25:37.428125  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 29 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260518 13:25:38.474471  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 15)
+I20260518 13:25:39.292976  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 2
+I20260518 13:25:39.292986  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 31441 ( 0.0157205 s)for satellite GPS PRN 02 (Block IIR) in channel 11
+I20260518 13:25:39.445683  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 11 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:43.134728  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 5
+I20260518 13:25:43.135964  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 36386 ( 0.018193 s)for satellite GPS PRN 05 (Block IIR-M) in channel 15
+I20260518 13:25:43.874557  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 02 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:47.602931  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 05 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:25:53.356964  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 28
+I20260518 13:25:53.357736  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 32069 ( 0.0160345 s)for satellite GPS PRN 28 (Block III) in channel 14
+I20260518 13:25:56.367179  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 15
+I20260518 13:25:56.367378  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25475 ( 0.0127375 s)for satellite GPS PRN 15 (Block IIR-M) in channel 11
+I20260518 13:25:56.911657  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 11
+I20260518 13:25:56.911922  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 49148 ( 0.024574 s)for satellite GPS PRN 11 (Block III) in channel 15
+I20260518 13:25:57.585829  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 5)
+I20260518 13:25:59.836552  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 15 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:00.426962  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 31
+I20260518 13:26:00.427663  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25161 ( 0.0125805 s)for satellite GPS PRN 31 (Block IIR-M) in channel 11
+I20260518 13:26:00.490140  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 11 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:03.511219  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 5
+I20260518 13:26:03.512485  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 14215 ( 0.0071075 s)for satellite GPS PRN 05 (Block IIR-M) in channel 5
+I20260518 13:26:04.739462  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:07.112885  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 18
+I20260518 13:26:07.113626  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 28144 ( 0.014072 s)for satellite GPS PRN 18 (Block III) in channel 15
+I20260518 13:26:07.566682  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 05 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:09.286092  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468740 s, for satellite G8, signal 1C
+I20260518 13:26:09.299880  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468740 s, for satellite G8, signal 1C
+I20260518 13:26:09.404911  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.412642  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.448511  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.506363  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.550171  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.760178  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468741 s, for satellite G8, signal 1C
+I20260518 13:26:09.858832  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468742 s, for satellite G8, signal 1C
+I20260518 13:26:09.874938  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468742 s, for satellite G8, signal 1C
+I20260518 13:26:10.181569  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468742 s, for satellite G8, signal 1C
+I20260518 13:26:10.217595  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.224907  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.232877  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.241183  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.269662  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.488547  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.497316  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.533860  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.542074  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.551765  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468743 s, for satellite G8, signal 1C
+I20260518 13:26:10.765738  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.837390  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.873237  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.937821  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.945569  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.954304  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.978215  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:10.984525  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468744 s, for satellite G8, signal 1C
+I20260518 13:26:11.090140  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.098196  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.105590  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.114760  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.203611  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.251067  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.301373  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 08 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:11.359911  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.378026  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.388420  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260518 13:26:11.396469  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.405105  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:11.424361  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 9 at RX time 468745 s, for satellite G8, signal 1C
+I20260518 13:26:14.862757  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 17
+I20260518 13:26:14.863946  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26691 ( 0.0133455 s)for satellite GPS PRN 17 (Block IIR-M) in channel 11
+I20260518 13:26:17.967367  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 30
+I20260518 13:26:17.967959  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22492 ( 0.011246 s)for satellite GPS PRN 30 (Block IIF) in channel 15
+I20260518 13:26:19.546805  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 19
+I20260518 13:26:19.548122  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22806 ( 0.011403 s)for satellite GPS PRN 19 (Block IIR) in channel 5
+I20260518 13:26:19.934824  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 17 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 7)
+I20260518 13:26:22.298591  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 30 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:23.316169  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 5
+I20260518 13:26:23.316545  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35444 ( 0.017722 s)for satellite GPS PRN 05 (Block IIR-M) in channel 15
+I20260518 13:26:23.860731  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 19 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:25.517266  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 15
+I20260518 13:26:25.517350  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 24258 ( 0.012129 s)for satellite GPS PRN 15 (Block IIR-M) in channel 9
+I20260518 13:26:25.728888  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 12
+I20260518 13:26:25.730505  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 39605 ( 0.0198025 s)for satellite GPS PRN 12 (Block IIR-M) in channel 11
+I20260518 13:26:27.624423  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 05 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:28.610672  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 31
+I20260518 13:26:28.611337  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 38309 ( 0.0191545 s)for satellite GPS PRN 31 (Block IIR-M) in channel 15
+I20260518 13:26:29.248418  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 15 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:29.411052  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:30.041564  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 1
+I20260518 13:26:30.042120  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30656 ( 0.015328 s)for satellite GPS PRN 01 (Block IIF) in channel 11
+I20260518 13:26:32.746771  1022 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 15, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:32.910462  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 30
+I20260518 13:26:32.911535  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 32932 ( 0.016466 s)for satellite GPS PRN 30 (Block IIF) in channel 9
+I20260518 13:26:34.184326  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 01 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:34.691771  1024 pcps_acquisition.cc:333] Successful acquisition in channel 15 for satellite G 23
+I20260518 13:26:34.692040  1022 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 31441 ( 0.0157205 s)for satellite GPS PRN 23 (Block III) in channel 15
+I20260518 13:26:37.060958  1022 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 15 for satellite GPS PRN 23 (Block III)
+I20260518 13:26:37.101812  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 30 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:37.845166  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 11
+I20260518 13:26:37.845706  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 27986 ( 0.013993 s)for satellite GPS PRN 11 (Block III) in channel 14
+I20260518 13:26:39.800989  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 31
+I20260518 13:26:39.801416  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26063 ( 0.0130315 s)for satellite GPS PRN 31 (Block IIR-M) in channel 5
+I20260518 13:26:41.901378  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 11 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:43.780109  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 15)
+I20260518 13:26:45.038228  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 29
+I20260518 13:26:45.038239  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26888 ( 0.013444 s)for satellite GPS PRN 29 (Block IIR-M) in channel 14
+I20260518 13:26:45.528970  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 26
+I20260518 13:26:45.529383  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30813 ( 0.0154065 s)for satellite GPS PRN 26 (Block IIF) in channel 9
+I20260518 13:26:47.890882  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 32
+I20260518 13:26:47.891330  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 48388 ( 0.024194 s)for satellite GPS PRN 32 (Block IIF) in channel 11
+I20260518 13:26:48.049919  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 29 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:48.396298  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 26 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:51.645414  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 32 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:26:52.496973  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 29
+I20260518 13:26:52.497560  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26734 ( 0.013367 s)for satellite GPS PRN 29 (Block IIR-M) in channel 5
+I20260518 13:26:56.450043  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 25
+I20260518 13:26:56.451102  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 34855 ( 0.0174275 s)for satellite GPS PRN 25 (Block IIF) in channel 14
+I20260518 13:26:56.703544  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 15
+I20260518 13:26:56.704033  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 48643 ( 0.0243215 s)for satellite GPS PRN 15 (Block IIR-M) in channel 9
+I20260518 13:26:56.988052  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 29 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 1)
+I20260518 13:27:00.117210  1025 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 14, satellite GPS PRN 25 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:00.351603  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 15 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:01.591928  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 15
+I20260518 13:27:01.592905  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 29792 ( 0.014896 s)for satellite GPS PRN 15 (Block IIR-M) in channel 11
+I20260518 13:27:03.131862  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 25
+I20260518 13:27:03.131908  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 33932 ( 0.016966 s)for satellite GPS PRN 25 (Block IIF) in channel 9
+I20260518 13:27:04.180390  1027 pcps_acquisition.cc:333] Successful acquisition in channel 14 for satellite G 24
+I20260518 13:27:04.181061  1025 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 23217 ( 0.0116085 s)for satellite GPS PRN 24 (Block IIF) in channel 14
+I20260518 13:27:05.180716  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 32
+I20260518 13:27:05.181448  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 53746 ( 0.026873 s)for satellite GPS PRN 32 (Block IIF) in channel 5
+I20260518 13:27:05.342128  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 15 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:06.140744  1025 dll_pll_veml_tracking.cc:2085] GPS L1 C/A tracking bit synchronization locked in channel 14 for satellite GPS PRN 24 (Block IIF)
+I20260518 13:27:06.608989  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 25 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:08.820240  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 32 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:09.758456  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 30
+I20260518 13:27:09.758889  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 33796 ( 0.016898 s)for satellite GPS PRN 30 (Block IIF) in channel 9
+I20260518 13:27:12.897858  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 27
+I20260518 13:27:12.898595  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 36465 ( 0.0182325 s)for satellite GPS PRN 27 (Block IIF) in channel 5
+I20260518 13:27:13.160717  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 30 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:15.869626  1026 gps_l1_ca_telemetry_decoder_gs.cc:531] Successful frame synchronization in channel 14 for GPS L1 satellite GPS PRN 24 (Block IIF) at d_sample_counter=1635
+I20260518 13:27:16.377902  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 27 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:24.819157  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 12
+I20260518 13:27:24.819900  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35703 ( 0.0178515 s)for satellite GPS PRN 12 (Block IIR-M) in channel 5
+I20260518 13:27:28.288692  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 12 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:31.506687  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 32
+I20260518 13:27:31.507722  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35365 ( 0.0176825 s)for satellite GPS PRN 32 (Block IIF) in channel 5
+I20260518 13:27:33.905105  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 26
+I20260518 13:27:33.905673  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 39448 ( 0.019724 s)for satellite GPS PRN 26 (Block IIF) in channel 11
+I20260518 13:27:34.843462  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 32 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:37.287396  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 26 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:41.471086  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468992 s, for satellite G21, signal 1C
+I20260518 13:27:41.573999  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468992 s, for satellite G21, signal 1C
+I20260518 13:27:41.659157  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468993 s, for satellite G22, signal 1C
+I20260518 13:27:41.740110  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468993 s, for satellite G21, signal 1C
+I20260518 13:27:41.887452  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468993 s, for satellite G22, signal 1C
+I20260518 13:27:41.954669  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468993 s, for satellite G21, signal 1C
+I20260518 13:27:41.954723  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468993 s, for satellite G22, signal 1C
+I20260518 13:27:42.101961  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468994 s, for satellite G21, signal 1C
+I20260518 13:27:42.140874  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468994 s, for satellite G22, signal 1C
+I20260518 13:27:42.286463  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468994 s, for satellite G22, signal 1C
+I20260518 13:27:42.331233  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468994 s, for satellite G21, signal 1C
+I20260518 13:27:42.340366  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468994 s, for satellite G21, signal 1C
+I20260518 13:27:42.349000  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468994 s, for satellite G22, signal 1C
+I20260518 13:27:42.367522  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468994 s, for satellite G21, signal 1C
+I20260518 13:27:42.387686  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468994 s, for satellite G22, signal 1C
+I20260518 13:27:42.432348  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468994 s, for satellite G22, signal 1C
+I20260518 13:27:42.487358  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.506026  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.522598  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.539702  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468995 s, for satellite G21, signal 1C
+I20260518 13:27:42.539764  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.606796  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.742947  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.751744  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.761536  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.769490  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.846191  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468995 s, for satellite G22, signal 1C
+I20260518 13:27:42.958392  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:42.967199  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:43.026182  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.127285  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:43.146582  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.156694  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:43.163714  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:43.220247  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.230527  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.230585  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468996 s, for satellite G22, signal 1C
+I20260518 13:27:43.238651  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.248100  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.257673  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.315272  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468996 s, for satellite G21, signal 1C
+I20260518 13:27:43.343374  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468997 s, for satellite G21, signal 1C
+I20260518 13:27:43.352613  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468997 s, for satellite G21, signal 1C
+I20260518 13:27:43.378698  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.386301  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.395987  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.412954  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.420794  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.461915  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.470911  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468997 s, for satellite G21, signal 1C
+I20260518 13:27:43.564268  1055 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 4, satellite GPS PRN 22 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:43.579278  1064 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 1, satellite GPS PRN 21 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:43.579491  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.650640  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.683440  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468997 s, for satellite G21, signal 1C
+I20260518 13:27:43.692332  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:43.703220  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 1 at RX time 468997 s, for satellite G21, signal 1C
+I20260518 13:27:43.704326  1069 hybrid_observables_gs.cc:674] Cycle slip detected on channel 4 at RX time 468997 s, for satellite G22, signal 1C
+I20260518 13:27:44.769706  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 19
+I20260518 13:27:44.769790  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 32143 ( 0.0160715 s)for satellite GPS PRN 19 (Block IIR) in channel 11
+I20260518 13:27:47.885890  1057 pcps_acquisition.cc:333] Successful acquisition in channel 4 for satellite G 1
+I20260518 13:27:47.886531  1055 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 36670 ( 0.018335 s)for satellite GPS PRN 01 (Block IIF) in channel 4
+I20260518 13:27:50.079157  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 19 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 14)
+I20260518 13:27:51.395021  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 26
+I20260518 13:27:51.395232  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22518 ( 0.011259 s)for satellite GPS PRN 26 (Block IIF) in channel 11
+I20260518 13:27:52.940496  1055 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 4, satellite GPS PRN 01 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 41)
+I20260518 13:27:56.755008  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 26 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:27:57.386147  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 27
+I20260518 13:27:57.387306  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25318 ( 0.012659 s)for satellite GPS PRN 27 (Block IIF) in channel 11
+I20260518 13:27:59.397485  1057 pcps_acquisition.cc:333] Successful acquisition in channel 4 for satellite G 8
+I20260518 13:27:59.398558  1055 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 27594 ( 0.013797 s)for satellite GPS PRN 08 (Block IIF) in channel 4
+I20260518 13:28:02.181368  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 27 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 3)
+I20260518 13:28:03.050114  1066 pcps_acquisition.cc:333] Successful acquisition in channel 1 for satellite G 3
+I20260518 13:28:03.050346  1064 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30342 ( 0.015171 s)for satellite GPS PRN 03 (Block IIF) in channel 1
+I20260518 13:28:03.883780  1055 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 4, satellite GPS PRN 08 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:05.803999  1057 pcps_acquisition.cc:333] Successful acquisition in channel 4 for satellite G 30
+I20260518 13:28:05.804031  1055 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22178 ( 0.011089 s)for satellite GPS PRN 30 (Block IIF) in channel 4
+I20260518 13:28:08.097805  1064 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 1, satellite GPS PRN 03 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:11.075048  1055 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 4, satellite GPS PRN 30 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:11.470695  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 21
+I20260518 13:28:11.471205  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35523 ( 0.0177615 s)for satellite GPS PRN 21 (Block IIR) in channel 11
+I20260518 13:28:15.684444  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 31
+I20260518 13:28:15.685374  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 28320 ( 0.01416 s)for satellite GPS PRN 31 (Block IIR-M) in channel 5
+I20260518 13:28:16.813481  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 21 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:20.543025  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:23.410682  1066 pcps_acquisition.cc:333] Successful acquisition in channel 1 for satellite G 31
+I20260518 13:28:23.411494  1064 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 28839 ( 0.0144195 s)for satellite GPS PRN 31 (Block IIR-M) in channel 1
+I20260518 13:28:26.759212  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 17
+I20260518 13:28:26.760718  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 35052 ( 0.017526 s)for satellite GPS PRN 17 (Block IIR-M) in channel 5
+I20260518 13:28:28.129199  1064 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 1, satellite GPS PRN 31 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 3)
+I20260518 13:28:29.730225  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 28
+I20260518 13:28:29.731315  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 22256 ( 0.011128 s)for satellite GPS PRN 28 (Block III) in channel 9
+I20260518 13:28:31.605304  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 17 (Block IIR-M) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:34.566195  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 18
+I20260518 13:28:34.567523  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30400 ( 0.0152 s)for satellite GPS PRN 18 (Block III) in channel 11
+I20260518 13:28:34.988427  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:35.516846  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 25
+I20260518 13:28:35.517177  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26338 ( 0.013169 s)for satellite GPS PRN 25 (Block IIF) in channel 9
+I20260518 13:28:39.636864  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 18 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:40.666531  1040 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 9, satellite GPS PRN 25 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:45.452260  1036 pcps_acquisition.cc:333] Successful acquisition in channel 11 for satellite G 27
+I20260518 13:28:45.454003  1034 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30656 ( 0.015328 s)for satellite GPS PRN 27 (Block IIF) in channel 11
+I20260518 13:28:45.797237  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 2
+I20260518 13:28:45.797887  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 25004 ( 0.012502 s)for satellite GPS PRN 02 (Block IIR) in channel 5
+I20260518 13:28:46.914319  1066 pcps_acquisition.cc:333] Successful acquisition in channel 1 for satellite G 25
+I20260518 13:28:46.914852  1064 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30342 ( 0.015171 s)for satellite GPS PRN 25 (Block IIF) in channel 1
+I20260518 13:28:49.364289  1034 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 11, satellite GPS PRN 27 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:49.625031  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 02 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:50.317385  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 21
+I20260518 13:28:50.317726  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 30342 ( 0.015171 s)for satellite GPS PRN 21 (Block IIR) in channel 5
+I20260518 13:28:50.826596  1064 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 1, satellite GPS PRN 25 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:28:55.614596  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 21 (Block IIR) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 9)
+I20260518 13:28:58.858129  1042 pcps_acquisition.cc:333] Successful acquisition in channel 9 for satellite G 17
+I20260518 13:28:58.858562  1040 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 24885 ( 0.0124425 s)for satellite GPS PRN 17 (Block IIR-M) in channel 9
+I20260518 13:29:01.027812  1057 pcps_acquisition.cc:333] Successful acquisition in channel 4 for satellite G 8
+I20260518 13:29:01.028966  1055 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 26574 ( 0.013287 s)for satellite GPS PRN 08 (Block IIF) in channel 4
+I20260518 13:29:01.888609  1040 dll_pll_veml_tracking.cc:2068] GPS L1 C/A histogram bit synchronization locked in channel 9 for satellite GPS PRN 17 (Block IIR-M)
+I20260518 13:29:03.177014  1054 pcps_acquisition.cc:333] Successful acquisition in channel 5 for satellite G 28
+I20260518 13:29:03.178663  1052 dll_pll_veml_tracking.cc:1973] Pull-in: Number of samples between Acquisition and Tracking = 36308 ( 0.018154 s)for satellite GPS PRN 28 (Block III) in channel 5
+I20260518 13:29:05.146720  1055 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 4, satellite GPS PRN 08 (Block IIF) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:29:06.953210  1052 dll_pll_veml_tracking.cc:1215] Loss of lock in channel 5, satellite GPS PRN 28 (Block III) (carrier_lock_fail_counter:5001 code_lock_fail_counter : 0)
+I20260518 13:29:22.399209  1017 gnss_sdr_valve.cc:75] Stopping receiver, 1608339296 samples processed
+I20260518 13:29:22.400264  1005 control_thread.cc:974] Received action STOP
+I20260518 13:29:22.405287  1005 gnss_flowgraph.cc:458] Disconnecting flowgraph
+I20260518 13:29:22.405480  1005 gnss_flowgraph.cc:475] Flowgraph disconnected
+I20260518 13:29:22.405594  1005 control_thread.cc:489] Flowgraph stopped

@@ -334,16 +334,36 @@ ruta_signal="${ruta_TFM}/data/Spirent/L1_4mhz_UPMsat2_16bits_IQ.iq"
 # done
 # echo -e "~~~~~~~~~~ [2] Pruebas concluidas ~~~~~~~~~~\n"
 
+# echo "---> [1] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50, sin Filtro de Kalman, varios cambios..."
+# echo "------------------------------------------------------------------------------"
+# ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos_variosCambios-GPS"
+# num_pruebas=1
+# for ((i=0; i<$num_pruebas; i++))
+# do
+	# echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
+	# ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos_variosCambios-GPS-Prueba$i"
+	# mkdir -p $ruta_subprueba
+	# sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos_sinFK-GPS-variosCambios.conf > ${ruta_config}/temp.conf
+	# gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
+	# echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
+# done
+# echo -e "~~~~~~~~~~ [1] Pruebas concluidas ~~~~~~~~~~\n"
+
+
+ruta_signal="${ruta_TFM}/data/Spirent/estrella_gps_l1.32fc"
+
+ruta_signal="${ruta_TFM}/data/Spirent/estrella_14min_gps_l1.32fc"
+
 echo "---> [1] Ejecutando las pruebas: canales estáticos, High_dynamics, Max_lock_fail=50, sin Filtro de Kalman, varios cambios..."
 echo "------------------------------------------------------------------------------"
-ruta_prueba="${ruta_resultados}/Nueva_señal_estáticos_variosCambios-GPS"
+ruta_prueba="${ruta_resultados}/Pruebitaaaaaaaaaaaaaaaaaa"
 num_pruebas=1
 for ((i=0; i<$num_pruebas; i++))
 do
 	echo "---> [1] Ejecutando prueba $((i+1))/$num_pruebas..."
 	ruta_subprueba="${ruta_prueba}/Nueva_señal_estáticos_variosCambios-GPS-Prueba$i"
 	mkdir -p $ruta_subprueba
-	sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal_estáticos_sinFK-GPS-variosCambios.conf > ${ruta_config}/temp.conf
+	sed "s|RUTA_SUBPRUEBA|${ruta_subprueba}|g" ${ruta_config}/Config_nueva_señal-GPS-copia.conf > ${ruta_config}/temp.conf
 	gnss-sdr --config_file="${ruta_config}/temp.conf" --signal_source=$ruta_signal --log_dir=$ruta_subprueba 
 	echo "~~~~~~ [1] Prueba $((i+1))/$num_pruebas concluida ~~~~~~"
 done

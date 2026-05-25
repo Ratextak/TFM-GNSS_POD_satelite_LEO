@@ -1,5 +1,0 @@
-Log file created at: 2026/03/04 13:18:39
-Running on machine: MSI
-Running duration (h:mm:ss): 0:00:00
-Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
-W20260304 13:18:39.083722   896 channel_msg_receiver_cc.cc:106] msg_handler_channel_events invalid event

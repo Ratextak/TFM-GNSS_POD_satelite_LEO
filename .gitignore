@@ -242,9 +242,11 @@ TFM/data/Spirent/
 *.pdf
 TFM/results/Órbita_Matlab/*.txt
 
-# Archivos de navegación.
+# Archivos de navegación y otros archivos de datos.
 *.26N    
 *.gpx
+TFM/data/GNSS-SDR/Señal_13-08-2025/
+TFM/data/GNSS-SDR/Señal_07-04-2026/
 
 # Grisolia.
 data/grisolia/static_spirent_8bits_8.192msps_1antenna.dat
