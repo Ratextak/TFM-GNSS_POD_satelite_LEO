@@ -15,8 +15,8 @@ configuracion.colores = [0.0000 0.4470 0.7410;  % 14 Colores para varias líneas
     colores12(8:12, :)];  % Amarillo pollo, azul-morado, naranja neón, verde turquesa y marrón claro.
 
 % Configuración de parámetros para GNSS-SDR.
-configuracion.canalesGnssSdr = 12;  % Número de canales del receptor GNSS-SDR.
-configuracion.frecMuestreoGnssSdr = 4000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
+configuracion.canalesGnssSdr = 16;  % Número de canales del receptor GNSS-SDR.
+configuracion.frecMuestreoGnssSdr = 2000000;  % Frecuencia de muestreo de GNSS-SDR, en Hz.
 configuracion.dirDatos = "data/GNSS-SDR/";  % Ruta dónde se encuentran los datos de GNSS-SDR.
 
 % Configuración y variables relativas al tiempo.
@@ -66,7 +66,7 @@ skyplots(datosSpirent.sat_data, tiempo.tInicioSpirentUTC, constelaciones, config
 % Por ello meteremos todas las carpetas y subcarpetas implicadas en una struct.
 carpetas = dir(configuracion.dirDatos+"Dinámicos*/*Prueba*");
 carpetas = carpetas([carpetas.isdir]);
-configuracion.nombreConjPruebas = "Dinámicos\_HD";  % El nombre del conjunto de pruebas de "carpetas".
+configuracion.nombreConjPruebas = "Dinámicos\_16canales-GPS";  % El nombre del conjunto de pruebas de "carpetas".
 
 for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     configuracion.rutaDatos = fullfile(carpetas(c).folder, carpetas(c).name);  % Carpeta de datos actual.
@@ -99,7 +99,7 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     
     % También vamos a pintar el factor de degradación de la precisión, la DOP, 
     % para ver que tan precisa es la PVT que hemos obtenido.
-    dop(datosSpirent.pvt, datosGnssSdr.pvt, false, configuracion, false);
+    dop(datosSpirent.pvt, datosGnssSdr.pvt, true, configuracion, false);
     
     % ---------------------- Gráficos de observación ----------------------
     % A continuación vamos a analizar los archivos de observación (RINEX u observables.mat).
@@ -112,10 +112,10 @@ for c = 1:length(carpetas)  % Para cada subcarpeta de datos.
     % Y también pintaremos los histogramas de los errores.
     erroresObservacion(datosSpirent.obs.GPS, datosGnssSdr.obs_rinex.GPS, ["C1C", "D1C", "S1C"], false, 0, constelaciones("GPS"), configuracion);
     % También los podemos pintar por el método de las dobles diferencias.
-    %erroresObservacion(datosSpirent.obs.GPS, datosGnssSdr.obs_rinex.GPS, ["C1C", "D1C", "L1C"], true, 17, constelaciones("GPS"), configuracion);
+    erroresObservacion(datosSpirent.obs.GPS, datosGnssSdr.obs_rinex.GPS, ["C1C", "D1C", "S1C"], true, 13, constelaciones("GPS"), configuracion);
     
     % Pintaremos la visibilidad de los satélites.
-    visibilidad(datosSpirent.obs.GPS, {datosGnssSdr.obs, datosGnssSdr.obs_rinex.GPS}, false, constelaciones("GPS"), configuracion, false);
+    visibilidad(datosSpirent.obs.GPS, {datosGnssSdr.obs, datosGnssSdr.obs_rinex.GPS}, false, datosGnssSdr.pvt, constelaciones("GPS"), configuracion, false);
     
     % Pintaremos el mapa de calor de C/N0 para cada satélite visible por el receptor.
     mapaCalorCN0(datosGnssSdr.obs_rinex.GPS, constelaciones("GPS"), configuracion);
