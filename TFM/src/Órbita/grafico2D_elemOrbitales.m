@@ -1,6 +1,6 @@
 % Pintaremos la variación de los elementos orbitales del satélite respecto al tiempo.
 % Parámetros:   elemOrb: array con los 6 principales elementos orbitales Nx6, siendo: 
-%                   · Semieje mayor (a): en metros.
+%                   · Semieje mayor (a): en km.
 %                   · Excentricidad (e).
 %                   · Inclinación (i): en grados.
 %                   · Ascensión recta del nodo ascendente (RAAN) (omega mayúscula): en grados.

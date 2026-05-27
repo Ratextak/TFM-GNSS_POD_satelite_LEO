@@ -35,6 +35,7 @@ function [a, e, i, O, o, M] = rv2orb(r, v, mu)
         % Vector excentricidad.
         ev  = ((vn^2 - mu/rn)*rv - dot(rv, vv)*vv) / mu;
         ec  = norm(ev);
+        e(k) = ec;
 
         % Energía específica → semieje mayor.
         eps  = vn^2/2 - mu/rn;

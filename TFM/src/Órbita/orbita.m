@@ -1,26 +1,28 @@
+% --------------------- Configuración del escenario y del satélite --------
 % Ruta dónde guardar el archivo con la órbita generada y ruta del TLE.
 rutaResultado = "results/Órbita_Matlab/";
 if ~exist(rutaResultado, "dir"), mkdir(rutaResultado); end
 tle = "data/tle_UPMSat-2.tle";
 
-% Creamos el escenario donde estará nuestro satélite (1 día de simulación o 1 órbita).
-%tiempoInicio = datetime(2023, 1, 20, 10, 6, 27);
-%tiempoFin = tiempoInicio + minutes(60*24);  % 1 día de simulación.
-%tiempoMuestreo = 10;  % 10s entre las muestras.
-%escenario = satelliteScenario(tiempoInicio, tiempoFin, tiempoMuestreo);
+% Creamos el escenario donde estará nuestro satélite (1 órbita).
 escenario = satelliteScenario();  % 1 órbita.
-
 % Creamos el satélite y su órbita con el fichero TLE.
 sat = satellite(escenario, tle);
-escenario.SampleTime = 0.01;  % Tiempo de muestreo = 10 ms (como en Spirent).
 
+% ¡¡¡SI TIENES BAJA MEMORIA RAM (RAM <= 16GB) SUBIR TIEMPO DE MUESTREO!!! (100 ms va bien).
+escenario.SampleTime = 0.01;  % Tiempo de muestreo = 10 ms (como en Spirent).
 % Calculamos los tiempos para cada muestra.
 tiempos = escenario.StartTime : seconds(escenario.SampleTime) : escenario.StopTime;
-% Propagamos 2 muestras más para que podamos calcular bien el jerk y la aceleración.
-escenario.StartTime = escenario.StartTime - seconds(escenario.SampleTime*2);
 
+% --------------------- Visualización de la órbita ------------------------
 % Muestra los elementos orbitales al inicio de la epoch por pantalla.
 elemOrbitales0 = orbitalElements(sat)
+% Creamos la vista en 3D de la órbita de nuestro satélite.
+vista = satelliteScenarioViewer(escenario, position=[450 250 700 700]);
+
+% --------------------- Entradas de Spirent -------------------------------
+% Propagamos 2 muestras más para que podamos calcular bien el jerk y la aceleración.
+escenario.StartTime = escenario.StartTime - seconds(escenario.SampleTime*2);
 
 % Hallamos la posición y velocidad ECEF, y latitud, longitud y altitud.
 [pos_ecef, vel_ecef] = states(sat, CoordinateFrame="ecef");
@@ -64,11 +66,6 @@ jerk_enu = jerk_enu(3:end, :);
 % Y volvemos a poner bien el tiempo de inicio del escenario.
 escenario.StartTime = escenario.StartTime + seconds(escenario.SampleTime*2);
 
-% Podemos calcular la variación de los elementos orbitales en el transcurso de la órbita.
-[pos_efi, vel_efi] = states(sat, CoordinateFrame="inertial");
-[a, e, i, O, o, M] = rv2orb(pos_efi, vel_efi, 3.986004418 * 10^14);
-elemOrbClasicos = [a'/1e3, e', rad2deg(i'), rad2deg(O'), rad2deg(o'), rad2deg(M')];  % a: m → km
-
 % Preparamos las demás entradas para Spirent. Las ' trasponen las matrices.
 segundos = seconds(tiempos - tiempos(1))';  % Convertimos tipo datetime a segundos desde el inicio de la simulación.
 veh_mot = createArray(length(tiempos), 1, FillValue={'v1_m1'});
@@ -76,6 +73,17 @@ lat = deg2rad(lla(:,1));  % En radianes.
 lon = deg2rad(lla(:,2));  % En radianes.
 alt = lla(:,3);  % En metros.
 
+% --------------------- Elementos orbitales -------------------------------
+% Podemos calcular la variación de los elementos orbitales en el transcurso de la órbita.
+[pos_eci, vel_eci] = states(sat, CoordinateFrame="inertial");
+if tiempos(end) ~= escenario.StopTime  
+    pos_eci = pos_eci(:, 1:end-1);
+    vel_eci = vel_eci(:, 1:end-1);
+end
+[a, e, i, O, o, M] = rv2orb(pos_eci, vel_eci, 3.986004418 * 10^14);
+elemOrbClasicos = [a/1e3, e, rad2deg(i), rad2deg(O), rad2deg(o), rad2deg(M)];  % a: m → km
+
+% --------------------- Escribir ficheros ---------------------------------
 % Unimos las entradas en una tabla y escribimos el fichero .txt.
 % Comando MOTB. Debemos cambiar de signo los valores Up, porque Spirent toma Down.
 MOTB = createArray(length(tiempos), 1, FillValue={'MOTB'});
@@ -96,6 +104,3 @@ T_MOT = table(segundos, MOT, veh_mot, pos_ecef(:,1), pos_ecef(:,2), pos_ecef(:,3
     "Aceleración_Z", "Jerk_X", "Jerk_Y", "Jerk_Z"]);
 writetable(T_MOT, rutaResultado+"orbita_UPMSat2_MOT.txt", WriteMode="overwrite");
 disp("---> Archivo MOT escrito");
-
-% Creamos la vista en 3D de la órbita de nuestro satélite.
-vista = satelliteScenarioViewer(escenario, position=[450 250 700 700]);
