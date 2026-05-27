@@ -1,9 +1,17 @@
-function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord, opciones)
+% Pintaremos la posición (km) y la velocidad juntas respecto al tiempo, para el sistema de coordenadas especificado.
+% Parámetros:   pos: array con la posición Nx3 (en m).
+%               vel: array con la velocidad Nx3 (en m/s).
+%               t: array de tiempos UTC Nx1.
+%               sistCoord: marco de referencia utilizado, disponibles: "ECEF" y "ENU".
+%               opciones: opciones para guardar las imágenes.
+
+
+function grafico2D_2variablesTiempo(pos, vel, t, sistCoord, opciones)
     fig = figure(Name="Posición y velocidad — " + sistCoord, WindowState='maximized');
-    sgtitle(titulo);
+    sgtitle("Análisis del movimiento del UPMSat-2 ["+sistCoord+"]");
 
     if sistCoord == "ECEF"
-        titles = ["Eje X", "Eje Y", "Eje Z"];
+        titles = ["Eje X_{ECEF}", "Eje Y_{ECEF}", "Eje Z_{ECEF}"];
     else  % ENU.
         titles = ["Eje East", "Eje North", "Eje Up"];
     end
@@ -11,12 +19,12 @@ function grafico2D_2variablesTiempo(pos, vel, t, titulo, sistCoord, opciones)
     for i = 1:3
         subplot(3, 1, i);
         yyaxis left;
-        plot(t, pos(:,i), 'b-', LineWidth=1); 
+        plot(t, pos(:,i)/10^3, '-', LineWidth=1.3); 
         ylabel("Posición [km]");
         yyaxis right;
-        plot(t, vel(:,i), 'r--', LineWidth=1);
+        plot(t, vel(:,i), '--', LineWidth=1.3);
         ylabel("Velocidad [m/s]");
-        xlabel("Tiempo [s]");
+        xlabel("Tiempo");
         legend("Posición", "Velocidad");
         title(titles(i));
         grid on;

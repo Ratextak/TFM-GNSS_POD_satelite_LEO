@@ -8,10 +8,10 @@ function grafico3D_posicion(x, y, z, opciones)
     plot3(x/10^3, y/10^3, z/10^3, 'b', LineWidth=1.7);  % Pasamos las coordenadas a km.
     hold on;
 
-    % Pintamos la esfera que representa a la Tierra.
+    % Pintamos la esfera azul que representa a la Tierra.
     [xe, ye, ze] = sphere(50);
     r_tierra = 6371;  % Km.
-    surf(xe*r_tierra, ye*r_tierra, ze*r_tierra, FaceColor=[0.27 0.51 0.71], EdgeColor='none', FaceAlpha=0.7);
+    surf(xe*r_tierra, ye*r_tierra, ze*r_tierra, FaceColor=opciones.colores(6, :), EdgeColor='none', FaceAlpha=0.7);
 
     % Pintamos sobre la esfera las intersecciones entre los ejes XZ, YZ y XY. 
     % Meridiano de Greenwich.
