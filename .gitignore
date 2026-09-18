@@ -202,18 +202,6 @@ cython_debug/
 .cursorindexingignore
 
 
-# CEDEA source data
-data/CEDEA/vuelo_2_eme_rx_adv/gnss_sdr_script.sh
-data/CEDEA/vuelo_2_eme_rx_adv/run_2025-07-05_00-18-38/
-data/CEDEA/vuelo_2_eme_rx_basic/run_2025-02-05_00-25-57/
-data/CEDEA/vuelo_2_mosaicX5/
-# plots fig of processed data
-results/plots/PVT_Comparison_Plots/fig/
-results/plots/PVT_Plots/
-# other processed data
-results/pvt_comparison_processed.mat
-
-
 *.asv
 
 *.zip
@@ -226,9 +214,6 @@ results/pvt_comparison_processed.mat
 
 *.xlsx
 
-data/cache_PVT_data.mat
-
-data/CEDEA/RADAR_GNSS_flex_SCRABII-16-17JUL25/Radar_Flight2_17_jul_25_8_32_UTC.mat
 
 # Señales GNSS.
 *.iq
